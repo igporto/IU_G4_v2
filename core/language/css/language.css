@@ -1,0 +1,6 @@
+select.icon-menu option {
+    background-repeat: no-repeat;
+    background-image: url(sp.png);
+    padding-left: 30px;
+    background-position: bottom left;
+}
