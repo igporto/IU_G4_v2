@@ -27,19 +27,12 @@ class ExampleMapper {
 	public function add(Example $example) {
 		//cambiar a sentencia acorde á taboa que referencia
 		//IMPORTANTE: se a PK da táboa é autoincremental, non se inserta manualmente (non se pon nos 'campo' nin nos '?')
-		$stmt = $this->db->prepare("INSERT INTO taboa_examle(campo1, campo2, campoX) values (?,?,?)"); //1 ? por campo a insertar
+		$stmt = $this->db->prepare("INSERT INTO nome_taboa_example(campo1, campo2, campoX) values (?,?,?)"); //1 ? por campo a insertar
 		//cada elemento do array será insertado no correspondente ? da query
 		$stmt->execute(array($example->getCampo1(), $example->getCampo2(), $example->getCampoX()));
 		//devolve o ID do último elemento insertado
 		return $this->db->lastInsertId();
 	}
-
-
-
-
-
-
-
 
 	//Funcion de listar: devolve un array de todos obxetos Example correspondentes á tabla Example
 	public function show() {
@@ -63,7 +56,7 @@ class ExampleMapper {
 
 	//devolve o obxecto Example no que o $example_campo_id coincida co da tupla.
 	public function view($example_campo_id){
-		$stmt = $this->db->prepare("SELECT * FROM example WHERE campo_id=?");
+		$stmt = $this->db->prepare("SELECT * FROM nome_taboa_example WHERE campo_id=?");
 		$stmt->execute(array($example_campo_id));
 		$example = $stmt->fetch(PDO::FETCH_ASSOC);
 
