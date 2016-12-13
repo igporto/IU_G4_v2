@@ -1276,6 +1276,40 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 19),
 (1, 20);
 
+/*ASIGNACIONS DE PERMISOS AOS PERFILES*/
+        /*PERFIL ADMIN*/
+             /*ACTION*/
+            /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
+        /*PERFIL ADMIN*/
+             /*ACTION*/
+             INSERT INTO `permisos_perfil`(`id_perfil`, `id_permiso`) VALUES
+              (1, 1),
+              (1, 2),
+              (1, 3),
+              (1, 4),
+              (1, 5),
+            /*CONTROLLER*/
+              (1, 6),
+              (1, 7),
+              (1, 8),
+              (1, 9),
+              (1, 10),
+            /*PROFILE*/
+              (1, 11),
+              (1, 12),
+              (1, 13),
+              (1, 14),
+              (1, 15),
+            /*USER*/
+              (1, 16),
+              (1, 17),
+              (1, 18),
+              (1, 19),
+              (1, 20);
+
+
+
+
 
 
 
