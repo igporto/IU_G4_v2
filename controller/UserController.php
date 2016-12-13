@@ -63,8 +63,9 @@ class UserController extends BaseController {
 
 			}else{
 				$errors = array();
-				$errors["general"] = "Username is not valid";
+				$errors["userNotValid"] = 'Usuario ou Contrasinal incorrecto';
 				$this->view->setVariable("errors", $errors);
+
 			}
 		}
 

@@ -23,6 +23,27 @@ function emptyError() {
      document.getElementById("usrImg").style.color = "red";
 }
 
+
+function userError() {
+     document.getElementById("userErr").style.display = "block";
+     document.getElementById("password").style.border = "1px solid red";
+     document.getElementById("password").style.borderRadius = "5px";
+     document.getElementById("userName").style.border = "1px solid red";
+     document.getElementById("userName").style.borderRadius = "5px";
+     document.getElementById("lock").style.color = "red";
+     document.getElementById("usrImg").style.color = "red";
+}
+
+function emptyError() {
+     document.getElementById("emptyErr").style.display = "block";
+     document.getElementById("password").style.border = "1px solid red";
+     document.getElementById("password").style.borderRadius = "5px";
+     document.getElementById("userName").style.border = "1px solid red";
+     document.getElementById("userName").style.borderRadius = "5px";
+     document.getElementById("lock").style.color = "red";
+     document.getElementById("usrImg").style.color = "red";
+}
+
 //Ocultar el error y volver a apariencia normal de los campos.
 function hideError() {
      document.getElementById("passErr").style.display = "none";

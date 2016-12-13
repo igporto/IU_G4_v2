@@ -129,6 +129,6 @@ $strings = array(
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
 	'not_edit_perm' => 'Permissions for the selected profile can not be modified',
-	'perm_over_controller' => 'Permissions on controller actions'
+	'perm_over_controller' => 'Permissions on controller actions',
 )
 ?>
