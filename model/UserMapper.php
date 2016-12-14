@@ -2,6 +2,10 @@
 
 require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/User.php");
+require_once(__DIR__."/../model/Permission.php");
+require_once(__DIR__."/../model/PermissionMapper.php");
+require_once(__DIR__."/../model/Profile.php");
+require_once(__DIR__."/../model/ProfileMapper.php");
 
 
 class UserMapper {
@@ -11,9 +15,13 @@ class UserMapper {
 	* @var PDO
 	*/
 	private $db;
+	private $permMapper;
+	private $profileMapper;
 
 	public function __construct() {
 		$this->db = PDOConnection::getInstance();
+		$this->permMapper = new PermissionMapper();
+		$this->profileMapper = new ProfileMapper();
 	}
 
 	//return: o id do usuario co nome $username
@@ -29,9 +37,8 @@ class UserMapper {
 	public function add(User $user) {
 
 		//insertamos na taboa usuario
-		$stmt = $this->db->prepare("INSERT INTO usuario(cod_usuario, passsword, user, id_perfil) values (?,?,?,?)"); 
+		$stmt = $this->db->prepare("INSERT INTO usuario(passsword, user, id_perfil) values (?,?,?)"); 
 		$stmt->execute(array(
-								$user->getCoduser(),
 								$user->getPasswd(),
 								$user->getUsername(),
 								$user->getProfile()->getCodprofile()
@@ -51,15 +58,36 @@ class UserMapper {
 	//Funcion de listar: devolve un array de todos obxetos User correspondentes á tabla User
 	public function show() {
 
+		//obtemos os datos da taboa usuario
 		$stmt = $this->db->query("SELECT * FROM usuario");
 		$user_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 		$users = array();
 
+		//por cada usuario, obtemos os seus permisos e creamos un obxeto no que se insertan
 		foreach ($user_db as $user) {
-			//se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
-			//introduce no array o obxeto User creado a partir da query
-			array_push($users, new User($user["campo1"], $user["campo2"], $user["campoX"]));
+			//obtemos os id's de todos os permisos dun usuario
+			$stmt = $this->db->prepare("SELECT id_permiso FROM usuario_tiene_permiso WHERE cod_usuario = ?"); 
+			$stmt->execute(array($user->getCoduser()));
+			$perm_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			//insertamos os permisos propios do ususario 
+			$permisos = array();
+			foreach ($perm_db as $perm) {
+				//pusheamos un obxeto permiso en $permisos
+				array_push($permisos, $this->permMapper->view($perm['id_permiso']));
+			}
+
+			//engadimos o usuario cos seus permisos a $users
+			array_push($users,
+					new User(
+						$user['user'],
+						$user['cod_usuario'], 
+						$user['password'], 
+						$this->profileMapper->view($user['id_perfil']),
+						$permisos
+						)
+				);
+			
 		}
 
 		//devolve o array
@@ -68,18 +96,29 @@ class UserMapper {
 
 	
 
-	//devolve o obxecto User no que o $user_campo_id coincida co da tupla.
-	public function view($user_campo_id){
-		$stmt = $this->db->prepare("SELECT * FROM usuario WHERE campo_id=?");
-		$stmt->execute(array($user_campo_id));
+	//devolve o obxecto User no que o $id_user coincida co da tupla.
+	public function view($id_user){
+		$stmt = $this->db->prepare("SELECT u.cod_usuario, u.password, u.user, utp.id_perfil, utp.id_permiso 
+			FROM usuario u, usuario_tiene_permiso utp  
+			WHERE u.cod_ususario = utp.cod_usuario AND u.cod_usuario=?");
+		$stmt->execute(array($id_user));
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if($user != null) {
+
+			//insertamos os permisos propios do ususario 
+			$permisos = array();
+			foreach ($user as $us) {
+				//pusheamos un obxeto permiso en $permisos
+				array_push($permisos, $this->permMapper->view($us['id_permiso']));
+			}
 			return new User(
-			$user["campo1"],
-			$user["campo2"],
-			$user["campoX"]
-			);
+						$user['user'],
+						$user['cod_usuario'], 
+						$user['password'], 
+						$this->profileMapper->view($user['id_perfil']),
+						$permisos
+						)
 		} else {
 			return NULL;
 		}
@@ -97,26 +136,8 @@ class UserMapper {
 		
 	//borra sobre a taboa usuario a tupla con id igual a o do obxeto pasado	
 	public function delete(User $user) {
-		$stmt = $this->db->prepare("DELETE from usuario WHERE user_id=?");
-		$stmt->execute(array($user->getId()));
-	}
-
-
-
-
-
-
-
-	/**
-	* Saves a User into the database
-	*
-	* @param User $user The user to be saved
-	* @throws PDOException if a database error occurs
-	* @return void
-	*/
-	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO usuario values (?,?,?,?)");
-		$stmt->execute(array($user->getCoduser(), $user->getUsername(), $user->getPasswd(), $user->getIdperf()));
+		$stmt = $this->db->prepare("DELETE from usuario WHERE cod_usuario=?");
+		$stmt->execute(array($user->getCoduser()));
 	}
 
 	/**

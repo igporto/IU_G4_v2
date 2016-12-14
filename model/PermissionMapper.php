@@ -4,7 +4,11 @@ require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/Permission.php");
 
 require_once(__DIR__."/../model/Action.php");
+require_once(__DIR__."/../model/ControllerMapper.php");
+
 require_once(__DIR__."/../model/Controller.php");
+require_once(__DIR__."/../model/ActionMapper.php");
+
 
 
 class PermissionMapper {
@@ -14,9 +18,13 @@ class PermissionMapper {
 	* @var PDO
 	*/
 	private $db;
+	private $cm;
+	private $am;
 
 	public function __construct() {
 		$this->db = PDOConnection::getInstance();
+		$this->cm = new ControllerMapper();
+		$this->am = new ActionMapper();
 	}
 
 
@@ -30,19 +38,16 @@ class PermissionMapper {
 	//Funcion de listar: devolve un array de todos obxetos Permission correspondentes á tabla Permission
 	public function show() {
 
-		$stmt = $this->db->query("SELECT p.id_permiso, c.id_controlador, c.nombre as c_nombre, 
-		a.id_accion, a.nombre as a_nombre 		
-				FROM permiso p, controlador c, accion a 
-				WHERE p.id_controlador = c.id_controlador AND p.id_accion = a.id_accion");
+		$stmt = $this->db->query("SELECT * FROM permiso");
 		$permission_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$permissions = array();
 
 		foreach ($permission_db as $permission) {
 			array_push($permissions, 
-				new Permission($permission["id_permiso"], 
-					new Controller($permission["id_controlador"], $permission["c_nombre"]), 
-					new Action($permission["id_accion"],$permission["a_nombre"]))
+				new Permission($permission["id_permiso"],
+					$this->cm->view($permission['id_controlador']), 
+					$this->am->view($permission['id_accion']);
 				);
 		}
 
@@ -54,17 +59,14 @@ class PermissionMapper {
 
 	//devolve o obxecto Permission no que o $permission_campo_id coincida co da tupla.
 	public function view($id_permiso){
-		$stmt = $this->db->prepare("SELECT p.id_permiso, c.id_controlador, 
-		c.nombre as c_nombre, a.id_accion, a.nombre as a_nombre 
-			FROM permiso p, controlador c, accion a 
-			WHERE p.id_controlador = c.id_controlador AND p.id_accion = a.id_accion AND id_permiso=?");
+		$stmt = $this->db->prepare("SELECT * FROM permiso WHERE id_permiso=?");
 		$stmt->execute(array($id_permiso));
 		$permission = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if($permission != null) {
 			return new Permission($permission["id_permiso"], 
-						new Controller($permission["id_controlador"], $permission["c_nombre"]), 
-						new Action($permission["id_accion"],$permission["a_nombre"]));
+						$this->cm->view($permission['id_controlador']), 
+						$this->am->view($permission['id_accion']);
 		} else {
 			return NULL;
 		}

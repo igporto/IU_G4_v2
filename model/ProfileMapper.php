@@ -7,8 +7,9 @@ require_once(__DIR__."/../core/PDOConnection.php");
 
 //Include do obxeto que mapeas
 require_once(__DIR__."/../model/Profile.php");
-require_once(__DIR__."/../model/Controller.php");
-require_once(__DIR__."/../model/Action.php");
+require_once(__DIR__."/../model/Permission.php");
+require_once(__DIR__."/../model/PermissionMapper.php");
+
 
 
 //inclues de outros obxetos que se precisen
@@ -19,13 +20,13 @@ class ProfileMapper {
 
 	//Obtemos a instancia da conexión
 	private $db;
+	private $pm;
 
 	public function __construct() {
 		$this->db = PDOConnection::getInstance();
+		$this->pm = new PermissionMapper();
 	}
 
-
-	//ACABADO
 	//Inserta na base de datos unha tupla cos datos do obxeto $profile
 	public function add(Profile $profile) {	
 		//insertamos un novo perfil	
@@ -44,10 +45,9 @@ class ProfileMapper {
 	//Funcion de listar: devolve un array de todos obxetos Profile correspondentes á tabla Profile
 	public function show() {
 
-		$stmt = $this->db->query("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso, c.nombre as c_nombre,  a.nombre as a_nombre, pm.id_accion, pm.id_controlador
-			FROM accion a, controlador c, permiso pm, perfil pf, permisos_perfil pp 
-			WHERE a.id_accion = pm.id_accion AND c.id_controlador = pm.id_controlador 
-					AND pf.id_perfil = pp.id_perfil AND pp.id_permiso = pm.id_permiso");
+		$stmt = $this->db->query("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso
+			FROM  perfil pf, permisos_perfil pp 
+			WHERE pf.id_perfil = pp.id_perfil");
 
 		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -69,12 +69,7 @@ class ProfileMapper {
 			}
 				
 			//mentres sexa o mesmo perfil, almacenamos os permisos do perfil actual en $permissions
-			array_push($permissions, 
-				new Permission($result['id_permiso'], 
-					new Controller($result['id_controlador'],$result['c_nombre']),
-					new Action($result['id_accion'], $result['a_nombre'])
-				)
-			);
+			array_push($permissions, $this->pm->view($result['id_permiso'])));
 		
 		}
 		//engadimos o ultimo perfil
@@ -87,38 +82,28 @@ class ProfileMapper {
 
 	//devolve o obxecto Profile no que o $id_perfil coincida co da tupla.
 	public function view($id_perfil){
-		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso, c.nombre as c_nombre,  a.nombre as a_nombre, pm.id_accion, pm.id_controlador
-			FROM accion a, controlador c, permiso pm, perfil pf, permisos_perfil pp 
-			WHERE a.id_accion = pm.id_accion AND c.id_controlador = pm.id_controlador 
-					AND pf.id_perfil = pp.id_perfil AND pp.id_permiso = pm.id_permiso
-					AND pf.id_perfil = ?");
+		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso
+			FROM perfil pf, permisos_perfil pp 
+			WHERE pf.id_perfil = pp.id_perfil AND pf.id_perfil = ?");
 		$stmt->execute(array($id_perfil);
 		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if($result_db != null) {
-			$profile = new Profile(
-			$result_db[0]["id_perfil"],
-			$result_db[0]["p_nombre"]
-			);
+			$permissions = array();
 
 			//insertamos os permisos do perfil no obxeto
 			foreach ($result_db as $permiso) {
-			$this->addPermission(
-					$profile,
-					new Permission(
-						$permiso['id_permiso'],
-						new Controller(
-							$permiso['id_controlador'],
-							$permiso['c_nombre']
-							)
-						new Action(
-							$permiso['id_accion'], 
-							$permiso['a_nombre'])
-					)
-				);	
+				array_push($permissions,$this-pm->view($permiso['id_permiso'])));	
+
+			}
+
+			$profile = new Profile(
+				$result_db[0]["id_perfil"],
+				$result_db[0]["p_nombre"],
+				$permissions
+			);
 
 			return $profile;
-		}
 		} else {
 			return NULL;
 		}
