@@ -1100,8 +1100,8 @@ ALTER TABLE `permiso`
 -- Filtros para la tabla `permisos_perfil`
 --
 ALTER TABLE `permisos_perfil`
-  ADD CONSTRAINT `permisos_perfil_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`),
-  ADD CONSTRAINT `permisos_perfil_ibfk_2` FOREIGN KEY (`id_permiso`) REFERENCES `permiso` (`id_permiso`);
+  ADD CONSTRAINT `permisos_perfil_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permisos_perfil_ibfk_2` FOREIGN KEY (`id_permiso`) REFERENCES `permiso` (`id_permiso`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `recibo`
