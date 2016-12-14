@@ -30,7 +30,10 @@ class PermissionMapper {
 	//Funcion de listar: devolve un array de todos obxetos Permission correspondentes á tabla Permission
 	public function show() {
 
-		$stmt = $this->db->query("SELECT p.id_permiso, c.id_controlador, c.nombre as c_nombre, a.id_accion, a.nombre as a_nombre  FROM permiso p, controlador c, accion a");
+		$stmt = $this->db->query("SELECT p.id_permiso, c.id_controlador, c.nombre as c_nombre, 
+		a.id_accion, a.nombre as a_nombre 		
+				FROM permiso p, controlador c, accion a 
+				WHERE p.id_controlador = c.id_controlador AND p.id_accion = a.id_accion");
 		$permission_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$permissions = array();
@@ -51,9 +54,12 @@ class PermissionMapper {
 
 	//devolve o obxecto Permission no que o $permission_campo_id coincida co da tupla.
 	public function view($id_permiso){
-		$stmt = $this->db->prepare("SELECT p.id_permiso, c.id_controlador, c.nombre as c_nombre, a.id_accion, a.nombre as a_nombre  FROM permiso p, controlador c, accion a WHERE id_permiso=?");
+		$stmt = $this->db->prepare("SELECT p.id_permiso, c.id_controlador, 
+		c.nombre as c_nombre, a.id_accion, a.nombre as a_nombre 
+			FROM permiso p, controlador c, accion a 
+			WHERE p.id_controlador = c.id_controlador AND p.id_accion = a.id_accion AND id_permiso=?");
 		$stmt->execute(array($id_permiso));
-		$permission = $stmt->fetch(PDO::FETCH_ASSOC);
+		$permission = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if($permission != null) {
 			return new Permission($permission["id_permiso"], 
@@ -70,7 +76,13 @@ class PermissionMapper {
 	//edita a tupla correspondente co id do obxecto Permission $permission
 	public function edit(Permission $permission) {
 		$stmt = $this->db->prepare("UPDATE permiso set id_controlador=?, id_accion=? where id_permiso=?");
-		$stmt->execute(array($permission->getController()->getCodcontroller(), $permission->getAction()->getCodaction(), $permission->getCodpermission()));
+		$stmt->execute(
+			array(
+					$permission->getController()->getCodcontroller(), 
+					$permission->getAction()->getCodaction(), 
+					$permission->getCodpermission()
+				)
+		);
 	}
 
 		

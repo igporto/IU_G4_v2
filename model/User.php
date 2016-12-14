@@ -1,48 +1,45 @@
 <?php
 
 require_once(__DIR__."/../core/ValidationException.php");
+require_once(__DIR__."/../model/Profile.php");
+require_once(__DIR__."/../model/Permission.php");
 
 class User {
 
 	private $coduser;
 	private $username;
 	private $passwd;
-	private $idperf;
+	private $profile;
+    private $permissions;
 
 
 
-	public function __construct($coduser=NULL, $username=NULL, $passwd=NULL, $idperf=NULL) {
+	public function __construct($username=NULL, $coduser=NULL, $passwd=NULL, Profile $profile=NULL, array $permissions=NULL) {
 		$this->username = $username;
 		$this->passwd = $passwd;
 		$this->coduser = $coduser;
-		$this->idperf = $idperf;
+		$this->profile = $profile;
+        $this->permissions = $permissions;
 	}
 
 	
 
-	/**
-     * Gets the value of idperf.
-     *
-     * @return mixed
-     */
-    public function getIdperf()
-    {
-        return $this->idperf;
-    }
+	public function checkIsValidForRegister() {
+		$errors = array();
+		if (strlen($this->username) < 5) {
+			$errors["username"] = "Username must be at least 5 characters length";
 
-    /**
-     * Sets the value of idperf.
-     *
-     * @param mixed $idperf the idperf
-     *
-     * @return self
-     */
-    private function setIdperf($idperf)
-    {
-        $this->idperf = $idperf;
+		}
+		if (strlen($this->passwd) < 5) {
+			$errors["passwd"] = "Password must be at least 5 characters length";
+		}
+		if (sizeof($errors)>0){
+			throw new ValidationException($errors, "user is not valid");
+		}
+	}
 
-        return $this;
-    }
+    
+
 
     /**
      * Gets the value of coduser.
@@ -59,15 +56,11 @@ class User {
      *
      * @param mixed $coduser the coduser
      *
-     * @return self
      */
     private function setCoduser($coduser)
     {
         $this->coduser = $coduser;
-
-        return $this;
     }
-
 
     /**
      * Gets the value of username.
@@ -84,13 +77,10 @@ class User {
      *
      * @param mixed $username the username
      *
-     * @return self
      */
     private function setUsername($username)
     {
         $this->username = $username;
-
-        return $this;
     }
 
     /**
@@ -108,30 +98,51 @@ class User {
      *
      * @param mixed $passwd the passwd
      *
-     * @return self
      */
     private function setPasswd($passwd)
     {
         $this->passwd = $passwd;
+    }
+
+    /**
+     * Gets the value of profile.
+     *
+     * @return mixed
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Sets the value of profile.
+     *
+     * @param mixed $profile the profile
+     */
+    private function setProfile(Profile $profile)
+    {
+        $this->profile = $profile;
+    }
+
+    /**
+     * Gets the value of permissions.
+     *
+     * @return mixed
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Sets the value of permissions.
+     *
+     * @param mixed $permissions the permissions
+     */
+    private function setPermissions(array $permissions)
+    {
+        $this->permissions = $permissions;
 
         return $this;
     }
-
-	
-	public function checkIsValidForRegister() {
-		$errors = array();
-		if (strlen($this->username) < 5) {
-			$errors["username"] = "Username must be at least 5 characters length";
-
-		}
-		if (strlen($this->passwd) < 5) {
-			$errors["passwd"] = "Password must be at least 5 characters length";
-		}
-		if (sizeof($errors)>0){
-			throw new ValidationException($errors, "user is not valid");
-		}
-	}
-
-    
-
 }
