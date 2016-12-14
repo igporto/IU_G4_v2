@@ -36,19 +36,20 @@ $view = ViewManager::getInstance();
     <!-- Custom Theme JavaScript -->
     <script src="lib/admin/js/sb-admin-2.js"></script>
 
-    <script src=<?php echo "js/loginValidations.js"; ?>></script>
+    <script src="js/loginValidations.js"></script>
+
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
     <!--FAVICON-->
     <link rel="icon" type="image/ico" href=<?php echo __DIR__ . "/../media/images/favicon.ico"; ?>>
 
     <!--MULTIIDIOMA-->
-    <link rel="stylesheet" href=<?php echo __DIR__ . "/../core/language/css/language.css"; ?>>
+    <link rel="stylesheet" href=<?php echo __DIR__ . "/../../core/language/css/language.css"; ?>>
 </head>
 <body>
 
 		<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
-	
+
 </body>
 
 </html>
