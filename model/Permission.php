@@ -13,7 +13,7 @@ class Permission {
 
 
 	public function __construct($codpermission=NULL,Controller $controller=NULL , Action $action=NULL) {
-		$this->permissionname = $permissionname;
+		$this->codpermission = $codpermission;
         $this->action = $action;
         $this->controller = $controller;
 	}

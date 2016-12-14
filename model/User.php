@@ -3,6 +3,7 @@
 require_once(__DIR__."/../core/ValidationException.php");
 require_once(__DIR__."/../model/Profile.php");
 require_once(__DIR__."/../model/Permission.php");
+require_once(__DIR__."/../model/UserPermission.php");
 
 class User {
 
@@ -14,7 +15,7 @@ class User {
 
 
 
-	public function __construct($username=NULL, $coduser=NULL, $passwd=NULL, Profile $profile=NULL, array $permissions=NULL) {
+	public function __construct($username=NULL, $coduser=NULL, $passwd=NULL, Profile $profile=NULL, UserPermission $permissions=NULL) {
 		$this->username = $username;
 		$this->passwd = $passwd;
 		$this->coduser = $coduser;
@@ -119,8 +120,10 @@ class User {
      * Sets the value of permissions.
      *
      * @param mixed $permissions the permissions
+     * @return mixed    
      */
-    private function setPermissions(array $permissions)
+
+    private function setPermissions(UserPermission $permissions)
     {
         $this->permissions = $permissions;
 

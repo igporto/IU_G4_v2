@@ -55,7 +55,7 @@ class UserPermissionMapper {
 		foreach ($result_db as $result) {	
 			if($result['cod_usuario'] != $currentUserPermission['cod_usuario']){
 				//cando se cambia de usuario_tiene_permiso, creamos o usuario_tiene_permiso anterior
-				array_push($userpermissions, new UserPermission($currentUserPermission["cod_usuario"], $permissions);
+				array_push($userpermissions, new UserPermission($currentUserPermission["cod_usuario"], $permissions));
 				//setteamos o usuario_tiene_permiso actual ó novo usuario_tiene_permiso
 				$currentUserPermission = $result;
 				//baleiramos o array de permisos do novo usuario_tiene_permiso
@@ -63,11 +63,11 @@ class UserPermissionMapper {
 			}
 				
 			//mentres sexa o mesmo usuario_tiene_permiso, almacenamos os permisos do usuario_tiene_permiso actual en $permissions
-			array_push($permissions, $this->pm->view($result['id_permiso'])));
+			array_push($permissions, $this->pm->view($result['id_permiso']));
 		
 		}
 		//engadimos o ultimo usuario_tiene_permiso
-		array_push($userpermissions, new UserPermission($currentUserPermission["cod_usuario"], $permissions);
+		array_push($userpermissions, new UserPermission($currentUserPermission["cod_usuario"], $permissions));
 
 		//devolve o array
 		return $userpermissions;
@@ -79,7 +79,7 @@ class UserPermissionMapper {
 		$stmt = $this->db->prepare("SELECT cod_usuario, id_permiso
 			FROM usuario_tiene_permiso
 			WHERE cod_usuario = ?");
-		$stmt->execute(array($cod_usuario);
+		$stmt->execute(array($cod_usuario));
 		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if($result_db != null) {
@@ -87,7 +87,7 @@ class UserPermissionMapper {
 
 			//insertamos os permisos do usuario_tiene_permiso no obxeto
 			foreach ($result_db as $permiso) {
-				array_push($permissions, $this-pm->view($permiso['id_permiso'])));	
+				array_push($permissions, $this->pm->view($permiso['id_permiso']));	
 
 			}
 
@@ -121,8 +121,10 @@ class UserPermissionMapper {
 
 	//borra sobre a taboa usuario_tiene_permiso a tupla con id igual a o do obxeto pasado	
 	public function delete(UserPermission $userpermission) {
-		$stmt = $this->db->prepare("DELETE from usuario_tiene_permiso WHERE cod_usuario = ? AND id_permiso = ?");
-		$stmt->execute(array($userpermission->getCoduser(), $userpermission->getCoduser()));
+		foreach ($userpermission->getPermissions() as $permiso){
+			$this->removePermission($userpermission,$permiso );
+		}
+		
 	}
 
 	//engade un permiso $permission ao usuario_tiene_permiso $userpermission
