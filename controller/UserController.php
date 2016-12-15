@@ -64,7 +64,7 @@ class UserController extends BaseController {
 
 			}
 
-			
+
 		}
 
 				//if the user is already logged in, it is redirected to the home page
@@ -100,7 +100,7 @@ class UserController extends BaseController {
 
 
 		//devolvemos o array de permisos do usuario actual
-		return $perms;
+		return array_unique($perms);
 
 
 	}

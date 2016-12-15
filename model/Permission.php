@@ -81,4 +81,11 @@ class Permission {
     {
         $this->controller = $controller;
     }
+
+    //to string for array_unique purposes
+    //@return: a string with Codpermission
+    public function __toString()
+    {
+        return "" . $this->getCodpermission() . "";
+    }
 }
