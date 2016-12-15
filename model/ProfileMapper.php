@@ -61,7 +61,7 @@ class ProfileMapper {
 		foreach ($result_db as $result) {	
 			if($result['id_perfil'] != $currentProfile['id_perfil']){
 				//cando se cambia de perfil, creamos o perfil anterior
-				array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions);
+				array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions));
 				//setteamos o perfil actual ó novo perfil
 				$currentProfile = $result;
 				//baleiramos o array de permisos do novo perfil
@@ -69,11 +69,11 @@ class ProfileMapper {
 			}
 				
 			//mentres sexa o mesmo perfil, almacenamos os permisos do perfil actual en $permissions
-			array_push($permissions, $this->pm->view($result['id_permiso'])));
+			array_push($permissions, $this->pm->view($result['id_permiso']));
 		
 		}
 		//engadimos o ultimo perfil
-		array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions);
+		array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions));
 
 		//devolve o array
 		return $profiles;
@@ -85,7 +85,7 @@ class ProfileMapper {
 		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso
 			FROM perfil pf, permisos_perfil pp 
 			WHERE pf.id_perfil = pp.id_perfil AND pf.id_perfil = ?");
-		$stmt->execute(array($id_perfil);
+		$stmt->execute(array($id_perfil));
 		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		if($result_db != null) {
@@ -93,7 +93,7 @@ class ProfileMapper {
 
 			//insertamos os permisos do perfil no obxeto
 			foreach ($result_db as $permiso) {
-				array_push($permissions,$this-pm->view($permiso['id_permiso'])));	
+				array_push($permissions,$this->pm->view($permiso['id_permiso']));	
 
 			}
 
@@ -101,7 +101,7 @@ class ProfileMapper {
 				$result_db[0]["id_perfil"],
 				$result_db[0]["p_nombre"],
 				$permissions
-			);
+				);
 
 			return $profile;
 		} else {

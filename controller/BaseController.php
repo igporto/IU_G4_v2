@@ -2,6 +2,7 @@
 //file: controller/BaseController.php
 
 require_once(__DIR__."/../core/ViewManager.php");
+require_once(__DIR__."/../core/PHPhelper.php");
 
 require_once(__DIR__."/../model/User.php");
 
@@ -22,6 +23,8 @@ class BaseController {
 	 * @var ViewManager
 	 */
 	protected $view;
+	protected $helper;
+	protected $userPerms;
 
 	/**
 	 * The current user instance
@@ -32,6 +35,7 @@ class BaseController {
 	public function __construct() {
 
 		$this->view = ViewManager::getInstance();
+		$this->helper = PHPhelper::getInstance();
 
 		// get the current user and put it to the view
 		if (session_status() == PHP_SESSION_NONE) {

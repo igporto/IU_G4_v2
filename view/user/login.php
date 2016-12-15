@@ -49,7 +49,6 @@ $errors = $view->getVariable("errors"); ?>
 
 
 
-
      
 
             

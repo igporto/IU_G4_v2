@@ -103,9 +103,7 @@ class UserMapper
     //devolve o obxecto User no que o $id_user coincida co da tupla.
     public function view($id_user)
     {
-        $stmt = $this->db->prepare("SELECT u.cod_usuario, u.password, u.user, utp.id_perfil, utp.id_permiso 
-			FROM usuario u, usuario_tiene_permiso utp  
-			WHERE u.cod_ususario = utp.cod_usuario AND u.cod_usuario=?");
+        $stmt = $this->db->prepare("SELECT cod_usuario, password, user, id_perfil FROM usuario WHERE cod_usuario=?");
         $stmt->execute(array($id_user));
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

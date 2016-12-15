@@ -1,7 +1,12 @@
 <?php
 // file: view/layouts/welcome.php
+require_once(__DIR__."/../../core/ViewManager.php");
 
 $view = ViewManager::getInstance();
+$permis = $view->getVariable("currentperms");
+
+
+
 
 ?><!DOCTYPE html>
 <html>
@@ -54,10 +59,7 @@ $view = ViewManager::getInstance();
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
     <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+        include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     ?>
 
 </head>
@@ -77,7 +79,7 @@ $view = ViewManager::getInstance();
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="index.php?controller=calendar&action=index">Moovett</a>
+            <a class="navbar-brand" href="index.php?controller=user&action=login">Moovett</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -133,15 +135,16 @@ $view = ViewManager::getInstance();
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    
-
+                  
+                   
                     <li>
-                        <a href="index.php?controller=calendar&action=index"><i
+                        <a href="index.php?controller=user&action=login"><i
                                 class="fa fa-home fa-fw active"></i> <?php echo $strings['home']; ?></a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> <?php echo 'Login: '.$_SESSION['currentuser'] ?><span class='fa arrow'></span></a>
+                        <a href="#"><i class="fa fa-user fa-fw"></i> <?php echo 'Login: '.$_SESSION['currentuser'];
+                                                                          ?><span class='fa arrow'></span></a>
                        
                         <ul id='menu1' class='nav nav-second-level'>
                             <li><a href="index.php?controller=user&action=logout"><i
@@ -150,11 +153,48 @@ $view = ViewManager::getInstance();
                         </ul>
                     </li>
                     <!--RENDER MENU POR PERMISOS-->
+                    <?php 
+
+                            $currentController = " ";
+                            foreach ($permis as $p) {
+
+                                $controller = $p->getController()->getControllername();
+                                if ($controller != $currentController) {
+                                    echo '<li><a href="#"><i class="fa fa-cog fa-fw"></i>';
+                                    echo $strings[$controller];
+                                    echo "<span class='fa arrow'></span></a><ul id='menu1' class='nav nav-second-level'>";
+                                    $currentController = $controller;
+                                
+
+                                
+
+                                $action = $p->getAction()->getActionname();
+                                
+
+                           
+                            if($action = "ADD") {
+                                echo "<li>
+                                  <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-plus fa-fw\"></i> " . $strings[$action] . "</a>
+
+                                  </li>";
+                            }
+                            if($action = "SHOW") {
+                                echo "<li>
+                                  <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-cogs fa-fw\"></i> " . $strings["manage"] . "</a>
+                                  
+                                  </li>";
+                                    
+                                }
+
+                                echo "</li></ul>";
+
+                            }
+                            }
+                     ?>
+                    
 
 
-
-
-
+                    </ul>
                     </div>
             <!-- /.sidebar-collapse -->
             </div>
@@ -164,9 +204,9 @@ $view = ViewManager::getInstance();
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
     <div class='container-fluid'>
-
-
-
+                
+                
+                
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 
 

@@ -5,11 +5,11 @@ require_once(__DIR__."/../core/ValidationException.php");
 class UserPermission {
 
     private $coduser;
-    private $permissions;
+    private $userPermissions;
 
-	public function __construct($coduser=NULL, array $permissions=NULL) {
+	public function __construct($coduser=NULL, array $userPermissions=NULL) {
 		$this->coduser = $coduser;
-        $this->permissions = $permissions;
+        $this->userPermissions = $userPermissions;
 	}
 
    
@@ -36,25 +36,27 @@ class UserPermission {
 
     }
 
+    
+
     /**
-     * Gets the value of permissions.
+     * Gets the value of userPermissions.
      *
      * @return mixed
      */
-    public function getPermissions()
+    public function getUserPermissions()
     {
-        return $this->permissions;
+        return $this->userPermissions;
     }
 
     /**
-     * Sets the value of permissions.
+     * Sets the value of userPermissions.
      *
-     * @param mixed $permissions the permissions
+     * @param mixed $userPermissions the user permissions
      *
      */
-    private function setPermissions(array $permissions)
+    private function setUserPermissions(array $userPermissions)
     {
-        $this->permissions = $permissions;
+        $this->userPermissions = $userPermissions;
 
     }
 }
