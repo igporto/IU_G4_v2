@@ -130,7 +130,7 @@ class UserController extends BaseController {
 
 			//Engadimos o usuario e o contrasinal ao usuario
 			$user->setUsername(htmlentities(addslashes($_POST["username"])));
-			$user->setPasswd(md5(htmlentities(addslashes($_POST["passwd"]))));
+			$user->setPasswd(md5(htmlentities(addslashes($_POST["password"]))));
 
 			//Engadimos o perfil
 

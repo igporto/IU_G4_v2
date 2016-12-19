@@ -3,9 +3,11 @@
 <?php 
     require_once(__DIR__ . "/../../core/ViewManager.php");
     $view = ViewManager::getInstance();
+    include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+    
 ?>
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px" >
-    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()" action="index.php?controller=user&action=add&function=add"
+    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()" action="index.php?controller=user&action=add"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -26,14 +28,14 @@
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="password" name="password"
-                                   placeholder= <?php echo $strings['pass'] ?> required="true">
+                                   placeholder= <?php echo $strings['password'] ?> required="true">
                         </div>
                         <!--Campo password-->
                     </div>
 
 
                     <div class="col-xs-12 col-md-6 col-md-offset-6">
-                        <label for=""><?php echo $strings['profile_type']; ?>:</label>
+                        <label for=""><?php echo $strings['profile']; ?>:</label>
                         <div class="form-group">
                             <div class="form-group input-group">
                                 <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>

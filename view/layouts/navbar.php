@@ -2,6 +2,7 @@
 // file: view/layouts/welcome.php
 require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
+include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $view = ViewManager::getInstance();
 $uc = new UserController();
@@ -60,10 +61,6 @@ $permis = $uc->getCurrentUserPerms();
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
-    <?php
-        include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-    ?>
-
 </head>
 
 <body>
