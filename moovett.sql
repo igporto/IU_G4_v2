@@ -1187,7 +1187,9 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (1, 'ACTION'),
 (2, 'CONTROLLER'),
 (3, 'PROFILE'),
-(4, 'USER');
+(4, 'USER'),
+(5, 'PERMISSION')
+;
 
 --
 -- Volcado de datos para la tabla `accion`
@@ -1225,7 +1227,12 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (4 ,2),
 (4 ,3),
 (4 ,4),
-(4 ,5);
+(4 ,5),
+(5 ,1),
+(5 ,2),
+(5 ,3),
+(5 ,4),
+(5 ,5);
 
 
 
@@ -1274,7 +1281,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 17),
 (1, 18),
 (1, 19),
-(1, 20);
+(1, 20),
+(1, 21),
+(1, 22),
+(1, 23),
+(1, 24),
+(1, 25);
 
 /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
         /*PERFIL ADMIN*/
@@ -1305,7 +1317,13 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 17),
               (1, 18),
               (1, 19),
-              (1, 20);
+              (1, 20),
+            /*PERMISSION*/
+              (1, 21),
+              (1, 22),
+              (1, 23),
+              (1, 24),
+              (1, 25);
 
 
 

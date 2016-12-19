@@ -130,10 +130,10 @@ class UserMapper
     }
 
     //borra sobre a taboa usuario a tupla con id igual a o do obxeto pasado	
-    public function delete(User $user)
+    public function delete($cod_User)
     {
-        $stmt = $this->db->prepare("DELETE from usuario WHERE cod_usuario=?");
-        $stmt->execute(array($user->getCoduser()));
+        $stmt = $this->db->prepare("DELETE from usuario WHERE cod_usuario= '$cod_User'");
+        $stmt->execute();
     }
 
     /**

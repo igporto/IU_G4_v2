@@ -7,11 +7,11 @@ require_once(__DIR__."/../model/UserPermission.php");
 
 class User {
 
-	private $coduser;
-	private $username;
-	private $passwd;
-	private $profile;
-    private $permissions;
+	public $coduser;
+	public $username;
+	public $passwd;
+	public $profile;
+    public $permissions;
 
 
 
@@ -39,7 +39,7 @@ class User {
      * @param mixed $coduser the coduser
      *
      */
-    private function setCoduser($coduser)
+    public function setCoduser($coduser)
     {
         $this->coduser = $coduser;
     }
@@ -60,7 +60,7 @@ class User {
      * @param mixed $username the username
      *
      */
-    private function setUsername($username)
+    public function setUsername($username)
     {
         $this->username = $username;
     }
@@ -81,7 +81,7 @@ class User {
      * @param mixed $passwd the passwd
      *
      */
-    private function setPasswd($passwd)
+    public function setPasswd($passwd)
     {
         $this->passwd = $passwd;
     }
@@ -101,7 +101,7 @@ class User {
      *
      * @param mixed $profile the profile
      */
-    private function setProfile(Profile $profile)
+    public function setProfile(Profile $profile)
     {
         $this->profile = $profile;
     }
@@ -123,7 +123,7 @@ class User {
      * @return mixed    
      */
 
-    private function setPermissions(UserPermission $permissions)
+    public function setPermissions(UserPermission $permissions)
     {
         $this->permissions = $permissions;
 

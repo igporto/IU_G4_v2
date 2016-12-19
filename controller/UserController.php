@@ -21,13 +21,14 @@ class UserController extends BaseController {
 	* @var UserMapper
 	*/
 	private $userMapper;
-	
+	private $profileMapper;
 
 	public function __construct() {
 		parent::__construct();
 
 
 		$this->userMapper = new UserMapper();
+        $this->profileMapper = new ProfileMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -121,4 +122,51 @@ class UserController extends BaseController {
 
 	}
 
+	public function add(){
+
+		//Creamos un obxecto User baleiro
+		$user = new User();
+
+		//"Seteamos" os atributos do usuario
+		if (isset($_POST["submit"])) {
+			//Engadimos o usuario e o contrasinal
+			$user->setUsername(htmlentities(addslashes($_POST["username"])));
+			$user->setPasswd(md5(htmlentities(addslashes($_POST["passwd"]))));
+
+			//Engadimos o perfil
+
+            $profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
+			$user->setProfile($profile);
+
+			//Engadimos os permisos do usuario (Non entran os do perfil)
+			$user->setPermissions(new UserPermission());
+
+			try {
+				if(!$this->userMapper->usernameExists($_POST["username"])){
+                    $user->checkIsValidForCreate();
+                    $this->userMapper->add($user);
+                    //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
+                    /////////CODIGO AQUI!!!!!/////////////////////////
+
+                    //REDIRECCION Á PAXINA QUE TOQUE
+                    $this->view->redirect("user", "consultar_all");
+				} else {
+					$errors = array();
+					$errors["general"] = "Username already exists";
+					$this->view->setVariable("errors", $errors);
+				}
+			}catch(ValidationException $ex) {
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
+		$this->view->setVariable("user", $user);
+
+	}
+
+    public function delete(){
+        $user = new User();
+        $user->setCoduser($_POST[""])
+        $this->userMapper->delete()
+    }
 }
