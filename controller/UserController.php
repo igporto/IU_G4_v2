@@ -148,8 +148,8 @@ class UserController extends BaseController {
                     //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
                     /////////CODIGO AQUI!!!!!/////////////////////////
 
-                    //REDIRECCION Á PAXINA QUE TOQUE
-                    $this->view->redirect("user", "consultar_all");
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
+                    $this->view->redirect("user", "show");
 				} else {
 					$errors = array();
 					$errors["general"] = "Username already exists";
@@ -160,13 +160,22 @@ class UserController extends BaseController {
 				$this->view->setVariable("errors", $errors);
 			}
 		}
-		$this->view->setVariable("user", $user);
 
+        $this->view->setVariable("user", $user);
+        //Se non se enviou nada
+        $this->view->render("user", "add");
 	}
 
     public function delete(){
-        $user = new User();
-        $user->setCoduser($_POST[""])
-        $this->userMapper->delete()
+        try{
+            $this->userMapper->delete($_POST["user"]);
+        }catch (Exception $e) {
+            $errors = $e->getErrors();
+            $this->view->setVariable("errors", $errors);
+        }
+    }
+
+    public function  show(){
+
     }
 }
