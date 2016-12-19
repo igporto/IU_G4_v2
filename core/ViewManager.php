@@ -241,7 +241,7 @@ class ViewManager {
 	* @return void
 	*/
 	public function render($controller, $viewname) {
-		include(__DIR__."/../view/$controller/".strtoupper($viewname).".php");
+		include(__DIR__."/../view/$controller/".strtoupper($viewname)."_view.php");
 		$this->renderLayout();
 	}
 
