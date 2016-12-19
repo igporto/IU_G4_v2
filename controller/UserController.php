@@ -124,12 +124,12 @@ class UserController extends BaseController {
 
 	public function add(){
 
-		//Creamos un obxecto User baleiro
-		$user = new User();
 
-		//"Seteamos" os atributos do usuario
 		if (isset($_POST["submit"])) {
-			//Engadimos o usuario e o contrasinal
+            //Creamos un obxecto User baleiro
+            $user = new User();
+
+			//Engadimos o usuario e o contrasinal ao usuario
 			$user->setUsername(htmlentities(addslashes($_POST["username"])));
 			$user->setPasswd(md5(htmlentities(addslashes($_POST["passwd"]))));
 
@@ -161,7 +161,6 @@ class UserController extends BaseController {
 			}
 		}
 
-        $this->view->setVariable("user", $user);
         //Se non se enviou nada
         $this->view->render("user", "add");
 	}
@@ -176,6 +175,14 @@ class UserController extends BaseController {
     }
 
     public function  show(){
+        $users = $this->userMapper->show();
+        $this->view->setVariable("users", $users);
+        $this->view->render("user", "show");
+    }
 
+    public function view(){
+        $user = $this->userMapper->view($_POST["user"]);
+        $this->view->setVariable("user", $user);
+        $this->view->render("user", "view");
     }
 }
