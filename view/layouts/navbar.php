@@ -1,7 +1,7 @@
 <?php
 // file: view/layouts/welcome.php
 require_once(__DIR__."/../../core/ViewManager.php");
-require_once(__DIR__."/../../controller/USER_controller.php");
+require_once(__DIR__ . "/../../controller/USER_controller.php");
 
 $view = ViewManager::getInstance();
 $uc = new UserController();

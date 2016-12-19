@@ -1,8 +1,7 @@
 <?php
-
 require_once(__DIR__."/../core/ValidationException.php");
-require_once(__DIR__."/../model/Action.php");
-require_once(__DIR__."/../model/Controller.php");
+require_once(__DIR__."/../model/ACTION.php");
+require_once(__DIR__."/../model/CONTROLLER.php");
 
 
 class Permission {

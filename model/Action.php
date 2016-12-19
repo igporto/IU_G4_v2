@@ -7,9 +7,6 @@ class Action {
 	private $codaction;
 	private $actionname;
 
-
-
-
 	public function __construct($codaction=NULL, $actionname=NULL) {
 		$this->actionname = $actionname;
 		$this->codaction = $codaction;

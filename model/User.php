@@ -1,9 +1,9 @@
 <?php
 
 require_once(__DIR__."/../core/ValidationException.php");
-require_once(__DIR__."/../model/Profile.php");
-require_once(__DIR__."/../model/Permission.php");
-require_once(__DIR__."/../model/UserPermission.php");
+require_once(__DIR__."/../model/PROFILE.php");
+require_once(__DIR__."/../model/PERMISSION.php");
+require_once(__DIR__."/../model/USERPERMISSION_model.php");
 
 class User {
 

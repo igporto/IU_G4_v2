@@ -4,7 +4,7 @@
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../core/PHPhelper.php");
 
-require_once(__DIR__."/../model/User.php");
+require_once(__DIR__."/../model/USER.php");
 
 /**
  * Class BaseController
