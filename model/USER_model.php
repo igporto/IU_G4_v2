@@ -72,7 +72,7 @@ class UserMapper
         foreach ($user_db as $user) {
             //obtemos os id's de todos os permisos dun usuario
             $stmt = $this->db->prepare("SELECT id_permiso FROM usuario_tiene_permiso WHERE cod_usuario = ?");
-            $stmt->execute(array($user->getCoduser()));
+            $stmt->execute(array($user["cod_usuario"]));
             $perm_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             //insertamos os permisos propios do ususario 

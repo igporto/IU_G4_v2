@@ -54,17 +54,12 @@ class UserController extends BaseController {
 
 				$_SESSION["currentuser"]=$_POST["userName"];
 
-				
-
 			}else{
 				$errors = array();
 				$errors["userNotValid"] = 'Usuario ou Contrasinal incorrecto';
 
 				$this->view->setVariable("errors", $errors);
-
 			}
-
-
 		}
 
 				//if the user is already logged in, it is redirected to the home page
@@ -103,11 +98,8 @@ class UserController extends BaseController {
 			}
 		}
 
-
 		//devolvemos o array de permisos do usuario actual
 		return array_unique($perms);
-
-
 	}
 
 	
@@ -148,7 +140,7 @@ class UserController extends BaseController {
                     /////////CODIGO AQUI!!!!!/////////////////////////
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
-                    $this->view->redirect("user", "add");
+                    $this->view->redirect("user", "show");
 				} else {
 					$errors = array();
 					$errors["general"] = "Username already exists";
