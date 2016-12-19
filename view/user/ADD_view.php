@@ -41,9 +41,9 @@
                                 <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
                                 <select id='perf_id' name='profile' class='form-control icon-menu'>
                                     <?php
-                                    
-                                    foreach ($profiles as $key => $v) {
-                                        echo "<option value='" . $v["perf_id"] . "'>" . $v["name"] . "</option>";
+                                    $profilemapper = new ProfileMapper();
+                                    foreach ($profilemapper->show() as $profile) {
+                                        echo "<option value='" . $profile->getCodprofile() . "'>" . $profile->getProfilename() ."</option>";
                                     }
                                     ?>
                                 </select>

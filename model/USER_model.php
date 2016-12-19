@@ -42,7 +42,7 @@ class UserMapper
     public function add(User $user)
     {
         //insertamos na taboa usuario
-        $stmt = $this->db->prepare("INSERT INTO usuario(passsword, user, id_perfil) values (?,?,?)");
+        $stmt = $this->db->prepare("INSERT INTO usuario(password, user, id_perfil) values (?,?,?)");
         $stmt->execute(array(
                 $user->getPasswd(),
                 $user->getUsername(),

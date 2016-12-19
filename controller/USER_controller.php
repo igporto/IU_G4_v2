@@ -142,13 +142,13 @@ class UserController extends BaseController {
 
 			try {
 				if(!$this->userMapper->usernameExists($_POST["username"])){
-                    $user->checkIsValidForCreate();
+                    //$user->checkIsValidForCreate();
                     $this->userMapper->add($user);
                     //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
                     /////////CODIGO AQUI!!!!!/////////////////////////
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
-                    $this->view->redirect("user", "show");
+                    $this->view->redirect("user", "add");
 				} else {
 					$errors = array();
 					$errors["general"] = "Username already exists";
