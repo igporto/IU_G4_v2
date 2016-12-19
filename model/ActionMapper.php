@@ -67,7 +67,7 @@ class ActionMapper {
 			$action["nombre"]
 			);
 		} else {
-			return NULL;
+			return new Action();
 		}
 	}
 

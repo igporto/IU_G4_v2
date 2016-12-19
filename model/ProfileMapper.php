@@ -105,7 +105,7 @@ class ProfileMapper {
 
 			return $profile;
 		} else {
-			return NULL;
+			return new Profile();
 		}
 	}
 

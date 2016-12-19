@@ -61,13 +61,11 @@ class ControllerMapper {
 			$controller["nombre"]
 			);
 		} else {
-			return NULL;
+			return new Controller();
 		}
 	}
 
 	
-		
-
 	//edita a tupla correspondente co id do obxecto Controller $controller
 	public function edit(Controller $controller) {
 		$stmt = $this->db->prepare("UPDATE controlador set nombre=? where id_controlador=?");

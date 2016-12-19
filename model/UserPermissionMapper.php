@@ -98,10 +98,7 @@ class UserPermissionMapper {
 
 			return $userpermission;
 		} else {
-			return  new UserPermission(
-				$result_db[0]["cod_usuario"],
-				NULL
-			);;
+			return  new UserPermission();
 		}
 	}
 

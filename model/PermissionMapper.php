@@ -68,7 +68,7 @@ class PermissionMapper {
 						$this->cm->view($permission['id_controlador']), 
 						$this->am->view($permission['id_accion']));
 		} else {
-			return NULL;
+			return  new Permission();
 		}
 	}
 

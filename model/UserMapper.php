@@ -116,7 +116,7 @@ class UserMapper
                 $this->upm->view($user['cod_usuario'])
             );
 		} else {
-            return NULL;
+            return new User();
         }
     }
 

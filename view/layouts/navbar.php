@@ -164,35 +164,24 @@ $permis = $view->getVariable("currentperms");
                                     echo $strings[$controller];
                                     echo "<span class='fa arrow'></span></a><ul id='menu1' class='nav nav-second-level'>";
                                     $currentController = $controller;
-                                
 
-                                
+                                    $action = $p->getAction()->getActionname();
 
-                                $action = $p->getAction()->getActionname();
-                                
-
-                           
-                            if($action = "ADD") {
-                                echo "<li>
-                                  <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-plus fa-fw\"></i> " . $strings[$action] . "</a>
-
-                                  </li>";
-                            }
-                            if($action = "SHOW") {
-                                echo "<li>
-                                  <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-cogs fa-fw\"></i> " . $strings["manage"] . "</a>
-                                  
-                                  </li>";
-                                    
+                                    if($action = "ADD") {
+                                        echo "<li>
+                                          <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-plus fa-fw\"></i> " . $strings[$action] . "</a>
+        
+                                          </li>";
+                                    }
+                                    if($action = "SHOW") {
+                                        echo "<li>
+                                         <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-cogs fa-fw\"></i> " . $strings["manage"] . "</a> 
+                                          </li>";
+                                        }
+                                        echo "</li></ul>";
                                 }
-
-                                echo "</li></ul>";
-
-                            }
                             }
                      ?>
-                    
-
 
                     </ul>
                     </div>
@@ -204,8 +193,6 @@ $permis = $view->getVariable("currentperms");
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
     <div class='container-fluid'>
-                
-                
                 
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 
