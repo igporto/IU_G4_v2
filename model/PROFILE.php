@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__."/../core/ValidationException.php");
-require_once(__DIR__."/../model/Permission.php");
+require_once(__DIR__."/../model/PERMISSION.php");
 
 
 class Profile {

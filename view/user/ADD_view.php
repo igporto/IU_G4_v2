@@ -19,7 +19,7 @@
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="user" name="user" placeholder= <?php echo $strings['username'] ?>
+                            <input type="text" class="form-control" id="user" name="username" placeholder= <?php echo $strings['username'] ?>
                             required="true">
                             <div id="error"></div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <div class="form-group input-group">
                                 <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
-                                <select id='perf_id' name='perf_id' class='form-control icon-menu'>
+                                <select id='perf_id' name='profile' class='form-control icon-menu'>
                                     <?php
                                     
                                     foreach ($profiles as $key => $v) {
