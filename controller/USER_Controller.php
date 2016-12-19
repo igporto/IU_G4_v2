@@ -12,7 +12,7 @@ require_once(__DIR__."/../controller/BaseController.php");
 *
 * Controller to login, logout and user data managing
 */
-class User_Controller extends BaseController {
+class UserController extends BaseController {
 
 	/**
 	* Reference to the UserMapper to interact
@@ -54,8 +54,7 @@ class User_Controller extends BaseController {
 
 				$_SESSION["currentuser"]=$_POST["userName"];
 
-				//setteamos a variable da vista 'currentperms' a un array de permisos do user actual
-				$this->view->setVariable('currentperms', $this->getCurrentUserPerms());
+				
 
 			}else{
 				$errors = array();
@@ -162,6 +161,7 @@ class User_Controller extends BaseController {
 		}
 
         //Se non se enviou nada
+        //$this->view->setLayout("navbar");
         $this->view->render("user", "add");
 	}
 

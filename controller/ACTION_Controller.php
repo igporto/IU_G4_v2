@@ -21,9 +21,9 @@ class ActionController extends  BaseController{
      * ActionController constructor.
      * @param $ActionMapper
      */
-    public function __construct($ActionMapper)
+    public function __construct()
     {
-        $this->ActionMapper = $ActionMapper;
+        $this->ActionMapper = new ActionMapper();
     }
     
 

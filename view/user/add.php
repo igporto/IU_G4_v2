@@ -1,13 +1,9 @@
 
 <!-- CONTIDO DA PAXINA -->
-<script<?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-//Incluímos os strings para o multiidioma
-include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-?>></script>
-<script src=<?php echo "js/validations.js"?>></script>
+<?php 
+    require_once(__DIR__ . "/../../core/ViewManager.php");
+    $view = ViewManager::getInstance();
+?>
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px" >
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()" action="index.php?controller=user&action=add&function=add"
           enctype="multipart/form-data">
@@ -43,9 +39,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
                                 <select id='perf_id' name='perf_id' class='form-control icon-menu'>
                                     <?php
-                                    require_once('controllers/PROFILE_controller.php');
-                                    $pc = new PROFILE_controller();
-                                    $profiles = $pc->getprofiles();
+                                    
                                     foreach ($profiles as $key => $v) {
                                         echo "<option value='" . $v["perf_id"] . "'>" . $v["name"] . "</option>";
                                     }

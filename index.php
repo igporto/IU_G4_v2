@@ -26,7 +26,7 @@ function run() {
 		$controller = loadController($_GET["controller"]);
 
 		// Call the corresponding action
-		$actionName = $_GET["action"];
+		$actionName = strtolower($_GET["action"]);
 		$controller->$actionName();
 	} catch(Exception $ex) {
 		//uniform treatment of exceptions
@@ -41,9 +41,10 @@ function run() {
 * @return Object A Controller instance
 */
 function loadController($controllerName) {
+	$controllerFileName = getControllerFileName($controllerName);
 	$controllerClassName = getControllerClassName($controllerName);
 
-	require_once(__DIR__."/controller/".$controllerClassName.".php");
+	require_once(__DIR__."/controller/".$controllerFileName.".php");
 	return new $controllerClassName();
 }
 
@@ -56,7 +57,11 @@ function loadController($controllerName) {
 * @return string The controller class name
 */
 function getControllerClassName($controllerName) {
-	return strToUpper(substr($controllerName, 0, 1)).strtoupper(substr($controllerName, 1))."_Controller";
+	return strToUpper(substr($controllerName, 0, 1)).strtolower(substr($controllerName, 1))."Controller";
+}
+
+function getControllerFileName($controllerName){
+	return strToUpper(substr($controllerName, 0, 1)).strtoupper(substr($controllerName, 1))."_controller";
 }
 
 run();
