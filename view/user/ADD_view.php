@@ -28,7 +28,7 @@
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="password" name="password"
-                                   placeholder= <?php echo $strings['password'] ?> required="true">
+                                   placeholder= <?php echo $strings['pass'] ?> required="true">
                         </div>
                         <!--Campo password-->
                     </div>
