@@ -97,27 +97,47 @@ switch ($_SESSION['idioma']) {
             }
             //Botón que direcciona á vista de eliminar
             if($delete){
-                if($u->getUsername()!=$_SESSION['currentuser']){
-                    echo "<a href='index.php?controller=user&action=delete&user=" . $u->getUsername() . "'>";
-                }else{
-                    echo "<a href='#'>";
-                }
-
-                echo "<button class='btn btn-danger btn-xs";
-
-                if($u->getUsername()==$_SESSION['currentuser']){
-                    echo " disabled' data-toggle='tooltip' title='".$strings['cannot_delete_user'];
-                }
-                echo "' style='margin:2px'>";
-
-
-                echo "<i class='fa fa-trash-o fa-fw'></i></button></a>";
+                echo '<button type="button" class="btn btn-danger btn-xs';
+                    if($u->getUsername()==$_SESSION['currentuser']){
+                        echo ' disabled">';
+                    }else{
+                        echo '" data-toggle="modal" data-target="#confirmar'.$u->getUsername().'">';
+                    }
+                
+                echo '<i class="fa fa-trash-o fa-fw"></i>
+                </button>';
+                
             }
 
-
+            //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA USUARIO
+            echo '
+            <div class="modal fade" id="confirmar'.$u->getUsername().'" tabindex="-1" role="dialog" aria-labelledby="'.$u->getUsername().'label" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title" id="'.$u->getUsername().'label">'.$strings["DELETE"].': '.$u->getUsername().'</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            '.$strings["confirm_message"].' '.$u->getUsername().'? 
+                                        </div>
+                                        <div class="modal-footer">
+                                            
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["cancel"].'</button>
+                                            
+                                            <a href="index.php?controller=user&action=delete&user=' . $u->getUsername().'">
+                                            <button type="button" class="btn btn-danger">'.$strings["DELETE"].'</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>';
             echo "</td></tr>";
         }
         ?>
+
         </tbody>
     </table>
 

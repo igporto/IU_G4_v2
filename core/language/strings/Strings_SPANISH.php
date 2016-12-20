@@ -127,7 +127,8 @@ $strings = array(
 	'newpass' => 'Nueva_contraseña',
 	'not_edit_perm' => 'Los permisos del perfil selecionado no se pueden modificar',
 	'perm_over_controller' => 'Permisos sobre acciones del controlador',
-	'no_user_permissions' => 'Este usuario no tiene permisos propios'
+	'no_user_permissions' => 'Este usuario no tiene permisos propios',
+	'cancel'=>'Cancelar'
 
 )
 ?>
