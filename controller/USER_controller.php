@@ -159,16 +159,14 @@ class UserController extends BaseController {
 	}
 
     public function delete(){
-        if(isset($_REQUEST["op"]) && $_REQUEST["op"] == "s"){
-			try{
-				$this->userMapper->delete($this->userMapper->getIdByName($_REQUEST["user"]));
-				$this->view->redirect("user", "show");
+    		try{
+				$this->userMapper->delete($this->userMapper->getIdByName($_GET["user"]));
+				$this->view->setFlash('msg_delete_correct');
 			}catch (Exception $e) {
 				$errors = $e->getErrors();
 				$this->view->setVariable("errors", $errors);
 			}
-		}
-		$this->view->render("user", "delete");
+			$this->view->render("user", "show");	
     }
 
     public function  show(){
