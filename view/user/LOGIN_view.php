@@ -23,14 +23,18 @@ $errors = $view->getVariable("errors"); ?>
         <!-- Campo del usuario -->
         <div class="form-group ">
             <input type="text" class="form-control" placeholder="Usuario " id="userName"
-                   onfocus="selUsr()" name="userName">
+                   onfocus="selUsr();<?php if (isset($errors['userNotValid'])) {
+                       echo "hideUNV();";
+                   } ?>" name="userName">
             <i class="fa fa-user" id="usrImg"></i>
         </div>
 
         <!-- Campo de la contraseña -->
         <div class="form-group log-status">
             <input type="password" class="form-control" placeholder="Contrasinal" id="password"
-                   onfocus="selPass()" name="password">
+                   onfocus="selPass();<?php if (isset($errors['userNotValid'])) {
+                       echo "hideUNV();";
+                   } ?>" name="password">
             <i class="fa fa-lock" id="lock"></i>
         </div>
 
@@ -38,23 +42,17 @@ $errors = $view->getVariable("errors"); ?>
     </form>
 
     <div>
-        <div>
-            <span class="alert" id="emptyErr">O campo debe estar cuberto.</span>
-            <span class="alert"
-                  id="userNotValid"><?= isset($errors['userNotValid']) ? $errors['userNotValid'] : ''; ?></span>
-        </div>
+        <span class="alert" style="display: none" id="emptyErr">O campo debe estar cuberto.</span>
+    </div>
+
+    <div>
+        <?php
+        if (isset($errors['userNotValid'])) {
+            echo " <span style='display:block;font-size: 12px;color: #f00;float: left;margin-top: 15px;' id='userNotValid' >";
+            echo $errors['userNotValid'];
+            echo "</span>";
+        }
+        ?>
     </div>
 
 </div>
-
-
-
-     
-
-            
-
-
-
-
-
-
