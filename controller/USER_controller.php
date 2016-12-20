@@ -160,8 +160,12 @@ class UserController extends BaseController {
 
     public function delete(){
     		try{
-				$this->userMapper->delete($this->userMapper->getIdByName($_GET["user"]));
-				$this->view->setFlash('msg_delete_correct');
+    			if (isset($_GET['user'])) {
+    				$this->userMapper->delete($this->userMapper->getIdByName($_GET["user"]));
+					$this->view->setFlash('msg_delete_correct');
+					$this->view->redirect("user", "show");
+    			}
+				
 			}catch (Exception $e) {
 				$errors = $e->getErrors();
 				$this->view->setVariable("errors", $errors);
