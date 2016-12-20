@@ -1,6 +1,6 @@
 <!--SCRIPT DE DATATABLE-->
 <?php
-require_once('controllers/USER_controller.php');
+require_once(__DIR__ . "/../../controller/USER_controller.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
@@ -30,35 +30,42 @@ switch ($_SESSION['idioma']) {
             </div>
             <div class="panel-body">
 
-                <?php $um = new USER_model(); $perfil = $um->view();?>
+                <?php $um = new UserMapper();
+                    $id_user = $um->getIdByName($_REQUEST["user"]);
+                ?>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                             <label for=""><?php echo $strings['name'];?>: </label>
-                            <span class=""><?php echo $_REQUEST['user']?></span>
+                            <span class=""><?php echo $um->view($id_user)->getUsername();?></span>
 
                         <!--Campo ususario-->
                     </div>
 
                     <div class="col-xs-12 col-md-12">
-                            <label for=""><?php echo $strings['profile_type'];?>: </label>
-                            <span class=""><?php echo $perfil[0]; ?></span>
+                            <label for=""><?php echo $strings['profile_type']; ?>: </label>
+                            <span class=""><?php echo $um->view($id_user)->getProfile()->getProfilename(); ?></span>
                         <!--Campo perfil-->
                     </div>
+
 
                     <div class="col-xs-12 col-md-12">
                             <label for=""><?php echo $strings['own_permis'].":";?></label>
                             <ul>
                                 <?php
-                                    $um = new USER_model();
 
-                                    $c = $um->getPermis($_REQUEST['user']);
-                                    //echo var_dump($c);
-                                //foreach que imprime o nome do controlador e da acción según os permisos que ten o usuario
-                                foreach ($c as $k=>$v){
-                                    echo '<li><span class=\"\">'.$v['controller_name'].'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
-                                    echo '<span class=\"\">'.$v['action_name'].'</span></li>';
-                                }
+                                    $permissions = $um->view($id_user)->getPermissions()->getUserPermissions();
 
+                                   if($permissions != NULL){
+                                       //foreach que imprime o nome do controlador e da acción según os permisos que ten o usuario
+                                       foreach ($permissions as $p){
+                                           echo '<li><span class=\"\">'.$p->getController()->getControllername().'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
+                                           echo '<span class=\"\">'.$p->getAction()->getActionname().'</span></li>';
+                                       }
+                                   }
+                                    else{
+                                        echo $strings['no_user_permissions'];
+                                    }
+                                    
                                 ?>
                             </ul>
 

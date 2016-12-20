@@ -128,6 +128,7 @@ $strings = array(
     'action_exists' => 'O nome escollido xa existe no sistema',
     'newpass' => 'Novo_contrasinal',
     'not_edit_perm' => 'Os permisos do perfil selecionado non se poden modificar',
-    'perm_over_controller' => 'Permisos sobre accions do controlador'
+    'perm_over_controller' => 'Permisos sobre accions do controlador',
+    'no_user_permissions' => 'Este non ten permisos propios'
 )
 ?>

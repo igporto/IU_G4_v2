@@ -69,7 +69,7 @@ switch ($_SESSION['idioma']) {
             echo $u->getUsername()."</td><td class='text-center'>";
             //Botón que direcciona a vista do usuario
             if($view){
-                echo "<a href='index.php?controller=user&action=view&user=" .
+                echo "<a href='index.php?controller=USER&action=VIEW&user=" .
                     $u->getUsername() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
                 echo "<i class='fa fa-eye fa-fw'></i></button></a>";
             }

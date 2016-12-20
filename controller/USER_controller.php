@@ -173,7 +173,8 @@ class UserController extends BaseController {
     }
 
     public function view(){
-        $user = $this->userMapper->view($_POST["user"]);
+		$userid = $this->userMapper->getIdByName($_REQUEST["user"]);
+        $user = $this->userMapper->view($userid);
         $this->view->setVariable("user", $user);
         $this->view->render("user", "view");
     }

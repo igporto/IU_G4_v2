@@ -1,5 +1,4 @@
 <?php
-// file: view/layouts/welcome.php
 require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
@@ -192,11 +191,7 @@ $permis = $uc->getCurrentUserPerms();
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
     <div class='container-fluid'>
-                
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
-
-
-
     </div>
     <!-- FIN CONTAINER -->
 </div>

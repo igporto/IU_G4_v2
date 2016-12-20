@@ -130,5 +130,6 @@ $strings = array(
 	'newpass' => 'New_Password',
 	'not_edit_perm' => 'Permissions for the selected profile can not be modified',
 	'perm_over_controller' => 'Permissions on controller actions',
+	'no_user_permissions' => 'This user doesn´t have permissions by himself'
 )
 ?>
