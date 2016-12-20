@@ -2,7 +2,7 @@
 function selPass() {
     //Borrar el mensaje
     document.getElementById("emptyErr").style.display = "none";
-    document.getElementById("invalidUser").style.display = "none";
+
 
     //Volver al estilo original del campo userName (verde)
     document.getElementById("userName").style.border = "none";
@@ -15,11 +15,14 @@ function selPass() {
     document.getElementById("lock").style.color = "#10CE88"
 }
 
+function hideUNV() {
+    document.getElementById("userNotValid").style.display = "none";
+}
+
 //Animaciones selección del campo usuario.
 function selUsr() {
     //Borrar el mensaje
     document.getElementById("emptyErr").style.display = "none";
-    document.getElementById("invalidUser").style.display = "none";
 
     //Volver al estilo original del campo pass (verde)
     document.getElementById("password").style.border = "none";
