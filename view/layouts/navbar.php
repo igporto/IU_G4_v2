@@ -191,6 +191,20 @@ $permis = $uc->getCurrentUserPerms();
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
     <div class='container-fluid'>
+
+    <?php 
+                //mostrado de notificacións flash
+        $flag = false;
+        $flag = $view->popFlash();
+                if($flag != false)
+                {
+                    echo '<div id="flash-notif" class="alert alert-danger alert-dismissable">';
+                    echo $strings[$flag];
+                    echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
+                } 
+    ?>
+                
+                <!--CARGAR FRAGMENTO INTERNO-->  
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
     </div>
     <!-- FIN CONTAINER -->

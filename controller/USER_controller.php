@@ -137,7 +137,7 @@ class UserController extends BaseController {
                     //$user->checkIsValidForCreate();
                     $this->userMapper->add($user);
                     //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
-                    /////////CODIGO AQUI!!!!!/////////////////////////
+                    $this->view->setFlash("Usuario creado correctamente!");
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("user", "show");
@@ -145,6 +145,7 @@ class UserController extends BaseController {
 					$errors = array();
 					$errors["general"] = "Username already exists";
 					$this->view->setVariable("errors", $errors);
+					$this->view->setFlash("user_already_exists");
 				}
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
