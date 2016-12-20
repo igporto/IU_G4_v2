@@ -101,6 +101,7 @@ $strings = array(
 	'error_logout' => 'An error was happened and it is impossible to logout',
 	'ACTION' => 'Actions',
 	'CONTROLLER' => 'Controllers',
+	'PERMISSION'=> 'Permissions',
 	'PROFILE' => 'Profiles',
 	'USER' => 'Users',
 	'ADD' => 'Add',
@@ -131,6 +132,7 @@ $strings = array(
 	'not_edit_perm' => 'Permissions for the selected profile can not be modified',
 	'perm_over_controller' => 'Permissions on controller actions',
 	'no_user_permissions' => 'This user doesn´t have permissions by himself',
-	'cancel'=>'Cancel'
+	'cancel'=>'Cancel',
+	'user_data'=>'User data'
 )
 ?>

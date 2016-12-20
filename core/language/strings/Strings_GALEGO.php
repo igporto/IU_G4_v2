@@ -100,6 +100,7 @@ $strings = array(
     'error_logout' => 'Ocurriu un erro que fai imposible pechar a sesión',
     'ACTION' => 'Accións',
     'CONTROLLER' => 'Controladores',
+    'PERMISSION'=> 'Permisos',
     'PROFILE' => 'Perfiles',
     'USER' => 'Usuarios',
     'ADD' => 'Engadir',
@@ -130,6 +131,7 @@ $strings = array(
     'not_edit_perm' => 'Os permisos do perfil selecionado non se poden modificar',
     'perm_over_controller' => 'Permisos sobre accions do controlador',
     'no_user_permissions' => 'Este usuario non ten permisos propios',
-    'cancel'=>'Cancelar'
+    'cancel'=>'Cancelar',
+    'user_data'=>'Datos do usuario'
 )
 ?>

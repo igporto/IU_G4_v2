@@ -91,9 +91,6 @@ switch ($_SESSION['idioma']) {
 
                 echo "<i class='fa fa-edit fa-fw'></i></button></a>";
 
-                /*echo "<a href='index.php?controller=user&action=edit&user=" .
-                    $u["user"] . "'><button class='btn btn-warning btn-xs' style='margin:2px'>";
-                echo "<i class='fa fa-edit fa-fw'></i></button></a>";*/
             }
             //Botón que direcciona á vista de eliminar
             if($delete){
@@ -116,10 +113,54 @@ switch ($_SESSION['idioma']) {
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title" id="'.$u->getUsername().'label">'.$strings["DELETE"].': '.$u->getUsername().'</h4>
+                                            <h4 class="modal-title" id="'.$u->getUsername().'label">'.$strings["confirm_message"].' '.$u->getUsername().'?</h4>
                                         </div>
                                         <div class="modal-body">
-                                            '.$strings["confirm_message"].' '.$u->getUsername().'? 
+                                             <label for="">' . $strings["user_data"] . ': </label>';
+                                        //DATOS DO USUARIO A BORRAR
+                                       echo '  
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-12">
+                                                    <label for="">' . $strings["name"] . ': </label>
+                                                    <span class="">' . $u->getUsername() . '</span>
+
+                                                <!--Campo ususario-->
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-12">
+                                                    <label for="">'.$strings["profile_type"].': </label>
+                                                    <span class="">'.$u->getProfile()->getProfilename().'</span>
+                                                <!--Campo perfil-->
+                                            </div>
+
+
+                                            <div class="col-xs-12 col-md-12">
+                                                    <label for="">'.$strings["own_permis"].': </label>
+                                                    <ul>';
+                                                        
+                                                            $permissions = $u->getPermissions()->getUserPermissions();
+
+                                                           if($permissions != NULL){
+                                                               //foreach que imprime o nome do controlador e da acción según os permisos que ten o usuario
+                                                               foreach ($permissions as $p){
+                                                                   echo '<li><span class=\"\">'.$p->getController()->getControllername().'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
+                                                                   echo '<span class=\"\">'.$p->getAction()->getActionname().'</span></li>';
+                                                               }
+                                                           }
+                                                            else{
+                                                                echo $strings['no_user_permissions'];
+                                                            }
+                                                            
+                                                    
+
+                                                echo '</ul>
+
+                                            </div>
+
+                                        </div>';
+
+                                        //fin dos datos do usuario
+                                        echo '
                                         </div>
                                         <div class="modal-footer">
                                             

@@ -99,6 +99,7 @@ $strings = array(
 	'error_logout' => 'Ocurrió un error y es imposible cerrar sesión',
 	'ACTION' => 'Acciones',
 	'CONTROLLER' => 'Controladores',
+	'PERMISSION'=> 'Permisos',
 	'PROFILE' => 'Perfiles',
 	'USER' => 'Usuarios',
 	'ADD' => 'Añadir',
@@ -128,7 +129,8 @@ $strings = array(
 	'not_edit_perm' => 'Los permisos del perfil selecionado no se pueden modificar',
 	'perm_over_controller' => 'Permisos sobre acciones del controlador',
 	'no_user_permissions' => 'Este usuario no tiene permisos propios',
-	'cancel'=>'Cancelar'
+	'cancel'=>'Cancelar',
+	'user_data'=>'Datos del usuario'
 
 )
 ?>
