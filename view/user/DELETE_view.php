@@ -1,6 +1,6 @@
 <!--SCRIPT DE DATATABLE-->
 <?php
-require_once('controllers/USER_controller.php');
+require_once(__DIR__ . "/../../controller/USER_controller.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
