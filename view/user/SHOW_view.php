@@ -83,7 +83,7 @@ switch ($_SESSION['idioma']) {
 
                 echo "<button class='btn btn-warning btn-xs ";
 
-                if($u->getUsername()=='admin'){
+                if($u->getUsername() == $_SESSION["currentuser"]){
                     echo " disabled' data-toggle='tooltip' title='".$strings['cannot_modify_user'];
                 }
                 echo "' style='margin:2px'>";
@@ -97,7 +97,7 @@ switch ($_SESSION['idioma']) {
             }
             //Botón que direcciona á vista de eliminar
             if($delete){
-                if($u->getUsername()!=$_SESSION['currentuser'] && $u->getUsername()!='admin' ){
+                if($u->getUsername()!=$_SESSION['currentuser']){
                     echo "<a href='index.php?controller=user&action=delete&user=" . $u->getUsername() . "'>";
                 }else{
                     echo "<a href='#'>";
@@ -105,7 +105,7 @@ switch ($_SESSION['idioma']) {
 
                 echo "<button class='btn btn-danger btn-xs";
 
-                if($u->getUsername()==$_SESSION['currentuser']  || $u->getUsername()=='admin' ){
+                if($u->getUsername()==$_SESSION['currentuser']){
                     echo " disabled' data-toggle='tooltip' title='".$strings['cannot_delete_user'];
                 }
                 echo "' style='margin:2px'>";
