@@ -131,8 +131,7 @@ class UserController extends BaseController {
 			$user->setPermissions(new UserPermission());
 
 			try {
-				if(!$this->userMapper->usernameExists($_POST["username"])){
-                    //$user->checkIsValidForCreate();
+				if(!$this->userMapper->usernameExists(htmlentities(addslashes($_POST["username"])))){
                     $this->userMapper->add($user);
                     //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
                     $this->view->setFlash("Usuario creado correctamente!");

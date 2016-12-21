@@ -56,7 +56,7 @@ class Permission {
      * @param mixed $action the action
      *
      */
-    private function setAction(Action $action)
+    public function setAction(Action $action)
     {
         $this->action = $action;
     }
@@ -77,7 +77,7 @@ class Permission {
      * @param mixed $controller the controller
      *
      */
-    private function setController(Controller $controller)
+    public function setController(Controller $controller)
     {
         $this->controller = $controller;
     }
