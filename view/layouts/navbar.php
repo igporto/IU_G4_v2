@@ -195,9 +195,7 @@ $permis = $uc->getCurrentUserPerms();
 
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
-    <div class='container-fluid'>
-    
-                
+    <div class='container-fluid'>                
                 <!--CARGAR FRAGMENTO INTERNO-->  
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
     </div>

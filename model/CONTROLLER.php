@@ -61,7 +61,7 @@ class Controller {
      *
      * @return self
      */
-    private function setControllername($controllername)
+    public function setControllername($controllername)
     {
         $this->controllername = $controllername;
 

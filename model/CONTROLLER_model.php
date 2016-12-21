@@ -19,12 +19,19 @@ class ControllerMapper {
 	
 	//devolve true se xa existe un controlador co nome $controllername
 	public function controllernameExists($controllername) {
-		$stmt = $this->db->prepare("SELECT count(controller) FROM controlador where nombre=?");
+		$stmt = $this->db->prepare("SELECT count(*) FROM controlador where nombre=?");
 		$stmt->execute(array($controllername));
 
 		if ($stmt->fetchColumn() > 0) {
 			return true;
 		}
+	}
+
+	public function add(Controller $controller) {
+		$stmt = $this->db->prepare("INSERT INTO controlador(id_controlador, nombre) values (?,?)"); 
+		$stmt->execute(array($controller->getCodcontroller(), $controller->getControllername()));
+
+		return $this->db->lastInsertId();
 	}
 	
 

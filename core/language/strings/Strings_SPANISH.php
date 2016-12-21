@@ -132,7 +132,8 @@ $strings = array(
 	'cancel'=>'Cancelar',
 	'user_data'=>'Datos del usuario',
 	'profile_perms' => 'Permisos del Perfil',
-	'user_perms' => 'Permisos propios del Usuario'
+	'user_perms' => 'Permisos propios del Usuario',
+	'controller_data'=>'Datos del controlador'
 
 )
 ?>

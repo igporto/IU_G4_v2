@@ -135,6 +135,7 @@ $strings = array(
 	'cancel'=>'Cancel',
 	'user_data'=>'User data',
 	'profile_perms' => 'Profile Permissions',
-	'user_perms' => 'User Permissions'
+	'user_perms' => 'User Permissions',
+	'controller_data'=>'Controller data'
 )
 ?>
