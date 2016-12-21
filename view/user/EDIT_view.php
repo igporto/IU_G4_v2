@@ -104,7 +104,7 @@
                     //IMPRESIÓN DOS PERMISOS DO USUARIO
                     echo "<div>
                               <div>
-                                    <label>".$strings['perm_over_controller']."</label>: 
+                                    <label>".$strings['profile_perms']."</label>: 
                               </div>
                           <div><p class='help-block'>".$strings['not_edit_perm']."</div>";
 
@@ -138,32 +138,33 @@
                     $allpermissions = $pm->show();
                     $userperms = $um->view($id_user)->getPermissions()->getUserPermissions();
 
-                    echo "<div>
-                            <label>".$strings['perm_over_controller']."</label>: 
+                    //Comprobamos que ten permisos para mostrar
+                    if($userperms != NULL){
+                        echo "<div>
+                            <label>".$strings['own_permis']."</label>: 
                           </div>";
+                        //Seteamos de novo o COntrolador do permiso actual
+                        $currentControllername = $userperms[0]->getController()->getControllername();
+                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        foreach ($allpermissions as $ap) {
 
-                    //Seteamos de novo o COntrolador do permiso actual
-                    $currentControllername = $userperms[0]->getController()->getControllername();
-                    echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
-                    foreach ($allpermissions as $ap) {
-                        
-                        //recuperamos os nomes do controlador  e accion do perfile a mostrar
-                        $controllername = $ap->getController()->getControllername();
-                        $actionname = $ap->getAction()->getActionname();
-                        if($controllername != $currentControllername){
-                            // echo "</div>";
-                            $currentControllername = $controllername;
-                            echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
-                        }
-                        if(in_array($controllername,$userperms)){
-                            $perm_id = $actionname . "_" . $controllername;
-                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
-                        }else{
-                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
-                        }
+                            //recuperamos os nomes do controlador  e accion do perfile a mostrar
+                            $controllername = $ap->getController()->getControllername();
+                            $actionname = $ap->getAction()->getActionname();
+                            if($controllername != $currentControllername){
+                                // echo "</div>";
+                                $currentControllername = $controllername;
+                                echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                            }
+                            if(in_array($controllername,$userperms)){
+                                $perm_id = $actionname . "_" . $controllername;
+                                echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
+                            }else{
+                                echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
+                            }
 
+                        }
                     }
-
                 ?>
             </div>
         </div>

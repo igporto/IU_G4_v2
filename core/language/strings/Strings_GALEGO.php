@@ -132,6 +132,8 @@ $strings = array(
     'perm_over_controller' => 'Permisos sobre accions do controlador',
     'no_user_permissions' => 'Este usuario non ten permisos propios',
     'cancel'=>'Cancelar',
-    'user_data'=>'Datos do usuario'
+    'user_data'=>'Datos do usuario',
+    'profile_perms' => 'Permisos do Perfil',
+    'user_perms' => 'Permisos propios do Usuario'
 )
 ?>
