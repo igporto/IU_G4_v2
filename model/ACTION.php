@@ -60,7 +60,7 @@ class Action {
      *
      * @return self
      */
-    private function setCodaction($codaction)
+    public function setCodaction($codaction)
     {
         $this->codaction = $codaction;
 

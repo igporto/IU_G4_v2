@@ -143,6 +143,16 @@ class ProfileMapper {
 		$stmt->execute(array($profile->getCodprofile()));
 	}
 
+	//Comproba se existe un perfil con ese nome
+	public function profilenameExists($profilename)
+	{
+		$stmt = $this->db->prepare("SELECT count(*) FROM perfil where nombre=?");
+		$stmt->execute(array($profilename));
+
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+	}
 	//engade un permiso $permission ao perfil $profile
 	private function addPermission(Profile $profile, Permission $permission)
 	{

@@ -55,7 +55,7 @@ class Profile {
      * @param mixed $profilename the profilename
      *
      */
-    private function setProfilename($profilename)
+    public function setProfilename($profilename)
     {
         $this->profilename = $profilename;
 
@@ -77,7 +77,7 @@ class Profile {
      * @param mixed $permissions the permissions
      *
      */
-    private function setPermissions(array $permissions)
+    public function setPermissions(array $permissions)
     {
         $this->permissions = $permissions;
 

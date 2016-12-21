@@ -15,10 +15,7 @@ class Controller {
 		$this->codcontroller = $codcontroller;
 	}
 
-	
-
-	
-
+    
     /**
      * Gets the value of codcontroller.
      *
@@ -36,7 +33,7 @@ class Controller {
      *
      * @return self
      */
-    private function setCodcontroller($codcontroller)
+    public function setCodcontroller($codcontroller)
     {
         $this->codcontroller = $codcontroller;
 
