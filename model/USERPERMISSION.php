@@ -54,7 +54,7 @@ class UserPermission {
      * @param mixed $userPermissions the user permissions
      *
      */
-    private function setUserPermissions(array $userPermissions)
+    public function setUserPermissions(array $userPermissions)
     {
         $this->userPermissions = $userPermissions;
 

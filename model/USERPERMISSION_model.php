@@ -107,13 +107,15 @@ class UserPermissionMapper {
 		$stmt->execute(array($userpermission->getCoduser()));
 
 		//insetar novos permisos
-		foreach ($userpermission->getPermissions() as $permiso) {
-			$stmt = $this->db->prepare("INSERT INTO usuario_tiene_permiso(cod_usuario,id_permiso) values (?, ?)");
-			$stmt->execute(array(
-					$userpermission->getCoduser(), 
-					$permiso->getCodpermission()
+		if($userpermission != NULL){
+			foreach ($userpermission->getUserPermissions() as $permiso) {
+				$stmt = $this->db->prepare("INSERT INTO usuario_tiene_permiso(cod_usuario,id_permiso) values (?, ?)");
+				$stmt->execute(array(
+						$userpermission->getCoduser(),
+						$permiso->getCodpermission()
 					)
-			);
+				);
+			}
 		}
 	}
 

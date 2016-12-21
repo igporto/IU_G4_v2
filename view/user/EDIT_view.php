@@ -18,12 +18,12 @@
             include 'js/showscriptGL.js';
             break;
     }
-    $auxiliar = $_REQUEST["user"];
+    $username = $_REQUEST["user"];
 ?>
 <script>
     function enviar() {
         var ruta = 'index.php?controller=user&action=edit&user=';
-        var nome = <?php echo '"'.$auxiliar.'"';?>;
+        var nome = <?php echo '"'.$username.'"';?>;
         var query = '&perf_id=';
         var perfil = document.getElementById("perf_id").value;
 
@@ -35,7 +35,7 @@
 
 <div class="col-md-8 col-md-offset-2" style="margin-top: 20px">
     <form method="POST" name="editform" id="editform"
-          action="index.php?controller=user&action=edit&function=edit&user= <?php echo $_REQUEST["user"] ?>"
+          action="index.php?controller=user&action=edit&user=<?php echo $username; ?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -64,10 +64,8 @@
                 //Recuperamos o id do perfil do usuario a modificar para telo selecionalo previamente
                 if(!isset($_GET["perf_id"])){
                     $userProfile = $um->view($id_user)->getProfile()->getCodprofile();
-                    echo"Primeira";
                 }
                 else{
-                    echo "segunda";
                     $userProfile = $_REQUEST["perf_id"];
                 }
                 $user = $_REQUEST["user"];
@@ -79,6 +77,7 @@
                         <select id='perf_id' name='perf_id' class='form-control icon-menu'
                                 onchange='enviar()'>
                             <?php
+                            //Engadimos unha opcion por perfil que se pode escoller
                                 $pc = new ProfileMapper();
 
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
@@ -92,7 +91,6 @@
                                     if ($userProfile == $profile->getCodprofile()) {
                                         echo " selected ";
                                     }
-
                                     echo ">" . $profile->getProfilename() . "</option>";
                                 }
                             ?>
@@ -133,6 +131,8 @@
                             echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$p->getCodpermission()."' checked disabled >".$actionname."</input>";
 
                         }
+
+
                     //PERMISOS PROPIOS DO USUARIO
                     $pm = new PermissionMapper();
                     $allpermissions = $pm->show();
@@ -156,13 +156,28 @@
                                 $currentControllername = $controllername;
                                 echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
                             }
-                            if(in_array($controllername,$userperms)){
-                                $perm_id = $actionname . "_" . $controllername;
-                                echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
+                            //Se ten ese permiso pomolo marcado
+                            if(in_array($ap, $userperms)){
+                                //$perm_id = $actionname . "_" . $controllername;
+                                echo "<input type='checkbox' name='userperm[]'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
                             }else{
-                                echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
+                                echo "<input type='checkbox' name='userperm[]'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
                             }
-
+                        }
+                    }
+                    else{
+                        $currentControllername = $allpermissions[0]->getController()->getControllername();
+                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        foreach ($allpermissions as $ap) {
+                            //recuperamos os nomes do controlador  e accion do perfile a mostrar
+                            $controllername = $ap->getController()->getControllername();
+                            $actionname = $ap->getAction()->getActionname();
+                            if($controllername != $currentControllername){
+                                // echo "</div>";
+                                $currentControllername = $controllername;
+                                echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                            }
+                            echo "<input type='checkbox' name='userperm[]'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
                         }
                     }
                 ?>

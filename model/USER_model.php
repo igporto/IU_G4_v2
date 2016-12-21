@@ -125,8 +125,9 @@ class UserMapper
     public function edit(User $user)
     {
         $stmt = $this->db->prepare("UPDATE usuario set user = ?, password = ?, id_perfil = ? where cod_usuario=?");
-        $stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getProfile()->getCodprofile()));
+        $stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getProfile()->getCodprofile(), $user->getCoduser()));
         $this->upm->edit($user->getPermissions());
+        
     }
 
     //borra sobre a taboa usuario a tupla con id igual a o do obxeto pasado	
@@ -144,7 +145,7 @@ class UserMapper
      */
     public function usernameExists($username)
     {
-        $stmt = $this->db->prepare("SELECT count(user) FROM usuario where user=?");
+        $stmt = $this->db->prepare("SELECT count(*) FROM usuario where user=?");
         $stmt->execute(array($username));
 
         if ($stmt->fetchColumn() > 0) {
