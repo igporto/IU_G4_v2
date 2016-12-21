@@ -38,19 +38,14 @@ class PermissionMapper {
 	//Funcion de listar: devolve un array de todos obxetos Permission correspondentes á tabla Permission
 	public function show() {
 
-		$stmt = $this->db->query("SELECT id_permiso, id_accion, id_controlador FROM permiso");
+		$stmt = $this->db->query("SELECT * FROM permiso");
 		$permission_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$permissions = array();
 
 		foreach ($permission_db as $permission) {
-			array_push($permissions, 
-				new Permission($permission["id_permiso"]),
-					$this->cm->view($permission['id_controlador']), 
-					$this->am->view($permission['id_accion'])
-				);
+			array_push($permissions, $this->view($permission["id_permiso"]));
 		}
-
 		//devolve o array
 		return $permissions;
 	}

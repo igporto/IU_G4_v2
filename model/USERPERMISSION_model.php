@@ -37,7 +37,6 @@ class UserPermissionMapper {
 		return $this->db->lastInsertId();
 	}
 
-	//ACABADO
 	//Funcion de listar: devolve un array de todos obxetos UserPermission correspondentes á tabla UserPermission
 	public function show() {
 
@@ -72,8 +71,7 @@ class UserPermissionMapper {
 		//devolve o array
 		return $userpermissions;
 	}
-
-
+	
 	//devolve o obxecto UserPermission no que o $id_usuario_tiene_permiso coincida co da tupla.
 	public function view($cod_usuario){
 		$stmt = $this->db->prepare("SELECT cod_usuario, id_permiso

@@ -101,9 +101,7 @@ class UserController extends BaseController {
 		//devolvemos o array de permisos do usuario actual
 		return array_unique($perms);
 	}
-
 	
-
 	//cerra sesión e redirecciona a login
 	public function logout() {
 		session_destroy();
@@ -114,7 +112,6 @@ class UserController extends BaseController {
 	}
 
 	public function add(){
-
 
 		if (isset($_POST["submit"])) {
             //Creamos un obxecto User baleiro
@@ -185,4 +182,38 @@ class UserController extends BaseController {
         $this->view->setVariable("user", $user);
         $this->view->render("user", "view");
     }
+	
+	public function edit(){
+		if (isset($_POST["submit"])) {
+			//Creamos un obxecto User baleiro
+			$user_id = $this->userMapper->getIdByName($_REQUEST['user']);
+			$user = $this->userMapper->view($user_id);
+
+			//Engadimos o novo contrasinal ao usuario
+			//$user->setUsername(htmlentities(addslashes($_POST["username"])));
+			$user->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
+
+			//Engadimos o perfil
+
+			$profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
+			$user->setProfile($profile);
+
+			//Engadimos os permisos do usuario (Non entran os do perfil)
+			$user->setPermissions(new UserPermission());
+
+			try {
+				$this->userMapper->edit($user);
+				//ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
+				$this->view->setFlash("Usuario modificado correctamente!");
+				//REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
+				$this->view->redirect("user", "show");
+			}catch(ValidationException $ex) {
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
+		//Se non se enviou nada
+		//$this->view->setLayout("navbar");
+		$this->view->render("user", "edit");
+	}
 }

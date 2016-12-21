@@ -1,31 +1,50 @@
 <!-- CONTIDO DA PAXINA -->
 
 <?php
-if (!isset($_SESSION["cambiado"])) {
-    require_once('controllers/USER_controller.php');
-    $uc = new USER_controller();
-    $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
-    $profile_id = $prof_id;
-    $_SESSION["editprofile"] = $prof_id;
-
-} elseif ($_SESSION["cambiado"] = false) {
-    require_once('controllers/USER_controller.php');
-    $uc = new USER_controller();
-    $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
-    $profile_id = $prof_id;
-    $_SESSION["editprofile"] = $prof_id;
-}
-
-if (isset($_SESSION["cambiado"]) && $_SESSION["cambiado"] = true) {
-    $profile_id = $_SESSION["editprofile"];
-}
-
+    require_once(__DIR__ . "/../../controller/USER_controller.php");
+    require_once(__DIR__ . "/../../model/PERMISSION_model.php");
+    include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+    switch ($_SESSION['idioma']) {
+        case 'SPANISH':
+            include 'js/showscriptES.js';
+            break;
+        case 'GALEGO':
+            include 'js/showscriptGL.js';
+            break;
+        case 'ENGLISH':
+            include 'js/showscriptEN.js';
+            break;
+        default:
+            include 'js/showscriptGL.js';
+            break;
+    }
+/*
+    if (!isset($_SESSION["cambiado"])) {
+        require_once('controllers/USER_controller.php');
+        $uc = new USER_controller();
+        $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
+        $profile_id = $prof_id;
+        $_SESSION["editprofile"] = $prof_id;
+    
+    } elseif ($_SESSION["cambiado"] = false) {
+        require_once('controllers/USER_controller.php');
+        $uc = new USER_controller();
+        $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
+        $profile_id = $prof_id;
+        $_SESSION["editprofile"] = $prof_id;
+    }
+    
+    if (isset($_SESSION["cambiado"]) && $_SESSION["cambiado"] = true) {
+        $profile_id = $_SESSION["editprofile"];
+    }
+*/
 ?>
 
 <script>
-    function enviar() {
-        var aux1 = 'index.php?controller=USER&action=edit&profileEdit=';
-        var aux = document.getElementById("perf_id").value;
+    function actualizar() {
+        var aux1 = 'index.php?controller=USER&action=edit&user=';
+        var aux = document.getElementById( $_REQUEST["user"]).value;
+        
         window.location.href = aux1.concat(aux);
     }
 </script>
@@ -57,78 +76,96 @@ if (isset($_SESSION["cambiado"]) && $_SESSION["cambiado"] = true) {
                 <div class="form-group">
                     <div class="form-group input-group">
                         <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
-                        <select id='perf_id' name='perf_id' class='form-control icon-menu'
-                                onchange='enviar()'>
+                        <select id='perf_id' name='profile' class='form-control icon-menu'
+                                onchange='actualizar()'>
                             <?php
-                            require_once('controllers/PROFILE_controller.php');
-                            $pc = new PROFILE_controller();
-                            $profiles = $pc->getprofiles();
-                            foreach ($profiles as $key => $v) {
+                                $um = new UserMapper();
+                                $pc = new ProfileMapper();
 
-                                echo "<option value='" . $v["perf_id"];
-                                if ($profile_id == $v["perf_id"]) {
-                                    echo "' selected='selected'";
+                                //Recuperamos o id do usuario a editar
+                                $id_user = $um->getIdByName($_REQUEST["user"]);
+
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $profiles = $pc->show();
+
+                                //Recuperamos o id do perfil do usuario a modificar para telo selecionalo previamente
+                                $userProfile = $um->view($id_user)->getProfile()->getCodprofile();
+                                foreach ($profiles as $profile) {
+
+                                    echo "<option value='" . $profile->getCodprofile();
+
+                                    //Se é o perfil que ten o usuario a editar poñemolo como selecionado por defecto
+                                    if ($userProfile == $profile->getCodprofile()) {
+                                        echo "' selected='selected'";
+                                    }
+
+                                    echo "'>" . $profile->getProfilename() . "</option>";
                                 }
-
-                                echo "'>" . $v["name"] . "</option>";
-                            }
-
                             ?>
                         </select>
                     </div>
                 </div>
 
                 <?php
+                    //IMPRESIÓN DOS PERMISOS DO USUARIO
+                    echo "<div>
+                              <div>
+                                    <label>".$strings['perm_over_controller']."</label>: 
+                              </div>
+                          <div><p class='help-block'>".$strings['not_edit_perm']."</div>";
+                    //PERMISOS PROPIOS DO PERFIL
+                    //recorremos os permisos do perfil(so se mostran xa que non se poden modificar)
+                    $profileperms = $um->view($id_user)->getProfile()->getPermissions();
+                    //axuda
+                    $currentControllername = $profileperms[0]->getController()->getControllername();
+                    echo "<div class='col-md-6 col-md-offset-3'>";
 
-                require_once('controllers/USER_controller.php');
-                $uc = new USER_controller();
-                $permissions = $uc->getUserPerms($_REQUEST["user"]);
+                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        foreach ($profileperms as $p) {
 
-                require_once('controllers/CONTROLLER_controller.php');
-                $cc = new CONTROLLER_controller();
-                $controllersActions = $cc->getControllersActions();
-                $controllersAll = array();
+                            //recuperamos os nomes do controlador  e accion do perfile a mostrar
+                            $controllername = $p->getController()->getControllername();
+                            $actionname = $p->getAction()->getActionname();
 
-                foreach ($controllersActions as $key => $value) {
-                    array_push($controllersAll, $value["controller_name"]);
-                }
-
-                $controllersAll = array_unique($controllersAll);
-
-                $u_p_p = $uc->getProfilePerms($profile_id);
-                $user_profile_perms = array();
-                foreach ($u_p_p as $item) {
-                    array_push($user_profile_perms, $item["perm_id"]);
-                }
-
-                //IMPRESIÓN DOS PERMISOS DO USUARIO
-                echo "<div><div><label>".$strings['perm_over_controller']."</label>: </div><div><p class='help-block'>".$strings['not_edit_perm']."</div>"	;
-
-                foreach ($controllersAll as $key1 => $value1) {
-                	echo "<div class='col-md-6'>";
-                    echo "<div class='text-center'><label>".$value1 . "</label>: </div><div class='text-center'>";
-
-                    foreach ($controllersActions as $key2 => $value2) {
-
-                        if ($value1 == $value2["controller_name"]) {
-                            $perm_id = $value1 . "_" . $value2["action_name"];
-                            echo "<input type='checkbox' name='" . $perm_id . "' " . "value='" . $perm_id . "'";
-
-                            if (in_array($perm_id, $permissions)) {
-                                echo " checked";
+                            if($controllername != $currentControllername){
+                               // echo "</div>";
+                                $currentControllername = $controllername;
+                                echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
                             }
+                            $perm_id = $actionname . "_" . $controllername;
+                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$p->getCodpermission()."' checked disabled >".$actionname."</input>";
 
-                            $perm_id_subs = substr($value1, 0, 4) . "_" . substr($value2["action_name"], 0, 4);
-                            if (in_array($perm_id_subs, $user_profile_perms)) {
-                                echo " checked disabled";
-                            }
-
-                            echo ">" . $value2["action_name"];
-                            echo "<br>";
                         }
+                    //PERMISOS PROPIOS DO USUARIO
+                    $pm = new PermissionMapper();
+                    $allpermissions = $pm->show();
+                    $userperms = $um->view($id_user)->getPermissions()->getUserPermissions();
+
+                    echo "<div>
+                            <label>".$strings['perm_over_controller']."</label>: 
+                          </div>";
+
+                    //Seteamos de novo o COntrolador do permiso actual
+                    $currentControllername = $userperms[0]->getController()->getControllername();
+                    echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                    foreach ($allpermissions as $ap) {
+                        
+                        //recuperamos os nomes do controlador  e accion do perfile a mostrar
+                        $controllername = $ap->getController()->getControllername();
+                        $actionname = $ap->getAction()->getActionname();
+                        if($controllername != $currentControllername){
+                            // echo "</div>";
+                            $currentControllername = $controllername;
+                            echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        }
+                        if(in_array($controllername,$userperms)){
+                            $perm_id = $actionname . "_" . $controllername;
+                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
+                        }else{
+                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$ap->getCodpermission()."'>".$actionname."</input>";
+                        }
+
                     }
-                    echo "<br></div></div>";
-                }
 
                 ?>
             </div>

@@ -126,7 +126,6 @@ class UserMapper
     {
         $stmt = $this->db->prepare("UPDATE usuario set user = ?, password = ?, id_perfil = ? where cod_usuario=?");
         $stmt->execute(array($user->getUsername(), $user->getPasswd(), $user->getProfile()->getCodprofile()));
-
         $this->upm->edit($user->getPermissions());
     }
 
@@ -169,7 +168,6 @@ class UserMapper
             return true;
         }
     }
-
 
     //engade un permiso $permission ao perfil $user
     private function addPermission(User $user, Permission $permission)
