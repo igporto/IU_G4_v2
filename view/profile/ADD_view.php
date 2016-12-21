@@ -7,7 +7,7 @@
     
 ?>
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px" >
-    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()" action="index.php?controller=user&action=add"
+    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()" action="index.php?controller=profile&action=add"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">

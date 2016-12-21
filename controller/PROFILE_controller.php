@@ -30,22 +30,22 @@ class ProfileController extends BaseController {
             //Engadimos o nome ao perfil
             $profile->setProfilename(htmlentities(addslashes($_POST["profilename"])));
 
-
+            $perms = array();
             //Engadimos os permisos ao perfil
             if(isset($_REQUEST["profileperm"])){
 
                 $pm = new PermissionMapper();
-                $upm= new UserPermissionMapper();
-                $profileperms = $_REQUEST["userperm"];
-                foreach ($profileperms as $pp){
-                    array_push($perms, $pm->view($pp));
+                $profileperms = $_REQUEST["profileperm"];
+                foreach ($profileperms as $p){
+
+                    array_push($perms, $pm->view($p));
                 }
             }
 
             $profile->setPermissions($perms);
 
             try {
-                if(!$this->profileMapper->profilenameExists(htmlentities(addslashes($_POST["username"])))){
+                if(!$this->profileMapper->profilenameExists(htmlentities(addslashes($_POST["profilename"])))){
                     $this->profileMapper->add($profile);
                     //ENVIAR AVISO DE PERFIL ENGADIDO!!!!!!!!!!
                     $this->view->setFlash("Perfil creado correctamente!");
