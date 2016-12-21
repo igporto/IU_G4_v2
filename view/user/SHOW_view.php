@@ -76,7 +76,7 @@ switch ($_SESSION['idioma']) {
             //Botón que direcciona á vista do editar
             if($edit){
                 if($u->getUsername()!=$_SESSION['currentuser'] && $u->getUsername()!='admin'){
-                    echo "<a href='index.php?controller=user&action=edit&user=" . $u->getUsername() . "'>";
+                    echo "<a href=index.php?controller=user&action=edit&user=". $u->getUsername().'>';
                 }else{
                     echo "<a href='#'>";
                 }
@@ -87,7 +87,6 @@ switch ($_SESSION['idioma']) {
                     echo " disabled' data-toggle='tooltip' title='".$strings['cannot_modify_user'];
                 }
                 echo "' style='margin:2px'>";
-
 
                 echo "<i class='fa fa-edit fa-fw'></i></button></a>";
 

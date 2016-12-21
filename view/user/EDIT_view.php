@@ -18,34 +18,18 @@
             include 'js/showscriptGL.js';
             break;
     }
-/*
-    if (!isset($_SESSION["cambiado"])) {
-        require_once('controllers/USER_controller.php');
-        $uc = new USER_controller();
-        $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
-        $profile_id = $prof_id;
-        $_SESSION["editprofile"] = $prof_id;
-    
-    } elseif ($_SESSION["cambiado"] = false) {
-        require_once('controllers/USER_controller.php');
-        $uc = new USER_controller();
-        $prof_id = $uc->getUserProfileId($_REQUEST["user"]);
-        $profile_id = $prof_id;
-        $_SESSION["editprofile"] = $prof_id;
-    }
-    
-    if (isset($_SESSION["cambiado"]) && $_SESSION["cambiado"] = true) {
-        $profile_id = $_SESSION["editprofile"];
-    }
-*/
+    $auxiliar = $_REQUEST["user"];
 ?>
-
 <script>
-    function actualizar() {
-        var aux1 = 'index.php?controller=USER&action=edit&user=';
-        var aux = document.getElementById( $_REQUEST["user"]).value;
-        
-        window.location.href = aux1.concat(aux);
+    function enviar() {
+        var ruta = 'index.php?controller=user&action=edit&user=';
+        var nome = <?php echo '"'.$auxiliar.'"';?>;
+        var query = '&perf_id=';
+        var perfil = document.getElementById("perf_id").value;
+
+        var parte1 = ruta.concat(nome);
+        var parte2 = query.concat(perfil);
+        window.location.href = parte1.concat(parte2);
     }
 </script>
 
@@ -72,34 +56,44 @@
                     </div>
                 </div>
 
+                <?php
+                $um = new UserMapper();
+                //Recuperamos o id do usuario a editar
+                $id_user =  $um->getIdByName($_REQUEST["user"]);
+
+                //Recuperamos o id do perfil do usuario a modificar para telo selecionalo previamente
+                if(!isset($_GET["perf_id"])){
+                    $userProfile = $um->view($id_user)->getProfile()->getCodprofile();
+                    echo"Primeira";
+                }
+                else{
+                    echo "segunda";
+                    $userProfile = $_REQUEST["perf_id"];
+                }
+                $user = $_REQUEST["user"];
+                ?>
                 <label for=""><?php echo $strings['profile_type']; ?>:</label>
                 <div class="form-group">
                     <div class="form-group input-group">
                         <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
-                        <select id='perf_id' name='profile' class='form-control icon-menu'
-                                onchange='actualizar()'>
+                        <select id='perf_id' name='perf_id' class='form-control icon-menu'
+                                onchange='enviar()'>
                             <?php
-                                $um = new UserMapper();
                                 $pc = new ProfileMapper();
-
-                                //Recuperamos o id do usuario a editar
-                                $id_user = $um->getIdByName($_REQUEST["user"]);
 
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $profiles = $pc->show();
 
-                                //Recuperamos o id do perfil do usuario a modificar para telo selecionalo previamente
-                                $userProfile = $um->view($id_user)->getProfile()->getCodprofile();
                                 foreach ($profiles as $profile) {
 
-                                    echo "<option value='" . $profile->getCodprofile();
+                                    echo "<option value=" . $profile->getCodprofile();
 
                                     //Se é o perfil que ten o usuario a editar poñemolo como selecionado por defecto
                                     if ($userProfile == $profile->getCodprofile()) {
-                                        echo "' selected='selected'";
+                                        echo " selected ";
                                     }
 
-                                    echo "'>" . $profile->getProfilename() . "</option>";
+                                    echo ">" . $profile->getProfilename() . "</option>";
                                 }
                             ?>
                         </select>
@@ -113,9 +107,12 @@
                                     <label>".$strings['perm_over_controller']."</label>: 
                               </div>
                           <div><p class='help-block'>".$strings['not_edit_perm']."</div>";
+
                     //PERMISOS PROPIOS DO PERFIL
                     //recorremos os permisos do perfil(so se mostran xa que non se poden modificar)
-                    $profileperms = $um->view($id_user)->getProfile()->getPermissions();
+                    $pm = new ProfileMapper();
+                    $profileperms = $pm->view($userProfile)->getPermissions();
+
                     //axuda
                     $currentControllername = $profileperms[0]->getController()->getControllername();
                     echo "<div class='col-md-6 col-md-offset-3'>";
