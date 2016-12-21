@@ -71,8 +71,8 @@ class ControllerController extends BaseController {
 
     public function delete(){
     		try{
-    			if (isset($_GET['controller'])) {
-    				$this->controllerMapper->delete($this->controllerMapper->getIdByName($_GET["controller"]));
+    			if (isset($_GET['controller_id'])) {
+    				$this->controllerMapper->delete($this->controllerMapper->getIdByName($_GET["controller_id"]));
 					$this->view->setFlash('msg_delete_correct');
 					$this->view->redirect("controller", "show");
     			}

@@ -16,6 +16,14 @@ class ControllerMapper {
 		$this->db = PDOConnection::getInstance();
 	}
 
+	//return: o id do usuario co nome $controllername
+    public function getIdByName($controllername)
+    {
+        $stmt = $this->db->prepare("SELECT id_controlador FROM controlador WHERE  nombre= ?");
+        $stmt->execute(array($controllername));
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id_controlador'];
+    }
 	
 	//devolve true se xa existe un controlador co nome $controllername
 	public function controllernameExists($controllername) {
@@ -81,9 +89,9 @@ class ControllerMapper {
 
 		
 	//borra sobre a taboa controlador a tupla con id igual a o do obxeto pasado	
-	public function delete(Controller $controller) {
+	public function delete($id_controller) {
 		$stmt = $this->db->prepare("DELETE from controlador WHERE id_controlador=?");
-		$stmt->execute(array($controller->getCodcontroller()));
+		$stmt->execute(array($id_controller));
 	}
 
 

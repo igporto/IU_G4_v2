@@ -212,13 +212,14 @@ $permis = $uc->getCurrentUserPerms();
                 //mostrado de notificacións flash
         $flag = false;
         $flag = $view->popFlash();
+                var_dump($flag);
                 if($flag != false)
                 {
                     
                     echo "<script>
                     $.amaran({
                         content:{
-                            title:'" . $strings[$flag] . "',
+                            title:'" . $strings[""] . "',
                             message:'',
                             icon:'fa fa-check',
                             'delay'     :7000
