@@ -3,7 +3,6 @@ function selPass() {
     //Borrar el mensaje
     document.getElementById("emptyErr").style.display = "none";
 
-
     //Volver al estilo original del campo userName (verde)
     document.getElementById("userName").style.border = "none";
     document.getElementById("userName").style.borderBottom = "2px solid #ddd";

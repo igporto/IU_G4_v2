@@ -30,21 +30,6 @@ class Action {
     }
 
     /**
-     * Sets the value of codaction.
-     *
-     * @param mixed $codaction the codaction
-     *
-     * @return self
-     */
-    private function setCodaction($codaction)
-    {
-        $this->codaction = $codaction;
-
-        return $this;
-    }
-
-
-    /**
      * Gets the value of actionname.
      *
      * @return mixed
@@ -61,9 +46,23 @@ class Action {
      *
      * @return self
      */
-    private function setActionname($actionname)
+    public function setActionname($actionname)
     {
         $this->actionname = $actionname;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value of codaction.
+     *
+     * @param mixed $codaction the codaction
+     *
+     * @return self
+     */
+    private function setCodaction($codaction)
+    {
+        $this->codaction = $codaction;
 
         return $this;
     }

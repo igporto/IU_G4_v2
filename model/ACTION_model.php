@@ -19,15 +19,13 @@ class ActionMapper {
 
 	//devolve true se xa existe unha acción co nome $actionname
 	public function actionnameExists($actionname) {
-		$stmt = $this->db->prepare("SELECT count(action) FROM accion where nombre=?");
+        $stmt = $this->db->prepare("SELECT count(*) FROM accion where nombre=?");
 		$stmt->execute(array($actionname));
 
 		if ($stmt->fetchColumn() > 0) {
 			return true;
 		}
 	}
-	
-
 
 	//Inserta na base de datos unha tupla cos datos do obxeto $action
 	public function add(Action $action) {
