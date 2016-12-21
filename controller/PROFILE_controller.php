@@ -83,9 +83,9 @@ class ProfileController extends BaseController {
     }
 
     public function  show(){
-        $users = $this->userMapper->show();
-        $this->view->setVariable("users", $users);
-        $this->view->render("user", "show");
+        $profiles = $this->profileMapper->show();
+        $this->view->setVariable("profiles", $profiles);
+        $this->view->render("profile", "show");
     }
 
     public function view(){

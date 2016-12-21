@@ -190,7 +190,7 @@ class UserController extends BaseController {
 			$user = $this->userMapper->view($user_id);
 
 			//Engadimos o novo contrasinal ao usuario se chega (se non deixamos o que ten)
-			if(isset($_POST["newpass"])){
+			if(isset($_POST["newpass"])&& addslashes($_POST['newpass'])!=""){
 				$user->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
 			}else{
 				$pass = $this->view($user_id)->getPasswd();
