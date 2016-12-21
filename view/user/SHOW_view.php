@@ -134,10 +134,10 @@ switch ($_SESSION['idioma']) {
 
 
                                             <div class="col-xs-12 col-md-6 col-md-offset-3">
-                                                    <div class="panel panel-default">
+                                                    <div class="panel panel-info">
                                                             <div class="panel-heading">
                                                                 <h4 class="panel-title">
-                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse' . $u->getUsername() . '" aria-expanded="true" class="">'.$strings["own_permis"].'</a>
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse' . $u->getUsername() . '" aria-expanded="true" class="">'.$strings["own_permis"].': </a>
                                                                 </h4>
                                                             </div>
                                                             <div id="collapse' . $u->getUsername() . '" class="panel-collapse collapse" aria-expanded="true">

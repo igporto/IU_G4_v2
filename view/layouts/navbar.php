@@ -44,6 +44,7 @@ $permis = $uc->getCurrentUserPerms();
 
     <!--MULTIIDIOMA-->
     <link rel="stylesheet" href="core/language/css/language.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
     <!-- jQuery, NECESARIO para scripts JS de Bootstrap, cargar ó final do body-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -60,6 +61,10 @@ $permis = $uc->getCurrentUserPerms();
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!--AmaranJS for notifications-->
+    <link rel="stylesheet" href="lib/amaranjs/css/amaran.min.css">
+    <script src="lib/amaranjs/js/jquery.amaran.js"></script>
 </head>
 
 <body>
@@ -191,18 +196,7 @@ $permis = $uc->getCurrentUserPerms();
 <!-- CONTIDO DA PAXINA -->
 <div id='page-wrapper'>
     <div class='container-fluid'>
-
-    <?php 
-                //mostrado de notificacións flash
-        $flag = false;
-        $flag = $view->popFlash();
-                if($flag != false)
-                {
-                    echo '<div id="flash-notif" class="alert alert-danger alert-dismissable">';
-                    echo $strings[$flag];
-                    echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
-                } 
-    ?>
+    
                 
                 <!--CARGAR FRAGMENTO INTERNO-->  
                 <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
@@ -216,6 +210,27 @@ $permis = $uc->getCurrentUserPerms();
 <!--FIN WRAPPER-->
 
 
+ <?php 
+                //mostrado de notificacións flash
+        $flag = false;
+        $flag = $view->popFlash();
+                if($flag != false)
+                {
+                    
+                    echo "<script>
+                    $.amaran({
+                        content:{
+                            title:'" . $strings[$flag] . "',
+                            message:'',
+                            icon:'fa fa-check',
+                            'delay'     :7000
+                        },
+                        theme:'awesome ok'
+                    });
+                    </script>";
+                   
+                } 
+    ?>
 </body>
 
 </html>
