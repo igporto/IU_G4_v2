@@ -75,7 +75,7 @@ switch ($_SESSION['idioma']) {
             }
             //Botón que direcciona á vista do editar
             if($edit){
-                if($u->getUsername()!=$_SESSION['currentuser'] && $u->getUsername()!='admin'){
+                if($u->getUsername()!=$_SESSION['currentuser']){
                     echo "<a href=index.php?controller=user&action=edit&user=". $u->getUsername().'>';
                 }else{
                     echo "<a href='#'>";
