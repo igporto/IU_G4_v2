@@ -134,8 +134,15 @@ switch ($_SESSION['idioma']) {
                                             </div>
 
 
-                                            <div class="col-xs-12 col-md-12">
-                                                    <label for="">'.$strings["own_permis"].': </label>
+                                            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                                                    <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                <h4 class="panel-title">
+                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse' . $u->getUsername() . '" aria-expanded="true" class="">'.$strings["own_permis"].'</a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapse' . $u->getUsername() . '" class="panel-collapse collapse" aria-expanded="true">
+                                                                <div class="panel-body">
                                                     <ul>';
                                                         
                                                             $permissions = $u->getPermissions()->getUserPermissions();
@@ -154,6 +161,10 @@ switch ($_SESSION['idioma']) {
                                                     
 
                                                 echo '</ul>
+
+                                                </div>
+                                    </div>
+                                </div>
 
                                             </div>
 
