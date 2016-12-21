@@ -50,7 +50,7 @@
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="password" name="newpass"
-                                   placeholder=<?php echo $strings['newpass']; ?>>
+                                   placeholder=<?php echo $strings['newpass'];?> >
                         </div>
                         <!--Campo password-->
                     </div>

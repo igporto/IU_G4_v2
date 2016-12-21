@@ -84,16 +84,17 @@ class UserController extends BaseController {
 
 		$perms = array();
 
-		if($cu->getPermissions()->getUserPermissions() !=NULL) {
-			foreach ($cu->getPermissions()->getUserPermissions() as $perm) {
-				array_push($perms, $perm);
-			}
-		}
-
 		//obtemos os permisos do perfil e metémolos en $perms
 		if($cu->getProfile()->getPermissions() != NULL) {
 
 			foreach ($cu->getProfile()->getPermissions() as $perm) {
+				array_push($perms, $perm);
+			}
+		}
+		
+		//obtemos os permisos propios do usuario e metémolos en $perms
+		if($cu->getPermissions()->getUserPermissions() !=NULL) {
+			foreach ($cu->getPermissions()->getUserPermissions() as $perm) {
 				array_push($perms, $perm);
 			}
 		}
