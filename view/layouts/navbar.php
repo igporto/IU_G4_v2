@@ -90,45 +90,9 @@ $permis = $uc->getCurrentUserPerms();
            
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-comment fa-fw"></i> <?php echo $strings['']; ?>
-                                <span class="pull-right text-muted small"><?php echo $strings['']; ?></span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong><?php echo $strings['']; ?></strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-alerts -->
+               
             </li>
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo $strings['user_profile']; ?></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> <?php echo $strings['settings']; ?></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="index.php?controller=user&action=logout"><i
-                                class="fa fa-sign-out fa-fw"></i> <?php echo $strings['close_session']; ?></a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
+          
             <!-- /.dropdown -->
             <?php include(__DIR__."/language_select.php");  ?>
         </ul>

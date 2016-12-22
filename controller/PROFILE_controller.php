@@ -51,9 +51,6 @@ class ProfileController extends BaseController {
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("profile", "show");
                 } else {
-                    $errors = array();
-                    $errors["general"] = "Profile already exists";
-                    $this->view->setVariable("errors", $errors);
                     $this->view->setFlash("profile_already_exists");
                 }
             }catch(ValidationException $ex) {

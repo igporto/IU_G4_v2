@@ -4,7 +4,7 @@
 $(document).ready(function() {
         $('#dataTable').DataTable({
             responsive: true,
-            searching: true,
+            searching: false,
             ordering: true,
             language: {
 					    "sEmptyTable":     "No data available in table",

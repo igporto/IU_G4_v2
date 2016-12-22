@@ -5,7 +5,7 @@
 $(document).ready(function() {
         $('#dataTable').DataTable({
             responsive: true,
-            searching: true,
+            searching: false,
             ordering: true,
             language: {
 					    "sProcessing":     "Procesando...",
