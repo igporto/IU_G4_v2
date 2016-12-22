@@ -79,6 +79,7 @@ class UserController extends BaseController {
 	//devolve un array de Permiso, que son os permisos de usuario+perfil do usuario $_SESSION['currentuser']
 	public function getCurrentUserPerms()
 	{
+
 		//obtén o obxecto usuario
 		$cu = $this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser']));
 		//$this->helper->toConsole(var_dump($cu));
@@ -93,10 +94,9 @@ class UserController extends BaseController {
 				}
 			}
 		}
-
 		
 		//obtemos os permisos propios do usuario e metémolos en $perms
-		if($cu->getPermissions()->getUserPermissions() !=NULL) {
+		if($cu->getPermissions()->getUserPermissions() != NULL) {
 			foreach ($cu->getPermissions()->getUserPermissions() as $perm) {
 				array_push($perms, $perm);
 			}

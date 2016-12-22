@@ -91,51 +91,43 @@ class ProfileController extends BaseController {
 
     public function edit(){
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto User baleiro
-            $user_id = $this->userMapper->getIdByName($_REQUEST["user"]);
-            $user = $this->userMapper->view($user_id);
+            //Creamos un obxecto Profile baleiro
+            $profile_id = htmlentities(addslashes($_REQUEST["profile_id"]));
+            $profile = $this->profileMapper->view($profile_id);
 
-            //Engadimos o novo contrasinal ao usuario se chega (se non deixamos o que ten)
-            if(isset($_POST["newpass"])){
-                $user->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
+            //Engadimos o novo nome ao perfil se chega (se non deixamos o que ten)
+            if(isset($_POST["newname"]) && $_POST["newname"] != ""){
+                $profile->setProfilename(htmlentities(addslashes($_POST["newname"])));
             }else{
-                $pass = $this->view($user_id)->getPasswd();
-                $user->setPasswd($pass);
+                $name = $this->view($profile_id)->getProfilename();
+                $profile->setPasswd($name);
             }
 
-            //Engadimos o perfil
-            $prof = htmlentities(addslashes($_POST["perf_id"]));
-            $profile = $this->profileMapper->view($prof);
-            //var_dump($profile);exit;
-            $user->setProfile($profile);
-
             $perms = array();
-            //Engadimos os permisos do usuario (Non entran os do perfil)
-            if(isset($_REQUEST["userperm"])){
-
+            //Engadimos os permisos ao perfil
+            if(isset($_REQUEST["profileperm"])){
                 $pm = new PermissionMapper();
-                $upm= new UserPermissionMapper();
-                $userperms = $_REQUEST["userperm"];
-                foreach ($userperms as $up){
+                $profileperms = $_REQUEST["profileperm"];
+                foreach ($profileperms as $up){
                     array_push($perms, $pm->view($up));
                 }
             }
 
-            $user->setPermissions(new UserPermission($user_id, $perms));
+            $profile->setPermissions($perms);
 
             try {
-                $this->userMapper->edit($user);
+                $this->profileMapper->edit($profile);
                 //ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
-                $this->view->setFlash("Usuario modificado correctamente!");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
-                $this->view->redirect("user", "view", "user=".$user->getUsername());
+                $this->view->setFlash("Perfil modificado correctamente!");
+                //REDIRECCION Á PAXINA
+                echo $profile->getCodprofile();
+                $this->view->redirect("profile", "view", "profile_id=".$profile->getCodprofile());
             }catch(ValidationException $ex) {
                 $errors = $ex->getErrors();
                 $this->view->setVariable("errors", $errors);
             }
         }
         //Se non se enviou nada
-        //$this->view->setLayout("navbar");
-        $this->view->render("user", "edit");
+        $this->view->render("profile", "edit");
     }
 }

@@ -94,10 +94,8 @@ class ProfileMapper {
 				return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);
 			} else {
 				//Se non ten permisos recuperamos o nome para crear o obxecto Profile
-				$stmt = $this->db->prepare("SELECT  id_perfil, nombre
-				FROM perfil 
-				WHERE id_perfil = ?");
-				$stmt->execute(array($id_perfil));
+				$stmt = $this->db->prepare("SELECT  id_perfil, nombre FROM perfil WHERE id_perfil = '$id_perfil'");
+				$stmt->execute();
 				$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);
 			}
