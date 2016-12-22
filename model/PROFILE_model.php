@@ -46,40 +46,21 @@ class ProfileMapper {
 
 		return $this->db->lastInsertId();
 	}
-
-	//ACABADO
+	
 	//Funcion de listar: devolve un array de todos obxetos Profile correspondentes á tabla Profile
 	public function show() {
 
 		//Obtemos todos os perfiles da BD
-		$stmt1 = $this->db->query("SELECT  pf.id_perfil, pf.nombre as p_nombre FROM  perfil pf");
+		$stmt1 = $this->db->query("SELECT  id_perfil, nombre as p_nombre FROM  perfil");
 		$stmt1->execute();
 		$profiles1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-
-		$stmt2 = $this->db->query("SELECT  id_perfil, id_permiso FROM  permisos_perfil");
-		$stmt2->execute();
-		$profiles2 =  $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 		//Array de obxectos Profile que se vai a devolver
 		$profiles = array();
 
-		foreach ($profiles1 as $p1){
-
-			$permissions = array();
-			if(in_array($p1["id_perfil"],$profiles2)){
-				//Xeramos o array dos permisos dese perfil logo de facer a busca na BD
-
-				//Engadimos no array os permisos do perfil
-				foreach($profiles2 as $p2){
-					array_push($permissions, $this->pm->view($p2['id_permiso']));
-				}
-
-				//"Seteamos no obxecto perfil os permisos deste"
-				array_push($profiles, new Profile($p1["id_perfil"], $p1["p_nombre"], $permissions));
-			}
-			else{
-				array_push($profiles, new Profile($p1["id_perfil"], $p1["p_nombre"], $permissions));
-			}
+		//engadimos os obxectos Profile empregando a query que devolve todos os perfiles da BD
+		foreach ($profiles1 as $profile) {
+			array_push($profiles, $this->view($profile["id_perfil"]));
 		}
 
 		//devolve o array
@@ -144,9 +125,9 @@ class ProfileMapper {
 	}
 
 	//borra sobre a taboa perfil a tupla con id igual a o do obxeto pasado	
-	public function delete(Profile $profile) {
+	public function delete($profile_id) {
 		$stmt = $this->db->prepare("DELETE from perfil WHERE id_perfil = ?");
-		$stmt->execute(array($profile->getCodprofile()));
+		$stmt->execute(array($profile_id));
 	}
 
 	//Comproba se existe un perfil con ese nome

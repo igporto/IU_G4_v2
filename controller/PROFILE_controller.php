@@ -67,17 +67,17 @@ class ProfileController extends BaseController {
 
     public function delete(){
         try{
-            if (isset($_GET['user'])) {
-                $this->userMapper->delete($this->userMapper->getIdByName($_GET["user"]));
+            if (isset($_GET["profile_id"])) {
+                $this->profileMapper->delete(htmlentities(addslashes($_GET["profile_id"])));
                 $this->view->setFlash('msg_delete_correct');
-                $this->view->redirect("user", "show");
+                $this->view->redirect("profile", "show");
             }
 
         }catch (Exception $e) {
             $errors = $e->getErrors();
             $this->view->setVariable("errors", $errors);
         }
-        $this->view->render("user", "show");
+        $this->view->render("profile", "show");
     }
 
     public function  show(){
