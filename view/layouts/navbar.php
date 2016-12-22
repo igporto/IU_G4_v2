@@ -210,23 +210,99 @@ $permis = $uc->getCurrentUserPerms();
 
  <?php 
                 //mostrado de notificacións flash
-        $flag = false;
+        
         $flag = $view->popFlash();
-                if($flag != false)
+                if($flag != '')
                 {
-                    
-                    echo "<script>
-                    $.amaran({
-                        content:{
-                            title:'" . $strings[$flag] . "',
-                            message:'Esto ven sendo unha notificación',
-                            icon:'fa fa-check',
-                            'delay'     :10000
-                        },
-                        theme:'awesome ok'
-                    });
-                    </script>";
-                   
+                    $tipo = substr($flag, 0, 4);
+
+                    switch ($tipo) {
+                        case 'succ':
+                            echo "<script>
+                                    $.amaran({
+                                        content:{
+                                            title:'" . $strings[$tipo."_title"] . "',
+                                            message:'" . $strings[$flag] . "',
+                                            info: '',
+                                            icon:'fa fa-check',
+                                            'delay'     :10000
+                                        },
+                                        theme:'awesome ok',
+                                        'position'  :'bottom right',
+                                        'outEffect' :'slideBottom'
+                                    });
+                                </script>";
+                            break;
+
+                        case 'erro':
+                            echo "<script>
+                                    $.amaran({
+                                        content:{
+                                            title:'" . $strings[$tipo."_title"] . "',
+                                            message:'" . $strings[$flag] . "',
+                                            info: '',
+                                            icon:'fa fa-ban',
+                                            'delay'     :10000
+                                        },
+                                        theme:'awesome error',
+                                        'position'  :'bottom right',
+                                        'outEffect' :'slideBottom'
+                                    });
+                                </script>";
+                            break;
+
+                        case 'fail':
+                            echo "<script>
+                                    $.amaran({
+                                        content:{
+                                            title:'" . $strings[$tipo."_title"] . "',
+                                            message:'" . $strings[$flag] . "',
+                                            info: '',
+                                            icon:'fa fa-times',
+                                            'delay'     :10000
+                                        },
+                                        theme:'awesome warning',
+                                        'position'  :'bottom right',
+                                        'outEffect' :'slideBottom'
+                                    });
+                                </script>";
+                            break;
+
+                        case 'info':
+                            echo "<script>
+                                    $.amaran({
+                                        content:{
+                                            title:'" . $strings[$tipo."_title"] . "',
+                                            message:'" . $strings[$flag] . "',
+                                            info: '',
+                                            icon:'fa fa-info',
+                                            'delay'     :10000
+                                        },
+                                        theme:'awesome blue',
+                                        'position'  :'bottom right',
+                                        'outEffect' :'slideBottom'
+                                    });
+                                </script>";
+                            break;
+                        
+                        default:
+                            echo "<script>
+                                    $.amaran({
+                                        content:{
+                                            title:'Undefined',
+                                            message:'" . $strings[$flag] . "',
+                                            info: '',
+                                            icon:'fa fa-code',
+                                            'delay'     :10000
+                                        },
+                                        theme:'awesome ok',
+                                        'position'  :'bottom right',
+                                        'outEffect' :'slideBottom'
+                                    });
+                                </script>";
+                            break;
+                    }
+                      
                 } 
     ?>
 </body>

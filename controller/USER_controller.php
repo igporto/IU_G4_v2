@@ -54,6 +54,7 @@ class UserController extends BaseController {
 
 				$_SESSION["currentuser"]=$_POST["userName"];
 
+				//$this->view->setFlash('succ_login');
 			}else{
 				$errors = array();
 				$errors["userNotValid"] = 'Usuario ou Contrasinal incorrecto';
@@ -134,15 +135,12 @@ class UserController extends BaseController {
 				if(!$this->userMapper->usernameExists(htmlentities(addslashes($_POST["username"])))){
                     $this->userMapper->add($user);
                     //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("Usuario creado correctamente!");
+                    $this->view->setFlash("succ_user_add");
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("user", "show");
 				} else {
-					$errors = array();
-					$errors["general"] = "Username already exists";
-					$this->view->setVariable("errors", $errors);
-					$this->view->setFlash("user_already_exists");
+					$this->view->setFlash("fail_user_exists");
 				}
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
@@ -159,7 +157,7 @@ class UserController extends BaseController {
     		try{
     			if (isset($_GET['user'])) {
     				$this->userMapper->delete($this->userMapper->getIdByName($_GET["user"]));
-					$this->view->setFlash('msg_delete_correct');
+					$this->view->setFlash('succ_user_delete');
 					$this->view->redirect("user", "show");
     			}
 				

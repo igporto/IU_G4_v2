@@ -140,7 +140,24 @@ $strings = array(
 	'user_perms' => 'User Permissions',
 	'controller_data'=>'Controller data',
 	'profile_data'=>'Profile data',
-	'controller_edit'=>'Edit controller'
+	'controller_edit'=>'Edit controller',
 
+	/*NOTIFICACIÓNS*/
+
+		/*SUCCES*/
+		'succ_title'=>'Correct',
+		'succ_login'=>'You are logged in!',
+		'succ_user_add'=>'User properly created',
+		'succ_user_delete'=>'User properly deleted',
+
+		/*FAIL*/
+		'fail_title'=>'Fail',
+		'fail_user_exists'=>"User already exists",
+
+		/*ERROR*/
+		'erro_title'=>'Error',
+
+		/*INFO*/
+		'info_title'=>'Information'
 )
 ?>
