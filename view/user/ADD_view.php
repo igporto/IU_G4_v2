@@ -41,6 +41,7 @@
                                 <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
                                 <select id='perf_id' name='profile' class='form-control icon-menu'>
                                     <?php
+                                    echo "<option value='NULL'>".$strings['no_profile']."</option>";
                                     $profilemapper = new ProfileMapper();
                                     foreach ($profilemapper->show() as $profile) {
                                         echo "<option value='" . $profile->getCodprofile() . "'>" . $profile->getProfilename() ."</option>";
