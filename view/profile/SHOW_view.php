@@ -72,7 +72,7 @@ switch ($_SESSION['idioma']) {
             //Botón que direcciona a vista do usuario
             if($view){
                 echo "<a href='index.php?controller=PROFILE&action=VIEW&profile_id=" .
-                    $p->getProfilename() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
+                    $p->getCodprofile() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
                 echo "<i class='fa fa-eye fa-fw'></i></button></a>";
             }
             //Botón que direcciona á vista do editar

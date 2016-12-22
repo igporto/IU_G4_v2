@@ -129,6 +129,7 @@ $strings = array(
 	'not_edit_perm' => 'Los permisos del perfil selecionado no se pueden modificar',
 	'perm_over_controller' => 'Permisos sobre acciones del controlador',
 	'no_user_permissions' => 'Este usuario no tiene permisos propios',
+	'no_profile_permissions' => 'Este perfil no tiene permisos',
 	'cancel'=>'Cancelar',
 	'user_data'=>'Datos del usuario',
 	'profile_perms' => 'Permisos del Perfil',

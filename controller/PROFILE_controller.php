@@ -87,10 +87,9 @@ class ProfileController extends BaseController {
     }
 
     public function view(){
-        $userid = $this->userMapper->getIdByName($_REQUEST["user"]);
-        $user = $this->userMapper->view($userid);
-        $this->view->setVariable("user", $user);
-        $this->view->render("user", "view");
+        $profile = $this->profileMapper->view($_REQUEST["profile_id"]);
+        $this->view->setVariable("profile", $profile);
+        $this->view->render("profile", "view");
     }
 
     public function edit(){

@@ -63,7 +63,7 @@
         <div style="margin-bottom: 20px" class="col-md-6 col-md-offset-3">
 
             <button class="btn btn-primary btn-md btn-block" id="submit" name="submit" type="submit">
-                <?php echo $strings['create_user'] ?></i></button>
+                <?php echo $strings['create_profile'] ?></i></button>
             <?php
             if (!isset($_SESSION)) {
                 session_start();

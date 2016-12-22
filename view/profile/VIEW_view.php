@@ -16,7 +16,7 @@ switch ($_SESSION['idioma']) {
         include 'js/showscriptGL.js';
         break;
 }
-
+    $pm = new ProfileMapper();
 ?>
 
 <!--ESTRUTURA DA TABLA EN SI-->
@@ -26,34 +26,23 @@ switch ($_SESSION['idioma']) {
     <form name="form" id="form" method="POST" enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['user_info'] ?>
+                <?php echo $strings['profile_info'] ?>
             </div>
             <div class="panel-body">
-
-                <?php $um = new UserMapper();
-                    $id_user = $um->getIdByName($_REQUEST["user"]);
-                ?>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                             <label for=""><?php echo $strings['name'];?>: </label>
-                            <span class=""><?php echo $um->view($id_user)->getUsername();?></span>
+                            <span class=""><?php echo $pm->view($_REQUEST["profile_id"])->getProfilename();?></span>
 
-                        <!--Campo ususario-->
+                        <!--Campo nome do perfil-->
                     </div>
 
                     <div class="col-xs-12 col-md-12">
-                            <label for=""><?php echo $strings['profile_type']; ?>: </label>
-                            <span class=""><?php echo $um->view($id_user)->getProfile()->getProfilename(); ?></span>
-                        <!--Campo perfil-->
-                    </div>
-
-
-                    <div class="col-xs-12 col-md-12">
-                            <label for=""><?php echo $strings['own_permis'].":";?></label>
+                            <label for=""><?php echo $strings['PERMISSION'].":";?></label>
                             <ul>
                                 <?php
 
-                                    $permissions = $um->view($id_user)->getPermissions()->getUserPermissions();
+                                    $permissions = $pm->view($_REQUEST["profile_id"])->getPermissions();
 
                                    if($permissions != NULL){
                                        //foreach que imprime o nome do controlador e da acción según os permisos que ten o usuario
@@ -63,7 +52,7 @@ switch ($_SESSION['idioma']) {
                                        }
                                    }
                                     else{
-                                        echo $strings['no_user_permissions'];
+                                        echo $strings['no_profile_permissions'];
                                     }
                                     
                                 ?>

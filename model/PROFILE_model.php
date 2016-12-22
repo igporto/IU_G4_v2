@@ -51,35 +51,36 @@ class ProfileMapper {
 	//Funcion de listar: devolve un array de todos obxetos Profile correspondentes á tabla Profile
 	public function show() {
 
-		$stmt = $this->db->query("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso
-			FROM  perfil pf, permisos_perfil pp 
-			WHERE pf.id_perfil = pp.id_perfil");
+		//Obtemos todos os perfiles da BD
+		$stmt1 = $this->db->query("SELECT  pf.id_perfil, pf.nombre as p_nombre FROM  perfil pf");
+		$stmt1->execute();
+		$profiles1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 
-		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$stmt2 = $this->db->query("SELECT  id_perfil, id_permiso FROM  permisos_perfil");
+		$stmt2->execute();
+		$profiles2 =  $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
-		$results = array();
-		$permissions = array();
+		//Array de obxectos Profile que se vai a devolver
 		$profiles = array();
-		//setteamos o perfil actual ao primeiro perfil
-		$currentProfile = $result_db[0];
 
-		//recorremos o resultado da query
-		foreach ($result_db as $result) {	
-			if($result['id_perfil'] != $currentProfile['id_perfil']){
-				//cando se cambia de perfil, creamos o perfil anterior
-				array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions));
-				//setteamos o perfil actual ó novo perfil
-				$currentProfile = $result;
-				//baleiramos o array de permisos do novo perfil
-				$permissions = array();
+		foreach ($profiles1 as $p1){
+
+			$permissions = array();
+			if(in_array($p1["id_perfil"],$profiles2)){
+				//Xeramos o array dos permisos dese perfil logo de facer a busca na BD
+
+				//Engadimos no array os permisos do perfil
+				foreach($profiles2 as $p2){
+					array_push($permissions, $this->pm->view($p2['id_permiso']));
+				}
+
+				//"Seteamos no obxecto perfil os permisos deste"
+				array_push($profiles, new Profile($p1["id_perfil"], $p1["p_nombre"], $permissions));
 			}
-				
-			//mentres sexa o mesmo perfil, almacenamos os permisos do perfil actual en $permissions
-			array_push($permissions, $this->pm->view($result['id_permiso']));
-		
+			else{
+				array_push($profiles, new Profile($p1["id_perfil"], $p1["p_nombre"], $permissions));
+			}
 		}
-		//engadimos o ultimo perfil
-		array_push($profiles, new Profile($currentProfile["id_perfil"], $currentProfile["p_nombre"], $permissions));
 
 		//devolve o array
 		return $profiles;
@@ -87,31 +88,31 @@ class ProfileMapper {
 
 	//devolve o obxecto Profile no que o $id_perfil coincida co da tupla.
 	public function view($id_perfil){
-		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre as p_nombre, pp.id_permiso
-			FROM perfil pf, permisos_perfil pp 
-			WHERE pf.id_perfil = pp.id_perfil AND pf.id_perfil = ?");
+		//Consultamos se o perfil ten permisos asociados
+		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre, pp.id_permiso
+			FROM perfil pf, permisos_perfil pp
+			WHERE pf.id_perfil = pp.id_perfil AND pp.id_perfil = ?");
 		$stmt->execute(array($id_perfil));
 		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+		//Creamos o array de permisos baleiro
+		$permissions = array();
+
 		if($result_db != null) {
-			$permissions = array();
-
-			//insertamos os permisos do perfil no obxeto
+			//Se ten permisos recorremolos e engadimolos ao array de permisos
 			foreach ($result_db as $permiso) {
-				array_push($permissions,$this->pm->view($permiso['id_permiso']));	
-
+				array_push($permissions,$this->pm->view($permiso['id_permiso']));
 			}
-
-			$profile = new Profile(
-				$result_db[0]["id_perfil"],
-				$result_db[0]["p_nombre"],
-				$permissions
-				);
-
-			return $profile;
 		} else {
-			return new Profile();
+			//Se non ten permisos recuperamos o nome para crear o obxecto Profile
+			$stmt = $this->db->prepare("SELECT  id_perfil, nombre
+			FROM perfil 
+			WHERE id_perfil = ?");
+			$stmt->execute(array($id_perfil));
+			$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
+
+		return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);;
 	}
 
 	//edita a tupla correspondente co id do obxecto Profile $profile
