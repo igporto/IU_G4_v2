@@ -111,27 +111,28 @@
                     $pm = new ProfileMapper();
                     $profileperms = $pm->view($userProfile)->getPermissions();
 
-                    //axuda
-                    $currentControllername = $profileperms[0]->getController()->getControllername();
-                    echo "<div class='col-md-6 col-md-offset-3'>";
+                    if($profileperms != NULL){
+                        //axuda
+                        $currentControllername = $profileperms[0]->getController()->getControllername();
+                        echo "<div class='col-md-6 col-md-offset-3'>";
 
-                    echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
-                    foreach ($profileperms as $p) {
+                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        foreach ($profileperms as $p) {
 
-                        //recuperamos os nomes do controlador  e accion do perfile a mostrar
-                        $controllername = $p->getController()->getControllername();
-                        $actionname = $p->getAction()->getActionname();
+                            //recuperamos os nomes do controlador  e accion do perfile a mostrar
+                            $controllername = $p->getController()->getControllername();
+                            $actionname = $p->getAction()->getActionname();
 
-                        if($controllername != $currentControllername){
-                           // echo "</div>";
-                            $currentControllername = $controllername;
-                            echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                            if($controllername != $currentControllername){
+                                // echo "</div>";
+                                $currentControllername = $controllername;
+                                echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                            }
+                            $perm_id = $actionname . "_" . $controllername;
+                            echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$p->getCodpermission()."' checked disabled >".$actionname."</input>";
+
                         }
-                        $perm_id = $actionname . "_" . $controllername;
-                        echo "<input type='checkbox' name='" . $perm_id . "'"."value='".$p->getCodpermission()."' checked disabled >".$actionname."</input>";
-
                     }
-
 
                     //PERMISOS PROPIOS DO USUARIO
                     $pm = new PermissionMapper();
