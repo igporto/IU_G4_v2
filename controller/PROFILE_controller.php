@@ -33,11 +33,9 @@ class ProfileController extends BaseController {
             $perms = array();
             //Engadimos os permisos ao perfil
             if(isset($_REQUEST["profileperm"])){
-
                 $pm = new PermissionMapper();
                 $profileperms = $_REQUEST["profileperm"];
                 foreach ($profileperms as $p){
-
                     array_push($perms, $pm->view($p));
                 }
             }
@@ -83,9 +81,9 @@ class ProfileController extends BaseController {
     }
 
     public function  show(){
-        $users = $this->userMapper->show();
-        $this->view->setVariable("users", $users);
-        $this->view->render("user", "show");
+        $profiles = $this->profileMapper->show();
+        $this->view->setVariable("profiles", $profiles);
+        $this->view->render("profile", "show");
     }
 
     public function view(){

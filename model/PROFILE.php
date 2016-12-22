@@ -33,7 +33,7 @@ class Profile {
      * @param mixed $codprofile the codprofile
      *
      */
-    private function setCodprofile($codprofile)
+    public function setCodprofile($codprofile)
     {
         $this->codprofile = $codprofile;
 

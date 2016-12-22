@@ -56,7 +56,6 @@
                     }
 
                     echo "<input type='checkbox' name='profileperm[]' value='".$p->getCodpermission()."'>".$actionname."</input>";
-
                 }
                 ?>
             </div>

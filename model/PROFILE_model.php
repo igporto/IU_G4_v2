@@ -30,12 +30,18 @@ class ProfileMapper {
 	//Inserta na base de datos unha tupla cos datos do obxeto $profile
 	public function add(Profile $profile) {	
 		//insertamos un novo perfil	
-		$stmt = $this->db->prepare("INSERT INTO perfil(id_perfil, nombre) values (?,?)"); 
-		$stmt->execute(array($profile->getCodprofile(), $profile->getProfilename()));
+		$stmt = $this->db->prepare("INSERT INTO perfil(nombre) values (?)");
+		$stmt->execute(array($profile->getProfilename()));
 
+		//Unha vez insertado o nome do Perfil insertamos no obxecto $profile o id do perfil(Autoxenérase)
+		$stmt = $this->db->prepare("SELECT id_perfil FROM perfil WHERE nombre = (?)");
+		$stmt->execute(array($profile->getProfilename()));
+		$result_db = $stmt->fetch(PDO::FETCH_ASSOC);
+		//E asignamosllo ao perfil
+		$profile->setCodprofile($result_db["id_perfil"]);
 		//insertamos os permisos do perfil
 		foreach ($profile->getPermissions() as $permiso) {
-			$this->addPermission($profile, $permiso);	
+			$this->addPermission($profile, $permiso);
 		}
 
 		return $this->db->lastInsertId();
@@ -78,7 +84,6 @@ class ProfileMapper {
 		//devolve o array
 		return $profiles;
 	}
-
 
 	//devolve o obxecto Profile no que o $id_perfil coincida co da tupla.
 	public function view($id_perfil){
@@ -156,7 +161,7 @@ class ProfileMapper {
 	//engade un permiso $permission ao perfil $profile
 	private function addPermission(Profile $profile, Permission $permission)
 	{
-		$stmt = $this->db->prepare("INSERT INTO permisos_perfil(id_perfil, id_permiso) values (?,?)"); 
+		$stmt = $this->db->prepare("INSERT INTO permisos_perfil(id_perfil, id_permiso) values (?,?)");
 		$stmt->execute(array($profile->getCodprofile(), $permission->getCodpermission()));
 
 		return $this->db->lastInsertId();
