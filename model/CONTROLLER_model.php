@@ -16,8 +16,6 @@ class ControllerMapper {
 		$this->db = PDOConnection::getInstance();
 	}
 
-<<<<<<< Updated upstream
-=======
 	//return: o id do usuario co nome $controllername
     //return: o id do usuario co nome $username
     public function getIdByName($controllername)
@@ -27,7 +25,7 @@ class ControllerMapper {
        	$result = $stmt->fetch(PDO::FETCH_ASSOC)["id_controlador"];
         return $result;
     }
->>>>>>> Stashed changes
+
 	
 	//devolve true se xa existe un controlador co nome $controllername
 	public function controllernameExists($controllername) {
