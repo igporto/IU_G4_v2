@@ -2,8 +2,8 @@
 
 require_once(__DIR__."/../core/ViewManager.php");
 
-require_once(__DIR__."/../model/USER.php");
-require_once(__DIR__."/../model/USER_model.php");
+require_once(__DIR__."/../model/CONTROLLER.php");
+require_once(__DIR__."/../model/CONTROLLER_model.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -100,26 +100,17 @@ class ControllerController extends BaseController {
 	public function edit(){
 		if (isset($_POST["submit"])) {
 			//Creamos un obxecto Controller baleiro
-			$controller_id = $this->controllerMapper->getIdByName($_REQUEST['controller']);
+			$controller_id = $this->controllerMapper->getIdByName($_GET['controllertoedit']);
+
 			$controller = $this->controllerMapper->view($controller_id);
 
-			//Engadimos o novo contrasinal ao usuario
-			//$controller->setControllername(htmlentities(addslashes($_POST["controllername"])));
-			$controller->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
-
-			//Engadimos o perfil
-
-			$profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
-			$controller->setProfile($profile);
-
 			//Engadimos os permisos do usuario (Non entran os do perfil)
-			$controller->setPermissions(new ControllerPermission());
+			$controller->setControllername($_POST['newname']);
+
 
 			try {
 				$this->controllerMapper->edit($controller);
-				//ENVIAR AVISO DE CONTROLADOR EDITADO!!!!!!!!!!
-				$this->view->setFlash("Usuario modificado correctamente!");
-				//REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
+				$this->view->setFlash("succ_edit");
 				$this->view->redirect("controller", "show");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
