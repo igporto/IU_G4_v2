@@ -15,7 +15,14 @@ class ActionMapper {
 		$this->db = PDOConnection::getInstance();
 	}
 
-	
+    //return: o id da action co nome $actionname
+    public function getIdByName($actionname)
+    {
+        $stmt = $this->db->prepare("SELECT id_accion FROM accion WHERE  nombre= ?");
+        $stmt->execute(array($actionname));
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id_accion'];
+    }
 
 	//devolve true se xa existe unha acción co nome $actionname
 	public function actionnameExists($actionname) {
@@ -41,7 +48,6 @@ class ActionMapper {
 
 		$stmt = $this->db->query("SELECT * FROM accion");
 		$action_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 		$actions = array();
 
 		foreach ($action_db as $action) {
@@ -68,9 +74,6 @@ class ActionMapper {
 			return new Action();
 		}
 	}
-
-	
-		
 
 	//edita a tupla correspondente co id do obxecto Action $action
 	public function edit(Action $action) {

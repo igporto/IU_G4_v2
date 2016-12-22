@@ -82,6 +82,7 @@ $strings = array(
 	'edit' => 'Editar',
 	'all_alerts' => 'Ver todas las Notificaciones',
 	'user_info' => 'Información del Usuario',
+    'action_info' => 'Información de la Accion',
 	'profile_info' => 'Información del Perfil',
 	'controller_info' => 'Información del Controlador',
 	//LOGIN_controller, USER_controller, logout Strings
@@ -132,6 +133,7 @@ $strings = array(
 	'no_profile_permissions' => 'Este perfil no tiene permisos',
 	'cancel'=>'Cancelar',
 	'user_data'=>'Datos del usuario',
+    'action_data' => 'Datos de la acción',
 	'profile_perms' => 'Permisos del Perfil',
 	'user_perms' => 'Permisos propios del Usuario',
 	'controller_data'=>'Datos del controlador',

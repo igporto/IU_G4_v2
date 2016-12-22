@@ -41,33 +41,6 @@ class ActionController extends BaseController
         $this->view->setLayout("navbar");
     }
 
-    //devolve un array de Permiso, que son os permisos de usuario+perfil do usuario $_SESSION['currentaction']
-    public function getCurrentActionPerms()
-    {
-        //obtén o obxecto usuario
-        $cu = $this->actionMapper->view($this->actionMapper->getIdByName($_SESSION['currentaction']));
-        //$this->helper->toConsole(var_dump($cu));
-
-        $perms = array();
-
-        if ($cu->getPermissions()->getActionPermissions() != NULL) {
-            foreach ($cu->getPermissions()->getActionPermissions() as $perm) {
-                array_push($perms, $perm);
-            }
-        }
-
-        //obtemos os permisos do perfil e metémolos en $perms
-        if ($cu->getProfile()->getPermissions() != NULL) {
-
-            foreach ($cu->getProfile()->getPermissions() as $perm) {
-                array_push($perms, $perm);
-            }
-        }
-
-        //devolvemos o array de permisos do usuario actual
-        return array_unique($perms);
-    }
-
     public function add()
     {
 
@@ -83,7 +56,7 @@ class ActionController extends BaseController
                 if (!$this->actionMapper->actionnameExists($_POST["actionname"])) {
                     //$action->checkIsValidForCreate();
                     $this->actionMapper->add($action);
-                    //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
+                    //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                     $this->view->setFlash('action_exists');
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos actions)
@@ -108,12 +81,13 @@ class ActionController extends BaseController
     public function delete()
     {
         try {
-            if (isset($_GET['action'])) {
-                $this->actionMapper->delete($this->actionMapper->getIdByName($_GET["action"]));
+            if (isset($_GET['actionName'])) {
+                $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
+                $action = $this->actionMapper->view($action_id);
+                $this->actionMapper->delete($action);
                 $this->view->setFlash('msg_delete_correct');
                 $this->view->redirect("action", "show");
             }
-
         } catch (Exception $e) {
             $errors = $e->getErrors();
             $this->view->setVariable("errors", $errors);
@@ -134,5 +108,29 @@ class ActionController extends BaseController
         $action = $this->actionMapper->view($actionid);
         $this->view->setVariable("action", $action);
         $this->view->render("action", "view");
+    }
+
+    public function edit()
+    {
+        if (isset($_POST["submit"])) {
+            //Creamos un obxecto action baleiro
+            $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
+            $action = $this->actionMapper->view($action_id);
+            $action->setActionname($_REQUEST["newname"]);
+
+            try {
+                $this->actionMapper->edit($action);
+                //ENVIAR AVISO DE ACCION EDITADA!!!!!!!!!!
+                $this->view->setFlash("Accion modificada correctamente!");
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos accions)
+                $this->view->redirect("action", "view", "actionName=" . $action->getActionname());
+            } catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        //$this->view->setLayout("navbar");
+        $this->view->render("action", "edit");
     }
 }

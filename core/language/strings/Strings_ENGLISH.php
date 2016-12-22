@@ -84,6 +84,7 @@ $strings = array(
 	'edit' => 'Edit',
 	'all_alerts' => 'Show All Alerts',
 	'user_info' => 'User Info',
+    'action_info' => 'Action Info',
 	'profile_info' => 'Profile Info',
 	'controller_info' => 'Controller Info',
 	//LOGIN_controller, USER_controller, logout Strings
