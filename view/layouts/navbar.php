@@ -219,9 +219,9 @@ $permis = $uc->getCurrentUserPerms();
                     $.amaran({
                         content:{
                             title:'" . $strings[$flag] . "',
-                            message:'',
+                            message:'Esto ven sendo unha notificación',
                             icon:'fa fa-check',
-                            'delay'     :7000
+                            'delay'     :10000
                         },
                         theme:'awesome ok'
                     });

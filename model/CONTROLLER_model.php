@@ -92,9 +92,9 @@ class ControllerMapper {
 
 		
 	//borra sobre a taboa controlador a tupla con id igual a o do obxeto pasado	
-	public function delete(Controller $controller) {
+	public function delete($cod_controller) {
 		$stmt = $this->db->prepare("DELETE from controlador WHERE id_controlador=?");
-		$stmt->execute(array($controller->getCodcontroller()));
+		$stmt->execute(array($cod_controller));
 	}
 
 
