@@ -80,9 +80,11 @@
                             //Engadimos unha opcion por perfil que se pode escoller
                                 $pc = new ProfileMapper();
 
+                                echo "<option value='NULL'>".$strings['no_profile']."</option>";
+
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $profiles = $pc->show();
-
+                            
                                 foreach ($profiles as $profile) {
 
                                     echo "<option value=" . $profile->getCodprofile();

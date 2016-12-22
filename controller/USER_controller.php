@@ -84,14 +84,16 @@ class UserController extends BaseController {
 		//$this->helper->toConsole(var_dump($cu));
 
 		$perms = array();
-
+		
 		//obtemos os permisos do perfil e metémolos en $perms
-		if($cu->getProfile()->getPermissions() != NULL) {
-
-			foreach ($cu->getProfile()->getPermissions() as $perm) {
-				array_push($perms, $perm);
+		if($cu->getProfile() != NULL){
+			if($cu->getProfile()->getPermissions() != NULL) {
+				foreach ($cu->getProfile()->getPermissions() as $perm) {
+					array_push($perms, $perm);
+				}
 			}
 		}
+
 		
 		//obtemos os permisos propios do usuario e metémolos en $perms
 		if($cu->getPermissions()->getUserPermissions() !=NULL) {
@@ -191,15 +193,17 @@ class UserController extends BaseController {
 			if(isset($_POST["newpass"])&& addslashes($_POST['newpass'])!=""){
 				$user->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
 			}else{
-				$pass = $this->view($user_id)->getPasswd();
+				$pass = $user->getPasswd();
 				$user->setPasswd($pass);
 			}
 
 			//Engadimos o perfil
-			$prof = htmlentities(addslashes($_POST["perf_id"]));
-			$profile = $this->profileMapper->view($prof);
-			//var_dump($profile);exit;
-			$user->setProfile($profile);
+			$prof = htmlentities(addslashes($_GET["perf_id"]));
+			if($prof != "NULL"){
+				$profile = $this->profileMapper->view($prof);
+				$user->setProfile($profile);
+			}
+			$user->setProfile(new Profile());
 
 			$perms = array();
 			//Engadimos os permisos do usuario (Non entran os do perfil)

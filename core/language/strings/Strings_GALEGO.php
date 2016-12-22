@@ -140,6 +140,7 @@ $strings = array(
     'user_perms' => 'Permisos propios do Usuario',
     'controller_data'=>'Datos do controlador',
     'profile_data'=>'Datos do Perfil',
+    'no_profile' => "Sen perfil",
     'controller_edit'=>'Editar controlador',
 
 

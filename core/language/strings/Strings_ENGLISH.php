@@ -141,6 +141,7 @@ $strings = array(
 	'controller_data'=>'Controller data',
 	'profile_data'=>'Profile data',
 	'controller_edit'=>'Edit controller',
+	'no_profile' => "Without profile",
 
 	/*NOTIFICACIÓNS*/
 

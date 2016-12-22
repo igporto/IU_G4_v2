@@ -449,7 +449,7 @@ CREATE TABLE `usuario` (
   `cod_usuario` int(4) NOT NULL,
   `user` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `id_perfil` int(4) NOT NULL
+  `id_perfil` int(4) NULL
 ) ;
 
 
@@ -1129,7 +1129,7 @@ ALTER TABLE `usuario_tiene_permiso`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_perfil`) REFERENCES `perfil` (`id_perfil`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 
 --

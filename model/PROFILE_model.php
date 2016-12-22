@@ -69,31 +69,40 @@ class ProfileMapper {
 
 	//devolve o obxecto Profile no que o $id_perfil coincida co da tupla.
 	public function view($id_perfil){
-		//Consultamos se o perfil ten permisos asociados
-		$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre, pp.id_permiso
-			FROM perfil pf, permisos_perfil pp
-			WHERE pf.id_perfil = pp.id_perfil AND pp.id_perfil = ?");
-		$stmt->execute(array($id_perfil));
-		$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		//Creamos o array de permisos baleiro
-		$permissions = array();
-
-		if($result_db != null) {
-			//Se ten permisos recorremolos e engadimolos ao array de permisos
-			foreach ($result_db as $permiso) {
-				array_push($permissions,$this->pm->view($permiso['id_permiso']));
-			}
-		} else {
-			//Se non ten permisos recuperamos o nome para crear o obxecto Profile
-			$stmt = $this->db->prepare("SELECT  id_perfil, nombre
-			FROM perfil 
-			WHERE id_perfil = ?");
+		if($id_perfil == NULL){
+			return new Profile();
+		}
+		elseif ( $id_perfil == "NULL"){
+			return new Profile();
+		}
+		else {
+			//Consultamos se o perfil ten permisos asociados
+			$stmt = $this->db->prepare("SELECT  pf.id_perfil, pf.nombre, pp.id_permiso
+				FROM perfil pf, permisos_perfil pp
+				WHERE pf.id_perfil = pp.id_perfil AND pp.id_perfil = ?");
 			$stmt->execute(array($id_perfil));
 			$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		}
 
-		return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);;
+			//Creamos o array de permisos baleiro
+			$permissions = array();
+
+			if ($result_db != null) {
+				//Se ten permisos recorremolos e engadimolos ao array de permisos
+				foreach ($result_db as $permiso) {
+					array_push($permissions, $this->pm->view($permiso['id_permiso']));
+				}
+				return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);
+			} else {
+				//Se non ten permisos recuperamos o nome para crear o obxecto Profile
+				$stmt = $this->db->prepare("SELECT  id_perfil, nombre
+				FROM perfil 
+				WHERE id_perfil = ?");
+				$stmt->execute(array($id_perfil));
+				$result_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				return new Profile($result_db[0]["id_perfil"], $result_db[0]["nombre"], $permissions);
+			}
+		}
+		
 	}
 
 	//edita a tupla correspondente co id do obxecto Profile $profile
