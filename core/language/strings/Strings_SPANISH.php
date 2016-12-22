@@ -139,7 +139,7 @@ $strings = array(
 	'controller_data'=>'Datos del controlador',
 	'profile_data'=>'Datos del Perfil',
 	'controller_edit'=>'Editar controlador',
-
+	'no_profile' => "Sin perfil",
 
 
 	/*NOTIFICACIÓNS*/
@@ -159,6 +159,8 @@ $strings = array(
 
 		/*INFO*/
 		'info_title'=>'Información'
+	
+	
 
 )
 ?>

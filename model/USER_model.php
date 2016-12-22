@@ -76,12 +76,6 @@ class UserMapper
             $stmt->execute(array($user["cod_usuario"]));
             $perm_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            //insertamos os permisos propios do ususario 
-            $permisos = array();
-            foreach ($perm_db as $perm) {
-                //pusheamos un obxeto permiso en $permisos
-                array_push($permisos, $this->upm->view($perm['id_permiso']));
-            }
 
             //engadimos o usuario cos seus permisos a $users
             array_push($users,
