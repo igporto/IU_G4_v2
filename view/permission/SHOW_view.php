@@ -117,18 +117,8 @@ switch ($_SESSION['idioma']) {
         
                                 <!--Campo nome da accion-->
                             </div>
-        
-                    </div>
-                </div>
-            </div>
-
                             </div>
-
-                        </div>';
-
-            //fin dos datos do permiso
-            echo '
-                        </div>
+                            </div>
                         <div class="modal-footer">
                             
                             <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["cancel"].'</button> 
