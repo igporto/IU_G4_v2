@@ -4,6 +4,8 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 
 require_once(__DIR__ . "/../model/PERMISSION.php");
 require_once(__DIR__ . "/../model/PERMISSION_model.php");
+require_once(__DIR__ . "/../model/CONTROLLER_model.php");
+require_once(__DIR__ . "/../model/ACTION_model.php");
 
 require_once(__DIR__ . "/../controller/BaseController.php");
 
@@ -22,7 +24,9 @@ class PermissionController extends BaseController
      * @var PermissionMapper
      */
     private $permissionMapper;
-    private $profileMapper;
+    private $actionMapper;
+    private $controllerMapper;
+    
 
     public function __construct()
     {
@@ -30,6 +34,8 @@ class PermissionController extends BaseController
 
 
         $this->permissionMapper = new PermissionMapper();
+        $this->actionMapper = new ActionMapper();
+        $this->controllerMapper = new ControllerMapper();
 
         // Permissions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
@@ -37,107 +43,22 @@ class PermissionController extends BaseController
         $this->view->setLayout("navbar");
     }
 
-    /**
-     * Action to login
-     *
-     * Logins a permission checking its creedentials agains
-     * the database
-     *
-     * When called via GET, it shows the login form
-     * When called via POST, it tries to login
-     * @return void
-     */
-    public function login()
-    {
-
-        if (isset($_POST["permissionName"])) {
-            //process login form
-            if ($this->permissionMapper->isValidPermission($_POST["permissionName"], $_POST["password"])) {
-
-                $_SESSION["currentpermission"] = $_POST["permissionName"];
-
-            } else {
-                $errors = array();
-                $errors["permissionNotValid"] = 'Usuario ou Contrasinal incorrecto';
-
-                $this->view->setVariable("errors", $errors);
-            }
-        }
-
-        //if the permission is already logged in, it is redirected to the home page
-        if (!isset($_SESSION['currentpermission'])) {
-            $this->view->setLayout("login");
-            $this->view->render("permission", "login");
-        } else {
-            $this->view->setVariable('currentperms', $this->getCurrentPermissionPerms());
-            $this->view->render("calendar", "placeholder");
-        }
-
-    }
-
-    //devolve un array de Permiso, que son os permisos de usuario+perfil do usuario $_SESSION['currentpermission']
-    public function getCurrentPermissionPerms()
-    {
-        //obtén o obxecto usuario
-        $cu = $this->permissionMapper->view($this->permissionMapper->getIdByName($_SESSION['currentpermission']));
-        //$this->helper->toConsole(var_dump($cu));
-
-        $perms = array();
-
-        //obtemos os permisos do perfil e metémolos en $perms
-        if ($cu->getProfile()->getPermissions() != NULL) {
-
-            foreach ($cu->getProfile()->getPermissions() as $perm) {
-                array_push($perms, $perm);
-            }
-        }
-
-        //obtemos os permisos propios do usuario e metémolos en $perms
-        if ($cu->getPermissions()->getPermissionPermissions() != NULL) {
-            foreach ($cu->getPermissions()->getPermissionPermissions() as $perm) {
-                array_push($perms, $perm);
-            }
-        }
-
-        //devolvemos o array de permisos do usuario actual
-        return array_unique($perms);
-    }
-
-    //cerra sesión e redirecciona a login
-    public function logout()
-    {
-        session_destroy();
-
-        //redirecciona o login
-        $this->view->redirect("permission", "login");
-
-    }
-
     public function add()
     {
-
         if (isset($_POST["submit"])) {
             //Creamos un obxecto Permission baleiro
             $permission = new Permission();
-
-            //Engadimos o usuario e o contrasinal ao usuario
-            $permission->setPermissionname(htmlentities(addslashes($_POST["permissionname"])));
-            $permission->setPasswd(md5(htmlentities(addslashes($_POST["password"]))));
-
-            //Engadimos o perfil
-
-            $profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
-            $permission->setProfile($profile);
-
-            //Engadimos os permisos do usuario (Non entran os do perfil)
-            $permission->setPermissions(new PermissionPermission());
+            $codcontroller = htmlentities(addslashes($_POST["controller_id"]));
+            $codaction = htmlentities(addslashes($_POST["action_id"]));
+            //Engadimos accion e o controlador ao permiso
+            $permission->setAction($this->actionMapper->view($codaction));
+            $permission->setController($this->controllerMapper->view($codcontroller));
 
             try {
-                if (!$this->permissionMapper->permissionnameExists(htmlentities(addslashes($_POST["permissionname"])))) {
+                if (!$this->permissionMapper->permissionExists($permission)) {
                     $this->permissionMapper->add($permission);
-                    //ENVIAR AVISO DE USUARIO ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("Usuario creado correctamente!");
-
+                    //ENVIAR AVISO DE PERMISO ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash("Permiso creado correctamente!");
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("permission", "show");
                 } else {

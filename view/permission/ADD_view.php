@@ -5,6 +5,15 @@ $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
+
+<script>
+    function enviar() {
+        var ruta = 'index.php?controller=permission&action=add&controller_id=';
+        var nome = document.getElementById("controller_id").value;
+        
+        window.location.href = ruta.concat(nome);
+    }
+</script>
 <div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=permission&action=add"
@@ -14,18 +23,57 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
+                <label><?php echo $strings['CONTROLLER'] ?></label></div>
+                <select id='controller_id' name='controller_id' class='form-control icon-menu'
+                        onchange='enviar()'>
+                    <?php
+                    //Engadimos unha opcion por controlador que se pode escoller
+                    $cm = new ControllerMapper();
 
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="permission" name="permissionname"
-                                   placeholder= <?php echo $strings['name'] ?>
-                                   required="true">
-                            <div id="error"></div>
+
+                    //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                    $controllers = $cm->show();
+                    foreach ($controllers as $controller) {
+                        if(isset($_REQUEST["controller_id"]) && $controller->getCodcontroller == $_REQUEST["controller_id"] ){
+                            echo "<option value=" . $controller->getCodcontroller()." selected >" . $controller->getControllername() . "</option>";
+                        }else{
+                            echo "<option value=" . $controller->getCodcontroller().">" . $controller->getControllername() . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <?php
+                echo "<div>
+                        <div>
+                            <label>".$strings['PERMISSION']."</label>:
                         </div>
-                        <!--Campo ususario-->
-                    </div>
+                      <div>";
+               
+                $am = new ActionMapper();
+                $pm = new PermissionMapper();
+                $actions = $am->show();
+                $permissions = $pm->show();
+
+                if(isset($_REQUEST["controller_id"]) && $_REQUEST["controller_id"] != "NULL") {
+                    //Creamos un obxctto Controller co id que recibimos po $_GET que é do que temos que mostrar os datos
+                    $c = $cm->view($_REQUEST["controller_id"]);
+                    echo "<div class='col-md-6 col-md-offset-3'>";
+
+                    echo "<div class='text-center'><label>" . $c->getControllername() . "</label></div>";
+                    foreach ($actions as $a) {
+                        //Creamos un obxecto Permission co controlador e accion actual para poder comprobar que xa hai un permiso con ese par
+                        //CONTROLLER -> ACTION
+                        $permissionaux = new Permission(NULL, $c, $a);
+                        //Se xa existe ese permiso mostramolo pero non o deixamos engadir ese par CONTROLLER -> ACTION
+                        if ($pm->permissionExists($permissionaux)) {
+                            echo "<input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</input>";
+                        } else {
+                            echo "<input type='checkbox' name='action_id' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</input>";
+                        }
+
+                    }
+                }
+                ?>
                 </div>
             </div>
         </div>

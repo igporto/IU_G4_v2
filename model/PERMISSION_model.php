@@ -27,7 +27,24 @@ class PermissionMapper {
 		$this->am = new ActionMapper();
 	}
 
+	public function permissionExists(Permission $permission)
+	{
+		$stmt = $this->db->prepare("SELECT count(*) FROM permiso where id_controlador=? and id_accion=?");
+		$stmt->execute(array($permission->getController()->getCodcontroller(), $permission->getAction()->getCodaction()));
 
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+	}
+	
+	public function getIdPermission(Permission $permission){
+		$stmt = $this->db->prepare("SELECT id_permiso FROM permiso where id_controlador=? and id_accion=?");
+		$stmt->execute(array($permission->getController()->getCodcontroller(), $permission->getAction()->getCodaction()));
+		$result_db = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result_db["id_permiso"];
+	}
+	
+	
 	//Inserta na base de datos unha tupla cos datos do obxeto $permission
 	public function add(Permission $permission) {
 		$stmt = $this->db->prepare("INSERT INTO permiso(id_controlador, id_accion) values (?,?)"); 
@@ -37,7 +54,6 @@ class PermissionMapper {
 
 	//Funcion de listar: devolve un array de todos obxetos Permission correspondentes á tabla Permission
 	public function show() {
-
 		$stmt = $this->db->query("SELECT * FROM permiso");
 		$permission_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -49,8 +65,6 @@ class PermissionMapper {
 		//devolve o array
 		return $permissions;
 	}
-
-	
 
 	//devolve o obxecto Permission no que o $permission_campo_id coincida co da tupla.
 	public function view($id_permiso){
@@ -66,9 +80,6 @@ class PermissionMapper {
 			return  new Permission();
 		}
 	}
-
-	
-		
 
 	//edita a tupla correspondente co id do obxecto Permission $permission
 	public function edit(Permission $permission) {
