@@ -131,6 +131,7 @@ $strings = array(
     'action_modify' => 'Action_Modify',
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
+	'newname' => 'New_name',
 	'not_edit_perm' => 'Permissions for the selected profile can not be modified',
 	'perm_over_controller' => 'Permissions on controller actions',
 	'no_user_permissions' => 'This user doesn´t have permissions by himself',
@@ -141,8 +142,12 @@ $strings = array(
 	'user_perms' => 'User Permissions',
 	'controller_data'=>'Controller data',
 	'profile_data'=>'Profile data',
+	'permission_data'=>'Datos del Permiso',
 	'controller_edit'=>'Edit controller',
 	'no_profile' => "Without profile",
+	'no_controller' => "Sin controlador",
+	'one_controller' => 'Controller',
+	'one_action' => 'Action',
 
 	/*NOTIFICACIÓNS*/
 

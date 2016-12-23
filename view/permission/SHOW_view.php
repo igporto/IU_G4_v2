@@ -1,7 +1,8 @@
 <!--SCRIPT DE DATATABLE-->
 <?php
-require_once(__DIR__ . "/../../controller/PERMISSION_controller.php");
+require_once(__DIR__ . "/../../controller/USER_controller.php");
 
+require_once(__DIR__ . "/../../controller/PERMISSION_controller.php");
 require_once(__DIR__ . "/../../model/PERMISSION_model.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
@@ -67,7 +68,7 @@ switch ($_SESSION['idioma']) {
         foreach ($all_permissions as $p) {
             echo "<tr class='row text-center' ><td> ";
 
-            echo $p->getAction->getActioname()." -> ".$p->getController()->getControllername()."</td><td class='text-center'>";
+            echo $p->getAction()->getActionname()." -> ".$p->getController()->getControllername()."</td><td class='text-center'>";
             //Botón que direcciona a vista do usuario
             if($view){
                 echo "<a href='index.php?controller=PERMISSION&action=VIEW&perm_id=" .
@@ -96,7 +97,7 @@ switch ($_SESSION['idioma']) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="'.$p->getCodpermission().'label">'.$strings["confirm_message"].' '.$p->getAction->getActioname()." -> ".$p->getController()->getControllername().'?</h4>
+                            <h4 class="modal-title" id="'.$p->getCodpermission().'label">'.$strings["confirm_message"].' '.$p->getAction()->getActionname()." -> ".$p->getController()->getControllername().'?</h4>
                         </div>
                         <div class="modal-body">
                              <label for="">' . $strings["profile_data"] . ': </label>';
@@ -111,37 +112,12 @@ switch ($_SESSION['idioma']) {
                             </div>
                           
                             <div class="col-xs-12 col-md-12">
-                                    <label for="">' . $strings["one_controller"] . ': </label>
-                                    <span class="">' . $p->getAction->getActioname() . '</span>
+                                    <label for="">' . $strings["one_action"] . ': </label>
+                                    <span class="">' . $p->getAction()->getActionname() . '</span>
         
                                 <!--Campo nome da accion-->
                             </div>
         
-                            <div class="col-xs-12 col-md-6 col-md-offset-3">
-                                <div class="panel panel-info">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse' . $p->getCodprofile() . '" aria-expanded="true" class="">'.$strings["profile_perms"].': </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapse' . $p->getCodprofile() . '" class="panel-collapse collapse" aria-expanded="true">
-                                            <div class="panel-body">
-                                <ul>';
-
-            $permissions = $p->getPermissions();
-
-            if($permissions != NULL){
-                //foreach que imprime o nome do controlador e da acción según os permisos que ten o perfil
-                foreach ($permissions as $perm){
-                    echo '<li><span class=\"\">'.$perm->getController()->getControllername().'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
-                    echo '<span class=\"\">'.$perm->getAction()->getActionname().'</span></li>';
-                }
-            }
-            else{
-                echo $strings['no_user_permissions'];
-            }
-            echo '</ul>
-    
                     </div>
                 </div>
             </div>
@@ -150,14 +126,14 @@ switch ($_SESSION['idioma']) {
 
                         </div>';
 
-            //fin dos datos do usuario
+            //fin dos datos do permiso
             echo '
                         </div>
                         <div class="modal-footer">
                             
                             <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["cancel"].'</button>
                             
-                            <a href="index.php?controller=profile&action=delete&profile_id=' . $p->getCodprofile().'">
+                            <a href="index.php?controller=permission&action=delete&perm_id=' . $p->getCodpermission().'">
                             <button type="button" class="btn btn-danger">'.$strings["DELETE"].'</button>
                             </a>
                         </div>

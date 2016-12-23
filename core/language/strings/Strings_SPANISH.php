@@ -127,6 +127,7 @@ $strings = array(
 	'own_permis' => 'Permisos propios del usuario',
 	'action_modify' => 'Modificar Acción',
 	'newpass' => 'Nueva_contraseña',
+	'newname' => 'Nuevo_nombre',
 	'not_edit_perm' => 'Los permisos del perfil selecionado no se pueden modificar',
 	'perm_over_controller' => 'Permisos sobre acciones del controlador',
 	'no_user_permissions' => 'Este usuario no tiene permisos propios',
@@ -138,8 +139,13 @@ $strings = array(
 	'user_perms' => 'Permisos propios del Usuario',
 	'controller_data'=>'Datos del controlador',
 	'profile_data'=>'Datos del Perfil',
+	'permission_data'=>'Datos del Permiso',
 	'controller_edit'=>'Editar controlador',
 	'no_profile' => "Sin perfil",
+	'no_controller' => "Sin controlador",
+	'one_controller' => 'Controlador',
+	'one_controller' => 'Controlador',
+	'one_action' => 'Accion',
 
 
 	/*NOTIFICACIÓNS*/
