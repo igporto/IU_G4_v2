@@ -20,13 +20,74 @@ switch ($_SESSION['idioma']) {
         include 'js/showscriptGL.js';
         break;
 }
+$uc = new UserController();
+    $um = new PermissionMapper();
+    //Recollemos os usuarios
+    $all_permissions = $um->show();
+    $permissions = $uc->getCurrentUserPerms();
 
+    $add = false;
+    $delete = false;
+    $edit = false;
+    $view = false;
+    //Comprobamos os permisos que ten o usuario actual
+    foreach ($permissions as $perm){
+
+        if($perm->getAction()->getActionname()== "ADD"){
+            $add = true;
+        }
+        if($perm->getAction()->getActionname() == "EDIT"){
+            $edit = true;
+        }
+        if($perm->getAction()->getActionname() == "DELETE"){
+            $delete = true;
+        }
+        if($perm->getAction()->getActionname()== "VIEW"){
+            $view = true;
+        }
+    }
+
+                                
 ?>
 
 <!--ESTRUTURA DA TABLA EN SI-->
 
 <!--O id debe ser este para que funcione o script-->
-<div class="col-xs-12 col-md-8 col-md-offset-2" style="margin-top: 20px">
+<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+
+<h1 class="page-header"><?php echo $strings['management_permissions'] ?></h1>
+
+<div class="row">
+
+        <!--BOTÓN BUSCAR-->
+        <div class="col-xs-4 col-md-2">
+            <button type="button" class="btn btn-primary">
+            <i class="fa fa-fw fa-search"></i>
+            <?php echo $strings['find']; ?></button>
+        </div>
+
+
+        <!--BOTÓN ENGADIR-->
+        <?php if ($add) {
+            echo '  <div class="col-xs-4 col-md-2">
+                        <a href="index.php?controller=permission&action=add">
+                            <button type="button" class="btn btn-primary">
+                            <i class="fa fa-fw fa-plus"></i>
+                                '. $strings['ADD'].'
+                            </button>
+                        </a>
+                    </div>';
+        } ?>  
+</div>
+
+<!--PANEL TABOA DE LISTADO-->
+<div class="row" style="margin-top: 20px">
+<div class="panel panel-default">
+                        <div class="panel-heading">
+                            <?php echo $strings['list_of'].' '.$strings['PERMISSION']; ?>
+
+                        </div>
+                        <div class="panel-body">
 
     <table id="dataTable" class="table-responsive   table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">
         <thead>
@@ -41,29 +102,6 @@ switch ($_SESSION['idioma']) {
         <!--CADA UN DE ESTES É UNHA FILA-->
 
         <?php
-        $uc = new UserController();
-        $um = new PermissionMapper();
-        //Recollemos os usuarios
-        $all_permissions = $um->show();
-        $permissions = $uc->getCurrentUserPerms();
-
-        $delete = false;
-        $edit = false;
-        $view = false;
-        //Comprobamos os permisos que ten o usuario actual
-        foreach ($permissions as $perm){
-
-            if($perm->getAction()->getActionname() == "EDIT"){
-                $edit = true;
-            }
-            if($perm->getAction()->getActionname() == "DELETE"){
-                $delete = true;
-            }
-            if($perm->getAction()->getActionname()== "VIEW"){
-                $view = true;
-            }
-        }
-
         //Para cada Permiso, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
         foreach ($all_permissions as $p) {
             echo "<tr class='row text-center' ><td> ";
@@ -137,7 +175,8 @@ switch ($_SESSION['idioma']) {
 
         </tbody>
     </table>
-
+    </div>
+    </div>
 </div>
 
 

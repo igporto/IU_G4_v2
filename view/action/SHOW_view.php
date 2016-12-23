@@ -50,12 +50,12 @@ switch ($_SESSION['idioma']) {
                                 
 ?>
 
-<!--ESTRUTURA DA TABLA EN SI-->
+<h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
 
 <!--O id debe ser este para que funcione o script-->
 <div class="col-xs-12 col-md-8 " style="margin-top: 20px">
 
-<h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
+
 
 <div class="row">
 

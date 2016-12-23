@@ -76,7 +76,6 @@ $permis = $uc->getCurrentUserPerms();
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only"><?php echo $strings['toggle_navigation']; ?></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -89,12 +88,12 @@ $permis = $uc->getCurrentUserPerms();
         <ul class="nav navbar-top-links navbar-right">
            
             <!-- /.dropdown -->
-            <li class="dropdown">
-               
+            <li class="dropdown" style="margin-top: 8px">
+               <?php include(__DIR__."/language_select.php");  ?>
             </li>
           
             <!-- /.dropdown -->
-            <?php include(__DIR__."/language_select.php");  ?>
+            
         </ul>
         <!-- /.navbar-top-links -->
 
@@ -127,25 +126,20 @@ $permis = $uc->getCurrentUserPerms();
 
                                 $controller = $p->getController()->getControllername();
                                 if ($controller != $currentController) {
-                                    echo '<li><a href="#"><i class="fa fa-cog fa-fw"></i>';
-                                    echo $strings[$controller];
-                                    echo "<span class='fa arrow'></span></a><ul id='menu1' class='nav nav-second-level'>";
+                                   
                                     $currentController = $controller;
 
                                     $action = $p->getAction()->getActionname();
 
-                                    if($action = "ADD") {
-                                        echo "<li>
-                                          <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-plus fa-fw\"></i> " . $strings[$action] . "</a>
-        
-                                          </li>";
-                                    }
+                                   
                                     if($action = "SHOW") {
-                                        echo "<li>
-                                         <a href='index.php?controller=" . $controller . "&action=" . $action . "'><i class=\"fa fa-cogs fa-fw\"></i> " . $strings["manage"] . "</a> 
-                                          </li>";
-                                        }
-                                        echo "</li></ul>";
+                                        echo '<li>
+                                                    <a href="index.php?controller=' . $controller . '&action=' . $action . '">
+                                                    <i class="fa fa-edit fa-fw"></i> ';
+                                        echo $strings[$controller];
+                                        echo "</a>";
+                                    }
+                                        echo "</li>";
                                 }
                             }
                      ?>

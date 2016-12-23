@@ -5,7 +5,10 @@ $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
-<div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
+
+<h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
+
+<div class="col-md-6 " style="margin-top: 20px">
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=action&action=add"
           enctype="multipart/form-data">
