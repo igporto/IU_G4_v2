@@ -45,6 +45,7 @@ $strings = array(
     'create_profile' => 'Crear Perfil',
     'create_controller' => 'Crear Controlador',
     'create_action' => 'Crear Acción',
+    'create_permission' => 'Crear Permiso',
     'management_user' => 'Xestionar Usuario',
     'dni' => 'DNI',
     'name' => 'Nome',
