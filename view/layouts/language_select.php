@@ -1,7 +1,7 @@
 <?php
 // file: view/layouts/language_select_element.php
 ?>
-<li class="dropdown" style="margin-top: 8px">
+
                 
                 <form id='idiomaform' name='idiomaform' action='core/language/cambiaridioma.php' method='post'>
                     <select id='idioma' name='idioma' class=" form-control icon-menu"
@@ -35,4 +35,4 @@
                         </option>
                     </select>
                 </form>
-</li>
+

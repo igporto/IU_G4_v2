@@ -55,25 +55,29 @@ switch ($_SESSION['idioma']) {
 <!--O id debe ser este para que funcione o script-->
 <div class="col-xs-12 col-md-8 " style="margin-top: 20px">
 
-<h1 class="page-header">Xestión de accións</h1>
+<h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
 
 <div class="row">
+
+        <!--BOTÓN BUSCAR-->
+        <div class="col-xs-4 col-md-2">
+            <button type="button" class="btn btn-primary">
+            <i class="fa fa-fw fa-search"></i>
+            <?php echo $strings['find']; ?></button>
+        </div>
+
+
         <!--BOTÓN ENGADIR-->
         <?php if ($add) {
-            echo '  <div class="col-md-2">
+            echo '  <div class="col-xs-4 col-md-2">
                         <a href="index.php?controller=action&action=add">
                             <button type="button" class="btn btn-primary">
+                            <i class="fa fa-fw fa-plus"></i>
                                 '. $strings['ADD'].'
                             </button>
                         </a>
                     </div>';
-        } ?>
-        
-
-        <!--BOTÓN BUSCAR-->
-        <div class="col-md-2">
-            <button type="button" class="btn btn-primary"><?php echo $strings['find']; ?></button>
-        </div>
+        } ?>  
 </div>
 
 <!--PANEL TABOA DE LISTADO-->
@@ -81,6 +85,7 @@ switch ($_SESSION['idioma']) {
 <div class="panel panel-default">
                         <div class="panel-heading">
                             <?php echo $strings['list_of'].' '.$strings['ACTION']; ?>
+
                         </div>
                         <div class="panel-body">
                             <table id="dataTable" class="table-responsive   table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">
