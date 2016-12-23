@@ -81,8 +81,8 @@ class PermissionController extends BaseController
     public function delete()
     {
         try {
-            if (isset($_GET['permission'])) {
-                $this->permissionMapper->delete($this->permissionMapper->getIdByName($_GET["permission"]));
+            if (isset($_GET['perm_id'])) {
+                $this->permissionMapper->delete(htmlentities(addslashes($_GET["permission"])));
                 $this->view->setFlash('msg_delete_correct');
                 $this->view->redirect("permission", "show");
             }

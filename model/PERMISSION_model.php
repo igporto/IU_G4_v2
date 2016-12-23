@@ -95,8 +95,8 @@ class PermissionMapper {
 
 		
 	//borra sobre a taboa permiso a tupla con id igual a o do obxeto pasado	
-	public function delete(Permission $permission) {
+	public function delete($perm_id) {
 		$stmt = $this->db->prepare("DELETE from permiso WHERE id_permiso=?");
-		$stmt->execute(array($permission->getCodpermission()));
+		$stmt->execute(array($perm_id));
 	}
 }

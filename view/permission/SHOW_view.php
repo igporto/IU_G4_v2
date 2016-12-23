@@ -131,8 +131,7 @@ switch ($_SESSION['idioma']) {
                         </div>
                         <div class="modal-footer">
                             
-                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["cancel"].'</button>
-                            
+                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["cancel"].'</button> 
                             <a href="index.php?controller=permission&action=delete&perm_id=' . $p->getCodpermission().'">
                             <button type="button" class="btn btn-danger">'.$strings["DELETE"].'</button>
                             </a>
