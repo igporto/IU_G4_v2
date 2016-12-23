@@ -82,7 +82,7 @@ class PermissionController extends BaseController
     {
         try {
             if (isset($_GET['perm_id'])) {
-                $this->permissionMapper->delete(htmlentities(addslashes($_GET["permission"])));
+                $this->permissionMapper->delete(htmlentities(addslashes($_GET["perm_id"])));
                 $this->view->setFlash('msg_delete_correct');
                 $this->view->redirect("permission", "show");
             }
