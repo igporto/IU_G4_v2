@@ -102,7 +102,7 @@
                     }
                     else{
                         $currentControllername = $allpermissions[0]->getController()->getControllername();
-                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
+                        echo "<div class='text-center'><label>".$currentControllername. "</label></div>"; 
                         foreach ($allpermissions as $ap) {
                             //recuperamos os nomes do controlador  e accion do perfile a mostrar
                             $controllername = $ap->getController()->getControllername();

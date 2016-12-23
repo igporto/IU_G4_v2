@@ -99,8 +99,8 @@ class ProfileController extends BaseController {
             if(isset($_POST["newname"]) && $_POST["newname"] != ""){
                 $profile->setProfilename(htmlentities(addslashes($_POST["newname"])));
             }else{
-                $name = $this->view($profile_id)->getProfilename();
-                $profile->setPasswd($name);
+                $name = $profile->getProfilename();
+                $profile->setProfilename($name);
             }
 
             $perms = array();
