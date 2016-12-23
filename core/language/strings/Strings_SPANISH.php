@@ -33,7 +33,7 @@ $strings = array(
 	 USER_SHOW_view, USER_VIEW_view Strings */
 	'student' => 'Alumno',
 	'students' => 'Alumnos',
-	'list' => 'Listado',
+	'list_of' => 'Listado de',
 	'filler' => 'Relleno',
 	'permissions' => 'Permisos',
 	'actions' => 'Acciones',

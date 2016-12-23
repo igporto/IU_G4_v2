@@ -34,7 +34,7 @@ $strings = array(
 	 USER_SHOW_view, USER_VIEW_view Strings */
 	'student' => 'Student',
 	'students' => 'Students',
-	'list' => 'List',
+	'list_of' => 'List of',
 	'filler' => 'Filler',
 	'permissions' => 'Permissions',
 	'actions' => 'Actions',
