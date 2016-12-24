@@ -151,6 +151,7 @@ $strings = array(
 	'no_controller' => "Sin controlador",
 	'one_controller' => 'Controller',
 	'one_action' => 'Action',
+	'STUDENT'=>'Students',
 
 	/*NOTIFICACIÓNS*/
 
@@ -166,6 +167,7 @@ $strings = array(
 
 		/*ERROR*/
 		'erro_title'=>'Error',
+		'erro_not_implemented'=>'Not implemented yet',
 
 		/*INFO*/
 		'info_title'=>'Information'

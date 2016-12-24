@@ -25,9 +25,18 @@ function run() {
 		// Instantiate the corresponding controller
 		$controller = loadController($_GET["controller"]);
 
-		// Call the corresponding action
-		$actionName = strtolower($_GET["action"]);
-		$controller->$actionName();
+		//if controller is not implemented, calls user/notImplemented to render a placeholder
+		if ($controller != 'notImplemented') {
+			// Call the corresponding action
+			$actionName = strtolower($_GET["action"]);
+			$controller->$actionName();
+		}
+		else{
+			require_once(__DIR__."/controller/USER_controller.php");
+			$controller = new UserController();
+			$controller->notImplemented();
+		}
+		
 	} catch(Exception $ex) {
 		//uniform treatment of exceptions
 		die("An exception occured!!!!!".$ex->getMessage());
@@ -44,8 +53,17 @@ function loadController($controllerName) {
 	$controllerFileName = getControllerFileName($controllerName);
 	$controllerClassName = getControllerClassName($controllerName);
 
-	require_once(__DIR__."/controller/".$controllerFileName.".php");
-	return new $controllerClassName();
+	$file = __DIR__."/controller/".$controllerFileName.".php";
+
+	//If file exists, returns a new controller
+	if (file_exists($file)) {
+	 	require_once($file);
+	 	return new $controllerClassName();
+	}
+	//else returns a value to be handled by mainf index file
+	else {
+	 	return 'notImplemented';
+	} 	
 }
 
 /**

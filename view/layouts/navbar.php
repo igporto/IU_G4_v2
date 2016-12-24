@@ -135,7 +135,7 @@ $permis = $uc->getCurrentUserPerms();
                                     if($action = "SHOW") {
                                         echo '<li>
                                                     <a href="index.php?controller=' . $controller . '&action=' . $action . '">
-                                                    <i class="fa fa-edit fa-fw"></i> ';
+                                                    <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
                                         echo $strings[$controller];
                                         echo "</a>";
                                     }

@@ -5,6 +5,8 @@ require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../model/USER.php");
 require_once(__DIR__."/../model/USER_model.php");
 
+require_once(__DIR__."/../model/PERMISSION_model.php");
+
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
@@ -80,27 +82,33 @@ class UserController extends BaseController {
 	public function getCurrentUserPerms()
 	{
 
-		//obtén o obxecto usuario
-		$cu = $this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser']));
-		//$this->helper->toConsole(var_dump($cu));
+		if ($_SESSION['currentuser'] != 'admin') {
+			//obtén o obxecto usuario
+			$cu = $this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser']));
+			//$this->helper->toConsole(var_dump($cu));
 
-		$perms = array();
-		
-		//obtemos os permisos do perfil e metémolos en $perms
-		if($cu->getProfile() != NULL){
-			if($cu->getProfile()->getPermissions() != NULL) {
-				foreach ($cu->getProfile()->getPermissions() as $perm) {
+			$perms = array();
+			
+			//obtemos os permisos do perfil e metémolos en $perms
+			if($cu->getProfile() != NULL){
+				if($cu->getProfile()->getPermissions() != NULL) {
+					foreach ($cu->getProfile()->getPermissions() as $perm) {
+						array_push($perms, $perm);
+					}
+				}
+			}
+			
+			//obtemos os permisos propios do usuario e metémolos en $perms
+			if($cu->getPermissions()->getUserPermissions() != NULL) {
+				foreach ($cu->getPermissions()->getUserPermissions() as $perm) {
 					array_push($perms, $perm);
 				}
 			}
+		}else{
+			$pm = new PermissionMapper();
+			$perms = $pm->show();
 		}
 		
-		//obtemos os permisos propios do usuario e metémolos en $perms
-		if($cu->getPermissions()->getUserPermissions() != NULL) {
-			foreach ($cu->getPermissions()->getUserPermissions() as $perm) {
-				array_push($perms, $perm);
-			}
-		}
 
 		//devolvemos o array de permisos do usuario actual
 		return array_unique($perms);
@@ -113,6 +121,12 @@ class UserController extends BaseController {
 		//redirecciona o login
 		$this->view->redirect("user", "login");
 
+	}
+
+	//render de vista placeholder no caso de que calquera funcionalidade non estea implementada
+	public function notImplemented()
+	{
+		$this->view->render("system","not_implemented_view");
 	}
 
 	public function add(){

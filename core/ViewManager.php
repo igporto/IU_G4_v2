@@ -240,11 +240,17 @@ class ViewManager {
 	* @return void
 	*/
 	public function render($controller, $viewname) {
-		try {
+		
+		//Renders the view if it exists. If not, it shows a placeholder
+		if (file_exists(__DIR__."/../view/$controller/".strtoupper($viewname)."_view.php")) {
 			include(__DIR__."/../view/$controller/".strtoupper($viewname)."_view.php");
-		} catch (Exception $e) {
+		}else{
 			include(__DIR__."/../view/system/not_implemented_view.php");
 		}
+			
+	
+			
+		
 		
 		$this->renderLayout();
 	}

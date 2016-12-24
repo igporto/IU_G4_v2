@@ -92,7 +92,7 @@
                                 echo "<div class='text-center'><label>".$currentControllername. "</label></div>";
                             }
                             //Se ten ese permiso pomolo marcado
-                            if(in_array($ap, $userperms)){
+                            if(in_array($ap, $profileperms)){
                                 //$perm_id = $actionname . "_" . $controllername;
                                 echo "<input type='checkbox' name='profileperm[]'"."value='".$ap->getCodpermission()."' checked >".$actionname."</input>";
                             }else{

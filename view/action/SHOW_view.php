@@ -92,7 +92,7 @@ switch ($_SESSION['idioma']) {
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class="text-center"><?php echo $strings['ACTION']?></th>
+                                    <th class=""><?php echo $strings['ACTION']?></th>
                                     <th class="text-center"><?php echo $strings['ACTION']?></th>
                                 </tr>
                                 </thead>
