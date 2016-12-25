@@ -49,6 +49,7 @@ class PermissionController extends BaseController
             //Creamos un obxecto Permission baleiro e "seteamos o controlador do mesmo"
             $permission = new Permission();
             $codcontroller = htmlentities(addslashes($_POST["controller_id"]));
+
             if(isset($_POST["actions"])){
                 $actions = $_POST["actions"];
                 $permission->setController($this->controllerMapper->view($codcontroller));
@@ -80,9 +81,10 @@ class PermissionController extends BaseController
                     $errors = $ex->getErrors();
                     $this->view->setVariable("errors", $errors);
                 }
+            }else{
+                $this->view->setFlash('erro_no_add');
+                $this->view->redirect("permission", "show");
             }
-            $this->view->setFlash('succ_perm_add');
-            $this->view->redirect("permission", "show");
         }
         //Se non se enviou nada
         //$this->view->setLayout("navbar");

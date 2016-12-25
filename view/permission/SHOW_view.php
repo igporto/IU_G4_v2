@@ -106,7 +106,7 @@ $uc = new UserController();
         foreach ($all_permissions as $p) {
             echo "<tr class='row text-center' ><td> ";
 
-            echo $p->getAction()->getActionname()." -> ".$p->getController()->getControllername()."</td><td class='text-center'>";
+            echo $p->getController()->getControllername()." -> ".$p->getAction()->getActionname()."</td><td class='text-center'>";
             //Botón que direcciona a vista do usuario
             if($view){
                 echo "<a href='index.php?controller=PERMISSION&action=VIEW&perm_id=" .
