@@ -183,7 +183,7 @@ class UserController extends BaseController {
 
     public function  show(){
         $users = $this->userMapper->show();
-        $this->view->setVariable("users", $users);
+		$this->view->setVariable("userstoshow", $users);
         $this->view->render("user", "show");
     }
 
@@ -244,5 +244,25 @@ class UserController extends BaseController {
 		//Se non se enviou nada
 		//$this->view->setLayout("navbar");
 		$this->view->render("user", "edit");
+	}
+	
+	public function search(){
+		if(isset($_POST["submit"])){
+			$user = new User();
+			if(isset($_POST['coduser'])){
+				$user->setCoduser(htmlentities(addslashes($_POST["coduser"])));
+			}
+			if(isset($_POST["username"])){
+				$user->setUsername(htmlentities(addslashes($_POST["username"])));
+			}
+			if(isset($_POST["id_perfil"])){
+				$user->setProfile($this->profileMapper->view(htmlentities(addslashes($_POST["id_perfil"]))));
+			}
+			$this->view->setVariable("userstoshow", $this->userMapper->search($user));
+			$this->view->render("user","show");
+		}else{
+			$this->view->render("user", "search");
+		}
+
 	}
 }

@@ -71,12 +71,6 @@ class UserMapper
         //por cada usuario, obtemos os seus permisos e creamos un obxeto no que se insertan
         foreach ($user_db as $user) {
 
-            //obtemos os id's de todos os permisos dun usuario
-            $stmt = $this->db->prepare("SELECT id_permiso FROM usuario_tiene_permiso WHERE cod_usuario = ?");
-            $stmt->execute(array($user["cod_usuario"]));
-            $perm_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
             //engadimos o usuario cos seus permisos a $users
             array_push($users,
                 new User(
@@ -87,7 +81,6 @@ class UserMapper
                     $this->upm->view($user['cod_usuario'])
                 )
             );
-
         }
 
         //devolve o array
@@ -180,5 +173,23 @@ class UserMapper
         $stmt->execute(array($user->getCoduser(), $permission->getCodpermission()));
 
         return $this->db->lastInsertId();
+    }
+
+    public function search(USER $user){
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND `user` like ? AND id_perfil like ?");
+        $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%", "%".$user->getProfile()->getCodprofile()."%"));
+        $users_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $users = array();
+        foreach ($users_db as $u){
+            array_push($users, new User(
+                $u['user'],
+                $u["cod_usuario"],
+                NULL,
+                $this->profileMapper->view($u["id_perfil"]),
+                $this->upm->view($u["cod_usuario"]))
+            );
+        }
+        return $users;
     }
 }

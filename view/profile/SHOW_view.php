@@ -32,11 +32,11 @@ switch ($_SESSION['idioma']) {
     $add = false;
     $delete = false;
     $edit = false;
-    $view = false;
+    $v = false;
     //Comprobamos os permisos que ten o usuario actual
     foreach ($permissions as $perm){
-    
-        if($perm->getController()->getControllername() == $_GET["controller"]){
+
+        if($perm->getController()->getControllername() == strtoupper($_GET["controller"])){
             if($perm->getAction()->getActionname()== "ADD"){
                 $add = true;
             }
@@ -47,7 +47,7 @@ switch ($_SESSION['idioma']) {
                 $delete = true;
             }
             elseif($perm->getAction()->getActionname()== "VIEW"){
-                $view = true;
+                $v = true;
             }
         }
     }
@@ -95,7 +95,7 @@ switch ($_SESSION['idioma']) {
                                 <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                                 <th class="text-center"><?php echo $strings['PROFILE']?></th>
                                 <?php
-                                if(!$add && !$edit && !$delete && !$view){ ?>
+                                if(!$edit && !$delete && !$v){ ?>
                                     <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
                                     <?php
                                 }else{
@@ -116,7 +116,7 @@ switch ($_SESSION['idioma']) {
 
                                 echo $p->getProfilename()."</td><td class='text-center'>";
                                 //Botón que direcciona a vista do usuario
-                                if($view){
+                                if($v){
                                     echo "<a href='index.php?controller=PROFILE&action=VIEW&profile_id=" .
                                         $p->getCodprofile() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
                                     echo "<i class='fa fa-eye fa-fw'></i></button></a>";

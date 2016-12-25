@@ -3,6 +3,8 @@
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../model/USER_model.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+require_once(__DIR__."/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
 
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
@@ -23,18 +25,18 @@ switch ($_SESSION['idioma']) {
 
 
     //Recollemos os usuarios
-    $users = $um->show();
+    $users = $view->getVariable("userstoshow");
     $permissions = $uc->getCurrentUserPerms();
 
     $add = false;
     $delete = false;
     $edit = false;
-    $view = false;
+    $v = false;
 
     //Comprobamos os permisos que ten o usuario actual
     foreach ($permissions as $perm){
 
-        if($perm->getController()->getControllername() == $_GET["controller"]){
+        if($perm->getController()->getControllername() == strtoupper($_GET["controller"])){
             if($perm->getAction()->getActionname()== "ADD"){
                 $add = true;
             }
@@ -45,7 +47,7 @@ switch ($_SESSION['idioma']) {
                 $delete = true;
             }
             elseif($perm->getAction()->getActionname()== "VIEW"){
-                $view = true;
+                $v = true;
             }
         }
     }
@@ -64,9 +66,12 @@ switch ($_SESSION['idioma']) {
 
         <!--BOTÓN BUSCAR-->
         <div class="col-xs-4 col-md-2">
-            <button type="button" class="btn btn-primary">
-            <i class="fa fa-fw fa-search"></i>
-            <?php echo $strings['find']; ?></button>
+            <a href="index.php?controller=user&action=search">
+                <button type="button" class="btn btn-primary">
+                    <i class="fa fa-fw fa-search"></i>
+                    <?php echo $strings['find']; ?>
+                </button>
+            </a>
         </div>
 
 
@@ -97,7 +102,7 @@ switch ($_SESSION['idioma']) {
             <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
             <th class="text-center"><?php echo $strings['USER']?></th>
             <?php
-            if(!$add && !$edit && !$delete && !$view){ ?>
+            if(!$edit && !$delete && !$v){ ?>
                 <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
                 <?php
             }else{
@@ -119,7 +124,7 @@ switch ($_SESSION['idioma']) {
 
             echo $u->getUsername()."</td><td class='text-center'>";
             //Botón que direcciona a vista do usuario
-            if($view){
+            if($v){
                 echo "<a href='index.php?controller=USER&action=VIEW&user=" .
                     $u->getUsername() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
                 echo "<i class='fa fa-eye fa-fw'></i></button></a>";

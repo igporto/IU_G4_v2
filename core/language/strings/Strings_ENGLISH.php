@@ -153,6 +153,7 @@ $strings = array(
 	'one_action' => 'Action',
 	'STUDENT'=>'Students',
 	'no_actions_to_do' => 'No action can be taken',
+	'coduser' => 'User_Code',
 
 	/*NOTIFICACIÓNS*/
 
