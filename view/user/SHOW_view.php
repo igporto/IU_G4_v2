@@ -30,20 +30,23 @@ switch ($_SESSION['idioma']) {
     $delete = false;
     $edit = false;
     $view = false;
+
     //Comprobamos os permisos que ten o usuario actual
     foreach ($permissions as $perm){
 
-        if($perm->getAction()->getActionname()== "ADD"){
-            $add = true;
-        }
-        if($perm->getAction()->getActionname() == "EDIT"){
-            $edit = true;
-        }
-        if($perm->getAction()->getActionname() == "DELETE"){
-            $delete = true;
-        }
-        if($perm->getAction()->getActionname()== "VIEW"){
-            $view = true;
+        if($perm->getController()->getControllername() == $_GET["controller"]){
+            if($perm->getAction()->getActionname()== "ADD"){
+                $add = true;
+            }
+            elseif($perm->getAction()->getActionname() == "EDIT"){
+                $edit = true;
+            }
+            elseif($perm->getAction()->getActionname() == "DELETE"){
+                $delete = true;
+            }
+            elseif($perm->getAction()->getActionname()== "VIEW"){
+                $view = true;
+            }
         }
     }
 
