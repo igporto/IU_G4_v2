@@ -152,6 +152,7 @@ $strings = array(
 	'one_controller' => 'Controller',
 	'one_action' => 'Action',
 	'STUDENT'=>'Students',
+	'no_actions_to_do' => 'No action can be taken',
 
 	/*NOTIFICACIÓNS*/
 

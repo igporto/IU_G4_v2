@@ -95,7 +95,15 @@ switch ($_SESSION['idioma']) {
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                                     <th class=""><?php echo $strings['ACTION']?></th>
-                                    <th class="text-center"><?php echo $strings['ACTION']?></th>
+                                    <?php 
+                                        if(!$add && !$edit && !$delete && !$view){ ?>
+                                            <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
+                                    <?php
+                                        }else{
+                                    ?>
+                                            <th class="text-center"><?php echo $strings['ACTION']?></th>
+                                    <?php } ?>
+                                    
                                 </tr>
                                 </thead>
 

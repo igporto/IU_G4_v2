@@ -54,7 +54,7 @@ class PermissionMapper {
 
 	//Funcion de listar: devolve un array de todos obxetos Permission correspondentes á tabla Permission
 	public function show() {
-		$stmt = $this->db->query("SELECT p.id_permiso FROM permiso p, controlador c WHERE p.id_controlador = c.id_controlador ORDER BY c.nombre");
+		$stmt = $this->db->query("SELECT p.id_permiso FROM permiso p, controlador c, accion a WHERE p.id_controlador = c.id_controlador AND p.id_accion = a.id_accion ORDER BY c.nombre, a.nombre");
 		$permission_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$permissions = array();
