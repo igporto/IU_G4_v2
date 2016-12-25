@@ -169,6 +169,7 @@ $strings = array(
 		/*ERROR*/
 		'erro_title'=>'Error',
 		'erro_not_implemented'=>'Not implemented yet',
+		'erro_no_add' => 'There is nothing to add',
 
 		/*INFO*/
 		'info_title'=>'Information'

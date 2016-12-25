@@ -120,28 +120,35 @@ $permis = $uc->getCurrentUserPerms();
                     </li>
                     <!--RENDER MENU POR PERMISOS-->
                     <?php 
+                        $controllertoShow = array();
+                        $currentController = " ";
 
-                            $currentController = " ";
-                            foreach ($permis as $p) {
-
-                                $controller = $p->getController()->getControllername();
-                                if ($controller != $currentController) {
-                                   
-                                    $currentController = $controller;
-
-                                    $action = $p->getAction()->getActionname();
-
-                                   
-                                    if($action = "SHOW") {
-                                        echo '<li>
-                                                    <a href="index.php?controller=' . $controller . '&action=' . $action . '">
-                                                    <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
-                                        echo $strings[$controller];
-                                        echo "</a>";
-                                    }
-                                        echo "</li>";
+                        foreach ($permis as $p) {
+                            $controller = $p->getController()->getControllername();
+                            //mentres sigamos co mesmo controlador comprobamos as accions asociadas
+                            if ($controller != $currentController) {
+                                $currentController = $controller;
+                                $action = $p->getAction()->getActionname();
+                                if($action = "SHOW") {
+                                    array_push($controllertoShow,$controller);
                                 }
                             }
+                        }
+                        $controllers = array_unique($controllertoShow);
+
+                        foreach ($controllers as $c){
+                            echo '<li>
+                                     <a href="index.php?controller=' . $c . '&action=SHOW ">
+                                         <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
+                                        if (isset($strings[$c])){
+                                            echo $strings[$c];
+                                        }
+                                        else{
+                                            echo $strings[""].": ".$c;
+                                        }
+                                echo "</a>";
+                            echo "</li>";
+                        }
                      ?>
 
                     </ul>
