@@ -143,10 +143,7 @@ class UserController extends BaseController {
 
             $profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
 			$user->setProfile($profile);
-
-			//Engadimos os permisos do usuario (Non entran os do perfil)
-			$user->setPermissions(new UserPermission());
-
+			
 			try {
 				if(!$this->userMapper->usernameExists(htmlentities(addslashes($_POST["username"])))){
                     $this->userMapper->add($user);

@@ -85,8 +85,7 @@ class UserPermissionMapper {
 
 			//insertamos os permisos do usuario_tiene_permiso no obxeto
 			foreach ($result_db as $permiso) {
-				array_push($permissions, $this->pm->view($permiso['id_permiso']));	
-
+				array_push($permissions, $this->pm->view($permiso['id_permiso']));
 			}
 
 			$userpermission = new UserPermission(
