@@ -126,19 +126,20 @@ $permis = $uc->getCurrentUserPerms();
                         foreach ($permis as $p) {
                             $controller = $p->getController()->getControllername();
                             //mentres sigamos co mesmo controlador comprobamos as accions asociadas
-                            if ($controller != $currentController) {
-                                $currentController = $controller;
+                            if ($controller == $currentController) {
                                 $action = $p->getAction()->getActionname();
-                                if($action = "SHOW") {
+                                if($action == "SHOW") {
                                     array_push($controllertoShow,$controller);
                                 }
                             }
+                            $currentController = $controller;
                         }
+
                         $controllers = array_unique($controllertoShow);
 
                         foreach ($controllers as $c){
                             echo '<li>
-                                     <a href="index.php?controller=' . $c . '&action=SHOW ">
+                                     <a href="index.php?controller=' . $c . '&action=show" >
                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
                                         if (isset($strings[$c])){
                                             echo $strings[$c];
