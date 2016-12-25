@@ -4,6 +4,8 @@ require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../controller/ACTION_controller.php");
 require_once(__DIR__ . "/../../model/ACTION_model.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+require_once(__DIR__."/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
 
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
@@ -23,7 +25,7 @@ switch ($_SESSION['idioma']) {
     $uc = new UserController();
     $um = new ActionMapper();
     //Recollemos os usuarios
-    $controllers = $um->show();
+    $controllers = $view->getVariable("actionstoshow");
     $permissions = $uc->getCurrentUserPerms();
 
     $add = false;
@@ -64,9 +66,11 @@ switch ($_SESSION['idioma']) {
 
         <!--BOTÓN BUSCAR-->
         <div class="col-xs-4 col-md-2">
-            <button type="button" class="btn btn-primary">
-            <i class="fa fa-fw fa-search"></i>
-            <?php echo $strings['find']; ?></button>
+            <a href="index.php?controller=action&action=search">
+                <button type="button" class="btn btn-primary">
+                <i class="fa fa-fw fa-search"></i>
+                <?php echo $strings['find']; ?></button>
+            </a>
         </div>
 
 

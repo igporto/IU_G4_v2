@@ -98,7 +98,7 @@ class ActionController extends BaseController
     public function show()
     {
         $actions = $this->actionMapper->show();
-        $this->view->setVariable("actions", $actions);
+        $this->view->setVariable("actionstoshow", $actions);
         $this->view->render("action", "show");
     }
 
@@ -132,5 +132,22 @@ class ActionController extends BaseController
         //Se non se enviou nada
         //$this->view->setLayout("navbar");
         $this->view->render("action", "edit");
+    }
+
+    public function search(){
+        if(isset($_POST["submit"])){
+            $action = new Action();
+            if(isset($_POST['actionname'])){
+                $action->setActionname((htmlentities(addslashes($_POST["actionname"]))));
+            }
+            if(isset($_POST["codaction"])){
+                $action->setCodaction(htmlentities(addslashes($_POST["codaction"])));
+            }
+            $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
+            $this->view->render("action","show");
+        }else{
+            $this->view->render("action", "search");
+        }
+
     }
 }

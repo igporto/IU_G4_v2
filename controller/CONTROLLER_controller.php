@@ -86,7 +86,7 @@ class ControllerController extends BaseController {
 
     public function  show(){
         $controllers = $this->controllerMapper->show();
-        $this->view->setVariable("controllers", $controllers);
+        $this->view->setVariable("controllerstoshow", $controllers);
         $this->view->render("controller", "show");
     }
 
@@ -120,5 +120,22 @@ class ControllerController extends BaseController {
 		//Se non se enviou nada
 		//$this->view->setLayout("navbar");
 		$this->view->render("controller", "edit");
+	}
+
+	public function search(){
+		if(isset($_POST["submit"])){
+			$controller = new Controller();
+			if(isset($_POST['controllername'])){
+				$controller->setcontrollername((htmlentities(addslashes($_POST["controllername"]))));
+			}
+			if(isset($_POST["codcontroller"])){
+				$controller->setCodcontroller(htmlentities(addslashes($_POST["codcontroller"])));
+			}
+			$this->view->setVariable("controllerstoshow", $this->controllerMapper->search($controller));
+			$this->view->render("controller","show");
+		}else{
+			$this->view->render("controller", "search");
+		}
+
 	}
 }

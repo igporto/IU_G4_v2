@@ -97,5 +97,19 @@ class ControllerMapper {
 		$stmt->execute(array($cod_controller));
 	}
 
+	public function search(Controller $controller){
+		$stmt = $this->db->prepare("SELECT * FROM controlador WHERE id_controlador like ? AND nombre like ?");
+		$stmt->execute(array("%".$controller->getCodcontroller()."%","%".$controller->getControllername()."%"));
+		$controllers_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$controllers = array();
+		foreach ($controllers_db as $c){
+			array_push($controllers, new Controller(
+					$c['id_controlador'],
+					$c["nombre"])
+			);
+		}
+		return $controllers;
+	}
 
 }

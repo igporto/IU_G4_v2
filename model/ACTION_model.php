@@ -88,4 +88,19 @@ class ActionMapper {
 		$stmt->execute(array($action->getCodaction()));
 	}
 
+	public function search(Action $action){
+		$stmt = $this->db->prepare("SELECT * FROM accion WHERE id_accion like ? AND nombre like ?");
+		$stmt->execute(array("%".$action->getCodaction()."%","%".$action->getActionname()."%"));
+		$actions_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$actions = array();
+		foreach ($actions_db as $a){
+			array_push($actions, new Action(
+					$a['id_accion'],
+					$a["nombre"])
+			);
+		}
+		return $actions;
+	}
+
 }
