@@ -38,9 +38,6 @@ $uc = new UserController();
             if($action == "ADD"){
                 $add = true;
             }
-            elseif($action == "EDIT"){
-                $edit = true;
-            }
             elseif($action == "DELETE"){
                 $delete = true;
             }
@@ -122,14 +119,6 @@ $uc = new UserController();
                 echo "<a href='index.php?controller=PERMISSION&action=VIEW&perm_id=" .
                     $p->getCodpermission() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
                 echo "<i class='fa fa-eye fa-fw'></i></button></a>";
-            }
-            //Botón que direcciona á vista do editar
-            if($edit){
-                echo "<a href=index.php?controller=permission&action=edit&perm_id=". $p->getCodpermission() .">";
-                echo "<button class='btn btn-warning btn-xs ";
-                echo "' style='margin:2px'>";
-                echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-
             }
             //Botón que direcciona á vista de eliminar
             if($delete){

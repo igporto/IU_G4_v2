@@ -167,7 +167,7 @@ class PermissionController extends BaseController
 
     public function view()
     {
-        $permissionid = $this->permissionMapper->getIdByName($_REQUEST["permission"]);
+        $permissionid = htmlentities(addslashes($_REQUEST["perm_id"]));
         $permission = $this->permissionMapper->view($permissionid);
         $this->view->setVariable("permission", $permission);
         $this->view->render("permission", "view");
