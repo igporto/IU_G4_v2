@@ -34,7 +34,7 @@ class Permission {
      * @param mixed $codpermission the codpermission
      *
      */
-    private function setCodpermission($codpermission)
+    public function setCodpermission($codpermission)
     {
         $this->codpermission = $codpermission;
 

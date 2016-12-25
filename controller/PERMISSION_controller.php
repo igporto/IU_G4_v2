@@ -110,7 +110,7 @@ class PermissionController extends BaseController
     public function show()
     {
         $permissions = $this->permissionMapper->show();
-        $this->view->setVariable("permissions", $permissions);
+        $this->view->setVariable("permistoshow", $permissions);
         $this->view->render("permission", "show");
     }
 
@@ -171,5 +171,34 @@ class PermissionController extends BaseController
         $permission = $this->permissionMapper->view($permissionid);
         $this->view->setVariable("permission", $permission);
         $this->view->render("permission", "view");
+    }
+
+    public function search(){
+        if(isset($_POST["submit"])){
+            $permission = new Permission();
+
+            if (isset($_POST['codpermission'])) {
+                $permission->setCodpermission($_POST['codpermission']);
+            }
+
+            if(isset($_POST["actionname"])){
+                $permission->setAction(
+                    $this->actionMapper->view($_POST["actionname"])
+                    );
+            }
+
+           
+            if(isset($_POST["controllername"])){
+                $permission->setController(
+                    $this->controllerMapper->view($_POST["controllername"])
+                    );
+            }
+
+
+            $this->view->setVariable("permistoshow", $this->permissionMapper->search($permission));
+            $this->view->render("permission","show");
+        }else{
+            $this->view->render("permission", "search");
+        }
     }
 }

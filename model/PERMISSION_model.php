@@ -101,4 +101,18 @@ class PermissionMapper {
 		$stmt = $this->db->prepare("DELETE from permiso WHERE id_permiso=?");
 		$stmt->execute(array($perm_id));
 	}
+
+	public function search(Permission $permission){
+		$stmt = $this->db->prepare("SELECT * FROM permiso WHERE id_permiso like ? AND id_accion like ? AND id_controlador like ?");
+		$stmt->execute(array("%".$permission->getCodpermission()."%","%".$permission->getAction()->getCodaction()."%", "%".$permission->getController()->getCodcontroller()."%"));
+		$permissions_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+		$permissions = array();
+		foreach ($permissions_db as $a){
+			array_push($permissions, $this->view($a['id_permiso'])
+			);
+		}
+		return $permissions;
+	}
 }

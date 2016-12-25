@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../../controller/PERMISSION_controller.php");
 require_once(__DIR__ . "/../../model/PERMISSION_model.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+$view = ViewManager::getInstance();
+
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
         include 'js/showscriptES.js';
@@ -20,10 +22,10 @@ switch ($_SESSION['idioma']) {
         include 'js/showscriptGL.js';
         break;
 }
-$uc = new UserController();
+    $uc = new UserController();
     $um = new PermissionMapper();
     //Recollemos os usuarios
-    $all_permissions = $um->show();
+    $all_permissions = $view->getVariable('permistoshow');
     $permissions = $uc->getCurrentUserPerms();
 
     $add = false;
@@ -61,9 +63,11 @@ $uc = new UserController();
 
         <!--BOTÓN BUSCAR-->
         <div class="col-xs-4 col-md-2">
+            <a href="index.php?controller=permission&action=search">
             <button type="button" class="btn btn-primary">
             <i class="fa fa-fw fa-search"></i>
             <?php echo $strings['find']; ?></button>
+            </a>
         </div>
 
 
