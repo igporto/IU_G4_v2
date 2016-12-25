@@ -33,8 +33,10 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
                     //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                     $controllers = $cm->show();
+
+                    echo "<option value=NULL>".$strings["no_controller"]."</option>";
                     foreach ($controllers as $controller) {
-                        if(isset($_REQUEST["controller_id"]) && $controller->getCodcontroller == $_REQUEST["controller_id"] ){
+                        if(isset($_REQUEST["controller_id"]) && $controller->getCodcontroller() == $_REQUEST["controller_id"] ){
                             echo "<option value=" . $controller->getCodcontroller()." selected >" . $controller->getControllername() . "</option>";
                         }else{
                             echo "<option value=" . $controller->getCodcontroller().">" . $controller->getControllername() . "</option>";
@@ -68,7 +70,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         if ($pm->permissionExists($permissionaux)) {
                             echo "<input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</input>";
                         } else {
-                            echo "<input type='checkbox' name='action_id' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</input>";
+                            echo "<input type='checkbox' name='actions[]' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</input>";
                         }
 
                     }

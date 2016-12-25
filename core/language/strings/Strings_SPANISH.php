@@ -159,6 +159,7 @@ $strings = array(
 		'succ_login'=>'Estás correctamente identificado!',
 		'succ_user_add'=>'Usuario creado correctamente',
 		'succ_user_delete'=>'Usuario borrado correctamente',
+		'succ_perm_add'=>'Permiso creado correctamente',
 
 		/*FAIL*/
 		'fail_title'=>'Incorrecto',

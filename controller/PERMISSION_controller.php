@@ -46,22 +46,30 @@ class PermissionController extends BaseController
     public function add()
     {
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto Permission baleiro
+            //Creamos un obxecto Permission baleiro e "seteamos o controlador do mesmo"
             $permission = new Permission();
             $codcontroller = htmlentities(addslashes($_POST["controller_id"]));
-            $codaction = htmlentities(addslashes($_POST["action_id"]));
-            //Engadimos accion e o controlador ao permiso
-            $permission->setAction($this->actionMapper->view($codaction));
+            $actions = $_POST["actions"];
             $permission->setController($this->controllerMapper->view($codcontroller));
 
+            //Variable que nos di que todo va benne
+            $flag = false;
             try {
-                if (!$this->permissionMapper->permissionExists($permission)) {
-                    $this->permissionMapper->add($permission);
+                foreach ($actions as $action) {
+                    //Engadimos accion e permiso
+                    $permission->setAction($this->actionMapper->view($action));
+                    //Comprobamos se existe ese permiso se non, creamolo
+                    if (!$this->permissionMapper->permissionExists($permission)) {
+                        $this->permissionMapper->add($permission);
+                        $flag = true;
+                    }
+                }
+                if($flag) {
                     //ENVIAR AVISO DE PERMISO ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("Permiso creado correctamente!");
+                    $this->view->setFlash('succ_perm_add');
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("permission", "show");
-                } else {
+                }else {
                     $errors = array();
                     $errors["general"] = "Permissionname already exists";
                     $this->view->setVariable("errors", $errors);
