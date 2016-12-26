@@ -20,14 +20,57 @@ SET time_zone = "+00:00";
 -- Base de datos: `moovett`
 --
 
+DROP DATABASE `moovett`;
+
 CREATE DATABASE IF NOT EXISTS `moovett` DEFAULT character SET utf8 collate utf8_spanish_ci;
 USE `moovett`;
+
+DROP USER 'adminMoovett'@'localhost';
+
 
 CREATE USER 'adminMoovett'@'localhost';
 SET PASSWORD FOR 'adminMoovett'@'localhost' = PASSWORD('moovett');
 REVOKE ALL PRIVILEGES ON *.* FROM 'adminMoovett'@'localhost';
 GRANT ALL PRIVILEGES ON *.* TO 'adminMoovett'@'localhost';
 
+-- DROPS DE TABLAS
+DROP TABLE IF EXISTS `actividad`;
+DROP TABLE IF EXISTS `alumno`;
+DROP TABLE IF EXISTS `alumno_tiene_lesion`;
+DROP TABLE IF EXISTS `asistencia`;
+DROP TABLE IF EXISTS `espacio`;
+DROP TABLE IF EXISTS `calendario`;
+DROP TABLE IF EXISTS `caja`;
+DROP TABLE IF EXISTS `categoria`;
+DROP TABLE IF EXISTS `consulta_fisio`;
+DROP TABLE IF EXISTS `descuento`;
+DROP TABLE IF EXISTS `documento`;
+DROP TABLE IF EXISTS `empleado`;
+DROP TABLE IF EXISTS `empleado_tiene_lesion`;
+DROP TABLE IF EXISTS `evento`;
+DROP TABLE IF EXISTS `factura`;
+DROP TABLE IF EXISTS `linea_factura`;
+DROP TABLE IF EXISTS `horario_actividad`;
+DROP TABLE IF EXISTS `horas_posibles`;
+DROP TABLE IF EXISTS `inscripcion`;
+DROP TABLE IF EXISTS `lesion`;
+DROP TABLE IF EXISTS `pago`;
+DROP TABLE IF EXISTS `perfil`;
+DROP TABLE IF EXISTS `controlador`;
+DROP TABLE IF EXISTS `accion`;
+DROP TABLE IF EXISTS `permiso`;
+DROP TABLE IF EXISTS `permisos_perfil`;
+DROP TABLE IF EXISTS `recibo`;
+DROP TABLE IF EXISTS `reserva`;
+DROP TABLE IF EXISTS `usuario_tiene_permiso`;
+DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `cliente_externo`;
+DROP TABLE IF EXISTS `servicio`;
+DROP TABLE IF EXISTS `log_acceso_lesion`;
+DROP TABLE IF EXISTS `alerta`;
+DROP TABLE IF EXISTS `notificacion`;
+DROP TABLE IF EXISTS `usuario_recibe_alerta`;
+DROP TABLE IF EXISTS `alumnos_recibe_notificacion`;
 
 
 -- --------------------------------------------------------
