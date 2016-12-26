@@ -8,7 +8,7 @@
                                                                     <h4 class="modal-title" id="'.$c->getActionname().'label">'.$strings["confirm_message"].' '.$c->getActionname().'?</h4>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                     <label for="">' . $strings["controller_data"] . ': </label>';
+                                                                     <label for="">' . $strings["action_data"] . ': </label>';
                                                                 //DATOS DO USUARIO A BORRAR
                                                                echo '  
                                                                 <div class="row">

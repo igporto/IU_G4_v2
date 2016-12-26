@@ -57,19 +57,15 @@ class ActionController extends BaseController
                     //$action->checkIsValidForCreate();
                     $this->actionMapper->add($action);
                     //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash('action_exists');
+                    $this->view->setFlash('succ_action_add');
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos actions)
                     $this->view->redirect("action", "show");
                 } else {
-                    $errors = array();
-                    $errors["general"] = "Actionname already exists";
-                    $this->view->setVariable("errors", $errors);
-                    $this->view->setFlash("action_already_exists");
+                    $this->view->setFlash("fail_action_exists");
                 }
             } catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
 
@@ -85,12 +81,11 @@ class ActionController extends BaseController
                 $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
                 $action = $this->actionMapper->view($action_id);
                 $this->actionMapper->delete($action);
-                $this->view->setFlash('msg_delete_correct');
+                $this->view->setFlash('succ_action_delete');
                 $this->view->redirect("action", "show");
             }
         } catch (Exception $e) {
-            $errors = $e->getErrors();
-            $this->view->setVariable("errors", $errors);
+           $this->view->setFlash('erro_general');
         }
         $this->view->render("action", "show");
     }
@@ -121,12 +116,11 @@ class ActionController extends BaseController
             try {
                 $this->actionMapper->edit($action);
                 //ENVIAR AVISO DE ACCION EDITADA!!!!!!!!!!
-                $this->view->setFlash("Accion modificada correctamente!");
+                $this->view->setFlash("succ_action_edit");
                 //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos accions)
-                $this->view->redirect("action", "view", "actionName=" . $action->getActionname());
+                $this->view->redirect("action", "show");
             } catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
@@ -143,7 +137,14 @@ class ActionController extends BaseController
             if(isset($_POST["codaction"])){
                 $action->setCodaction(htmlentities(addslashes($_POST["codaction"])));
             }
-            $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
+            try {
+                $this->view->setFlash("succ_action_search");
+                $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
+
+            } catch (Exception $e) {
+                $this->view->setFlash("erro_general");
+            }
+            
             $this->view->render("action","show");
         }else{
             $this->view->render("action", "search");

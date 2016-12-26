@@ -23,26 +23,17 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
     <div class="row">
 
             
-            <!--BOTÓN QUITAR FILTRO-->
-            <div class="btn-group">
-               
-                    <a  href="index.php?controller=action&action=show">
-                        <button type="button" class="btn btn-warning btn-outline">
-                                <i class="fa fa-filter"></i>
-                                <?php echo $strings['clean']; ?>
-                        </button>
+            <!--BOTÓN QUITAR FILTRO-->               
+                    <a class="btn btn-warning btn-outline"  href="index.php?controller=action&action=show">
+                                <i class="fa fa-search-minus"></i>
+                                <?php echo $strings['clean'];?>
                     </a>
-                
-              
                 <!--BOTÓN BUSCAR-->
-            
-                    <a href="index.php?controller=action&action=search">
-                        <button type="button" class="btn btn-primary">
+                    <a class="btn btn-primary" href="index.php?controller=action&action=search">
                         <i class="fa fa-fw fa-search"></i>
-                        <?php echo $strings['find']; ?></button>
+                        <?php echo $strings['find']; ?>
                     </a>
-                
-            </div>
+
 
             
 
@@ -73,7 +64,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class=""><?php echo $strings['ACTION']?></th>
+                                    <th class="text-center"><?php echo $strings['ACTION']?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
                                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -98,9 +89,11 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     echo $c->getActionname()."</td><td class='text-center'>";
                                     //Botón que direcciona a vista do usuario
                                     if($v){
-                                        echo "<a href='index.php?controller=action&action=view&actionName=" .
-                                            $c->getActionname() . "'><button class='btn btn-primary btn-xs' style='margin:2px'>";
-                                        echo "<i class='fa fa-eye fa-fw'></i></button></a>";
+                                        echo '<button type="button" class="btn btn-primary btn-xs';
+                                        echo '" data-toggle="modal" data-target="#view'.$c->getActionname().'">';
+                                        
+                                        echo '<i class="fa fa-eye fa-fw"></i>
+                                        </button>';
                                     }
                                     //Botón que direcciona á vista do editar
                                     if($edit){
@@ -121,8 +114,12 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                         
                                     }
 
-                                    //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA USUARIO
-                                   include(__DIR__.'/DELETE_view.php');
+                                    //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA ACCIÓN
+                                    include(__DIR__.'/DELETE_view.php');
+
+                                    //MODAL DE VISTA PARA CADA ACCIÓN
+                                    include(__DIR__.'/VIEW_view.php');
+
                                     echo "</td></tr>";
                                 }
                                 ?>

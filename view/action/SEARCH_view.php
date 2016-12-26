@@ -6,26 +6,29 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
 
-<h1 class="page-header"><?php echo $strings['search']; ?></h1>
+
 
 <div class="col-md-6 " style="margin-top: 20px">
+<h1 class="page-header"><?php echo $strings['search'].' '.$strings['ACTION'] ; ?></h1>
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=action&action=search"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['search'] ?>
+                <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
                             <input type="text" class="form-control" id="codaction" name="codaction"
                                    placeholder= <?php echo $strings['codaction'] ?>>
                             <div id="error"></div>
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
                         <!--Campo action-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
@@ -38,18 +41,29 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 20px" class="col-md-6 col-md-offset-3">
+        
+        <div class="row">
+    
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=action&action=show">
+                    <i class="fa fa-arrow-left"></i>
+                    <?php echo $strings['back'] ?></i></a>
+                </div>
 
-            <button class="btn btn-primary btn-md btn-block" id="submit" name="submit" type="submit">
-                <?php echo $strings['search'] ?></i></button>
-            <?php
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-            ?>
-            <button class="btn btn-outline btn-warning btn-md btn-block" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                    <?php echo $strings['clean'] ?></i></button>
+
+                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                    <i class="fa fa-search"></i>
+                    <?php echo $strings['search'] ?></i></button>
+                <?php
+                
+                ?>
+                </div>
+            </div>
+                
         </div>
     </form>
     <!--fin formulario-->

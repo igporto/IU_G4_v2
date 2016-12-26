@@ -6,9 +6,10 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
 
-<h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
+
 
 <div class="col-md-6 " style="margin-top: 20px">
+<h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=action&action=add"
           enctype="multipart/form-data">
@@ -19,7 +20,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 ">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input type="text" class="form-control" id="actionname" name="actionname"
@@ -32,18 +33,28 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 20px" class="col-md-6 col-md-offset-3">
+        <div class="row">
+    
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=action&action=show">
+                    <i class="fa fa-arrow-left"></i>
+                    <?php echo $strings['back'] ?></i></a>
+                </div>
 
-            <button class="btn btn-primary btn-md btn-block" id="submit" name="submit" type="submit">
-                <?php echo $strings['create_action'] ?></i></button>
-            <?php
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-            ?>
-            <button class="btn btn-outline btn-warning btn-md btn-block" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                    <?php echo $strings['clean'] ?></i></button>
+
+                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                    <i class="fa fa-plus"></i>
+                    <?php echo $strings['ADD'] ?></i></button>
+                <?php
+                
+                ?>
+                </div>
+            </div>
+                
         </div>
     </form>
     <!--fin formulario-->
@@ -51,11 +62,11 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 <script>
 
-    //validacion de espazos en branco en cadeas para engadir usuarios
+    //validacion de espazos en branco en cadeas para engadir accions
     function hasWhiteSpace() {
         //print();
         var x = document.form;
-        var s = x.user.value;
+        var s = x.name.value;
         var w = <?php echo json_encode($strings); ?>;
         //document.write(s);
         if (s.indexOf(' ') >= 0) {

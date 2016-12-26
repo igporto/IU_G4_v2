@@ -44,11 +44,11 @@ $strings = array(
     'management_controllers' => 'Xestión de Controladores',
     'management_users' => 'Xestión de Usuarios',
     'users' => 'Usuarios',
-    'create_user' => 'Crear Usuario',
-    'create_profile' => 'Crear Perfil',
-    'create_controller' => 'Crear Controlador',
-    'create_action' => 'Crear Acción',
-    'create_permission' => 'Crear Permiso',
+    'create_user' => 'Engadir Usuario',
+    'create_profile' => 'Engadir Perfil',
+    'create_controller' => 'Engadir Controlador',
+    'create_action' => 'Engadir Acción',
+    'create_permission' => 'Engadir Permiso',
     'management_user' => 'Xestionar Usuario',
     'dni' => 'DNI',
     'name' => 'Nome',
@@ -156,6 +156,7 @@ $strings = array(
     'coduser' => 'Codigo_de_Usuario',
     'codaction' => 'Codigo_de_Accion',
     'refresh_filter' => 'Quitar filtro',
+    'okay' => 'Vale',
 
 
     /*NOTIFICACIÓNS*/
@@ -166,15 +167,22 @@ $strings = array(
         'succ_user_add'=>'Usuario creado correctamente',
         'succ_user_delete'=>'Usuario borrado correctamente',
         'succ_perm_add'=>'Permiso creado correctamente',
+        'succ_action_add'=>'Acción creada correctamente',
+        'succ_action_delete'=>'Acción borrada correctamente',
+        'succ_action_edit'=>'Acción editada correctamente',
+        'succ_action_search'=>'Accións filtradas correctamente',
+
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
         'fail_user_exists'=>"O usuario xa existe",
+        'fail_action_exists'=>'A acción xa existe',
 
         /*ERROR*/
         'erro_title'=>'Erro',
         'erro_not_implemented'=>'Ainda non foi implementado',
         'erro_no_add' => 'Non hai nada que engadir',
+        'erro_general'=>'Ocorreu un erro',
 
         /*INFO*/
         'info_title'=>'Información'

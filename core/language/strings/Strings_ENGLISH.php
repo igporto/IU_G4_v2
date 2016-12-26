@@ -45,12 +45,12 @@ $strings = array(
 	'management_controllers' => 'Controller Management',
 	'management_users' => 'User Management',
 	'users' => 'Users',
-	'create_user' => 'Create User',
-	'create_profile' => 'Create Profile',
-	'create_controller' => 'Create Controller',
-	'create_action' => 'Create Action',
-    'create_permission' => 'Crear Permission',
-	'management_user' => 'Management User',
+	'create_user' => 'Add User',
+	'create_profile' => 'Add Profile',
+	'create_controller' => 'Add Controller',
+	'create_action' => 'Add Action',
+    'create_permission' => 'Add Permission',
+	'management_user' => 'Manage User',
 	'dni' => 'DNI',
 	'name' => 'Name',
 	'surname' => 'Surname',
@@ -156,6 +156,7 @@ $strings = array(
 	'coduser' => 'User_Code',
 	'codaction' => 'Action_Code',
 	'refresh_filter' => 'Dismiss filter',
+	'okay' => 'Okay',
 
 	/*NOTIFICACIÓNS*/
 
@@ -165,15 +166,26 @@ $strings = array(
 		'succ_user_add'=>'User properly created',
 		'succ_user_delete'=>'User properly deleted',
 		'succ_perm_add'=>'Permission properly created',
+		'succ_action_add'=>'Action properly created',
+		'succ_action_delete'=>'Action properly deleted',
+		'succ_action_edit'=>'Action properly edited',
+		'succ_action_search'=>'Actions properly filtered',
+
+
+		
 
 		/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
+		'fail_action_exists'=>'Action already exists',
+		''=>'',
+		''=>'',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
 		'erro_not_implemented'=>'Not implemented yet',
 		'erro_no_add' => 'There is nothing to add',
+		'erro_general'=>'An error ocurred',
 
 		/*INFO*/
 		'info_title'=>'Information'
