@@ -7,9 +7,8 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 ?>
 
 
-
 <div class="col-md-6 " style="margin-top: 20px">
-<h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
+    <h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=action&action=add"
           enctype="multipart/form-data">
@@ -34,47 +33,35 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             </div>
         </div>
         <div class="row">
-    
+
             <div class="col-xs-12">
                 <div class="pull-left">
                     <a class="btn btn-default btn-md" href="index.php?controller=action&action=show">
-                    <i class="fa fa-arrow-left"></i>
-                    <?php echo $strings['back'] ?></i></a>
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
                 </div>
 
                 <div class="pull-right">
                     <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                    <?php echo $strings['clean'] ?></i></button>
+                        <?php echo $strings['clean'] ?></i></button>
 
-                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                    <i class="fa fa-plus"></i>
-                    <?php echo $strings['ADD'] ?></i></button>
-                <?php
-                
-                ?>
+                    <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                        <i class="fa fa-plus"></i>
+                        <?php echo $strings['ADD'] ?></i></button>
+                    <?php
+
+                    ?>
                 </div>
             </div>
-                
+
         </div>
     </form>
     <!--fin formulario-->
 </div>
 
 <script>
-
-    //validacion de espazos en branco en cadeas para engadir accions
-    function hasWhiteSpace() {
-        //print();
-        var x = document.form;
-        var s = x.name.value;
-        var w = <?php echo json_encode($strings); ?>;
-        //document.write(s);
-        if (s.indexOf(' ') >= 0) {
-            window.alert(w['white']);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
 </script>
