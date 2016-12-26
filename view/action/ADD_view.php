@@ -23,15 +23,15 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
-                        <div class="row">
+                        <!--  <div class="row">
                             <?php echo $strings['max_length'] ?>: 25
-                        </div>
+                        </div>-->
                          
                     </div>
                     <div class="col-xs-12 col col-md-5">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="actionname" name="actionname"
+                            <input autofocus type="text" class="form-control" id="actionname" name="actionname"
                                    placeholder= <?php echo $strings['name'] ?>
                                    required="true" maxlength="25">
                             <div id="error"></div>

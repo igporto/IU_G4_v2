@@ -23,15 +23,15 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
-                        <div class="row">
+                        <!--  <div class="row">
                             <?php echo $strings['max_length'] ?>: 25
-                        </div>
+                        </div>-->
                          
                     </div>
                     <div class="col-xs-12 col-md-5  pull-right">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input type="text" class="form-control" id="codaction" name="codaction"
+                            <input type="text" class="form-control" id="codaction" name="codaction" maxlength="4"
                                    placeholder= <?php echo $strings['codaction'] ?>>
                             <div id="error"></div>
                         </div>
@@ -43,7 +43,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <!--Campo action-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="actioname" name="actionname"
+                            <input autofocus type="text" class="form-control" id="actioname" name="actionname" maxlength="25"
                                    placeholder= <?php echo $strings['name'] ?>>
                             <div id="error"></div>
                         </div>

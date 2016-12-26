@@ -158,6 +158,7 @@ $strings = array(
 	'okay' => 'Vale',
 	'max_length'=> 'Caracteres máximos',
 	'no_white_spaces'=>'No se permiten espacios en blanco',
+	'code'=>'Código', 
 
 
 	/*NOTIFICACIÓNS*/

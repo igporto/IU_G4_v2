@@ -37,9 +37,9 @@ $actionname = $_REQUEST["actionName"];
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
-                        <div class="row">
+                        <!--  <div class="row">
                             <?php echo $strings['max_length'] ?>: 25
-                        </div>
+                        </div>-->
                          
                     </div>
 
@@ -47,7 +47,7 @@ $actionname = $_REQUEST["actionName"];
 
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input required  class="form-control" type="text" name="newname"
+                            <input autofocus required  class="form-control" type="text" name="newname" maxlength="25"
                                    placeholder=<?php echo $strings['name']; ?>>
                         </div>
                         <!--Campo password-->
