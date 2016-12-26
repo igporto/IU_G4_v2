@@ -19,7 +19,7 @@ Guia de implementación ET2
 
 
 1. Crear o controlador: **Controladores->Engadir**
-	    O nome debe coincidir co da entidade e os arquivos (ex.: _'USER'=>'USER_model.php'_).
+	    O nome debe coincidir co da entidade e os arquivos (ex.: _'USER'=>'USER_controller.php'_).
 
 2. Crear os permisos asociados ó controlador en **Permisos->Engadir**
         Unha vez engadidos ADD, VIEW, SHOW, DELETE, EDIT o *admin* xa debería ter a nova entidade no menú, como a seguinte: 
@@ -93,7 +93,7 @@ Guia de implementación ET2
   
 	+ Para renderizar unha vista concreta é necesario instanciar o ViewManager: ```php $view = ViewManager::getInstance()```, dado que é unha clase singleton. Isto faise por defecto no BaseController, polo que todos os controladores teñen acceso á variable **$view**.
 	
-	+ Tendo acceso á instancia do ViewManager, podemos chamar ó método ```php render('controller','action')```, e este mostrará a vista ```/view/'controller'/'view'_view.php```. 
+	+ Tendo acceso á instancia do ViewManager, podemos chamar ó método ```php render('controller','action')```, e este mostrará a vista ```/view/'controller'/'action'_view.php```. 
   
   ***
   
