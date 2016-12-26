@@ -130,6 +130,7 @@ $strings = array(
 	'assigned_action' => 'Accciones asignadas',
 	'own_permis' => 'Permisos propios del usuario',
 	'action_modify' => 'Modificar Acción',
+	'controller_modify'=>'Modificar Controlador',
 	'newpass' => 'Nueva_contraseña',
 	'newname' => 'Nuevo_nombre',
 	'not_edit_perm' => 'Los permisos del perfil selecionado no se pueden modificar',
@@ -173,11 +174,16 @@ $strings = array(
 		'succ_action_delete'=>'Acción borrada correctamente',
 		'succ_action_edit'=>'Acción editada correctamente',
 		'succ_action_search'=>'Acciones filtradas correctamente',
+		'succ_controller_add'=>'Controlador creado correctamente',
+		'succ_controller_delete'=>'Controlador borrado correctamente',
+		'succ_controller_edit'=>'Controlador editado correctamente',
+		'succ_controller_search'=>'Controladores filtrados correctamente',
 
 		/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
 		'fail_action_exists'=>'La acción ya existe',
+		'fail_controller_exists'=>"El controlador ya existe",
 
 		/*ERROR*/
 		'erro_title'=>'Error',

@@ -131,7 +131,8 @@ $strings = array(
 	'cannot_modify_user' => 'You cannot modify this user',
 	'assigned_action' => 'Assigned actions',
 	'own_permis' => 'User\'s own permissions',
-    'action_modify' => 'Action_Modify',
+    'action_modify' => 'Modify Action',
+    'controller_modify'=>'Modify Controller',
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
 	'newname' => 'New_name',
@@ -173,6 +174,10 @@ $strings = array(
 		'succ_action_delete'=>'Action properly deleted',
 		'succ_action_edit'=>'Action properly edited',
 		'succ_action_search'=>'Actions properly filtered',
+		'succ_controller_add'=>'Controller properly created',
+		'succ_controller_delete'=>'Controller properly deleted',
+		'succ_controller_edit'=>'Controller properly edited',
+		'succ_controller_search'=>'Controllers properly filtered',
 
 
 		
@@ -181,8 +186,7 @@ $strings = array(
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
-		''=>'',
-		''=>'',
+		'fail_controller_exists'=>"Controller already exists",
 
 		/*ERROR*/
 		'erro_title'=>'Error',

@@ -131,6 +131,7 @@ $strings = array(
     'assigned_action' => 'Accións asignadas',
     'own_permis' => 'Permisos propios do usuario',
     'action_modify' => 'Modificar Acción',
+    'controller_modify'=>'Modificar Controlador',
     'action_exists' => 'O nome escollido xa existe no sistema',
     'newpass' => 'Novo_contrasinal',
     'newname' => 'Novo_nome',
@@ -174,12 +175,17 @@ $strings = array(
         'succ_action_delete'=>'Acción borrada correctamente',
         'succ_action_edit'=>'Acción editada correctamente',
         'succ_action_search'=>'Accións filtradas correctamente',
+        'succ_controller_add'=>'Controlador creado correctamente',
+        'succ_controller_delete'=>'Controlador borrado correctamente',
+        'succ_controller_edit'=>'Controlador editado correctamente',
+        'succ_controller_search'=>'Controladores filtrados correctamente',
 
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
         'fail_user_exists'=>"O usuario xa existe",
         'fail_action_exists'=>'A acción xa existe',
+        'fail_controller_exists'=>"O controlador xa existe",
 
         /*ERROR*/
         'erro_title'=>'Erro',

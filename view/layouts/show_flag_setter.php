@@ -1,6 +1,5 @@
 <?php 		
- //obtemos o contido a mostrar
-    $controllers = $view->getVariable("actionstoshow");
+
     
     $uc = new UserController();
     //Recollemos os usuarios

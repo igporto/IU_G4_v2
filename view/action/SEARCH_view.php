@@ -32,7 +32,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
                             <input type="text" class="form-control" id="codaction" name="codaction" maxlength="4"
-                                   placeholder= <?php echo $strings['codaction'] ?>>
+                                   placeholder= <?php echo $strings['code'] ?>>
                             <div id="error"></div>
                         </div>
                     </div>

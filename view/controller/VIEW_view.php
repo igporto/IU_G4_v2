@@ -1,42 +1,41 @@
-<!-- CONTIDO DA PAXINA -->
+ <?php  
+ echo '
+                                    <div class="modal fade" id="view'.$c->getControllername().'" tabindex="-1" role="dialog" aria-labelledby="'.$c->getControllername().'viewlabel" aria-hidden="true" style="display: none;">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                    <h4 class="modal-title" id="'.$c->getControllername().'label">' . $strings["action_data"] . ': </h4>
+                                                                </div>
+                                                                <div class="modal-body">';
+                                                                     
+                                                                //DATOS DO USUARIO A BORRAR
+                                                               echo '  
+                                                                <div class="row">
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["name"] . ': </label>
+                                                                            <span class="">' . $c->getControllername() . '</span>
+                                                                
+                                                                            
+                                                                        <!--Campo ususario-->
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <label for="">' . $strings["code"] . ': </label>
+                                                                                <span class="">' . $c->getCodcontroller() . '</span>
+                                                                </div>
 
-<?php
-    require_once(__DIR__ . "/../../controller/USER_controller.php");
-    require_once(__DIR__ . "/../../model/PERMISSION_model.php");
-    include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-    switch ($_SESSION['idioma']) {
-        case 'SPANISH':
-            include 'js/showscriptES.js';
-            break;
-        case 'GALEGO':
-            include 'js/showscriptGL.js';
-            break;
-        case 'ENGLISH':
-            include 'js/showscriptEN.js';
-            break;
-        default:
-            include 'js/showscriptGL.js';
-            break;
-    }
-?>
+                                                                </div><div class="modal-footer">
+                                                                    
+                                                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                                    <i class="fa fa-tick"></i>'.$strings["okay"].'</button>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>';
 
-
-<div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
-    
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <?php include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php'); ?>
-                <?php echo $strings['controller_data']  ?>
-            </div>
-            <div class="panel-body">
-
-                <div class="row">
-                    <div class="col-xs-12">                      
-                            <label><?php echo $strings['name'] ?>: </label>  <?php echo $_GET["controller_id"] ?>
-                    </div>
-                </div>
-
-               
-        </div>
-    <!--fin formulario-->
-</div>
+                                                    ?>

@@ -6,30 +6,44 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
 
-<h1 class="page-header"><?php echo $strings['search']; ?></h1>
+
 
 <div class="col-md-6 " style="margin-top: 20px">
+<h1 class="page-header"><?php echo $strings['search'].' '.$strings['CONTROLLER'] ; ?></h1>
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=controller&action=search"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['search'] ?>
+                <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
-
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
+                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                        <div class="row">
+                            <?php echo $strings['no_white_spaces'] ?>
+                        </div>
+                        <!--  <div class="row">
+                            <?php echo $strings['max_length'] ?>: 25
+                        </div>-->
+                         
+                    </div>
+                    <div class="col-xs-12 col-md-5  pull-right">
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="codcontroller" name="codcontroller"
-                                   placeholder= <?php echo $strings['codaction'] ?>>
+                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                            <input type="text" class="form-control" id="codcontroller" name="codcontroller" maxlength="4"
+                                   placeholder= <?php echo $strings['code'] ?>>
                             <div id="error"></div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-5 pull-right">
                         <!--Campo action-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="controllername" name="controllername"
+                            <input autofocus type="text" class="form-control" id="controllerame" name="controllername" maxlength="25"
                                    placeholder= <?php echo $strings['name'] ?>>
                             <div id="error"></div>
                         </div>
@@ -38,38 +52,37 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 20px" class="col-md-6 col-md-offset-3">
+        
+        <div class="row">
+    
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=controller&action=show">
+                    <i class="fa fa-arrow-left"></i>
+                    <?php echo $strings['back'] ?></i></a>
+                </div>
 
-            <button class="btn btn-primary btn-md btn-block" id="submit" name="submit" type="submit">
-                <?php echo $strings['search'] ?></i></button>
-            <?php
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-            ?>
-            <button class="btn btn-outline btn-warning btn-md btn-block" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                    <?php echo $strings['clean'] ?></i></button>
+
+                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                    <i class="fa fa-search"></i>
+                    <?php echo $strings['search'] ?></i></button>
+                <?php
+                
+                ?>
+                </div>
+            </div>
+                
         </div>
     </form>
     <!--fin formulario-->
 </div>
 
 <script>
-
-    //validacion de espazos en branco en cadeas para engadir usuarios
-    function hasWhiteSpace() {
-        //print();
-        var x = document.form;
-        var s = x.user.value;
-        var w = <?php echo json_encode($strings); ?>;
-        //document.write(s);
-        if (s.indexOf(' ') >= 0) {
-            window.alert(w['white']);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
 </script>

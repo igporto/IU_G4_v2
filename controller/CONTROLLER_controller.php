@@ -49,19 +49,18 @@ class ControllerController extends BaseController {
                     //$controller->checkIsValidForCreate();
                     $this->controllerMapper->add($controller);
                     //ENVIAR AVISO DE CONTROLADOR ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("msg_add_controller_correct");
+                    $this->view->setFlash("succ_controller_add");
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("controller", "show");
 				} else {
-					$errors = array();
-					$errors["general"] = "Controllername already exists";
-					$this->view->setVariable("errors", $errors);
-					$this->view->setFlash("controller_already_exists");
+					
+					$this->view->setFlash("fail_controller_exists");
 				}
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
+				$this->view->setFlash("erro_general");
 			}
 		}
 
@@ -73,13 +72,14 @@ class ControllerController extends BaseController {
     		try{
     			if (isset($_GET['controller_id'])) {
     				$this->controllerMapper->delete($this->controllerMapper->getIdByName($_GET["controller_id"]));
-					$this->view->setFlash('msg_delete_correct');
+					$this->view->setFlash('succ_controller_delete');
 					$this->view->redirect("controller", "show");
     			}
 				
 			}catch (Exception $e) {
 				$errors = $e->getErrors();
 				$this->view->setVariable("errors", $errors);
+				$this->view->setFlash("erro_general");
 			}
 			$this->view->render("controller", "show");	
     }
@@ -100,7 +100,7 @@ class ControllerController extends BaseController {
 	public function edit(){
 		if (isset($_POST["submit"])) {
 			//Creamos un obxecto Controller baleiro
-			$controller_id = $this->controllerMapper->getIdByName($_GET['controllertoedit']);
+			$controller_id = $this->controllerMapper->getIdByName($_GET['controllerName']);
 
 			$controller = $this->controllerMapper->view($controller_id);
 
@@ -110,11 +110,12 @@ class ControllerController extends BaseController {
 
 			try {
 				$this->controllerMapper->edit($controller);
-				$this->view->setFlash("succ_edit");
+				$this->view->setFlash("succ_controller_edit");
 				$this->view->redirect("controller", "show");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
+				$this->view->setFlash("erro_general");
 			}
 		}
 		//Se non se enviou nada
@@ -132,6 +133,7 @@ class ControllerController extends BaseController {
 				$controller->setCodcontroller(htmlentities(addslashes($_POST["codcontroller"])));
 			}
 			$this->view->setVariable("controllerstoshow", $this->controllerMapper->search($controller));
+			$this->view->setFlash("succ_controller_search");
 			$this->view->render("controller","show");
 		}else{
 			$this->view->render("controller", "search");
