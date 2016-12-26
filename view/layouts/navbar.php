@@ -73,7 +73,7 @@ $permis = $uc->getCurrentUserPerms();
 <div id="wrapper">
 
     <!-- BARRA DE NAVEGACIÓN: HEADER -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -81,14 +81,16 @@ $permis = $uc->getCurrentUserPerms();
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="index.php?controller=user&action=login">Moovett</a>
+            <a class="navbar-brand float-xs-left" href="index.php?controller=user&action=login">
+               Moovett      
+            </a> 
         </div>
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
            
             <!-- /.dropdown -->
-            <li class="dropdown" style="margin-top: 8px">
+            <li class="nav-item" style="margin-top: 8px">
                <?php include(__DIR__."/language_select.php");  ?>
             </li>
           

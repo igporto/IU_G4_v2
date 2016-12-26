@@ -1,91 +1,65 @@
 <!--SCRIPT DE DATATABLE-->
 <?php
+require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../controller/ACTION_controller.php");
 require_once(__DIR__ . "/../../model/ACTION_model.php");
+
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-require_once(__DIR__."/../../core/ViewManager.php");
+
 $view = ViewManager::getInstance();
 
-switch ($_SESSION['idioma']) {
-    case 'SPANISH':
-        include 'js/showscriptES.js';
-        break;
-    case 'GALEGO':
-        include 'js/showscriptGL.js';
-        break;
-    case 'ENGLISH':
-        include 'js/showscriptEN.js';
-        break;
-    default:
-        include 'js/showscriptGL.js';
-        break;
-}
-
-    $uc = new UserController();
-    $um = new ActionMapper();
-    //Recollemos os usuarios
-    $controllers = $view->getVariable("actionstoshow");
-    $permissions = $uc->getCurrentUserPerms();
-
-    $add = false;
-    $delete = false;
-    $edit = false;
-    $v = false;
-    //Comprobamos os permisos que ten o usuario actual
-    foreach ($permissions as $perm){
+//include do selector de idioma da datatable
+include(__DIR__."/../../view/layouts/datatable_lang_select.php");
     
-        if($perm->getController()->getControllername() == strtoupper($_GET["controller"])){
-            $action = $perm->getAction()->getActionname();
-            if($action == "ADD"){
-                $add = true;
-            }
-            elseif($action == "EDIT"){
-                $edit = true;
-            }
-            elseif($action == "DELETE"){
-                $delete = true;
-            }
-            elseif($action== "VIEW"){
-                $v = true;
-            }
-        }
-    }
-
-                                
+//include do setter de permisos do usuario
+include(__DIR__."/../../view/layouts/show_flag_setter.php");               
 ?>
+
+<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
 
 <h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
 
-<!--O id debe ser este para que funcione o script-->
-<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+    <div class="row">
+
+            
+            <!--BOTÓN QUITAR FILTRO-->
+            <div class="btn-group">
+               
+                    <a  href="index.php?controller=action&action=show">
+                        <button type="button" class="btn btn-warning btn-outline">
+                                <i class="fa fa-filter"></i>
+                                <?php echo $strings['clean']; ?>
+                        </button>
+                    </a>
+                
+              
+                <!--BOTÓN BUSCAR-->
+            
+                    <a href="index.php?controller=action&action=search">
+                        <button type="button" class="btn btn-primary">
+                        <i class="fa fa-fw fa-search"></i>
+                        <?php echo $strings['find']; ?></button>
+                    </a>
+                
+            </div>
+
+            
 
 
 
-<div class="row">
-
-        <!--BOTÓN BUSCAR-->
-        <div class="col-xs-4 col-md-2">
-            <a href="index.php?controller=action&action=search">
-                <button type="button" class="btn btn-primary">
-                <i class="fa fa-fw fa-search"></i>
-                <?php echo $strings['find']; ?></button>
-            </a>
-        </div>
-
-
-        <!--BOTÓN ENGADIR-->
-        <?php if ($add) {
-            echo '  <div class="col-xs-4 col-md-2">
-                        <a href="index.php?controller=action&action=add">
-                            <button type="button" class="btn btn-primary">
-                            <i class="fa fa-fw fa-plus"></i>
-                                '. $strings['ADD'].'
-                            </button>
-                        </a>
-                    </div>';
-        } ?>  
-</div>
+            <!--BOTÓN ENGADIR-->
+            <?php if ($add) {
+                echo '  
+                            <a href="index.php?controller=action&action=add">
+                                <button type="button" class="btn btn-success">
+                                <i class="fa fa-fw fa-plus"></i>
+                                    '. $strings['ADD'].'
+                                </button>
+                            </a>
+                        ';
+            } ?>  
+    </div>
 
 <!--PANEL TABOA DE LISTADO-->
 <div class="row" style="margin-top: 20px">

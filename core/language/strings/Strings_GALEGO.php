@@ -155,6 +155,7 @@ $strings = array(
     'no_actions_to_do' => 'Non se pode realizar ningunha accion',
     'coduser' => 'Codigo_de_Usuario',
     'codaction' => 'Codigo_de_Accion',
+    'refresh_filter' => 'Quitar filtro',
 
 
     /*NOTIFICACIÓNS*/

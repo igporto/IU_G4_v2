@@ -40,7 +40,7 @@ $strings = array(
 	'management_profiles' => 'Gestión de Perfiles',
 	'management_permissions' => 'Gestion de Permisos',
 	'management_students' => 'Gestion de Alumnos',
-	'management_actions' => 'Gestiónde Acciones',
+	'management_actions' => 'Gestión de Acciones',
     'management_controllers' => 'Gestión de Controladores',
     'management_users' => 'Gestión de Usuarios',
 	'users' => 'Usuarios',
@@ -153,6 +153,7 @@ $strings = array(
 	'no_actions_to_do' => 'No se puede realizar ninguna accion',
 	'coduser' => 'Codigo_de_Usuario',
 	'codaction' => 'Codigo_de_Accion',
+	'refresh_filter' => 'Quitar filtro',
 
 
 	/*NOTIFICACIÓNS*/
