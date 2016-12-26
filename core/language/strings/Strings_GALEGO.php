@@ -157,6 +157,8 @@ $strings = array(
     'codaction' => 'Codigo_de_Accion',
     'refresh_filter' => 'Quitar filtro',
     'okay' => 'Vale',
+    'max_length'=> 'Caracteres máximos',
+    'no_white_spaces'=>'Non se permiten espacios en branco',
 
 
     /*NOTIFICACIÓNS*/
