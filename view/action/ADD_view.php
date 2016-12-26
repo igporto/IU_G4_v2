@@ -24,7 +24,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input type="text" class="form-control" id="actionname" name="actionname"
                                    placeholder= <?php echo $strings['name'] ?>
-                                   required="true">
+                                   required="true" maxlength="25">
                             <div id="error"></div>
                         </div>
                         <!--Campo action-->
