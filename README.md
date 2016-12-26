@@ -98,7 +98,36 @@ Guia de implementación ET2
   ***
   
    ###Notificacións
+   
+   O layout [navbar.php](https://github.com/igporto/IU_G4_v2/blob/master/view/layouts/navbar.php#L182) incorpora un mecanismo de renderización de notificacións [AmaranJS](http://www.amaranjs.com/) que depende do código string que reciva como variable flash da **$view**.
+   
   
-  .:toDo:.
+  ######Lanzar unha notificación:
+  
+  No **Controlador**, despois de facer as comprobacións necesarias, e antes de chamar a ```php $this->view->render()```, podemos facer un ```php $this->view->setFlash('cod_notificacion')```, sendo 'cod_notificacion' o código da string que queremos que mostre a notificación.
+  
+  ######Tipos de notificación dependendo do código da string (4 primeiros caractéres):
+  
+  - **Éxito:** String "succ_*algo*".
+  
+      ![succ_notif][succ_notif]
+  
+  - **Fallo controlado:** String  "fail_*algo*".
+  
+  	![fail_notif][fail_notif]
+  
+  - **Erro de bd, arquivo, etc...**: String "erro_*algo*".
+  
+  	![erro_notif][erro_notif]
+  
+  - **Información xenérica**: String "info_*algo*".
+  
+  	![info_notif][info_notif]
+  
+  
+  [succ_notif]:https://github.com/igporto/IU_G4_v2/blob/master/media/guia/succ_notif.PNG?raw=true "succ_notif"
+  [fail_notif]:https://github.com/igporto/IU_G4_v2/blob/master/media/guia/fail_notif.PNG?raw=true "fail_notif"
+  [erro_notif]:https://github.com/igporto/IU_G4_v2/blob/master/media/guia/erro_notif.PNG?raw=true "erro_notif"
+  [info_notif]:https://github.com/igporto/IU_G4_v2/blob/master/media/guia/info_notif.PNG?raw=true "info_notif"
   
   ***
