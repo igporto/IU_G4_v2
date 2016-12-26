@@ -78,10 +78,22 @@ Guia de implementación ET2
   ***
   
   ###Vistas
+  1. Para cada entidade, teremos as suas vistas na carpeta  [/view](https://github.com/igporto/IU_G4_v2/tree/master/view)/'controlador'/, sendo 'controlador' o nome da entidade.
+  2. Na dita carpeta debe haber cando menos 6 arquivos, sendo:
+  	- ADD_view.php (engadir)
+	- DELETE_view.php (borrar)
+	- EDIT_view.php (editar)
+	- SEARCH_view.php (buscar)
+	- SHOW_view.php (listar)
+	- VIEW_view.php (ver en detalle)
+	
+	Ademáis de calquera outra vista necesaria, como no caso de *User*, que ten a vista [/view/user/LOGIN_view.php](https://github.com/igporto/IU_G4_v2/blob/master/view/user/LOGIN_view.php). Pode utilizarse calquera das outras vistas como modelo, e deben seguir todas a mesma arquitectura visual (apartado puntuable).
   
-  ##Renderización
+  ######Renderización
   
-  .:toDo:.
+	+ Para renderizar unha vista concreta é necesario instanciar o ViewManager: ```php $view = ViewManager::getInstance()```, dado que é unha clase singleton. Isto faise por defecto no BaseController, polo que todos os controladores teñen acceso á variable **$view**.
+	
+	+ Tendo acceso á instancia do ViewManager, podemos chamar ó método ```php render('controller','action')```, e este mostrará a vista ```/view/'controller'/'view'_view.php```. 
   
   ***
   
