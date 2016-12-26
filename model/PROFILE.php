@@ -82,4 +82,9 @@ class Profile {
         $this->permissions = $permissions;
 
     }
+
+    public function __toString()
+    {
+        return "" . $this->getCodprofile() . "";
+    }
 }

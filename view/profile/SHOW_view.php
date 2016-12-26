@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../../controller/PROFILE_controller.php");
 require_once(__DIR__ . "/../../model/PROFILE_model.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+$view = ViewManager::getInstance();
+
 switch ($_SESSION['idioma']) {
     case 'SPANISH':
         include 'js/showscriptES.js';
@@ -24,10 +26,9 @@ switch ($_SESSION['idioma']) {
     $uc = new UserController();
     $um = new ProfileMapper();
     //Recollemos os usuarios
-    $controllers = $um->show();
+    $profiles = $view->getVariable('profilestoshow');
     $permissions = $uc->getCurrentUserPerms();
-    //perfis para uso da vista
-    $profiles = $um->show();
+
 
     $add = false;
     $delete = false;
@@ -64,10 +65,12 @@ switch ($_SESSION['idioma']) {
             <div class="row">
                      <!--BOTÓN BUSCAR-->
                     <div class="col-xs-4 col-md-2">
+                        <a href="index.php?controller=profile&action=search">
                         <button type="button" class="btn btn-primary">
                         <i class="fa fa-fw fa-search"></i>
                         <?php echo $strings['find']; ?>  
                         </button>
+                        </a>
                     </div>
                     <!--BOTÓN ENGADIR-->
                     <?php if ($add) {

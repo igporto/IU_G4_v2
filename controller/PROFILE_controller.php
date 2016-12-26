@@ -79,7 +79,7 @@ class ProfileController extends BaseController {
 
     public function  show(){
         $profiles = $this->profileMapper->show();
-        $this->view->setVariable("profiles", $profiles);
+        $this->view->setVariable("profilestoshow", $profiles);
         $this->view->render("profile", "show");
     }
 
@@ -129,5 +129,38 @@ class ProfileController extends BaseController {
         }
         //Se non se enviou nada
         $this->view->render("profile", "edit");
+    }
+
+    public function search(){
+        if(isset($_POST["submit"])){
+            $profile = new Profile();
+
+
+            if (isset($_POST['profilename'])) {
+                if ($_POST['profilename'] != NULL) {
+                    $profile->setProfilename($_POST['profilename']);
+                    $profile->setCodprofile(
+                                $this->profileMapper->getIdByName($_POST['profilename'])
+                            );
+                }
+                
+            }
+
+
+            if (isset($_POST['profileperm'])) {
+
+                $permis = array();
+                foreach ($_POST['profileperm'] as $perm) {
+                    //obten o obxeto permiso e méteo en $permis
+                    array_push($permis, $this->permissionMapper->view($perm));
+                }
+                $profile->setPermissions($permis);
+            }
+
+            $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
+            $this->view->render("profile","show");
+        }else{
+            $this->view->render("profile", "search");
+        }
     }
 }
