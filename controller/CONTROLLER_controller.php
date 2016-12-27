@@ -129,11 +129,18 @@ class ControllerController extends BaseController {
 			if(isset($_POST['controllername'])){
 				$controller->setcontrollername((htmlentities(addslashes($_POST["controllername"]))));
 			}
+
 			if(isset($_POST["codcontroller"])){
 				$controller->setCodcontroller(htmlentities(addslashes($_POST["codcontroller"])));
 			}
-			$this->view->setVariable("controllerstoshow", $this->controllerMapper->search($controller));
-			$this->view->setFlash("succ_controller_search");
+
+			try {
+				$this->view->setVariable("controllerstoshow", $this->controllerMapper->search($controller));
+			} catch (Exception $e) {
+				$this->view->setFlash("erro_general");
+                $this->view->redirect("controller", "show");
+			}
+			
 			$this->view->render("controller","show");
 		}else{
 			$this->view->render("controller", "search");

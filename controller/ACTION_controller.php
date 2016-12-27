@@ -138,13 +138,14 @@ class ActionController extends BaseController
                 $action->setCodaction(htmlentities(addslashes($_POST["codaction"])));
             }
             try {
-                $this->view->setFlash("succ_action_search");
+                
                 $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
 
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");
+                $this->view->redirect("action", "show");
             }
-            
+            //render dado que non se pode settear a variable antes de un redirect
             $this->view->render("action","show");
         }else{
             $this->view->render("action", "search");

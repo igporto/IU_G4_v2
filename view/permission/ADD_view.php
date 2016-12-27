@@ -100,7 +100,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     
                 <div class="col-xs-12">
                     <div class="pull-left">
-                        <a class="btn btn-default btn-md" href="index.php?controller=controller&action=show">
+                        <a class="btn btn-default btn-md" href="index.php?controller=permission&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                     </div>

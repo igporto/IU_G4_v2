@@ -14,8 +14,11 @@ include(__DIR__."/../../view/layouts/datatable_lang_select.php");
 //include do setter de permisos do usuario
 include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
- //obtemos o contido a mostrar
-    $permissions = $view->getVariable("permissionstoshow");               
+    //obtemos o contido a mostrar
+    $permissions = $view->getVariable("permissionstoshow"); 
+    
+
+                  
 ?>
 
 <div class="col-xs-12 col-md-8 " style="margin-top: 20px">

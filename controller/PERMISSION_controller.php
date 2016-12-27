@@ -75,7 +75,6 @@ class PermissionController extends BaseController
                         $errors = array();
                         $errors["general"] = "Permissionname already exists";
                         $this->view->setVariable("errors", $errors);
-                        $this->view->setFlash("permission_already_exists");
                     }
                 } catch (ValidationException $ex) {
                     $errors = $ex->getErrors();
@@ -133,20 +132,29 @@ class PermissionController extends BaseController
 
             if(isset($_POST["actionname"])){
                 $permission->setAction(
-                    $this->actionMapper->view($_POST["actionname"])
+                    $this->actionMapper->view(
+                                $this->actionMapper->getIdByName($_POST["actionname"])
+                                )
                     );
             }
 
            
             if(isset($_POST["controllername"])){
                 $permission->setController(
-                    $this->controllerMapper->view($_POST["controllername"])
+                    $this->controllerMapper->view(
+                            $this->controllerMapper->getIdByName($_POST["controllername"])
+                            )
                     );
             }
 
 
-            $this->view->setVariable("permissionstoshow", $this->permissionMapper->search($permission));
-            $this->view->setFlash('succ_perm_search');
+            try {
+                $this->view->setVariable("permissionstoshow", $this->permissionMapper->search($permission));
+            } catch (Exception $e) {
+                 $this->view->setFlash("erro_general");
+                 $this->view->redirect("permission", "show");
+            }
+            
             $this->view->render("permission","show");
         }else{
             $this->view->render("permission", "search");

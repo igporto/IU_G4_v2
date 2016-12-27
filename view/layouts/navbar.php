@@ -177,9 +177,10 @@ $permis = $uc->getCurrentUserPerms();
 
 
  <?php 
-                //mostrado de notificacións flash
-        
+        //mostrado de notificacións flash
+        $flag ='';
         $flag = $view->popFlash();
+                
                 if($flag != '')
                 {
                     $tipo = substr($flag, 0, 4);
@@ -271,7 +272,9 @@ $permis = $uc->getCurrentUserPerms();
                             break;
                     }
                       
-                } 
+                }
+
+                
     ?>
 </body>
 
