@@ -96,13 +96,14 @@ class PermissionController extends BaseController
         try {
             if (isset($_GET['perm_id'])) {
                 $this->permissionMapper->delete(htmlentities(addslashes($_GET["perm_id"])));
-                $this->view->setFlash('msg_delete_correct');
+                $this->view->setFlash('succ_perm_delete');
                 $this->view->redirect("permission", "show");
             }
 
         } catch (Exception $e) {
             $errors = $e->getErrors();
             $this->view->setVariable("errors", $errors);
+            $this->view->setFlash("erro_general");
         }
         $this->view->render("permission", "show");
     }
@@ -110,59 +111,8 @@ class PermissionController extends BaseController
     public function show()
     {
         $permissions = $this->permissionMapper->show();
-        $this->view->setVariable("permistoshow", $permissions);
+        $this->view->setVariable("permissionstoshow", $permissions);
         $this->view->render("permission", "show");
-    }
-
-    public function edit()
-    {
-        if (isset($_POST["submit"])) {
-            //Creamos un obxecto Permission baleiro
-            $permission_id = $this->permissionMapper->getIdByName($_REQUEST["permission"]);
-            $permission = $this->permissionMapper->view($permission_id);
-
-            //Engadimos o novo contrasinal ao usuario se chega (se non deixamos o que ten)
-            if (isset($_POST["newpass"]) && addslashes($_POST['newpass']) != "") {
-                $permission->setPasswd(md5(htmlentities(addslashes($_POST["newpass"]))));
-            } else {
-                $pass = $this->view($permission_id)->getPasswd();
-                $permission->setPasswd($pass);
-            }
-
-            //Engadimos o perfil
-            $prof = htmlentities(addslashes($_POST["perf_id"]));
-            $profile = $this->profileMapper->view($prof);
-            //var_dump($profile);exit;
-            $permission->setProfile($profile);
-
-            $perms = array();
-            //Engadimos os permisos do usuario (Non entran os do perfil)
-            if (isset($_REQUEST["permissionperm"])) {
-
-                $pm = new PermissionMapper();
-                $ppm = new PermissionPermissionMapper();
-                $permissionperms = $_REQUEST["permissionperm"];
-                foreach ($permissionperms as $pp) {
-                    array_push($perms, $pm->view($pp));
-                }
-            }
-
-            $permission->setPermissions(new PermissionPermission($permission_id, $perms));
-
-            try {
-                $this->permissionMapper->edit($permission);
-                //ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
-                $this->view->setFlash("Usuario modificado correctamente!");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
-                $this->view->redirect("permission", "view", "permission=" . $permission->getPermissionname());
-            } catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
-            }
-        }
-        //Se non se enviou nada
-        //$this->view->setLayout("navbar");
-        $this->view->render("permission", "edit");
     }
 
     public function view()
@@ -195,7 +145,8 @@ class PermissionController extends BaseController
             }
 
 
-            $this->view->setVariable("permistoshow", $this->permissionMapper->search($permission));
+            $this->view->setVariable("permissionstoshow", $this->permissionMapper->search($permission));
+            $this->view->setFlash('succ_perm_search');
             $this->view->render("permission","show");
         }else{
             $this->view->render("permission", "search");

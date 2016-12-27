@@ -5,7 +5,7 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    <h4 class="modal-title" id="'.$c->getControllername().'label">' . $strings["action_data"] . ': </h4>
+                                                                    <h4 class="modal-title" id="'.$c->getControllername().'label">' . $strings["controller_data"] . ': </h4>
                                                                 </div>
                                                                 <div class="modal-body">';
                                                                      

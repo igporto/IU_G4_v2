@@ -141,7 +141,7 @@ $permis = $uc->getCurrentUserPerms();
 
                         foreach ($controllers as $c){
                             echo '<li>
-                                     <a href="index.php?controller=' . $c . '&action=show" >
+                                     <a href="index.php?controller=' . strtolower($c) . '&action=show" >
                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
                                         if (isset($strings[$c])){
                                             echo $strings[$c];
