@@ -20,7 +20,7 @@ $actionname = $_REQUEST["actionName"];
     }
 </script>
 
-<div class="col-md-6" style="margin-top: 20px">
+<div class="col-md-6">
 <h1 class="page-header"><?php echo $strings['action_modify'].': '.$_GET['actionName']?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=action&action=edit&actionName=<?php echo $actionname; ?>"

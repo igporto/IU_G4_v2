@@ -18,7 +18,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
     $actions = $view->getVariable("actionstoshow");              
 ?>
 
-<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+<div class="col-xs-12 col-md-8 " >
 
 <h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
 

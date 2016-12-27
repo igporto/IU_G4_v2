@@ -20,7 +20,7 @@ $controllername = $_REQUEST["controllerName"];
     }
 </script>
 
-<div class="col-md-6" style="margin-top: 20px">
+<div class="col-md-6">
 <h1 class="page-header"><?php echo $strings['controller_modify'].': '.$_GET['controllerName']?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=controller&action=edit&controllerName=<?php echo $controllername; ?>"

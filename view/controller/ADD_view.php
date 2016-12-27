@@ -7,7 +7,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 ?>
 
 
-<div class="col-md-6 " style="margin-top: 20px">
+<div class="col-md-6 ">
     <h1 class="page-header"><?php echo $strings['create_controller']; ?></h1>
     <form name="form" id="form" method="POST" 
           action="index.php?controller=controller&action=add"
