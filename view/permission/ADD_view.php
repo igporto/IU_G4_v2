@@ -54,8 +54,10 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </select>
 
                 </div><!-- cerrar div1 -->
-
-                <div class="col-xs-10"><!-- div2 -->
+    
+                <label for="well"><?php echo $strings['PERMISSION']?>: </label>
+                <div id="well" class="well">
+                <div class="row" style="padding: 5px"><!-- div2 -->
                             
                 
                       
@@ -68,7 +70,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 $permissions = $pm->show();
 
                 if(isset($_REQUEST["controller_id"]) && $_REQUEST["controller_id"] != "NULL") {
-                    echo '<label>'.$strings['PERMISSION'].'</label>:';
+                    
                     //Creamos un obxctto Controller co id que recibimos po $_GET que é do que temos que mostrar os datos
                     $c = $cm->view($_REQUEST["controller_id"]);
                     echo "<div class='form-group'>";
@@ -94,6 +96,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
                 
                 </div><!-- /div2 -->
+                </div><!-- well -->
                 </div><!-- /panel-body -->
         </div><!-- /panel -->
             <div class="row">

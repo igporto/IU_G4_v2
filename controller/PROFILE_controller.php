@@ -46,16 +46,17 @@ class ProfileController extends BaseController {
                 if(!$this->profileMapper->profilenameExists(htmlentities(addslashes($_POST["profilename"])))){
                     $this->profileMapper->add($profile);
                     //ENVIAR AVISO DE PERFIL ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("Perfil creado correctamente!");
+                    $this->view->setFlash("succ_profile_add");
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("profile", "show");
                 } else {
-                    $this->view->setFlash("profile_already_exists");
+                    $this->view->setFlash("fail_profile_exists");
                 }
             }catch(ValidationException $ex) {
                 $errors = $ex->getErrors();
                 $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
@@ -66,13 +67,14 @@ class ProfileController extends BaseController {
         try{
             if (isset($_GET["profile_id"])) {
                 $this->profileMapper->delete(htmlentities(addslashes($_GET["profile_id"])));
-                $this->view->setFlash('msg_delete_correct');
+                $this->view->setFlash('succ_delete_profile');
                 $this->view->redirect("profile", "show");
             }
 
         }catch (Exception $e) {
             $errors = $e->getErrors();
             $this->view->setVariable("errors", $errors);
+            $this->view->setFlash("erro_general");
         }
         $this->view->render("profile", "show");
     }
@@ -91,9 +93,18 @@ class ProfileController extends BaseController {
 
     public function edit(){
         if (isset($_POST["submit"])) {
+
+
+
             //Creamos un obxecto Profile baleiro
             $profile_id = htmlentities(addslashes($_REQUEST["profile_id"]));
             $profile = $this->profileMapper->view($profile_id);
+
+            //se o nome xa existe abórtase o edit
+            if ($this->profileMapper->profilenameExists($profile->getProfilename())) {
+               $this->view->setFlash("fail_profile_exists");
+               $this->view->redirect("profile", "edit","profile_id=".$_REQUEST['profile_id']);
+            }
 
             //Engadimos o novo nome ao perfil se chega (se non deixamos o que ten)
             if(isset($_POST["newname"]) && $_POST["newname"] != ""){
@@ -118,13 +129,12 @@ class ProfileController extends BaseController {
             try {
                 $this->profileMapper->edit($profile);
                 //ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
-                $this->view->setFlash("Perfil modificado correctamente!");
+                $this->view->setFlash("succ_profile_edit");
                 //REDIRECCION Á PAXINA
-                echo $profile->getCodprofile();
-                $this->view->redirect("profile", "view", "profile_id=".$profile->getCodprofile());
+                $this->view->redirect("profile", "show");
             }catch(ValidationException $ex) {
-                $errors = $ex->getErrors();
                 $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
@@ -169,8 +179,12 @@ class ProfileController extends BaseController {
                 }
 
 
-
-                $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
+                try {
+                    $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
+                } catch (Exception $e) {
+                    $this->view->setFlash("erro_general"); 
+                }
+                
                 $this->view->render("profile","show");
             }
             

@@ -59,7 +59,7 @@ class ProfileMapper {
 	public function show() {
 
 		//Obtemos todos os perfiles da BD
-		$stmt1 = $this->db->query("SELECT  id_perfil, nombre as p_nombre FROM  perfil");
+		$stmt1 = $this->db->query("SELECT  id_perfil, nombre as p_nombre FROM  perfil ORDER BY nombre");
 		$stmt1->execute();
 		$profiles1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 

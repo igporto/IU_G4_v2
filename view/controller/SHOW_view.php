@@ -66,7 +66,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class="text-center"><?php echo $strings['ACTION']?></th>
+                                    <th class="text-center"><?php echo $strings['CONTROLLER']?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
                                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>

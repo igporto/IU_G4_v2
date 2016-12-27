@@ -26,7 +26,6 @@ $strings = array(
 	'pass_user_error' => 'Incorrect Password',
 	'user_search_error' => 'User\'s Search Error',
 	'empty_error' => 'Fields must not be empty',
-	'user_modify' => 'Modify data about',
 	'insert_error' => 'Insert Error',
 	'database_access_error' => 'Database Access Error',
 
@@ -133,6 +132,8 @@ $strings = array(
 	'own_permis' => 'User\'s own permissions',
     'action_modify' => 'Modify Action',
     'controller_modify'=>'Modify Controller',
+    'user_modify' => 'Modificar Usuario',
+	'profile_modify' => 'Modificar Perfil',
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
 	'newname' => 'New_name',
@@ -148,6 +149,7 @@ $strings = array(
 	'profile_data'=>'Profile data',
 	'permission_data'=>'Datos del Permiso',
 	'controller_edit'=>'Edit controller',
+	'edit_profile' => 'Edit profile',
 	'no_profile' => "Without profile",
 	'no_controller' => "Sin controlador",
 	'one_controller' => 'Controller',
@@ -180,6 +182,9 @@ $strings = array(
 		'succ_controller_delete'=>'Controller properly deleted',
 		'succ_controller_edit'=>'Controller properly edited',
 		'succ_controller_search'=>'Controllers properly filtered',
+		'succ_profile_add'=>'Profile properly created',
+		'succ_profile_delete'=>'Profile properly deleted',
+		'succ_profile_edit'=>'Profile properly edited',
 
 
 		
@@ -189,6 +194,7 @@ $strings = array(
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
 		'fail_controller_exists'=>"Controller already exists",
+		'fail_profile_exists'=>"Profile already exists",
 
 		/*ERROR*/
 		'erro_title'=>'Error',

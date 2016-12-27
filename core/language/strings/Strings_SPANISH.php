@@ -25,7 +25,8 @@ $strings = array(
 	'pass_user_error' => 'Constraseña Incorrecta',
 	'user_search_error' => 'Error en la busqueda de usuarios',
 	'empty_error' => 'Los campos no pueden estar vacíos',
-	'user_modify' => 'Modificar datos de',
+	'user_modify' => 'Modificar Usuario',
+	'profile_modify' => 'Modificar Perfil',
 	'insert_error' => 'Error en la Inserción',
 	'database_access_error' => 'Error en el Acceso a la Base de Datos',
 
@@ -146,6 +147,7 @@ $strings = array(
 	'profile_data'=>'Datos del Perfil',
 	'permission_data'=>'Datos del Permiso',
 	'controller_edit'=>'Editar controlador',
+	'edit_profile' => 'Editar perfil',
 	'no_profile' => "Sin perfil",
 	'no_controller' => "Sin controlador",
 	'one_controller' => 'Controlador',
@@ -180,12 +182,16 @@ $strings = array(
 		'succ_controller_delete'=>'Controlador borrado correctamente',
 		'succ_controller_edit'=>'Controlador editado correctamente',
 		'succ_controller_search'=>'Controladores filtrados correctamente',
+		'succ_profile_add'=>'Perfil creado correctamente',
+        'succ_profile_delete'=>'Perfil borrado correctamente',
+        'succ_profile_edit'=>'Perfil editado correctamente',
 
 		/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
 		'fail_action_exists'=>'La acción ya existe',
 		'fail_controller_exists'=>"El controlador ya existe",
+		'fail_profile_exists'=>"El perfil ya existe",
 
 		/*ERROR*/
 		'erro_title'=>'Error',

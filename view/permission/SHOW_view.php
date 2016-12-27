@@ -61,7 +61,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 <div class="row" style="margin-top: 20px">
 <div class="panel panel-default">
                         <div class="panel-heading">
-                            <?php echo $strings['list_of'].' '.$strings['CONTROLLER']; ?>
+                            <?php echo $strings['list_of'].' '.$strings['PERMISSION']; ?>
 
                         </div>
                         <div class="panel-body">
