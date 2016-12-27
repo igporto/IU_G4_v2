@@ -32,7 +32,7 @@ class ProfileMapper {
         $stmt = $this->db->prepare("SELECT id_perfil FROM perfil WHERE  nombre= ?");
         $stmt->execute(array($pfname));
 
-        return $stmt->fetch(PDO::FETCH_ASSOC)['id_perfil'];
+        return $stmt->fetch(PDO::FETCH_ASSOC)["id_perfil"];
     }
 
 	//Inserta na base de datos unha tupla cos datos do obxeto $profile
@@ -174,18 +174,22 @@ class ProfileMapper {
 	}
 
 	public function search(Profile $profile){
-
-		//obtemos o código e o nome do perfil con ese nome
-		$stmt = $this->db->prepare("SELECT * FROM perfil WHERE nombre like ?");
-		$stmt->execute(array("%".$profile->getProfilename()."%"));
-		$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		//array toRet
 		$profiles = array();
 
+		//obtemos o código e o nome do perfil con ese nome
+		if ($profile->getProfilename()!= NULL) {
+			$stmt = $this->db->prepare("SELECT * FROM perfil WHERE nombre like ?");
+			$stmt->execute(array("%".$profile->getProfilename()."%"));
+			$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+			foreach ($result1 as $p) {
+			array_push($profiles, $this->view($p['id_perfil']));
+			}
 
-		foreach ($profile->getPermissions() as $p) {
+		}
+		
+		if ($profile->getPermissions() != NULL) {
+			foreach ($profile->getPermissions() as $p) {
 			$stmt2 = $this->db->prepare("SELECT * FROM permisos_perfil WHERE id_permiso = ?");
 			$stmt2->execute(array($p->getCodpermission()));
 			$r = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -194,15 +198,10 @@ class ProfileMapper {
 				foreach ($r as $pf) {
 					array_push($profiles, $this->view($pf['id_perfil']));
 				}
-		}
-		
-		print_r($result1);
 
-		foreach ($result1 as $p) {
-			array_push($profiles, $this->view($p['id_perfil']));
+			}
 		}
 
-		
 		return array_unique($profiles);
 	}
 }

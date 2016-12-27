@@ -132,33 +132,48 @@ class ProfileController extends BaseController {
     }
 
     public function search(){
+        //se ven do show, mostra formulario; senón procesa e manda ó show co resultado
         if(isset($_POST["submit"])){
             $profile = new Profile();
 
+            //se non se enviou nada no formulario, avisa e devolve ó formulario
+            if (isset($_POST["profilename"]) 
+                    && empty($_POST["profilename"]) 
+                        && !isset($_POST["profileperm"])) 
+            {
+                //aviso de formulario vacío
+                $this->view->setFlash("erro_nothing_to_search");
+                $this->view->redirect("profile","search");
+            }
+            else{
 
-            if (isset($_POST['profilename'])) {
-                if ($_POST['profilename'] != NULL) {
-                    $profile->setProfilename($_POST['profilename']);
+                if (isset($_POST["profilename"])) {
+                if (!empty($_POST["profilename"])) {
+                    $profile->setProfilename($_POST["profilename"]);
                     $profile->setCodprofile(
-                                $this->profileMapper->getIdByName($_POST['profilename'])
+                                $this->profileMapper->getIdByName($_POST["profilename"])
                             );
+                    }
+                    
                 }
-                
-            }
 
 
-            if (isset($_POST['profileperm'])) {
+                if (isset($_POST["profileperm"])) {
 
-                $permis = array();
-                foreach ($_POST['profileperm'] as $perm) {
-                    //obten o obxeto permiso e méteo en $permis
-                    array_push($permis, $this->permissionMapper->view($perm));
+                    $permis = array();
+                    foreach ($_POST["profileperm"] as $perm) {
+                        //obten o obxeto permiso e méteo en $permis
+                        array_push($permis, $this->permissionMapper->view($perm));
+                    }
+                    $profile->setPermissions($permis);
                 }
-                $profile->setPermissions($permis);
-            }
 
-            $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
-            $this->view->render("profile","show");
+
+
+                $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
+                $this->view->render("profile","show");
+            }
+            
         }else{
             $this->view->render("profile", "search");
         }
