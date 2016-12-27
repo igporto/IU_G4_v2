@@ -104,6 +104,11 @@ class ControllerController extends BaseController {
 
 			$controller = $this->controllerMapper->view($controller_id);
 
+			 if ($this->controllerMapper->controllernameExists($controller->getControllername())) {
+                $this->view->setFlash("fail_controller_exists");
+                $this->view->redirect("controller", "edit", "controllerName=".$_REQUEST["controllerName"]);
+            }
+
 			//Engadimos os permisos do usuario (Non entran os do perfil)
 			$controller->setControllername($_POST['newname']);
 

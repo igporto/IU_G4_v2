@@ -111,6 +111,12 @@ class ActionController extends BaseController
             //Creamos un obxecto action baleiro
             $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
             $action = $this->actionMapper->view($action_id);
+
+            if ($this->actionMapper->actionnameExists($action->getActionname())) {
+                $this->view->setFlash("fail_action_exists");
+                $this->view->redirect("action", "edit", "actionName=".$_REQUEST["actionName"]);
+            }
+
             $action->setActionname($_REQUEST["newname"]);
 
             try {
