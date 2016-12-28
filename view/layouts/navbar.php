@@ -128,24 +128,12 @@ $permis = $uc->getCurrentUserPerms();
 
                         foreach ($permis as $p) {
                             $controller = $p->getController()->getControllername();
-                            //mentres sigamos co mesmo controlador comprobamos as accions asociadas
-                            if ($controller == $currentController) {
-                                $action = $p->getAction()->getActionname();
+                            $action = $p->getAction()->getActionname();
                                 if($action == "SHOW") {
                                     array_push($controllertoShow,$controller);
                                 }
-                            }
-                            $currentController = $controller;
+                            
                         }
-
-                        //comprobación último permiso
-                        if ($controller == $currentController) {
-                                $action = $p->getAction()->getActionname();
-                                if($action == "SHOW") {
-                                    array_push($controllertoShow,$controller);
-                                }
-                            }
-
                         $controllers = array_unique($controllertoShow);
 
                         foreach ($controllers as $c){
@@ -156,7 +144,7 @@ $permis = $uc->getCurrentUserPerms();
                                             echo $strings[$c];
                                         }
                                         else{
-                                            echo $strings[""].": ".$c;
+                                            echo "WIP: ".$c;
                                         }
                                 echo "</a>";
                             echo "</li>";
