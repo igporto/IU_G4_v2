@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- Base de datos: `moovett`
 --
 
-DROP DATABASE `moovett`;
+DROP DATABASE IF EXISTS `moovett`;
 
 CREATE DATABASE IF NOT EXISTS `moovett` DEFAULT character SET utf8 collate utf8_spanish_ci;
 USE `moovett`;
@@ -1231,8 +1231,10 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (2, 'CONTROLLER'),
 (3, 'PROFILE'),
 (4, 'USER'),
-(5, 'PERMISSION')
-;
+(5, 'PERMISSION'),
+(6, 'PAYMENT'),
+(7, 'BILL'),
+(8, 'DOMICILIATION');
 
 --
 -- Volcado de datos para la tabla `accion`
@@ -1275,7 +1277,22 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (5 ,2),
 (5 ,3),
 (5 ,4),
-(5 ,5);
+(5 ,5),
+(6 ,1),
+(6 ,2),
+(6 ,3),
+(6 ,4),
+(6 ,5),
+(7 ,1),
+(7 ,2),
+(7 ,3),
+(7 ,4),
+(7 ,5),
+(8 ,1),
+(8 ,2),
+(8 ,3),
+(8 ,4),
+(8 ,5);
 
 
 
@@ -1329,13 +1346,28 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 22),
 (1, 23),
 (1, 24),
-(1, 25);
+(1, 25),
+(1, 26),
+(1, 27),
+(1, 28),
+(1, 29),
+(1, 30),
+(1, 31),
+(1, 32),
+(1, 33),
+(1, 34),
+(1, 35),
+(1, 36),
+(1, 37),
+(1, 38),
+(1, 39),
+(1, 40);
 
 /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
-        /*PERFIL ADMIN*/
-             /*ACTION*/
+            /*PERFIL ADMIN*/
+            /*ACTION*/
             /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
-        /*PERFIL ADMIN*/
+            /*PERFIL ADMIN*/
              /*ACTION*/
              INSERT INTO `permisos_perfil`(`id_perfil`, `id_permiso`) VALUES
               (1, 1),
@@ -1366,18 +1398,26 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 22),
               (1, 23),
               (1, 24),
-              (1, 25);
-
-
-
-
-
-
-
-
-
+              (1, 25),
+              /*PAYMENT*/
+              (1, 26),
+              (1, 27),
+              (1, 28),
+              (1, 29),
+              (1, 30),
+              /*BILL*/
+              (1, 31),
+              (1, 32),
+              (1, 33),
+              (1, 34),
+              (1, 35),
+              /*DOMICILIATION*/
+              (1, 36),
+              (1, 37),
+              (1, 38),
+              (1, 39),
+              (1, 40);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

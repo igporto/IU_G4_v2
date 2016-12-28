@@ -94,7 +94,6 @@ $strings = array(
     'employer_not_exists' => 'Non existe o empleado',
     'try_again' => 'Volver a tentar',
     'add' => 'Engadir',
-    'edit' => 'Editar',
     'edit_error' => 'Erro á hora de Editar',
     'show' => 'Mostrar',
     'view' => 'Ver',
@@ -117,8 +116,6 @@ $strings = array(
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
     'white' => 'Hai espazos en branco nalgún campo',
-    'name' => 'Nome',
-    'edit_good' => 'cambios realizados correctamente',
     'edit_good' => 'cambios realizados correctamente',
     'edit_profile' => 'Editar perfil',
     'profile_type' =>'Tipo de Perfil',
@@ -202,6 +199,12 @@ $strings = array(
         'erro_general'=>'Ocorreu un erro',
 
         /*INFO*/
-        'info_title'=>'Información'
+    'info_title' => 'Información',
+
+    /* Gestion de Pagos, Facturas y Domiciliaciones */
+
+    'PAYMENT' => 'Pagos',
+    'BILL' => 'Facturas',
+    'DOMICILIATION' => 'Domiciliacions'
 )
 ?>

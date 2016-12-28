@@ -95,7 +95,6 @@ $strings = array(
 	'employer_not_exists' => 'Employer doesn\'t exists',
 	'try_again' => 'Try Again',
 	'add' => 'Add',
-	'edit' => 'Edit',
 	'show' => 'Show',
 	'view' => 'View',
 	'search' => 'Search',
@@ -117,9 +116,7 @@ $strings = array(
 	'manage' => 'Manage',
 	'clean' => 'Clean',
 	'white' => 'Blanks in some field',
-	'name' => 'Name',
 	'edit_good' => 'Changes were succesfull',
-	'edit_error' => 'Error á hora  de editar',
 	'add_profile' => 'Add a New Profile',
 	'edit_error' => 'Error on edit',
 	'confirm_message' => 'Are you sure you want to delete  ',
@@ -205,6 +202,12 @@ $strings = array(
 		'erro_general'=>'An error ocurred',
 
 		/*INFO*/
-		'info_title'=>'Information'
+    'info_title' => 'Information',
+
+    /* Gestion de Pagos, Facturas y Domiciliaciones */
+
+    'PAYMENT' => 'Payments',
+    'BILL' => 'Bills',
+    'DOMICILIATION' => 'Domiciliations'
 )
 ?>
