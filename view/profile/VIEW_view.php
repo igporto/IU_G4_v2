@@ -1,6 +1,6 @@
 <?php 
 echo '
-                                <div class="modal fade" id="view'.$c->getProfilename().'" tabindex="-1" role="dialog" aria-labelledby="'.$c->getProfilename().'viewlabel" aria-hidden="true" style="display: none;">
+                                <div  class="modal fade" id="view'.$c->getProfilename().'" tabindex="-1" role="dialog" aria-labelledby="'.$c->getProfilename().'viewlabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">

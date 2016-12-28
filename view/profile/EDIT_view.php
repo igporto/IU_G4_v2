@@ -10,18 +10,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     $currentProfile = $profilemapper->view($profile_id);
 
 ?>
-<script>
-    function enviar() {
-        var ruta = 'index.php?controller=user&action=edit&user=';
-        var nome = <?php echo '"'.$username.'"';?>;
-        var query = '&perf_id=';
-        var perfil = document.getElementById("perf_id").value;
-
-        var parte1 = ruta.concat(nome);
-        var parte2 = query.concat(perfil);
-        window.location.href = parte1.concat(parte2);
-    }
-</script>
 
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['profile_modify'].": ".$currentProfile->getProfilename() ; ?></h1>
