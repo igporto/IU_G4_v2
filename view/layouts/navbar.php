@@ -124,6 +124,7 @@ $permis = $uc->getCurrentUserPerms();
                     <?php 
                         $controllertoShow = array();
                         $currentController = " ";
+                        $controller = "";
 
                         foreach ($permis as $p) {
                             $controller = $p->getController()->getControllername();
@@ -136,6 +137,14 @@ $permis = $uc->getCurrentUserPerms();
                             }
                             $currentController = $controller;
                         }
+
+                        //comprobación último permiso
+                        if ($controller == $currentController) {
+                                $action = $p->getAction()->getActionname();
+                                if($action == "SHOW") {
+                                    array_push($controllertoShow,$controller);
+                                }
+                            }
 
                         $controllers = array_unique($controllertoShow);
 

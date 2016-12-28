@@ -32,16 +32,23 @@ echo '
 
                                 $cermissions = $c->getPermissions();
 
-                                if($cermissions != NULL){
-                                    //foreach que imprime o nome do controlador e da acción según os permisos que ten o perfil
-                                    foreach ($cermissions as $cerm){
-                                        echo '<li><span class=\"\">'.$cerm->getController()->getControllername().'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
-                                        echo '<span class=\"\">'.$cerm->getAction()->getActionname().'</span></li>';
+                                if ($c->getProfilename() != "admin") {
+                                     if($cermissions != NULL){
+                                        //foreach que imprime o nome do controlador e da acción según os permisos que ten o perfil
+                                        foreach ($cermissions as $cerm){
+                                            echo '<li><span class=\"\">'.$cerm->getController()->getControllername().'</span><i class="fa fa-long-arrow-right fa-fw"></i>';
+                                            echo '<span class=\"\">'.$cerm->getAction()->getActionname().'</span></li>';
+                                        }
+                                    }
+                                    else{
+                                        echo $strings['no_profile_permissions'];
                                     }
                                 }
                                 else{
-                                    echo $strings['no_profile_permissions'];
+                                    echo $strings["profile_has_all_permissions"];
                                 }
+
+                               
                                 echo '</ul>
                         
                                         </div>

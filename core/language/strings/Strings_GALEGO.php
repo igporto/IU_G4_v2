@@ -162,7 +162,9 @@ $strings = array(
     'okay' => 'Vale',
     'max_length'=> 'Caracteres máximos',
     'no_white_spaces'=>'Non se permiten espacios en branco',
-    'code'=>'Código', 
+    'code'=>'Código',
+    'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
+    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',  
 
 
     /*NOTIFICACIÓNS*/

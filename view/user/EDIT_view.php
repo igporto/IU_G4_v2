@@ -80,20 +80,22 @@
                             //Engadimos unha opcion por perfil que se pode escoller
                                 $pc = new ProfileMapper();
 
-                                echo "<option value='NULL'>".$strings['no_profile']."</option>";
+                                echo "<option value='NULL'>".$strings['no_profile']."</option>
+                                ";
 
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $profiles = $pc->show();
                             
                                 foreach ($profiles as $profile) {
 
-                                    echo "<option value=" . $profile->getCodprofile();
+                                    echo "<option value='" . $profile->getCodprofile()."'";
 
                                     //Se é o perfil que ten o usuario a editar poñemolo como selecionado por defecto
                                     if ($userProfile == $profile->getCodprofile()) {
                                         echo " selected ";
                                     }
-                                    echo ">" . $profile->getProfilename() . "</option>";
+                                    echo ">" . $profile->getProfilename() . "</option>
+                                    ";
                                 }
                             ?>
                         </select>

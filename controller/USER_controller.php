@@ -79,14 +79,22 @@ class UserController extends BaseController {
 	}
 
 	//devolve un array de Permiso, que son os permisos de usuario+perfil do usuario $_SESSION['currentuser']
+	//o perfil "admin" e o usuario "admin" sempre teñen todos os permisos
 	public function getCurrentUserPerms()
 	{
-
-		if ($_SESSION['currentuser'] != 'admin') {
-			//obtén o obxecto usuario
+		//obtén o obxecto usuario
 			$cu = $this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser']));
-			//$this->helper->toConsole(var_dump($cu));
 
+			if (!empty($cu->getProfile())) {
+				$hasnoadminpf = ($cu->getProfile()->getProfilename() != 'admin');
+			}else
+			{
+				$hasnoadminpf = true;
+			}
+
+		if (($_SESSION['currentuser'] != 'admin') && $hasnoadminpf){
+			
+			
 			$perms = array();
 			
 			//obtemos os permisos do perfil e metémolos en $perms
@@ -105,6 +113,8 @@ class UserController extends BaseController {
 				}
 			}
 		}else{
+
+			//se user é "admin", devolvemos todos os permisos
 			$pm = new PermissionMapper();
 			$perms = $pm->show();
 		}
@@ -209,12 +219,13 @@ class UserController extends BaseController {
 			}
 
 			//Engadimos o perfil
-			$prof = htmlentities(addslashes($_GET["perf_id"]));
+			$prof = htmlentities(addslashes($_POST["perf_id"]));
+			$profile = '';
+			
 			if($prof != "NULL"){
 				$profile = $this->profileMapper->view($prof);
 				$user->setProfile($profile);
 			}
-			$user->setProfile(new Profile());
 
 			$perms = array();
 			//Engadimos os permisos do usuario (Non entran os do perfil)
@@ -235,7 +246,7 @@ class UserController extends BaseController {
 				//ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
 				$this->view->setFlash("Usuario modificado correctamente!");
 				//REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
-				$this->view->redirect("user", "view", "user=".$user->getUsername());
+				$this->view->redirect("user", "show");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);

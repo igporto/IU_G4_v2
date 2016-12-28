@@ -48,7 +48,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     <div class="col-xs-12 col col-md-5">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="text" class="form-control" id="profilename" name="profilename"
+                            <input autofocus type="text" class="form-control" id="newname" name="newname"
                                    placeholder= <?php echo $strings['name'] ?>
                                    maxlength="25">
                             <div id="error"></div>

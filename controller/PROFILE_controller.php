@@ -67,7 +67,7 @@ class ProfileController extends BaseController {
         try{
             if (isset($_GET["profile_id"])) {
                 $this->profileMapper->delete(htmlentities(addslashes($_GET["profile_id"])));
-                $this->view->setFlash('succ_delete_profile');
+                $this->view->setFlash('succ_profile_delete');
                 $this->view->redirect("profile", "show");
             }
 
@@ -94,20 +94,18 @@ class ProfileController extends BaseController {
     public function edit(){
         if (isset($_POST["submit"])) {
 
-
-
             //Creamos un obxecto Profile baleiro
             $profile_id = htmlentities(addslashes($_REQUEST["profile_id"]));
             $profile = $this->profileMapper->view($profile_id);
 
-            //se o nome xa existe abórtase o edit
-            if ($this->profileMapper->profilenameExists($profile->getProfilename())) {
-               $this->view->setFlash("fail_profile_exists");
-               $this->view->redirect("profile", "edit","profile_id=".$_REQUEST['profile_id']);
-            }
-
             //Engadimos o novo nome ao perfil se chega (se non deixamos o que ten)
             if(isset($_POST["newname"]) && $_POST["newname"] != ""){
+                //se o nome xa existe abórtase o edit
+                if ($this->profileMapper->profilenameExists($_POST["newname"])) {
+                    $this->view->setFlash("fail_profile_exists");
+                    $this->view->redirect("profile", "edit","profile_id=".$_REQUEST['profile_id']);
+                }
+
                 $profile->setProfilename(htmlentities(addslashes($_POST["newname"])));
             }else{
                 $name = $profile->getProfilename();
