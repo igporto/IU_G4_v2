@@ -237,10 +237,11 @@ class UserController extends BaseController {
 			$prof = htmlentities(addslashes($_POST["perf_id"]));
 			$profile = '';
 
-			if($prof != "NULL"){
-				$profile = $this->profileMapper->view($prof);
-				$user->setProfile($profile);
-			}
+
+				if($prof != "NULL"){
+					$profile = $this->profileMapper->view($prof);
+					$user->setProfile($profile);
+				}
 
 			$perms = array();
 			//Engadimos os permisos do usuario (Non entran os do perfil)
@@ -275,15 +276,28 @@ class UserController extends BaseController {
 	public function search(){
 		if(isset($_POST["submit"])){
 			$user = new User();
-			if(isset($_POST['coduser'])){
+
+			$empty = true;
+
+			if(!empty($_POST['coduser'])){
 				$user->setCoduser(htmlentities(addslashes($_POST["coduser"])));
+				$empty = false;
 			}
-			if(isset($_POST["username"])){
+			if(!empty($_POST["username"])){
 				$user->setUsername(htmlentities(addslashes($_POST["username"])));
+				$empty = false;
 			}
-			if(isset($_POST["id_perfil"])){
+
+			if(isset($_POST["usepf"]) && isset($_POST["id_perfil"])){
 				$user->setProfile($this->profileMapper->view(htmlentities(addslashes($_POST["id_perfil"]))));
+				$empty = false;
 			}
+
+			if ($empty) {
+				$this->view->setFlash("fail_empty_query");
+				$this->view->redirect("user","search");
+			}
+
 			$this->view->setVariable("userstoshow", $this->userMapper->search($user));
 			$this->view->render("user","show");
 		}else{

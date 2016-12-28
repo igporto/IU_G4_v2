@@ -161,7 +161,8 @@ $strings = array(
     'no_white_spaces'=>'Non se permiten espacios en branco',
     'code'=>'Código',
     'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
-    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',  
+    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
+    'use_q'=>'Usar?',    
 
 
     /*NOTIFICACIÓNS*/
