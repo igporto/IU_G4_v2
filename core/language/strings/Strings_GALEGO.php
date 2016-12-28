@@ -185,6 +185,12 @@ $strings = array(
         'erro_general'=>'Ocorreu un erro',
 
         /*INFO*/
-        'info_title'=>'Información'
+    'info_title' => 'Información',
+
+    /* Gestion de Pagos, Facturas y Domiciliaciones */
+
+    'PAYMENT' => 'Pagos',
+    'BILL' => 'Facturas',
+    'DOMICILIATION' => 'Domiciliacions'
 )
 ?>

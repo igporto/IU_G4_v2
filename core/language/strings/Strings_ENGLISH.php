@@ -188,6 +188,12 @@ $strings = array(
 		'erro_general'=>'An error ocurred',
 
 		/*INFO*/
-		'info_title'=>'Information'
+    'info_title' => 'Information',
+
+    /* Gestion de Pagos, Facturas y Domiciliaciones */
+
+    'PAYMENT' => 'Payments',
+    'BILL' => 'Bills',
+    'DOMICILIATION' => 'Domiciliations'
 )
 ?>
