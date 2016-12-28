@@ -30,7 +30,7 @@ class UserPermission {
      * @param mixed $coduser the coduser
      *
      */
-    private function setCoduser($coduser)
+    public function setCoduser($coduser)
     {
         $this->coduser = $coduser;
 

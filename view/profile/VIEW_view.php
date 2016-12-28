@@ -8,7 +8,7 @@ echo '
                                                 <h4 class="modal-title" id="'.$c->getCodprofile().'label">'.$strings["profile_data"].' '.$c->getProfilename().':</h4>
                                             </div>
                                             <div class="modal-body">
-                                                 <label for="">' . $strings["profile_data"] . ': </label>';
+                                                 <label for="">' . $strings["code"] . ': ' . $c->getCodprofile() . ' </label>';
                                 //DATOS DO USUARIO A BORRAR
                                 echo '  
                                             <div class="row">

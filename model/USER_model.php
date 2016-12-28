@@ -50,11 +50,23 @@ class UserMapper
             )
         );
 
+
         //insertamos os permisos propios do ususario 
-        $perms = $user->getPermissions();
+        $perms = $user->getPermissions()->getUserPermissions();
+
+        $coduser = $this->getIdByName($user->getUsername());
+
+
 
         foreach ($perms as $userperm) {
-            $this->upm->add($userperm);
+            $codperm = $userperm->getCodpermission();
+            //insertamos os permisos do user
+            $stm = $this->db->prepare("INSERT INTO usuario_tiene_permiso(cod_usuario,id_permiso) values (?,?)");
+            $stm->execute(array(
+                    $coduser, $codperm    
+                )
+            );
+
         }
 
         return $this->db->lastInsertId();

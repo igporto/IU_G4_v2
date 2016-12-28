@@ -29,6 +29,7 @@ class UserPermissionMapper {
 
 	//Inserta na base de datos unha tupla cos datos do obxeto $userpermission
 	public function add(UserPermission $userpermission) {
+
 		//insertamos os permisos do usuario_tiene_permiso
 		foreach ($userpermission->getPermissions() as $permiso) {
 			$this->addPermission($userpermission, $permiso);	

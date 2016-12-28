@@ -4,6 +4,7 @@ require_once(__DIR__."/../core/ViewManager.php");
 
 require_once(__DIR__."/../model/USER.php");
 require_once(__DIR__."/../model/USER_model.php");
+require_once(__DIR__."/../model/USERPERMISSION.php");
 
 require_once(__DIR__."/../model/PERMISSION_model.php");
 
@@ -24,6 +25,7 @@ class UserController extends BaseController {
 	*/
 	private $userMapper;
 	private $profileMapper;
+	private $permissionMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -31,6 +33,7 @@ class UserController extends BaseController {
 
 		$this->userMapper = new UserMapper();
         $this->profileMapper = new ProfileMapper();
+        $this->permissionMapper = new PermissionMapper();
 
 		// Users controller operates in a "welcome" layout
 		// different to the "default" layout where the internal
@@ -115,8 +118,7 @@ class UserController extends BaseController {
 		}else{
 
 			//se user é "admin", devolvemos todos os permisos
-			$pm = new PermissionMapper();
-			$perms = $pm->show();
+			$perms = $this->permissionMapper->show();
 		}
 		
 
@@ -151,8 +153,20 @@ class UserController extends BaseController {
 
 			//Engadimos o perfil
 
-            $profile = $this->profileMapper->view(htmlentities(addslashes($_POST["profile"])));
+            $profile = $this->profileMapper->view(htmlentities(addslashes($_POST["perf_id"])));
 			$user->setProfile($profile);
+
+			$userperms = new UserPermission();
+			$up = array();
+
+			foreach ($_POST["userperm"] as $cod) {
+				array_push($up, $this->permissionMapper->view($cod));
+			}
+
+			$userperms->setUserPermissions($up);
+			$user->setPermissions($userperms);
+
+
 			
 			try {
 				if(!$this->userMapper->usernameExists(htmlentities(addslashes($_POST["username"])))){
@@ -168,6 +182,7 @@ class UserController extends BaseController {
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
+				$this->view->setFlash("erro_genereal");
 			}
 		}
 
