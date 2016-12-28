@@ -44,12 +44,18 @@ $strings = array(
 	'management_actions' => 'Gestión de Acciones',
     'management_controllers' => 'Gestión de Controladores',
     'management_users' => 'Gestión de Usuarios',
+    'management_payments' => 'Gestión de Pagos',
+    'management_bill' => 'Gestión de Facturas',
+    'management_domiciliation' => 'Gestión de Domiciliacións',
 	'users' => 'Usuarios',
 	'create_action' => 'Añadir Acción',
 	'create_user' => 'Añadir Usuario',
 	'create_profile' => 'Añadir Perfil',
 	'create_controller' => 'Añadir Controlador',
     'create_permission' => 'Añadir Permiso',
+    'create_payment' => 'Añadir Pago',
+    'create_bill' => 'Añadir Factura',
+    'create_domiciliation' => 'Añadir Domiciliación',
 	'management_user' => 'Gestión de Usuario',
 	'dni' => 'DNI',
 	'name' => 'Nombre',
@@ -205,7 +211,10 @@ $strings = array(
 
     'PAYMENT' => 'Pagos',
     'BILL' => 'Factura',
-    'DOMICILIATION' => 'Domiciliacion'
+    'DOMICILIATION' => 'Domiciliación',
+    'Quantity' => 'Cantidad',
+    'cash' => 'Efectivo',
+    'creditCard' => 'Tarjeta de Credito'
 
 )
 ?>
