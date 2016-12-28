@@ -124,6 +124,7 @@ $permis = $uc->getCurrentUserPerms();
                     <?php 
                         $controllertoShow = array();
                         $currentController = " ";
+                        $controller = "";
 
                         foreach ($permis as $p) {
                             $controller = $p->getController()->getControllername();
@@ -137,11 +138,19 @@ $permis = $uc->getCurrentUserPerms();
                             $currentController = $controller;
                         }
 
+                        //comprobación último permiso
+                        if ($controller == $currentController) {
+                                $action = $p->getAction()->getActionname();
+                                if($action == "SHOW") {
+                                    array_push($controllertoShow,$controller);
+                                }
+                            }
+
                         $controllers = array_unique($controllertoShow);
 
                         foreach ($controllers as $c){
                             echo '<li>
-                                     <a href="index.php?controller=' . $c . '&action=show" >
+                                     <a href="index.php?controller=' . strtolower($c) . '&action=show" >
                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i><span class="pull-right"><i class="fa fa-arrow-right"></i></span> ';
                                         if (isset($strings[$c])){
                                             echo $strings[$c];
@@ -177,9 +186,10 @@ $permis = $uc->getCurrentUserPerms();
 
 
  <?php 
-                //mostrado de notificacións flash
-        
+        //mostrado de notificacións flash
+        $flag ='';
         $flag = $view->popFlash();
+                
                 if($flag != '')
                 {
                     $tipo = substr($flag, 0, 4);
@@ -271,7 +281,9 @@ $permis = $uc->getCurrentUserPerms();
                             break;
                     }
                       
-                } 
+                }
+
+                
     ?>
 </body>
 

@@ -14,7 +14,12 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
         window.location.href = ruta.concat(nome);
     }
 </script>
-<div class="col-md-6 col-md-offset-3" style="margin-top: 20px">
+
+<div class="col-md-6">
+
+<h1 class="page-header"><?php echo $strings['create_permission']?></h1>
+
+
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=permission&action=add"
           enctype="multipart/form-data">
@@ -23,9 +28,9 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
-                <label><?php echo $strings['CONTROLLER'] ?></label></div>
-                <select id='controller_id' name='controller_id' class='form-control icon-menu'
-                        onchange='enviar()'>
+                <div class="form-group"><!-- div1 -->
+                    <label><?php echo $strings['CONTROLLER'] ?>: </label>
+                    <select id='controller_id' name='controller_id' class='form-control' onchange='enviar()'>
                     <?php
                     //Engadimos unha opcion por controlador que se pode escoller
                     $cm = new ControllerMapper();
@@ -34,22 +39,30 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                     $controllers = $cm->show();
 
-                    echo "<option value=NULL>".$strings["no_controller"]."</option>";
+                    echo "<option value=NULL>".$strings["no_controller"]."</option>
+                    ";
                     foreach ($controllers as $controller) {
                         if(isset($_REQUEST["controller_id"]) && $controller->getCodcontroller() == $_REQUEST["controller_id"] ){
-                            echo "<option value=" . $controller->getCodcontroller()." selected >" . $controller->getControllername() . "</option>";
+                            echo "<option value=" . $controller->getCodcontroller()." selected >" . $controller->getControllername() . "</option>
+                            ";
                         }else{
-                            echo "<option value=" . $controller->getCodcontroller().">" . $controller->getControllername() . "</option>";
+                            echo "<option value=" . $controller->getCodcontroller().">" . $controller->getControllername() . "</option>
+                            ";
                         }
                     }
                     ?>
                 </select>
+
+                </div><!-- cerrar div1 -->
+    
+                <label for="well"><?php echo $strings['PERMISSION']?>: </label>
+                <div id="well" class="well">
+                <div class="row" style="padding: 5px"><!-- div2 -->
+                            
+                
+                      
+
                 <?php
-                echo "<div>
-                        <div>
-                            <label>".$strings['PERMISSION']."</label>:
-                        </div>
-                      <div>";
                
                 $am = new ActionMapper();
                 $pm = new PermissionMapper();
@@ -57,65 +70,63 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 $permissions = $pm->show();
 
                 if(isset($_REQUEST["controller_id"]) && $_REQUEST["controller_id"] != "NULL") {
+                    
                     //Creamos un obxctto Controller co id que recibimos po $_GET que é do que temos que mostrar os datos
                     $c = $cm->view($_REQUEST["controller_id"]);
-                    echo "<div class='col-md-6 col-md-offset-3'>";
+                    echo "<div class='form-group'>";
 
-                    echo "<div class='text-center'><label>" . $c->getControllername() . "</label></div>";
                     foreach ($actions as $a) {
                         //Creamos un obxecto Permission co controlador e accion actual para poder comprobar que xa hai un permiso con ese par
                         //CONTROLLER -> ACTION
                         $permissionaux = new Permission(NULL, $c, $a);
                         //Se xa existe ese permiso mostramolo pero non o deixamos engadir ese par CONTROLLER -> ACTION
                         if ($pm->permissionExists($permissionaux)) {
-                            echo "<input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</input>";
+                            echo "<div class='checkbox'><label><input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</label></div>
+                            ";
                         } else {
-                            echo "<input type='checkbox' name='actions[]' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</input>";
+                            echo "<div class='checkbox'><label><input type='checkbox' name='actions[]' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</label></div>
+                            ";
                         }
 
                     }
+
+                    echo  '</div><!-- /form-group -->';
                 }
                 ?>
-                </div>
-            </div>
-        </div>
-        <div style="margin-bottom: 20px" class="col-md-6 col-md-offset-3">
 
-            <button class="btn btn-primary btn-md btn-block" id="submit" name="submit" type="submit">
-                <?php echo $strings['create_permission'] ?></i></button>
-            <?php
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-            ?>
-            <button class="btn btn-outline btn-warning btn-md btn-block" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
-        </div>
+                
+                </div><!-- /div2 -->
+                </div><!-- well -->
+                </div><!-- /panel-body -->
+        </div><!-- /panel -->
+            <div class="row">
+    
+                <div class="col-xs-12">
+                    <div class="pull-left">
+                        <a class="btn btn-default btn-md" href="index.php?controller=permission&action=show">
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
+                    </div>
+
+                    <div class="pull-right">
+                        <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                        <?php echo $strings['clean'] ?></i></button>
+
+                    <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                        <i class="fa fa-plus"></i>
+                        <?php echo $strings['ADD'] ?></i></button>
+                    <?php
+                    
+                    ?>
+                </div>
+            </div>        
     </form>
     <!--fin formulario-->
 </div>
 
 <script>
-    function validar() {
-        $permission = document.getElementById("permission").getAttribute().valueOf();
-        alert($permission);
-        return false;
-    }
-
-    //validacion de espazos en branco en cadeas para engadir permisos
-    function hasWhiteSpace() {
-        //print();
-        var x = document.form;
-        var s = x.permission.value;
-        var w = <?php echo json_encode($strings); ?>;
-        //document.write(s);
-        if (s.indexOf(' ') >= 0) {
-            window.alert(w['white']);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
 </script>

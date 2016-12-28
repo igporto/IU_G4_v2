@@ -19,7 +19,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     <div class="col-xs-12 col-md-6">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="user" name="username" placeholder= <?php echo $strings['username'] ?>>
+                            <input type="text" class="form-control" id="username" name="username" placeholder= <?php echo $strings['username'] ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo ususario-->

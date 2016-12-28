@@ -15,9 +15,18 @@
                                                                     <div class="col-xs-12 col-md-12">
                                                                             <label for="">' . $strings["name"] . ': </label>
                                                                             <span class="">' . $c->getActionname() . '</span>
-
+                                                                
+                                                                            
                                                                         <!--Campo ususario-->
-                                                                    </div></div></div><div class="modal-footer">
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <label for="">' . $strings["code"] . ': </label>
+                                                                                <span class="">' . $c->getCodaction() . '</span>
+                                                                </div>
+
+                                                                </div><div class="modal-footer">
                                                                     
                                                                     <button type="button" class="btn btn-success" data-dismiss="modal">
                                                                     <i class="fa fa-tick"></i>'.$strings["okay"].'</button>

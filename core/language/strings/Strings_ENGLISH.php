@@ -26,7 +26,6 @@ $strings = array(
 	'pass_user_error' => 'Incorrect Password',
 	'user_search_error' => 'User\'s Search Error',
 	'empty_error' => 'Fields must not be empty',
-	'user_modify' => 'Modify data about',
 	'insert_error' => 'Insert Error',
 	'database_access_error' => 'Database Access Error',
 
@@ -131,7 +130,10 @@ $strings = array(
 	'cannot_modify_user' => 'You cannot modify this user',
 	'assigned_action' => 'Assigned actions',
 	'own_permis' => 'User\'s own permissions',
-    'action_modify' => 'Action_Modify',
+    'action_modify' => 'Modify Action',
+    'controller_modify'=>'Modify Controller',
+    'user_modify' => 'Modificar Usuario',
+	'profile_modify' => 'Modificar Perfil',
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
 	'newname' => 'New_name',
@@ -147,6 +149,7 @@ $strings = array(
 	'profile_data'=>'Profile data',
 	'permission_data'=>'Datos del Permiso',
 	'controller_edit'=>'Edit controller',
+	'edit_profile' => 'Edit profile',
 	'no_profile' => "Without profile",
 	'no_controller' => "Sin controlador",
 	'one_controller' => 'Controller',
@@ -157,6 +160,11 @@ $strings = array(
 	'codaction' => 'Action_Code',
 	'refresh_filter' => 'Dismiss filter',
 	'okay' => 'Okay',
+	'max_length'=> 'Maximum length',
+	'no_white_spaces'=>'Cannot have white spaces',
+	'code'=>'Code',
+	'user_has_all_permissions'=>'This user has allways every permission',
+	'profile_has_all_permissions'=>'This profile has allways every permission', 
 
 	/*NOTIFICACIÓNS*/
 
@@ -166,10 +174,19 @@ $strings = array(
 		'succ_user_add'=>'User properly created',
 		'succ_user_delete'=>'User properly deleted',
 		'succ_perm_add'=>'Permission properly created',
+		'succ_perm_search'=>'Permissions properly filtered',
+		'succ_perm_delete'=>'Permission properly deleted',
 		'succ_action_add'=>'Action properly created',
 		'succ_action_delete'=>'Action properly deleted',
 		'succ_action_edit'=>'Action properly edited',
 		'succ_action_search'=>'Actions properly filtered',
+		'succ_controller_add'=>'Controller properly created',
+		'succ_controller_delete'=>'Controller properly deleted',
+		'succ_controller_edit'=>'Controller properly edited',
+		'succ_controller_search'=>'Controllers properly filtered',
+		'succ_profile_add'=>'Profile properly created',
+		'succ_profile_delete'=>'Profile properly deleted',
+		'succ_profile_edit'=>'Profile properly edited',
 
 
 		
@@ -178,8 +195,8 @@ $strings = array(
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
-		''=>'',
-		''=>'',
+		'fail_controller_exists'=>"Controller already exists",
+		'fail_profile_exists'=>"Profile already exists",
 
 		/*ERROR*/
 		'erro_title'=>'Error',

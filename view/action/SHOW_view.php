@@ -1,4 +1,3 @@
-<!--SCRIPT DE DATATABLE-->
 <?php
 require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
@@ -13,10 +12,13 @@ $view = ViewManager::getInstance();
 include(__DIR__."/../../view/layouts/datatable_lang_select.php");
     
 //include do setter de permisos do usuario
-include(__DIR__."/../../view/layouts/show_flag_setter.php");               
+include(__DIR__."/../../view/layouts/show_flag_setter.php"); 
+
+ //obtemos o contido a mostrar
+    $actions = $view->getVariable("actionstoshow");              
 ?>
 
-<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+<div class="col-xs-12 col-md-8 " >
 
 <h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
 
@@ -83,7 +85,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <?php  
 
                                 //Para cada usuario, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
-                                foreach ($controllers as $c) {
+                                foreach ($actions as $c) {
                                     echo "<tr class='row text-center' ><td> ";
 
                                     echo $c->getActionname()."</td><td class='text-center'>";

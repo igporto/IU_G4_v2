@@ -111,6 +111,12 @@ class ActionController extends BaseController
             //Creamos un obxecto action baleiro
             $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
             $action = $this->actionMapper->view($action_id);
+
+            if ($this->actionMapper->actionnameExists($action->getActionname())) {
+                $this->view->setFlash("fail_action_exists");
+                $this->view->redirect("action", "edit", "actionName=".$_REQUEST["actionName"]);
+            }
+
             $action->setActionname($_REQUEST["newname"]);
 
             try {
@@ -138,13 +144,14 @@ class ActionController extends BaseController
                 $action->setCodaction(htmlentities(addslashes($_POST["codaction"])));
             }
             try {
-                $this->view->setFlash("succ_action_search");
+                
                 $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
 
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");
+                $this->view->redirect("action", "show");
             }
-            
+            //render dado que non se pode settear a variable antes de un redirect
             $this->view->render("action","show");
         }else{
             $this->view->render("action", "search");

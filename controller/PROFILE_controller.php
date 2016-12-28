@@ -46,16 +46,17 @@ class ProfileController extends BaseController {
                 if(!$this->profileMapper->profilenameExists(htmlentities(addslashes($_POST["profilename"])))){
                     $this->profileMapper->add($profile);
                     //ENVIAR AVISO DE PERFIL ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("Perfil creado correctamente!");
+                    $this->view->setFlash("succ_profile_add");
 
                     //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
                     $this->view->redirect("profile", "show");
                 } else {
-                    $this->view->setFlash("profile_already_exists");
+                    $this->view->setFlash("fail_profile_exists");
                 }
             }catch(ValidationException $ex) {
                 $errors = $ex->getErrors();
                 $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
@@ -66,13 +67,14 @@ class ProfileController extends BaseController {
         try{
             if (isset($_GET["profile_id"])) {
                 $this->profileMapper->delete(htmlentities(addslashes($_GET["profile_id"])));
-                $this->view->setFlash('msg_delete_correct');
+                $this->view->setFlash('succ_profile_delete');
                 $this->view->redirect("profile", "show");
             }
 
         }catch (Exception $e) {
             $errors = $e->getErrors();
             $this->view->setVariable("errors", $errors);
+            $this->view->setFlash("erro_general");
         }
         $this->view->render("profile", "show");
     }
@@ -91,12 +93,19 @@ class ProfileController extends BaseController {
 
     public function edit(){
         if (isset($_POST["submit"])) {
+
             //Creamos un obxecto Profile baleiro
             $profile_id = htmlentities(addslashes($_REQUEST["profile_id"]));
             $profile = $this->profileMapper->view($profile_id);
 
             //Engadimos o novo nome ao perfil se chega (se non deixamos o que ten)
             if(isset($_POST["newname"]) && $_POST["newname"] != ""){
+                //se o nome xa existe abórtase o edit
+                if ($this->profileMapper->profilenameExists($_POST["newname"])) {
+                    $this->view->setFlash("fail_profile_exists");
+                    $this->view->redirect("profile", "edit","profile_id=".$_REQUEST['profile_id']);
+                }
+
                 $profile->setProfilename(htmlentities(addslashes($_POST["newname"])));
             }else{
                 $name = $profile->getProfilename();
@@ -118,13 +127,12 @@ class ProfileController extends BaseController {
             try {
                 $this->profileMapper->edit($profile);
                 //ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
-                $this->view->setFlash("Perfil modificado correctamente!");
+                $this->view->setFlash("succ_profile_edit");
                 //REDIRECCION Á PAXINA
-                echo $profile->getCodprofile();
-                $this->view->redirect("profile", "view", "profile_id=".$profile->getCodprofile());
+                $this->view->redirect("profile", "show");
             }catch(ValidationException $ex) {
-                $errors = $ex->getErrors();
                 $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
@@ -132,33 +140,52 @@ class ProfileController extends BaseController {
     }
 
     public function search(){
+        //se ven do show, mostra formulario; senón procesa e manda ó show co resultado
         if(isset($_POST["submit"])){
             $profile = new Profile();
 
+            //se non se enviou nada no formulario, avisa e devolve ó formulario
+            if (isset($_POST["profilename"]) 
+                    && empty($_POST["profilename"]) 
+                        && !isset($_POST["profileperm"])) 
+            {
+                //aviso de formulario vacío
+                $this->view->setFlash("erro_nothing_to_search");
+                $this->view->redirect("profile","search");
+            }
+            else{
 
-            if (isset($_POST['profilename'])) {
-                if ($_POST['profilename'] != NULL) {
-                    $profile->setProfilename($_POST['profilename']);
+                if (isset($_POST["profilename"])) {
+                if (!empty($_POST["profilename"])) {
+                    $profile->setProfilename($_POST["profilename"]);
                     $profile->setCodprofile(
-                                $this->profileMapper->getIdByName($_POST['profilename'])
+                                $this->profileMapper->getIdByName($_POST["profilename"])
                             );
+                    }
+                    
+                }
+
+
+                if (isset($_POST["profileperm"])) {
+
+                    $permis = array();
+                    foreach ($_POST["profileperm"] as $perm) {
+                        //obten o obxeto permiso e méteo en $permis
+                        array_push($permis, $this->permissionMapper->view($perm));
+                    }
+                    $profile->setPermissions($permis);
+                }
+
+
+                try {
+                    $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
+                } catch (Exception $e) {
+                    $this->view->setFlash("erro_general"); 
                 }
                 
+                $this->view->render("profile","show");
             }
-
-
-            if (isset($_POST['profileperm'])) {
-
-                $permis = array();
-                foreach ($_POST['profileperm'] as $perm) {
-                    //obten o obxeto permiso e méteo en $permis
-                    array_push($permis, $this->permissionMapper->view($perm));
-                }
-                $profile->setPermissions($permis);
-            }
-
-            $this->view->setVariable("profilestoshow", $this->profileMapper->search($profile));
-            $this->view->render("profile","show");
+            
         }else{
             $this->view->render("profile", "search");
         }

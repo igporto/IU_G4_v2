@@ -20,7 +20,7 @@ $actionname = $_REQUEST["actionName"];
     }
 </script>
 
-<div class="col-md-6" style="margin-top: 20px">
+<div class="col-md-6">
 <h1 class="page-header"><?php echo $strings['action_modify'].': '.$_GET['actionName']?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=action&action=edit&actionName=<?php echo $actionname; ?>"
@@ -33,11 +33,21 @@ $actionname = $_REQUEST["actionName"];
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-xs-12">
+                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                        <div class="row">
+                            <?php echo $strings['no_white_spaces'] ?>
+                        </div>
+                        <!--  <div class="row">
+                            <?php echo $strings['max_length'] ?>: 25
+                        </div>-->
+                         
+                    </div>
+
+                    <div class="col-xs-12 col-md-5">
 
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input required  class="form-control" type="text" name="newname"
+                            <input autofocus required  class="form-control" type="text" name="newname" maxlength="25"
                                    placeholder=<?php echo $strings['name']; ?>>
                         </div>
                         <!--Campo password-->
@@ -81,3 +91,10 @@ $actionname = $_REQUEST["actionName"];
     </form>
     <!--fin formulario-->
 </div>
+
+<script>
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
+</script>

@@ -8,7 +8,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 
 
-<div class="col-md-6 " style="margin-top: 20px">
+<div class="col-md-6 ">
 <h1 class="page-header"><?php echo $strings['search'].' '.$strings['ACTION'] ; ?></h1>
     <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
           action="index.php?controller=action&action=search"
@@ -18,21 +18,32 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
-
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
+                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                        <div class="row">
+                            <?php echo $strings['no_white_spaces'] ?>
+                        </div>
+                        <!--  <div class="row">
+                            <?php echo $strings['max_length'] ?>: 25
+                        </div>-->
+                         
+                    </div>
+                    <div class="col-xs-12 col-md-5  pull-right">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input type="text" class="form-control" id="codaction" name="codaction"
-                                   placeholder= <?php echo $strings['codaction'] ?>>
+                            <input type="text" class="form-control" id="codaction" name="codaction" maxlength="4"
+                                   placeholder= <?php echo $strings['code'] ?>>
                             <div id="error"></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-6">
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-5 pull-right">
                         <!--Campo action-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="actioname" name="actionname"
+                            <input autofocus type="text" class="form-control" id="actioname" name="actionname" maxlength="25"
                                    placeholder= <?php echo $strings['name'] ?>>
                             <div id="error"></div>
                         </div>
@@ -70,20 +81,8 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 </div>
 
 <script>
-
-    //validacion de espazos en branco en cadeas para engadir usuarios
-    function hasWhiteSpace() {
-        //print();
-        var x = document.form;
-        var s = x.user.value;
-        var w = <?php echo json_encode($strings); ?>;
-        //document.write(s);
-        if (s.indexOf(' ') >= 0) {
-            window.alert(w['white']);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
 </script>

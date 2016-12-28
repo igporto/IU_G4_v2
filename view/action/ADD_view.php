@@ -9,7 +9,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 <div class="col-md-6 " style="margin-top: 20px">
     <h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
-    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
+    <form name="form" id="form" method="POST" 
           action="index.php?controller=action&action=add"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
@@ -19,10 +19,19 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-xs-12 ">
+                    <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                        <div class="row">
+                            <?php echo $strings['no_white_spaces'] ?>
+                        </div>
+                        <!--  <div class="row">
+                            <?php echo $strings['max_length'] ?>: 25
+                        </div>-->
+                         
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="actionname" name="actionname"
+                            <input autofocus type="text" class="form-control" id="actionname" name="actionname"
                                    placeholder= <?php echo $strings['name'] ?>
                                    required="true" maxlength="25">
                             <div id="error"></div>

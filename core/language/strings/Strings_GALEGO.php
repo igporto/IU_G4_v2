@@ -25,7 +25,7 @@ $strings = array(
     'pass_user_error' => 'Contrasinal Incorrecto',
     'user_search_error' => 'Erro na busqueda de usuarios',
     'empty_error' => 'Os campos non poden estar vacíos',
-    'user_modify' => 'Modificar datos de',
+    'user_modify' => 'Modificar Usuario',
     'insert_error' => 'Erro na Inserción',
     'database_access_error' => 'Erro no Acceso á Base de Datos',
 
@@ -120,6 +120,7 @@ $strings = array(
     'name' => 'Nome',
     'edit_good' => 'cambios realizados correctamente',
     'edit_good' => 'cambios realizados correctamente',
+    'edit_profile' => 'Editar perfil',
     'profile_type' =>'Tipo de Perfil',
     'add_profile' => 'Engadir un Novo Perfil',
     'confirm_message' => 'Está seguro de querer borrar a ',
@@ -131,6 +132,8 @@ $strings = array(
     'assigned_action' => 'Accións asignadas',
     'own_permis' => 'Permisos propios do usuario',
     'action_modify' => 'Modificar Acción',
+    'controller_modify'=>'Modificar Controlador',
+    'profile_modify' => 'Modificar Perfil',
     'action_exists' => 'O nome escollido xa existe no sistema',
     'newpass' => 'Novo_contrasinal',
     'newname' => 'Novo_nome',
@@ -157,6 +160,11 @@ $strings = array(
     'codaction' => 'Codigo_de_Accion',
     'refresh_filter' => 'Quitar filtro',
     'okay' => 'Vale',
+    'max_length'=> 'Caracteres máximos',
+    'no_white_spaces'=>'Non se permiten espacios en branco',
+    'code'=>'Código',
+    'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
+    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',  
 
 
     /*NOTIFICACIÓNS*/
@@ -167,16 +175,25 @@ $strings = array(
         'succ_user_add'=>'Usuario creado correctamente',
         'succ_user_delete'=>'Usuario borrado correctamente',
         'succ_perm_add'=>'Permiso creado correctamente',
+        'succ_perm_delete'=>'Permiso borrado correctamente',
         'succ_action_add'=>'Acción creada correctamente',
         'succ_action_delete'=>'Acción borrada correctamente',
-        'succ_action_edit'=>'Acción editada correctamente',
-        'succ_action_search'=>'Accións filtradas correctamente',
+        'succ_action_edit'=>'Acción editada correctamente',   
+        'succ_controller_add'=>'Controlador creado correctamente',
+        'succ_controller_delete'=>'Controlador borrado correctamente',
+        'succ_controller_edit'=>'Controlador editado correctamente',
+        'succ_profile_add'=>'Perfil creado correctamente',
+        'succ_profile_delete'=>'Perfil borrado correctamente',
+        'succ_profile_edit'=>'Perfil editado correctamente',
+        
 
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
         'fail_user_exists'=>"O usuario xa existe",
         'fail_action_exists'=>'A acción xa existe',
+        'fail_controller_exists'=>"O controlador xa existe",
+        'fail_profile_exists'=>"O perfil xa existe",
 
         /*ERROR*/
         'erro_title'=>'Erro',
