@@ -8,7 +8,7 @@ echo '
                                                 <h4 class="modal-title" id="'.$c->getCoduser().'label">'.$strings["user_data"].' '.$c->getUsername().':</h4>
                                             </div>
                                             <div class="modal-body">
-                                                 <label for="">' . $strings["user_data"] . ': </label>';
+                                                 <label for="">' . $strings["code"] . ': '.$c->getCoduser().' </label>';
                                 //DATOS DO USUARIO A BORRAR
                                 echo '  
                                             <div class="row">

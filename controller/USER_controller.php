@@ -221,7 +221,7 @@ class UserController extends BaseController {
 			//Engadimos o perfil
 			$prof = htmlentities(addslashes($_POST["perf_id"]));
 			$profile = '';
-			
+
 			if($prof != "NULL"){
 				$profile = $this->profileMapper->view($prof);
 				$user->setProfile($profile);
