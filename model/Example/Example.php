@@ -3,26 +3,26 @@
 //Modelo de exemple dun obxeto da app
 
 //Icludes xerais
-require_once(__DIR__ . "/../core/ValidationException.php");
+require_once(__DIR__."/../core/ValidationException.php");
 
 
 //clase que representa unha tupla de 'Example'
-class Example
-{
+class Example {
 
     //cada un dos campos da tupla é un atributo
-    private $codexample;
+	private $codexample;
     private $campo1;
+
+
 
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($codexample = NULL, $campo1 = NULL)
-    {
-        $this->codexample = $codexample;
+	public function __construct($codexample=NULL, $campo1=NULL) {
+		$this->codexample = $codexample;
         $this->campo1 = $campo1;
 
-    }
+	}
 
     //GETTERS E SETTERS DO OBXETO
     /**
@@ -42,7 +42,7 @@ class Example
      *
      * @return self
      */
-    public function setCodexample($codexample)
+    private function setCodexample($codexample)
     {
         $this->codexample = $codexample;
 

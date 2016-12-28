@@ -43,9 +43,6 @@ $strings = array(
 	'management_actions' => 'Action Management',
 	'management_controllers' => 'Controller Management',
 	'management_users' => 'User Management',
-    'management_payments' => 'Payment Management',
-    'management_bill' => 'Bill Management',
-    'management_domiciliation' => 'Domiciliation Management',
 	'users' => 'Users',
 	'create_user' => 'Add User',
 	'create_profile' => 'Add Profile',
@@ -211,9 +208,6 @@ $strings = array(
 
     'PAYMENT' => 'Payments',
     'BILL' => 'Bills',
-    'DOMICILIATION' => 'Domiciliations',
-    'Quantity' => 'Quantity',
-    'cash' => 'Cash',
-    'creditCard' => 'Credit Card'
+    'DOMICILIATION' => 'Domiciliations'
 )
 ?>
