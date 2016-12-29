@@ -7,7 +7,7 @@
                 <h4 class="modal-title" id="'.$c->getDni().'label">'.$strings["confirm_message"].' '.$c->getDni().'?</h4>
             </div>
             <div class="modal-body">
-                 <label for="">' . $strings["action_data"] . ': </label>';
+                 <label for="">' . $strings["service_data"] . ': </label>';
             //DATOS DO CLIENTE A BORRAR
            echo '  
             <div class="row">
