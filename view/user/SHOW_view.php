@@ -26,34 +26,26 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 <h1 class="page-header"><?php echo $strings['management_users'] ?></h1>
 
     <div class="row">
-
-            
             <!--BOTÓN QUITAR FILTRO-->               
                     <a class="btn btn-warning btn-outline"  href="index.php?controller=user&action=show">
-                                <i class="fa fa-search-minus"></i>
-                                <?php echo $strings['clean'];?>
+                        <i class="fa fa-search-minus"></i>
+                        <?php echo $strings['clean'];?>
                     </a>
                 <!--BOTÓN BUSCAR-->
                     <a class="btn btn-primary" href="index.php?controller=user&action=search">
                         <i class="fa fa-fw fa-search"></i>
                         <?php echo $strings['find']; ?>
                     </a>
-
-
-            
-
-
-
             <!--BOTÓN ENGADIR-->
             <?php if ($add) {
                 echo '  
-                            <a href="index.php?controller=user&action=add">
-                                <button type="button" class="btn btn-success">
-                                <i class="fa fa-fw fa-plus"></i>
-                                    '. $strings['ADD'].'
-                                </button>
-                            </a>
-                        ';
+                    <a href="index.php?controller=user&action=add">
+                        <button type="button" class="btn btn-success">
+                        <i class="fa fa-fw fa-plus"></i>
+                            '. $strings['ADD'].'
+                        </button>
+                    </a>
+                ';
             } ?>  
     </div>
 
@@ -104,26 +96,15 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                                     //Botón que direcciona á vista do editar
                                     if($edit){
-
-                                        if ($c->getUsername() == "admin") {
-                                            echo "<button class='btn btn-warning btn-xs ";
-                                            echo "' disabled style='margin:2px'>";
-                                            echo "<i class='fa fa-edit fa-fw'></i></button>";
-                                        }
-                                        else{
-                                            echo "<a href=index.php?controller=user&action=edit&user=". $c->getUsername().'>';
-                                            echo "<button class='btn btn-warning btn-xs ";
-                                            echo "' style='margin:2px'>";
-                                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-                                        }
-
-                                        
-
+                                        echo "<a href=index.php?controller=user&action=edit&user=". $c->getUsername().'>';
+                                        echo "<button class='btn btn-warning btn-xs ";
+                                        echo "' style='margin:2px'>";
+                                        echo "<i class='fa fa-edit fa-fw'></i></button></a>";
                                     }
                                    
                                     //Botón que direcciona á vista de eliminar
                                     if($delete){
-                                        if (($c->getUsername() == "admin") || ($c->getUsername() == $_SESSION['currentuser'])) {
+                                        if ($c->getUsername() == $_SESSION['currentuser']) {
                                             echo '<button type="button" class="btn btn-danger btn-xs';
                                             echo '" disabled style="margin:2px">';
                                             echo '<i class="fa fa-trash-o fa-fw"></i>
