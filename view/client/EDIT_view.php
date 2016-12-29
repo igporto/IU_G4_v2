@@ -54,17 +54,17 @@ $client_id = $_REQUEST["clientdni"];
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input class="form-control" type="text" name="newsurname" maxlength="25"
-                                   placeholder=<?php echo $strings['surname']; ?>>
+                                   placeholder=<?php echo $strings['newsurname']; ?>>
                         </div>
                         <!--Campo surname-->
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                             <input class="form-control" type="text" name="newphone" maxlength="9"
                                    placeholder=<?php echo $strings['newphone']; ?>>
                         </div>
                         <!--Campo phone-->
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
                             <input class="form-control" type="text" name="newemail" maxlength="25"
                                    placeholder=<?php echo $strings['newemail']; ?>>
                         </div>

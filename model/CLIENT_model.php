@@ -79,11 +79,7 @@ class ClientMapper {
 
         $clients = array();
         foreach ($clients_db as $c){
-            array_push($clients, new Client(
-                    $c['dni_cliente_externo'],
-                    $c["nombre"]
-                )
-            );
+            array_push($clients, $this->view($c['dni_cliente_externo']));
         }
         return $clients;
     }

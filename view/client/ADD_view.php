@@ -54,14 +54,14 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <!--Campo surname-->
 
                         <div class="form-group input-group">
-                            <span autofocus required class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span autofocus required class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                             <input type="text" class="form-control" id="phone" name="phone" placeholder= <?php echo $strings['phone']?>
                             required="true" maxlength="9">
                             <div id="error"></div>
                         </div>
                         <!--Campo phone-->
                         <div class="form-group input-group">
-                            <span autofocus required class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span autofocus required class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
                             <input type="text" class="form-control" id="email" name="email" placeholder= <?php echo $strings['email'] ?>
                             required="true" maxlength="25">
                             <div id="error"></div>

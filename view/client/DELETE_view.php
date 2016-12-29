@@ -18,14 +18,14 @@
                     <!--Campo dni-->
                 </div>
                 <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["nombre"] . ': </label>
+                        <label for="">' . $strings["name"] . ': </label>
                         <span class="">' . $c->getName(). '</span>
 
                     <!--Campo nombre-->
                 </div>
               
                 <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["apellido"] . ': </label>
+                        <label for="">' . $strings["surname"] . ': </label>
                         <span class="">' . $c->getSurname() . '</span>
 
                     <!--Campo apellido-->

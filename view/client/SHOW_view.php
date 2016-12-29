@@ -115,6 +115,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                                     //MODAL DE VISTA PARA CADA ACCIÓN
                                     include(__DIR__.'/VIEW_view.php');
+                                    include(__DIR__.'/DELETE_view.php');
 
                                     echo "</td></tr>";
                                 }
