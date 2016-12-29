@@ -18,6 +18,7 @@ $strings = array(
 	'user' => 'User\'s name',
 	'usersurname' => 'User\'s surname',
 	'useremail' => 'User\'s email',
+	'client' => 'Client\'s name',
 	'insert' => 'Insert',
 	'modify' => 'Modify',
 	'delete' => 'Delete',
@@ -37,14 +38,18 @@ $strings = array(
 	'filler' => 'Filler',
 	'permissions' => 'Permissions',
 	'actions' => 'Actions',
+	'clients' => 'Clients',
+	'client' => 'Client',
 	'management_profiles' => 'Profiles Management',
 	'management_permissions' => 'Permissions Management',
 	'management_students' => 'Students Permissions',
 	'management_actions' => 'Action Management',
 	'management_controllers' => 'Controller Management',
 	'management_users' => 'User Management',
+	'management_clients' => 'Client Management',
 	'users' => 'Users',
 	'create_user' => 'Add User',
+    'create_client' => 'Add Client',
 	'create_profile' => 'Add Profile',
 	'create_controller' => 'Add Controller',
 	'create_action' => 'Add Action',
@@ -56,6 +61,7 @@ $strings = array(
 	'birthdate' => 'Birth date',
 	'address' => 'Address',
 	'email' => 'Email',
+	'phone' => 'Phone',
 	'hour_in' => 'Hour of Entrance',
 	'hour_out' => 'Hour of Exit',
 	'bank_account' => 'Bank Acount',
@@ -87,6 +93,7 @@ $strings = array(
 	'edit' => 'Edit',
 	'all_alerts' => 'Show All Alerts',
 	'user_info' => 'User Info',
+	'client_info' => 'Client Info',
     'action_info' => 'Action Info',
 	'profile_info' => 'Profile Info',
 	'controller_info' => 'Controller Info',
@@ -95,6 +102,7 @@ $strings = array(
 	'employer_not_exists' => 'Employer doesn\'t exists',
 	'try_again' => 'Try Again',
 	'add' => 'Add',
+	'edit' => 'Edit',
 	'show' => 'Show',
 	'view' => 'View',
 	'search' => 'Search',
@@ -107,6 +115,7 @@ $strings = array(
 	'PERMISSION'=> 'Permissions',
 	'PROFILE' => 'Profiles',
 	'USER' => 'Users',
+	'CLIENT' => 'Clients',
 	'ADD' => 'Add',
 	'DELETE' => 'Delete',
 	'EDIT' => 'Edit',
@@ -116,7 +125,9 @@ $strings = array(
 	'manage' => 'Manage',
 	'clean' => 'Clean',
 	'white' => 'Blanks in some field',
+	'name' => 'Name',
 	'edit_good' => 'Changes were succesfull',
+	'edit_error' => 'Error á hora  de editar',
 	'add_profile' => 'Add a New Profile',
 	'edit_error' => 'Error on edit',
 	'confirm_message' => 'Are you sure you want to delete  ',
@@ -131,9 +142,14 @@ $strings = array(
     'controller_modify'=>'Modify Controller',
     'user_modify' => 'Modificar Usuario',
 	'profile_modify' => 'Modificar Perfil',
+    'client_modify' => 'Modificar Cliente',
 	'action_exists' => 'The chosen name already exists in the system',
 	'newpass' => 'New_Password',
 	'newname' => 'New_name',
+	'newdni' => 'New_dni',
+	'newsurname' => 'New_surname',
+	'newphone' => 'New_phone',
+	'newemail' => 'New_email',
 	'not_edit_perm' => 'Permissions for the selected profile can not be modified',
 	'perm_over_controller' => 'Permissions on controller actions',
 	'no_user_permissions' => 'This user doesn´t have permissions by himself',
@@ -145,6 +161,7 @@ $strings = array(
 	'controller_data'=>'Controller data',
 	'profile_data'=>'Profile data',
 	'permission_data'=>'Datos del Permiso',
+	'client_data' => 'Datos del cliente',
 	'controller_edit'=>'Edit controller',
 	'edit_profile' => 'Edit profile',
 	'no_profile' => "Without profile",
@@ -162,7 +179,7 @@ $strings = array(
 	'code'=>'Code',
 	'user_has_all_permissions'=>'This user has allways every permission',
 	'profile_has_all_permissions'=>'This profile has allways every permission',
-	'use_q'=>'Use?',   
+	'use_q'=>'Use?',
 
 	/*NOTIFICACIÓNS*/
 
@@ -185,6 +202,12 @@ $strings = array(
 		'succ_profile_add'=>'Profile properly created',
 		'succ_profile_delete'=>'Profile properly deleted',
 		'succ_profile_edit'=>'Profile properly edited',
+		'succ_client_add'=>'Client properly created',
+		'succ_client_search'=>'Client properly filtered',
+		'succ_client_delete'=>'Client properly deleted',
+		'succ_service_add'=>'Client properly created',
+		'succ_service_search'=>'Client properly filtered',
+		'succ_service_delete'=>'Client properly deleted',
 
 
 		
@@ -194,6 +217,7 @@ $strings = array(
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
 		'fail_controller_exists'=>"Controller already exists",
+		'fail_client_exists'=>"Client already exists",
 		'fail_profile_exists'=>"Profile already exists",
 
 		/*ERROR*/
@@ -209,6 +233,18 @@ $strings = array(
 
     'PAYMENT' => 'Payments',
     'BILL' => 'Bills',
-    'DOMICILIATION' => 'Domiciliations'
+    'DOMICILIATION' => 'Domiciliations',
+
+	/* Servicios */
+	'SERVICE' => 'Services',
+	'service_info' => 'Service Info',
+	'management_services' => 'Services Management',
+	'date' => 'Date',
+	'cost' => 'Cost',
+	'description' => 'Description',
+	'create_service' => 'Create Service',
+	'service_data' => 'Service Data',
+	'service_modify' => 'Modify Service'
+
 )
 ?>

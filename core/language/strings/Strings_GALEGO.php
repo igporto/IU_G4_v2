@@ -25,6 +25,7 @@ $strings = array(
     'pass_user_error' => 'Contrasinal Incorrecto',
     'user_search_error' => 'Erro na busqueda de usuarios',
     'empty_error' => 'Os campos non poden estar vacíos',
+    'client_modify' => 'Modificar Cliente',
     'user_modify' => 'Modificar Usuario',
     'insert_error' => 'Erro na Inserción',
     'database_access_error' => 'Erro no Acceso á Base de Datos',
@@ -37,14 +38,18 @@ $strings = array(
     'filler' => 'Recheo',
     'permissions' => 'Permisos',
     'actions' => 'Accións',
+    'clients' => 'Clientes',
+    'client' => 'Cliente',
     'management_profiles' => 'Xestión de Perfiles',
     'management_permissions' => 'Xestión de Permisos',
     'management_students' => 'Xestión de Alumnos',
     'management_actions' => 'Xestión de Accións',
     'management_controllers' => 'Xestión de Controladores',
     'management_users' => 'Xestión de Usuarios',
+    'management_clients' => 'Xestión de Clientes',
     'users' => 'Usuarios',
     'create_user' => 'Engadir Usuario',
+    'create_client' => 'Engadir Cliente',
     'create_profile' => 'Engadir Perfil',
     'create_controller' => 'Engadir Controlador',
     'create_action' => 'Engadir Acción',
@@ -52,10 +57,11 @@ $strings = array(
     'management_user' => 'Xestionar Usuario',
     'dni' => 'DNI',
     'name' => 'Nome',
-    'surname' => 'Aapelidos',
+    'surname' => 'Apelidos',
     'birthdate' => 'Data de Nacemento',
     'address' => 'Enderezo',
     'email' => 'Email',
+    'phone' => 'Teléfono',
     'hour_in' => 'Hora de Entrada',
     'hour_out' => 'Hora de Salida',
     'bank_account' => 'Conta Bancaria',
@@ -86,6 +92,7 @@ $strings = array(
     'edit' => 'Editar',
     'all_alerts' => 'Ver todas as Notificacións',
     'user_info' => 'Información do Usuario',
+    'client_info' => 'Información do Cliente',
     'action_info' => 'Información da Acción',
     'profile_info' => 'Información do Perfil',
     'controller_info' => 'Información do Controlador',
@@ -94,6 +101,7 @@ $strings = array(
     'employer_not_exists' => 'Non existe o empleado',
     'try_again' => 'Volver a tentar',
     'add' => 'Engadir',
+    'edit' => 'Editar',
     'edit_error' => 'Erro á hora de Editar',
     'show' => 'Mostrar',
     'view' => 'Ver',
@@ -107,6 +115,7 @@ $strings = array(
     'PERMISSION'=> 'Permisos',
     'PROFILE' => 'Perfiles',
     'USER' => 'Usuarios',
+    'CLIENT' => 'Clientes',
     'ADD' => 'Engadir',
     'DELETE' => 'Borrar',
     'EDIT' => 'Editar',
@@ -116,6 +125,8 @@ $strings = array(
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
     'white' => 'Hai espazos en branco nalgún campo',
+    'name' => 'Nome',
+    'edit_good' => 'cambios realizados correctamente',
     'edit_good' => 'cambios realizados correctamente',
     'edit_profile' => 'Editar perfil',
     'profile_type' =>'Tipo de Perfil',
@@ -134,6 +145,10 @@ $strings = array(
     'action_exists' => 'O nome escollido xa existe no sistema',
     'newpass' => 'Novo_contrasinal',
     'newname' => 'Novo_nome',
+    'newdni' => 'Novo_dni',
+    'newsurname' => 'Novo_apelido',
+    'newphone' => 'Novo_telefono',
+    'newemail' => 'Novo_email',
     'not_edit_perm' => 'Os permisos do perfil selecionado non se poden modificar',
     'perm_over_controller' => 'Permisos sobre accions do controlador',
     'no_user_permissions' => 'Este usuario non ten permisos propios',
@@ -141,6 +156,7 @@ $strings = array(
     'cancel'=>'Cancelar',
     'user_data'=>'Datos do usuario',
     'action_data' => 'Datos da acción',
+    'client_data' => 'Datos do cliente',
     'profile_perms' => 'Permisos do Perfil',
     'user_perms' => 'Permisos propios do Usuario',
     'controller_data'=>'Datos do controlador',
@@ -162,7 +178,7 @@ $strings = array(
     'code'=>'Código',
     'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
     'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
-    'use_q'=>'Usar?',    
+    'use_q'=>'Usar?',
 
 
     /*NOTIFICACIÓNS*/
@@ -176,14 +192,23 @@ $strings = array(
         'succ_perm_delete'=>'Permiso borrado correctamente',
         'succ_action_add'=>'Acción creada correctamente',
         'succ_action_delete'=>'Acción borrada correctamente',
-        'succ_action_edit'=>'Acción editada correctamente',   
+        'succ_action_edit'=>'Acción editada correctamente',
         'succ_controller_add'=>'Controlador creado correctamente',
         'succ_controller_delete'=>'Controlador borrado correctamente',
         'succ_controller_edit'=>'Controlador editado correctamente',
         'succ_profile_add'=>'Perfil creado correctamente',
         'succ_profile_delete'=>'Perfil borrado correctamente',
         'succ_profile_edit'=>'Perfil editado correctamente',
-        
+
+        'succ_controller_search'=>'Controladores filtrados correctamente',
+        'succ_client_add'=>'Cliente creado correctamente',
+        'succ_client_search'=>'Cliente filtrados correctamente',
+        'succ_client_delete'=>'Cliente borrado correctamente',
+
+        'succ_service_search'=>'Servizos filtrados correctamente',
+        'succ_service_add'=>'Servizo creado correctamente',
+        'succ_service_delete'=>'Servizo borrado correctamente',
+        'succ_service_edit'=>'Servizo editado correctamente',
 
 
         /*FAIL*/
@@ -192,6 +217,7 @@ $strings = array(
         'fail_action_exists'=>'A acción xa existe',
         'fail_controller_exists'=>"O controlador xa existe",
         'fail_profile_exists'=>"O perfil xa existe",
+        'fail_client_exists'=>"O cliente xa existe",
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -206,6 +232,17 @@ $strings = array(
 
     'PAYMENT' => 'Pagos',
     'BILL' => 'Facturas',
-    'DOMICILIATION' => 'Domiciliacions'
+    'DOMICILIATION' => 'Domiciliacions',
+
+    /* Servicios */
+    'SERVICE' => 'Servizos',
+    'service_info' => 'Información do Servizo',
+    'management_services' => 'Xestión de Servizos',
+    'date' => 'Data',
+    'cost' => 'Custo',
+    'description' => 'Descripción',
+    'create_service' => 'Engadir Servizo',
+    'service_data' => 'Datos do Servizo',
+    'service_modify' => 'Modificar servizo'
 )
 ?>
