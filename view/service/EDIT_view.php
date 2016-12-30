@@ -5,6 +5,8 @@ require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+include(__DIR__."/../../model/CLIENT_model.php");
+
 $service_id = $_REQUEST["service_id"];
 ?>
 
@@ -33,15 +35,38 @@ $service_id = $_REQUEST["service_id"];
                     </div>
 
                     <div class="col-xs-12 col-md-5">
+                        <label for="selectperf"><?php echo $strings['client']; ?></label>
+                        <div class="form-group input-group">
+                                <span class="input-group-btn">
+                                <button class="btn btn-info" type="button"
+                                        data-toggle="modal"
+                                        data-target="#view<?php echo $strings['client'];?>">
+                                        <i class="fa fa-eye fa-fw"></i>
+                                </button>
+                                </span>
 
+                            <select id='dni' name='dni' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por perfil que se pode escoller
+                                $pc = new ClientMapper();
+
+                                //Recuperamos todos os posibles clientes que se poden escoller para o usuario
+                                $clients = $pc->show();
+
+                                foreach ($clients as $cliente) {
+                                    echo "<option value='" . $cliente->getDni()."'>" . $cliente->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input class="form-control" type="text" name="fecha" maxlength="25"
+                            <input class="form-control" type="date" name="fecha" maxlength="25"
                                    placeholder=<?php echo $strings['date']; ?>>
                         </div>
                         <!--Campo date-->
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                             <input class="form-control" type="text" name="coste" maxlength="25"
                                    placeholder=<?php echo $strings['cost']; ?>>
                         </div>
@@ -52,12 +77,6 @@ $service_id = $_REQUEST["service_id"];
                                    placeholder=<?php echo $strings['description']; ?>>
                         </div>
                         <!--Campo description-->
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input class="form-control" type="text" name="dni" maxlength="25"
-                                   placeholder=<?php echo $strings['dni']; ?>>
-                        </div>
-                        <!--Campo dni-->
                     </div>
                 </div>
 

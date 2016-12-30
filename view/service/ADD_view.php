@@ -2,6 +2,8 @@
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
 
+include(__DIR__."/../../model/CLIENT_model.php");
+
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     $serviceMapper = new ServiceMapper();
@@ -29,34 +31,33 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>-->
 
                     </div>
-                    <div class="form-group"><!-- div1 -->
-                        <label><?php echo $strings['CLIENT'] ?>: </label>
-                        <select id='clientdni' name='clientdni' class='form-control' onchange='enviar()'>
-                            <?php
-                            //Engadimos unha opcion por controlador que se pode escoller
-                            $cm = new ClientMapper();
-
-
-                            //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $clients = $cm->show();
-
-                            echo "<option value=NULL>".$strings["no_controller"]."</option>";
-                            foreach ($clients as $client) {
-                                if(isset($_REQUEST["clientdni"]) && $client->getDni() == $_REQUEST["clientdni"] ){
-                                    echo "<option value=" . $client->getDni()." selected >" . $client->getName() . "</option>
-                            ";
-                                }else{
-                                    echo "<option value=" . $client->getDni().">" . $client->getName() . "</option>
-                            ";
-                                }
-                            }
-                            ?>
-                        </select>
-
-                    </div><!-- cerrar div1 -->
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['client']; ?></label>
                         <div class="form-group input-group">
-                            <span autofocus required class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
+                                <span class="input-group-btn">
+                                <button class="btn btn-info" type="button"
+                                        data-toggle="modal"
+                                        data-target="#view<?php echo $strings['client'];?>">
+                                        <i class="fa fa-eye fa-fw"></i>
+                                </button>
+                                </span>
+
+                            <select id='dni' name='dni' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por perfil que se pode escoller
+                                $pc = new ClientMapper();
+
+                                //Recuperamos todos os posibles clientes que se poden escoller para o usuario
+                                $clients = $pc->show();
+
+                                foreach ($clients as $cliente) {
+                                    echo "<option value='" . $cliente->getDni()."'>" . $cliente->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group input-group">
+                            <span autofocus required class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                             <input type="date" class="form-control" id="fecha" name="fecha" placeholder=<?php echo $strings['date'] ?>
                             required="true" maxlength="9">
                             <div id="error"></div>
@@ -77,13 +78,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <div id="error"></div>
                         </div>
                         <!--Campo descripcion-->
-                        <div class="form-group input-group">
-                            <span autofocus required class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="dni" name="dni" placeholder=<?php echo $strings['dni'] ?>
-                            required="true" maxlength="9">
-                            <div id="error"></div>
-                        </div>
-                        <!--Campo dni-->
                     </div>
                 </div>
             </div>

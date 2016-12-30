@@ -60,7 +60,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class="text-center"><?php echo $strings['SERVICE']?></th>
+                                    <th class="text-center"><?php echo $strings['date']?></th>
                                     <th class="text-center"><?php echo $strings['cost']?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
@@ -83,7 +83,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 foreach ($services as $c) {
                                     echo "<tr class='row text-center' ><td> ";
 
-                                    echo $c->getDescripcion()."</td><td class='text-center'>";
+                                    echo $c->getFecha()."</td><td class='text-center'>";
                                     echo $c->getCoste()."€</td><td class='text-center'>";
 
                                     //Botón que direcciona a vista do usuario
