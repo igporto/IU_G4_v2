@@ -16,10 +16,10 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
     //obtemos o contido a mostrar
     $permissions = $view->getVariable("userstoshow"); 
-    
-
                   
 ?>
+
+
 
 <div class="col-xs-12 col-md-8 ">
 
@@ -96,15 +96,22 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                                     //Botón que direcciona á vista do editar
                                     if($edit){
-                                        echo "<a href=index.php?controller=user&action=edit&user=". $c->getUsername().'>';
-                                        echo "<button class='btn btn-warning btn-xs ";
-                                        echo "' style='margin:2px'>";
-                                        echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                                        if ($c->getUsername() != "admin") {                                          
+                                            echo "<button class='btn btn-warning btn-xs ";
+                                            echo "' style='margin:2px'>";
+                                            echo "<i class='fa fa-edit fa-fw'></i></button>";
+                                        }else{
+                                            echo "<a href=index.php?controller=user&action=edit&user=". $c->getUsername().'>';
+                                            echo "<button class='btn btn-warning btn-xs ";
+                                            echo "' disabled style='margin:2px'>";
+                                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                                        }
+                                        
                                     }
                                    
                                     //Botón que direcciona á vista de eliminar
                                     if($delete){
-                                        if ($c->getUsername() == $_SESSION['currentuser']) {
+                                        if (($c->getUsername() == $_SESSION['currentuser']) || ($c->getUsername() == "admin")) {
                                             echo '<button type="button" class="btn btn-danger btn-xs';
                                             echo '" disabled style="margin:2px">';
                                             echo '<i class="fa fa-trash-o fa-fw"></i>
