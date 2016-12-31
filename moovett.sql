@@ -1436,7 +1436,7 @@ INSERT INTO `cliente_externo` (`dni_cliente_externo`, `nombre`, `apellido`, `tel
 --
 
 INSERT INTO `servicio` (`fecha`, `coste`, `descripcion`, `dni_cliente_externo`) VALUES
-  ('2016-12-22',35, 'Servicio 1', '44658492J'),
+  ('2016-12-22',35, 'Servicio 1', '44654552J'),
   ('2016-11-17',125, 'Servicio 2', '34562321A'),
   ('2016-12-30',50, 'Servicio 3', '44432654I'),
   ('2016-12-14',69, 'Servicio 4', '34999524J');
