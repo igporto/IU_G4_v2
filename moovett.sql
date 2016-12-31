@@ -1234,7 +1234,10 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (5, 'PERMISSION'),
 (6, 'PAYMENT'),
 (7, 'BILL'),
-(8, 'DOMICILIATION');
+(8, 'DOMICILIATION'),
+(9, 'CLIENT'),
+(10, 'SERVICE');
+
 
 --
 -- Volcado de datos para la tabla `accion`
@@ -1292,7 +1295,17 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (8 ,2),
 (8 ,3),
 (8 ,4),
-(8 ,5);
+(8 ,5),
+(9 ,1),
+(9 ,2),
+(9 ,3),
+(9 ,4),
+(9 ,5),
+(10 ,1),
+(10 ,2),
+(10 ,3),
+(10 ,4),
+(10 ,5);
 
 
 
@@ -1361,7 +1374,18 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 37),
 (1, 38),
 (1, 39),
-(1, 40);
+(1, 40),
+(1, 41),
+(1, 42),
+(1, 43),
+(1, 44),
+(1, 45),
+(1, 46),
+(1, 47),
+(1, 48),
+(1, 49),
+(1, 50);
+
 
 /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
             /*PERFIL ADMIN*/
@@ -1416,7 +1440,19 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 37),
               (1, 38),
               (1, 39),
-              (1, 40);
+              (1, 40),
+              /* CLIENT */
+              (1, 41),
+              (1, 42),
+              (1, 43),
+              (1, 44),
+              (1, 45),
+              /* SERVICE */
+              (1, 46),
+              (1, 47),
+              (1, 48),
+              (1, 49),
+              (1, 50);
 
 --
 -- Volcado de datos para la tabla `cliente_externo`
