@@ -194,8 +194,8 @@ class UserMapper
             $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND user like ?");
             $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%"));
         }else{
-            $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND user like ? AND id_perfil like ?");
-            $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%", "%".$user->getProfile()->getCodprofile()."%"));
+            $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND user like ? AND id_perfil = ?");
+            $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%", $user->getProfile()->getCodprofile()));
         }
 
         

@@ -96,14 +96,14 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                                     //Botón que direcciona á vista do editar
                                     if($edit){
-                                        if ($c->getUsername() != "admin") {                                          
+                                        if ($c->getUsername() == "admin") {                                          
                                             echo "<button class='btn btn-warning btn-xs ";
-                                            echo "' style='margin:2px'>";
+                                            echo "' disabled style='margin:2px'>";
                                             echo "<i class='fa fa-edit fa-fw'></i></button>";
                                         }else{
                                             echo "<a href=index.php?controller=user&action=edit&user=". $c->getUsername().'>';
                                             echo "<button class='btn btn-warning btn-xs ";
-                                            echo "' disabled style='margin:2px'>";
+                                            echo "'  style='margin:2px'>";
                                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
                                         }
                                         
