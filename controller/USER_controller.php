@@ -178,6 +178,7 @@ class UserController extends BaseController {
                     $this->view->redirect("user", "show");
 				} else {
 					$this->view->setFlash("fail_user_exists");
+					$this->view->redirect("user", "add");
 				}
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
@@ -277,26 +278,30 @@ class UserController extends BaseController {
 		if(isset($_POST["submit"])){
 			$user = new User();
 
-			$empty = true;
+			//$empty = true;
 
 			if(!empty($_POST['coduser'])){
 				$user->setCoduser(htmlentities(addslashes($_POST["coduser"])));
-				$empty = false;
+				//$empty = false;
 			}
 			if(!empty($_POST["username"])){
 				$user->setUsername(htmlentities(addslashes($_POST["username"])));
-				$empty = false;
+				//$empty = false;
 			}
 
 			if(isset($_POST["usepf"]) && isset($_POST["id_perfil"])){
 				$user->setProfile($this->profileMapper->view(htmlentities(addslashes($_POST["id_perfil"]))));
-				$empty = false;
+				//$empty = false;
+			}else{
+				$profile = new Profile();
+				$profile->setCodprofile("");
+				$user->setProfile($profile);
 			}
 
-			if ($empty) {
+			/*if ($empty) {
 				$this->view->setFlash("fail_empty_query");
 				$this->view->redirect("user","search");
-			}
+			}*/
 
 			$this->view->setVariable("userstoshow", $this->userMapper->search($user));
 			$this->view->render("user","show");

@@ -187,10 +187,21 @@ class UserMapper
         return $this->db->lastInsertId();
     }
 
-    public function search(USER $user){
-        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND `user` like ? AND id_perfil like ?");
-        $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%", "%".$user->getProfile()->getCodprofile()."%"));
+    public function search(User $user){
+
+
+        if ($user->getprofile()->getCodprofile() == "") {
+            $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND user like ?");
+            $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%"));
+        }else{
+            $stmt = $this->db->prepare("SELECT * FROM usuario WHERE cod_usuario like ? AND user like ? AND id_perfil like ?");
+            $stmt->execute(array("%".$user->getCoduser()."%", "%".$user->getUsername()."%", "%".$user->getProfile()->getCodprofile()."%"));
+        }
+
+        
         $users_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
         
         $users = array();
         foreach ($users_db as $u){
@@ -202,6 +213,7 @@ class UserMapper
                 $this->upm->view($u["cod_usuario"]))
             );
         }
+
         return $users;
     }
 }
