@@ -122,6 +122,7 @@ $strings = array(
     'VIEW' => 'Visualizar',
     'SHOW' => 'Mostrar',
     'ACTIVITY' => 'Actividades',
+    'SCHEDULE'=>'Horarios',
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
     'white' => 'Hai espazos en branco nalgún campo',
@@ -243,6 +244,9 @@ $strings = array(
     'description' => 'Descripción',
     'create_service' => 'Engadir Servizo',
     'service_data' => 'Datos do Servizo',
-    'service_modify' => 'Modificar servizo'
+    'service_modify' => 'Modificar servizo',
+
+    /* Horario */
+    'management_schedules'=>'Xestión de Horarios'
 )
 ?>

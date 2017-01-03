@@ -122,6 +122,7 @@ $strings = array(
 	'VIEW' => 'View',
 	'SHOW' => 'Show',
 	'ACTIVITY' => 'Activities',
+	'SCHEDULE'=>'Schedules',
 	'manage' => 'Manage',
 	'clean' => 'Clean',
 	'white' => 'Blanks in some field',
@@ -244,7 +245,10 @@ $strings = array(
 	'description' => 'Description',
 	'create_service' => 'Create Service',
 	'service_data' => 'Service Data',
-	'service_modify' => 'Modify Service'
+	'service_modify' => 'Modify Service',
+
+	/* Horario */
+	'management_schedules'=>'Schedule Management'
 
 )
 ?>
