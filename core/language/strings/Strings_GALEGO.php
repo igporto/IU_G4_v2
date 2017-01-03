@@ -76,7 +76,6 @@ $strings = array(
     'personal_comment' => 'Comentario Persoal',
     'user_find' => 'Buscar Usuario',
     'find' => 'Buscar',
-
     'user_profile' => 'Perfil do Usuario',
     'settings' => 'Axustes',
     'close_session' => 'Pechar Sesión',
@@ -121,7 +120,7 @@ $strings = array(
     'EDIT' => 'Editar',
     'VIEW' => 'Visualizar',
     'SHOW' => 'Mostrar',
-    'ACTIVITY' => 'Actividades',
+
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
     'white' => 'Hai espazos en branco nalgún campo',
@@ -181,6 +180,24 @@ $strings = array(
     'use_q'=>'Usar?',
 
 
+    /*ESPAZOS*/
+    'SPACE' => 'Espazos',
+    'space_info' => 'Información do espazo',
+    'management_spaces' => 'Xestión de Espazos',
+    'SPACES_ID' => 'ID Espazos',
+    'space_id' => 'ID do Espazo',
+    'aforo' => 'Aforo',
+    'description' => 'Descripción',
+    'succ_space_add' => 'Espazo creado correctamente',
+    'space_already_exists' => 'O espazo xa existe',
+    'create_space' => 'Engadir Espazo',
+    'number_a' => 'Introduzca un valor numérico para o aforo',
+    'number_i' => 'Introduzca un valor numérico para o id',
+    'succ_space_mod' => 'Espazo modificado con éxito',
+    'space_edit' => 'Editar espazo',
+    'succ_space_delete' => 'Borrado realizado con éxito',
+    'spaces_data' => 'Datos do espazo',
+
     /*NOTIFICACIÓNS*/
 
         /*SUCCES*/
@@ -201,14 +218,27 @@ $strings = array(
         'succ_profile_edit'=>'Perfil editado correctamente',
 
         'succ_controller_search'=>'Controladores filtrados correctamente',
+
         'succ_client_add'=>'Cliente creado correctamente',
         'succ_client_search'=>'Cliente filtrados correctamente',
         'succ_client_delete'=>'Cliente borrado correctamente',
+        'succ_category_add'=> 'Categoría creada correctamente',
+        'succ_category_delete'=>'Categoría borrada correctamente',
+        'succ_category_edit'=>'Categoría editada correctamente',
+        
 
         'succ_service_search'=>'Servizos filtrados correctamente',
         'succ_service_add'=>'Servizo creado correctamente',
         'succ_service_delete'=>'Servizo borrado correctamente',
         'succ_service_edit'=>'Servizo editado correctamente',
+
+        'succ_activity_add'=>'Actividade creada correctamente',
+        'succ_activity_delete'=>'Actividade borrada correctamente',
+        'succ_activity_edit'=>'Actividade editada correctamente',
+
+        'succ_discount_add'=>'Desconto creado correctamente',
+        'succ_discount_delete'=>'Desconto borrado correctamente',
+        'succ_discount_edit'=>'Desconto editado correctamente',
 
 
         /*FAIL*/
@@ -217,7 +247,12 @@ $strings = array(
         'fail_action_exists'=>'A acción xa existe',
         'fail_controller_exists'=>"O controlador xa existe",
         'fail_profile_exists'=>"O perfil xa existe",
+        'fail_category_exists'=>'A categoría xa existe',
         'fail_client_exists'=>"O cliente xa existe",
+        'fail_activity_exists'=>"A actividade xa existe",
+        'fail_aforo_incorrect'=>'O aforo non pode ser menor que 1',
+        'fail_discount_incorrect'=>'O desconto non é válido',
+        'fail_discount_exists' => 'O desconto xa existe',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -243,6 +278,39 @@ $strings = array(
     'description' => 'Descripción',
     'create_service' => 'Engadir Servizo',
     'service_data' => 'Datos do Servizo',
-    'service_modify' => 'Modificar servizo'
+    'service_modify' => 'Modificar servizo',
+
+    /* Categorias*/
+    'CATEGORY' => 'Categorias',
+    'create_category' => 'Engadir Categoría',
+    'category_modify' => 'Modificar Categoría',
+    'category_data'=>'Datos da Categoría',
+    'management_categories' => 'Xestión de Categorías',
+
+    /* Actividades */
+    'ACTIVITY' => 'Actividades',
+    'create_activity' => 'Engadir Actividade',
+    'activity_modify' => 'Modificar Actividade',
+    'activity_data'=>'Datos da Actividade',
+    'management_activities' => 'Xestión de Actividades',
+    'discount' => 'Desconto',
+    'one_category' => 'Categoría',
+    'one_space' => 'Espazo',
+    'monitor' => 'Monitor',
+    'color'=>'Cor',
+    'no_monitor'=> 'Sen Monitor',
+    'no_discount'=>'Sen Desconto',
+    'no_category'=>'Sen Categoría',
+    'no_space'=>'Sen Espazo',
+
+    /*Descontos*/
+    'DISCOUNT' => 'Descontos',
+    'management_discounts'=>'Xestión de Descontos',
+    'discount_data'=>'Datos do Desconto',
+    'discount_type' => 'Tipo de Desconto',
+    'create_discount' => 'Engadir Desconto',
+    'discount_modify' => 'Modificar Desconto',
+
+
 )
 ?>

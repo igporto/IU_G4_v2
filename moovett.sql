@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2016 a las 14:25:14
--- Versión del servidor: 10.1.16-MariaDB
--- Versión de PHP: 5.6.24
+-- Tiempo de generaciÃ³n: 25-11-2016 a las 14:25:14
+-- VersiÃ³n del servidor: 10.1.16-MariaDB
+-- VersiÃ³n de PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -86,7 +86,8 @@ CREATE TABLE  `actividad` (
   `id_categoria` int(4) NOT NULL,
   `id_espacio` int(4) not null,
   `descuento` int(4) NOT NULL,
-  `empleado_imparte` varchar(9) NOT NULL
+  `color` varchar(16) NOT NULL,
+  `empleado_imparte` int(3) NOT NULL
 );
 
 
@@ -132,7 +133,7 @@ CREATE TABLE `asistencia` (
   `fecha_as` date NOT NULL,
   `asiste` tinyint(1) NOT NULL,
   `dni_alum` varchar(9) NOT NULL,
-  `dni` varchar(9) NOT NULL
+  `id_empleado` int(3) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -143,6 +144,7 @@ CREATE TABLE `asistencia` (
 
 CREATE TABLE `espacio` (
   `id_espacio` int(4) NOT NULL,
+  `nombre`varchar(100) NOT NULL,
   `aforo` int(4) NOT NULL,
   `descripcion` varchar(250) NULL
 );
@@ -228,7 +230,7 @@ CREATE TABLE `documento` (
   `id_documento` int (4) NOT NULL,
   `fecha_firma` date NOT NULL DEFAULT '0000-00-00',
   `dni_alum` varchar(9) NOT NULL,
-  `dni` varchar(9) DEFAULT NULL
+  `id_empleado` int(3) DEFAULT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -238,6 +240,7 @@ CREATE TABLE `documento` (
 --
 
 CREATE TABLE `empleado` (
+  `id_empleado` int(3) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `nombre` varchar(15) NULL,
   `apellidos` varchar(40) NULL,
@@ -245,8 +248,8 @@ CREATE TABLE `empleado` (
   `direccion_postal` varchar(25) NULL,
   `email` varchar(50) NULL,
   `comentario_personal` text NULL,
-  `hora_entrada` time  NULL, 
-  `hora_salida` time  NULL, 
+  `hora_entrada` time  NULL,
+  `hora_salida` time  NULL,
   `num_cuenta` varchar(15)  NULL,
   `tipo_contrato` varchar(20) NULL,
   `cod_usuario` int(4) NULL
@@ -260,7 +263,7 @@ CREATE TABLE `empleado` (
 --
 
 CREATE TABLE `empleado_tiene_lesion` (
-  `dni` varchar(9) NOT NULL,
+  `id_empleado` int(3) NOT NULL,
   `id_lesion` int(4) NOT NULL
 ) ;
 
@@ -273,12 +276,23 @@ CREATE TABLE `empleado_tiene_lesion` (
 
 CREATE TABLE `evento` (
   `id_evento` int(4) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `hora_inicio` time NOT NULL DEFAULT '00:00:00',
   `hora_fin` time NOT NULL DEFAULT '00:00:00',
   `fecha_evento` date NOT NULL DEFAULT '0000-00-00',
   `aforo` int(4) NOT NULL,
   `id_espacio` int(4) NOT NULL,
-  `dni` varchar(9) NOT NULL,
+  `id_empleado` int(3) NOT NULL
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alumno_se_apunta_evento`
+--
+
+CREATE TABLE `alumno_se_apunta_evento` (
+  `id_evento` int(4) NOT NULL,
   `dni_alum` varchar(9) NOT NULL
 ) ;
 
@@ -403,7 +417,7 @@ CREATE TABLE `perfil` (
 CREATE TABLE `controlador` (
   `id_controlador` int(4) NOT NULL,
   `nombre` varchar(25) NOT NULL
-) ; 
+) ;
 
 
 --
@@ -413,7 +427,7 @@ CREATE TABLE `controlador` (
 CREATE TABLE `accion` (
   `id_accion` int(4) NOT NULL,
   `nombre` varchar(25) NOT NULL
-) ; 
+) ;
 
 
 --
@@ -534,7 +548,7 @@ CREATE TABLE `servicio` (
 CREATE TABLE `log_acceso_lesion` (
   `id_log` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL,
-  `dni` VARCHAR(9) NULL,
+  `id_empleado` int(3) NULL,
   `dni_alum` VARCHAR(9) NULL,
   `cod_usuario` int(4) NOT NULL,
   `fecha` DATE NULL
@@ -596,7 +610,7 @@ CREATE TABLE `alumnos_recibe_notificacion` (
 
 
 --
--- Índices para tablas volcadas
+-- Ãndices para tablas volcadas
 --
 
 --
@@ -630,7 +644,7 @@ ALTER TABLE `alumno_tiene_lesion`
 ALTER TABLE `asistencia`
   ADD PRIMARY KEY (`id_asistencia`),
   ADD KEY `dni_alum` (`dni_alum`),
-  ADD KEY `dni` (`dni`);
+  ADD KEY `id_empleado` (`id_empleado`);
 
 --
 -- Indices de la tabla `espacio`
@@ -678,14 +692,14 @@ ALTER TABLE `descuento`
 --
 ALTER TABLE `documento`
   ADD PRIMARY KEY (`id_documento`),
-  ADD KEY `dni` (`dni`),
+  ADD KEY `id_empleado` (`id_empleado`),
   ADD KEY `dni_alum` (`dni_alum`);
 
 --
 -- Indices de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`dni`),
+  ADD PRIMARY KEY (`id_empleado`),
   ADD KEY `cod_usuario` (`cod_usuario`);
 
 
@@ -693,18 +707,23 @@ ALTER TABLE `empleado`
 -- Indices de la tabla `empleado_tiene_lesion`
 --
 ALTER TABLE `empleado_tiene_lesion`
-  ADD PRIMARY KEY (`id_lesion`,`dni`),
+  ADD PRIMARY KEY (`id_lesion`,`id_empleado`),
   ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `dni` (`dni`);
+  ADD KEY `id_empleado` (`id_empleado`);
 
 --
 -- Indices de la tabla `evento`
 --
 ALTER TABLE `evento`
   ADD PRIMARY KEY (`id_evento`),
-  ADD KEY `dni` (`dni`),
-  ADD KEY `dni_alum` (`dni_alum`),
+  ADD KEY `id_empleado` (`id_empleado`),
   ADD KEY `id_espacio` (`id_espacio`);
+
+--
+-- Indices de la tabla `alumno_se_apunta_evento`
+--
+ALTER TABLE `alumno_se_apunta_evento`
+ ADD PRIMARY KEY (`id_evento`,`dni_alum`);
 
 --
 -- Indices de la tabla `factura`
@@ -841,19 +860,19 @@ ALTER TABLE `servicio`
 -- indexes for table `log_acceso_lesion`
 --
 ALTER TABLE `log_acceso_lesion`
-  ADD PRIMARY KEY (`id_log`), 
+  ADD PRIMARY KEY (`id_log`),
   ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `dni_alum`(`dni_alum`), 
-  ADD KEY `dni`(`dni`), 
+  ADD KEY `dni_alum`(`dni_alum`),
+  ADD KEY `id_empleado`(`id_empleado`),
   ADD KEY `cod_usuario` (`cod_usuario`);
 
 --
 -- indexes for table `alerta`
 --
 ALTER TABLE `alerta`
- ADD PRIMARY KEY (`id_alerta`), 
- ADD KEY `id_pago` (`id_pago`), 
- ADD KEY `id_asistencia` (`id_asistencia`), 
+ ADD PRIMARY KEY (`id_alerta`),
+ ADD KEY `id_pago` (`id_pago`),
+ ADD KEY `id_asistencia` (`id_asistencia`),
  ADD KEY `cod_usuario` (`cod_usuario`);
 
 
@@ -861,7 +880,7 @@ ALTER TABLE `alerta`
 -- indexes for table `notificacion`
 --
 ALTER TABLE `notificacion`
- ADD PRIMARY KEY (`id_notificacion`), 
+ ADD PRIMARY KEY (`id_notificacion`),
  ADD KEY `cod_usuario` (`cod_usuario`);
 
 
@@ -869,16 +888,16 @@ ALTER TABLE `notificacion`
 -- indexes for table `usuario_recibe_alerta`
 --
 ALTER TABLE `usuario_recibe_alerta`
- ADD PRIMARY KEY (`cod_usuario`,`id_alerta`), 
- ADD KEY `cod_usuario` (`cod_usuario`), 
+ ADD PRIMARY KEY (`cod_usuario`,`id_alerta`),
+ ADD KEY `cod_usuario` (`cod_usuario`),
  ADD KEY `id_alerta` (`id_alerta`);
 
 --
 -- indexes for table `alumno_recibe_notificacion`
 --
 ALTER TABLE `alumnos_recibe_notificacion`
- ADD PRIMARY KEY (`dni_alum`,`id_notificacion`), 
- ADD KEY `dni_alum` (`dni_alum`), 
+ ADD PRIMARY KEY (`dni_alum`,`id_notificacion`),
+ ADD KEY `dni_alum` (`dni_alum`),
  ADD KEY `id_notificacion` (`id_notificacion`);
 
 
@@ -1032,7 +1051,7 @@ ALTER TABLE `notificacion`
 ALTER TABLE `actividad`
   ADD CONSTRAINT `actividad_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actividad_ibfk_2` FOREIGN KEY (`descuento`) REFERENCES `descuento` (`id_descuento`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `actividad_ibfk_3` FOREIGN KEY (`empleado_imparte`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `actividad_ibfk_3` FOREIGN KEY (`empleado_imparte`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `actividad_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1047,7 +1066,7 @@ ALTER TABLE `alumno_tiene_lesion`
 --
 ALTER TABLE `asistencia`
   ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`dni`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `caja`
@@ -1065,7 +1084,7 @@ ALTER TABLE `consulta_fisio`
 -- Filtros para la tabla `documento`
 --
 ALTER TABLE `documento`
-  ADD CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`dni`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `documento_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
@@ -1081,15 +1100,21 @@ ALTER TABLE `empleado`
 --
 ALTER TABLE `empleado_tiene_lesion`
   ADD CONSTRAINT `empleado_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_2` FOREIGN KEY (`dni`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `evento`
 --
 ALTER TABLE `evento`
-  ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`dni`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `evento_ibfk_3` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `alumno_se_apunta_evento`
+--
+ALTER TABLE `alumno_se_apunta_evento`
+  ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `factura`
@@ -1187,7 +1212,7 @@ ALTER TABLE `servicio`
 ALTER TABLE `log_acceso_lesion`
   ADD CONSTRAINT `log_acceso_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `log_acceso_lesion_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `log_acceso_lesion_ibfk_3` FOREIGN KEY (`dni`) REFERENCES `empleado` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `log_acceso_lesion_ibfk_3` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `log_acceso_lesion_ibfk_4` FOREIGN KEY (`cod_usuario`) REFERENCES `usuario` (`cod_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1220,8 +1245,6 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacione_alumno1` FOREIGN KEY (`dni_alum`
 ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_notificacion`) REFERENCES `notificacion` (`id_notificacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
-
-
 --
 -- Volcado de datos para la tabla `controlador`
 --
@@ -1236,7 +1259,14 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (7, 'BILL'),
 (8, 'DOMICILIATION'),
 (9, 'CLIENT'),
-(10, 'SERVICE');
+(10, 'SERVICE'),
+(11, 'CATEGORY'),
+(12, 'ACTIVITY'),
+(13, 'ATTENDANCE'),
+(14, 'EMPLOYEE'),
+(15, 'SPACE'),
+(16, 'DISCOUNT'),
+(17, 'EVENT');
 
 
 --
@@ -1305,7 +1335,42 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (10 ,2),
 (10 ,3),
 (10 ,4),
-(10 ,5);
+(10 ,5),
+(11 ,1),
+(11 ,2),
+(11 ,3),
+(11 ,4),
+(11 ,5),
+(12 ,1),
+(12 ,2),
+(12 ,3),
+(12 ,4),
+(12 ,5),
+(13 ,1),
+(13 ,2),
+(13 ,3),
+(13 ,4),
+(13 ,5),
+(14 ,1),
+(14 ,2),
+(14 ,3),
+(14 ,4),
+(14 ,5),
+(15 ,1),
+(15 ,2),
+(15 ,3),
+(15 ,4),
+(15 ,5),
+(16 ,1),
+(16 ,2),
+(16 ,3),
+(16 ,4),
+(16 ,5),
+(17 ,1),
+(17 ,2),
+(17 ,3),
+(17 ,4),
+(17 ,5);
 
 
 
@@ -1324,9 +1389,9 @@ INSERT INTO `perfil` (`id_perfil`, `nombre`) VALUES
 INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
 (1, 'rodeiro', '81dc9bdb52d04dc20036dbd8313ed055', 1),
 (2, 'admin','21232f297a57a5a743894a0e4a801fc3',1),
-(3, 'adri', '19606a576b4e1a6f376b72f36e89524f', 2),
-(4, 'qegbve', '510c43ca1b53ea91f4e69010baba00e6', 1),
-(5, 'sdfagd', '461fdc9677d4e04afb9f072a3cb94d5d', 2),
+(3, 'adri', '5e082012573775c13199192bf00694e7', 2),
+(4, 'ivan', '2c42e5cf1cdbafea04ed267018ef1511', 1),
+(5, 'lorena', '62a90ccff3fd73694bf6281bb234b09a', 2),
 (6, 'monitor','08b5411f848a2581a41672a759c87380',2);
 
 
@@ -1384,7 +1449,43 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 47),
 (1, 48),
 (1, 49),
-(1, 50);
+(1, 50),
+(1, 51),
+(1, 52),
+(1, 53),
+(1, 54),
+(1, 55),
+(1, 56),
+(1, 57),
+(1, 58),
+(1, 59),
+(1, 60),
+(1, 61),
+(1, 62),
+(1, 63),
+(1, 64),
+(1, 65),
+(1, 66),
+(1, 67),
+(1, 68),
+(1, 69),
+(1, 70),
+(1, 71),
+(1, 72),
+(1, 73),
+(1, 74),
+(1, 75),
+(1, 76),
+(1, 77),
+(1, 78),
+(1, 79),
+(1, 80),
+(1, 81),
+(1, 82),
+(1, 83),
+(1, 84),
+(1, 85);
+
 
 
 /*ASIGNACIONS DE PERMISOS AOS PERFILES*/
@@ -1452,31 +1553,108 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 47),
               (1, 48),
               (1, 49),
-              (1, 50);
+              (1, 50),
+              /*ENGADIDO POR IVAN DENDE AQUI OS PERMISOS*/
+              /*CATEGORY*/
+              (1, 51),
+              (1, 52),
+              (1, 53),
+              (1, 54),
+              (1, 55),
+              /*ACTIVITY*/
+              (1, 56),
+              (1, 57),
+              (1, 58),
+              (1, 59),
+              (1, 60),
+              /*ATTENDANCE*/
+              (1, 61),
+              (1, 62),
+              (1, 63),
+              (1, 64),
+              (1, 65),
+              /*EMPLOYEE*/
+              (1, 66),
+              (1, 67),
+              (1, 68),
+              (1, 69),
+              (1, 70),
+              /*SPACE*/
+              (1, 71),
+              (1, 72),
+              (1, 73),
+              (1, 74),
+              (1, 75),
+              /*DISCOUNT*/
+              (1, 76),
+              (1, 77),
+              (1, 78),
+              (1, 79),
+              (1, 80),
+              /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
+              /*ENGADIDO POR BRUNO*/
+              /*EVENT*/
+              (1, 81),
+              (1, 82),
+              (1, 83),
+              (1, 84),
+              (1, 85);
+
+/*ENGADIDO POR IVAN */
+--
+-- Volcado de datos para la tabla `categoria`
+--
+INSERT INTO `categoria`(`id_categoria`, `nombre`) VALUES
+  (1, "AZUL"),
+  (2, "ROSA");
+
+
+
 
 --
--- Volcado de datos para la tabla `cliente_externo`
+-- Volcado de datos para la tabla `espacio`
 --
+INSERT INTO `espacio`(`id_espacio`, `nombre`, `aforo`, `descripcion`) VALUES
+  (1, "Aula 1.1", "30", "Aula da primeira Planta Porta 1"),
+  (2, "Aula 1.2", "20", "Aula da primeira Planta Porta 2"),
+  (3, "Aula 0", "10", "Zona para as clases de TRX e zona de musculación");
 
-INSERT INTO `cliente_externo` (`dni_cliente_externo`, `nombre`, `apellido`, `telefono`, `email`) VALUES
-  ('44654552J', 'Lorena', 'Domínguez', 988656565, 'lore@email.com'),
-  ('34562321A', 'Adrián', 'Reboredo', 600125478, 'adrian@email.com'),
-  ('44432654I', 'Iván', 'Guardado', 902202122, 'iván@email.com'),
-  ('34999524J', 'Javier', 'Rodeiro', 600848484, 'javi@email.com'),
-  ('44612345B', 'Bruno', 'Cruz', 603456587, 'bruno@email.com'),
-  ('36955684Y', 'Yeray', 'Lage', 988123123, 'yeray@email.com'),
-  ('48575233D', 'Daniel', 'Resúa', 603125125, 'dani@email.com');
+
 
 --
--- Volcado de datos para la tabla `servicio`
+-- Volcado de datos para la tabla `empleado`
 --
+INSERT INTO `empleado`(`id_empleado`, `dni`, `nombre`, `apellidos`, `fech_nac`, `direccion_postal`, `email`, `comentario_personal`, `hora_entrada`, `hora_salida`, `num_cuenta`, `tipo_contrato`, `cod_usuario`) VALUES
+(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01", "Ourense", "lorena@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111111, "Fixo", 5),
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Ourense", "adrian@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111112, "Fixo", 3),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Ourense", "ivan@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111113, "Fixo", 4);
 
-INSERT INTO `servicio` (`fecha`, `coste`, `descripcion`, `dni_cliente_externo`) VALUES
-  ('2016-12-22',35, 'Servicio 1', '44654552J'),
-  ('2016-11-17',125, 'Servicio 2', '34562321A'),
-  ('2016-12-30',50, 'Servicio 3', '44432654I'),
-  ('2016-12-14',69, 'Servicio 4', '34999524J');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Volcado de datos para la tabla `descuento`
+--
+INSERT INTO `descuento`(`id_descuento`, `tipo`, `porcentaje`, `descripcion`) VALUES
+  (1, "Xoven", "25", "Desconto para as persoas menores de 30 anos"),
+  (2, "Desemprego", "50", "Desconto para as persoas desempregadas"),
+  (3, "Estudantes", "25", "Desconto para estudantes"),
+  (4, "Familiar", "45", "Desconto aplicado se empregan o ximnasio mais de 2 persoas da mesma familia"),
+  (5, "Parella", "20", "Desconto aplicado para persoas que usen o ximnasio xuntos"),
+  (6, "Rosa", "10", "Desconto aplicado as actividades con categoria ROSA"),
+  (7, "Azul", "15", "Desconto aplicado as actividades con categoria AZUL");
+
+
+
+--
+-- Volcado de datos para la tabla `actividad`
+--
+INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_espacio`, `descuento`, `empleado_imparte`, `color`) VALUES
+  ( 1, "ZUMBA KIDS", 30 , 1, 1, 6, 2, "#000000"),
+  ( 2, "ZUMBA JUNIOR", 20 , 2, 2, 7, 1, "#000000"),
+  ( 3, "TRX", 10, 1, 3, 6, 3, "#000000"),
+  ( 4, "ZUMBA", 20 , 2, 2, 7, 1, "#000000");
+
+
+
+
+/* FIN DE ENGADIDO POR IVAN */

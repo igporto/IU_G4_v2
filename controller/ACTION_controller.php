@@ -113,7 +113,7 @@ class ActionController extends BaseController
             $action = $this->actionMapper->view($action_id);
 
             $action->setActionname($_REQUEST["newname"]);
-            
+
             if ($this->actionMapper->actionnameExists($action->getActionname())) {
                 $this->view->setFlash("fail_action_exists");
                 $this->view->redirect("action", "edit", "actionName=".$_REQUEST["actionName"]);

@@ -122,7 +122,7 @@ $strings = array(
 	'EDIT' => 'Editar',
 	'VIEW' => 'Visualizar',
 	'SHOW' => 'Mostrar',
-	'ACTIVITY' => 'Actividades',
+
 	'manage' => 'Gestionar',
 	'clean' => 'Limpiar',
 	'white' => 'Hay espacios en blanco en algún campo',
@@ -180,6 +180,24 @@ $strings = array(
 	'profile_has_all_permissions'=>'Este perfil siempre tiene todos los permisos',
 	'use_q'=>'¿Usar?',
 
+	/*ESPAZOS*/
+	'SPACE' => 'Espacios',
+	'space_info' => 'Información del espacio',
+	'management_spaces' => 'Gestión de Espacios',
+	'SPACES_ID' => 'ID Espacios',
+	'space_id' => 'ID del Espacio',
+	'aforo' => 'Aforo',
+	'description' => 'Descripción',
+	'succ_space_add' => 'Espacio creado correctamente',
+	'space_already_exists' => 'El espacio ya existe',
+	'create_space' => 'Añadir espacio',
+	'number_a' => 'Introduzca un valor numérico para el aforo',
+	'number_i' => 'Introduzca un valor numérico para el id',
+	'succ_space_mod' => 'Espacio modificado con éxito',
+	'space_edit' => 'Editar espacio',
+	'succ_space_delete' => 'Borrado realizado con éxito',
+	'spaces_data' => 'Datos del espacio',
+
 
 	/*NOTIFICACIÓNS*/
 
@@ -188,35 +206,59 @@ $strings = array(
 		'succ_login'=>'Estás correctamente identificado!',
 		'succ_user_add'=>'Usuario creado correctamente',
 		'succ_user_delete'=>'Usuario borrado correctamente',
+
 		'succ_perm_add'=>'Permiso creado correctamente',
 		'succ_perm_search'=>'Permisos filtrados correctamente',
 		'succ_perm_delete'=>'Permiso borrado correctamente',
+
 		'succ_action_add'=>'Acción creada correctamente',
 		'succ_action_delete'=>'Acción borrada correctamente',
 		'succ_action_edit'=>'Acción editada correctamente',
 		'succ_action_search'=>'Acciones filtradas correctamente',
+
 		'succ_controller_add'=>'Controlador creado correctamente',
 		'succ_controller_delete'=>'Controlador borrado correctamente',
 		'succ_controller_edit'=>'Controlador editado correctamente',
 		'succ_controller_search'=>'Controladores filtrados correctamente',
+
 		'succ_client_add'=>'Permiso creado correctamente',
 		'succ_client_search'=>'Permisos filtrados correctamente',
 		'succ_client_delete'=>'Permiso borrado correctamente',
+
 		'succ_profile_add'=>'Perfil creado correctamente',
         'succ_profile_delete'=>'Perfil borrado correctamente',
         'succ_profile_edit'=>'Perfil editado correctamente',
+
+		'succ_category_add'=>'Categoría creada correctamente',
+		'succ_category_delete'=>'Categoría borrada correctamente',
+		'succ_category_edit'=>'Categoría editada correctamente',
+    	'succ_controller_search'=>'Controladores filtrados correctamente',
+
 		'succ_service_search'=>'Servicios filtrados correctamente',
 		'succ_service_add'=>'Servicio creado correctamente',
 		'succ_service_delete'=>'Servicio borrado correctamente',
 		'succ_service_edit'=>'Servicio editado correctamente',
 
-		/*FAIL*/
+    	'succ_activity_add'=>'Actividad creada correctamente',
+		'succ_activity_delete'=>'Actividad borrada correctamente',
+		'succ_activity_edit'=>'Actividad editada correctamente',
+
+		'succ_discount_add'=>'Descuento creado correctamente',
+		'succ_discount_delete'=>'Descuento borrado correctamente',
+		'succ_discount_edit'=>'Descuento editado correctamente',
+
+	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
 		'fail_action_exists'=>'La acción ya existe',
 		'fail_controller_exists'=>"El controlador ya existe",
 		'fail_client_exists'=>"El cliente ya existe",
 		'fail_profile_exists'=>"El perfil ya existe",
+		'fail_category_exists'=>"La categoría ya existe",
+    	'fail_activity_exists'=>"La actividad ya existe",
+    	'fail_aforo_incorrect'=>'EL aforo no puede ser menor que 1',
+    	'fail_discount_incorrect'=>'El descuento no es válido',
+   		'fail_discount_exists' => 'EL descuento ya existe',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -242,6 +284,41 @@ $strings = array(
 	'description' => 'Descripcion',
 	'create_service' => 'Añadir Servicio',
 	'service_data' => 'Datos del Servicio',
-	'service_modify' => 'Modificar servicio'
+	'service_modify' => 'Modificar servicio',
+
+	/* Categorias*/
+
+	 'CATEGORY' => 'Categorías',
+ 	'create_category' => 'Añadir Categoría',
+	'category_modify' => 'Modificar Categoría',
+ 	'category_data'=>'Datos de la Categoría',
+	'management_categories' => 'Gestión de Categorías',
+
+	/* Actividades */
+	'ACTIVITY' => 'Actividades',
+    'create_activity' => 'Añadir Actividad',
+    'activity_modify' => 'Modificar Actividad',
+    'activity_data'=>'Datos de la Actividad',
+    'management_activities' => 'Gestión de Actividades',
+    'discount' => 'Descuento',
+    'one_category' => 'Categoría',
+    'one_space' => 'Espacio',
+    'monitor' => 'Monitor',
+    'color'=>'Colour',
+    'no_monitor'=> 'Sin Monitor',
+    'no_discount'=>'Sin Descuento',
+    'no_category'=>'Sin Categoría',
+    'no_space'=>'Sin Espacio',
+
+
+
+    /*Descontos*/
+    'DISCOUNT' => 'Descuentos',
+    'management_discounts'=>'Gestión de Descuentos',
+    'discount_data'=>'Datos del Descuento',
+    'discount_type' => 'Tipo de Descuento',
+    'create_discount' => 'Añadir Descuento',
+    'discount_modify' => 'Modificar Descuento',
+
 )
 ?>
