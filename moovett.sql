@@ -1658,3 +1658,33 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
 
 
 /* FIN DE ENGADIDO POR IVAN */
+
+
+/* Engadido por Lore */
+
+
+--
+-- Volcado de datos para la tabla `cliente_externo`
+--
+
+
+INSERT INTO `cliente_externo` (`dni_cliente_externo`, `nombre`, `apellido`, `telefono`, `email`) VALUES
+  ('44654552J', 'Lorena', 'Domínguez', 988656565, 'lore@email.com'),
+  ('34562321A', 'Adrián', 'Reboredo', 600125478, 'adrian@email.com'),
+  ('44432654I', 'Iván', 'Guardado', 902202122, 'iván@email.com'),
+  ('34999524J', 'Javier', 'Rodeiro', 600848484, 'javi@email.com'),
+  ('44612345B', 'Bruno', 'Cruz', 603456587, 'bruno@email.com'),
+  ('36955684Y', 'Yeray', 'Lage', 988123123, 'yeray@email.com'),
+  ('48575233D', 'Daniel', 'Resúa', 603125125, 'dani@email.com');
+
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`fecha`, `coste`, `descripcion`, `dni_cliente_externo`) VALUES
+  ('2016-12-22',35, 'Servicio 1', '44654552J'),
+  ('2016-11-17',125, 'Servicio 2', '34562321A'),
+  ('2016-12-30',50, 'Servicio 3', '44432654I'),
+  ('2016-12-14',69, 'Servicio 4', '34999524J');
+
+/* Engadido por Lore */
