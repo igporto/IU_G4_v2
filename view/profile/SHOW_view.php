@@ -105,21 +105,10 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     //Botón que direcciona á vista do editar
                                     if($edit){
 
-                                        if ($c->getProfilename() == "admin") {
-                                           
-                                                echo "<button class='btn btn-warning btn-xs disabled";
-                                                echo "' style='margin:2px'>";
-                                                echo "<i class='fa fa-edit fa-fw'></i></button>";
-                                        }
-                                        else{
-                                                echo "<a href=index.php?controller=profile&action=edit&profile_id=". $c->getCodprofile().'>';
-                                                echo "<button class='btn btn-warning btn-xs ";
-                                                echo "' style='margin:2px'>";
-                                                echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-                                        }
-
-                                        
-
+                                        echo "<a href=index.php?controller=profile&action=edit&profile_id=". $c->getCodprofile().'>';
+                                        echo "<button class='btn btn-warning btn-xs ";
+                                        echo "' style='margin:2px'>";
+                                        echo "<i class='fa fa-edit fa-fw'></i></button></a>";
                                     }
                                    
                                     //Botón que direcciona á vista de eliminar

@@ -298,11 +298,6 @@ class UserController extends BaseController {
 				$user->setProfile($profile);
 			}
 
-			/*if ($empty) {
-				$this->view->setFlash("fail_empty_query");
-				$this->view->redirect("user","search");
-			}*/
-
 			$this->view->setVariable("userstoshow", $this->userMapper->search($user));
 			$this->view->render("user","show");
 		}else{

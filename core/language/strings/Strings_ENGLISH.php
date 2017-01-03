@@ -54,6 +54,7 @@ $strings = array(
 	'create_controller' => 'Add Controller',
 	'create_action' => 'Add Action',
     'create_permission' => 'Add Permission',
+
 	'management_user' => 'Manage User',
 	'dni' => 'DNI',
 	'name' => 'Name',
@@ -77,7 +78,6 @@ $strings = array(
 	'user_find' => 'User Find',
 	'find' => 'Find',
 	'profile_type' =>'Profile Type',
-
 	'user_profile' => 'User\'s Profile',
 	'settings' => 'Settings',
 	'close_session' => 'Close Session',
@@ -157,6 +157,7 @@ $strings = array(
 	'no_profile_permissions' => 'This profile perfil doesn´t have permissions',
 	'cancel'=>'Cancel',
 	'user_data'=>'User data',
+	'action_data'=>'Action data',
 	'profile_perms' => 'Profile Permissions',
 	'user_perms' => 'User Permissions',
 	'controller_data'=>'Controller data',
@@ -180,6 +181,25 @@ $strings = array(
 	'code'=>'Code',
 	'user_has_all_permissions'=>'This user has allways every permission',
 	'profile_has_all_permissions'=>'This profile has allways every permission',
+	'use_q'=>'Use?',   
+	
+	/*ESPAZOS*/
+	'SPACE' => 'Spaces',
+	'space_info' => 'Space information',
+	'management_spaces' => 'Spaces Management',
+	'SPACES_ID' => 'Spaces ID',
+	'space_id' => 'Space´s ID',
+	'aforo' => 'Capacity',
+	'description' => 'Description',
+	'succ_space_add' => 'Success space add',
+	'space_already_exists' => 'Space already exists',
+	'create_space' => 'Create Space',
+	'number_a' => 'Enter a numeric value for capacity',
+	'number_i' => 'Enter a numeric value for id',
+	'succ_space_mod' => 'Space modified successfully',
+	'space_edit' => 'Edit space',
+	'succ_space_delete' => 'Success delete',
+	'spaces_data' => 'Space data',
 	'use_q'=>'Use?',
 
 	/*NOTIFICACIÓNS*/
@@ -189,37 +209,60 @@ $strings = array(
 		'succ_login'=>'You are logged in!',
 		'succ_user_add'=>'User properly created',
 		'succ_user_delete'=>'User properly deleted',
+
 		'succ_perm_add'=>'Permission properly created',
 		'succ_perm_search'=>'Permissions properly filtered',
 		'succ_perm_delete'=>'Permission properly deleted',
+
 		'succ_action_add'=>'Action properly created',
 		'succ_action_delete'=>'Action properly deleted',
 		'succ_action_edit'=>'Action properly edited',
 		'succ_action_search'=>'Actions properly filtered',
+
 		'succ_controller_add'=>'Controller properly created',
 		'succ_controller_delete'=>'Controller properly deleted',
 		'succ_controller_edit'=>'Controller properly edited',
 		'succ_controller_search'=>'Controllers properly filtered',
+
 		'succ_profile_add'=>'Profile properly created',
 		'succ_profile_delete'=>'Profile properly deleted',
 		'succ_profile_edit'=>'Profile properly edited',
+
 		'succ_client_add'=>'Client properly created',
 		'succ_client_search'=>'Client properly filtered',
 		'succ_client_delete'=>'Client properly deleted',
+
 		'succ_service_add'=>'Client properly created',
 		'succ_service_search'=>'Client properly filtered',
 		'succ_service_delete'=>'Client properly deleted',
 
+		'succ_category_add'=>'Category properly created',
+		'succ_category_delete'=>'Category properly deleted',
+		'succ_category_edit'=>'Category properly edited',
 
-		
+    	'succ_activity_add'=>'Activity properly created',
+		'succ_activity_delete'=>'Activity properly deleted',
+		'succ_activity_edit'=>'Activity properly edited',
 
-		/*FAIL*/
+		'succ_discount_add'=>'Discount properly created',
+		'succ_discount_delete'=>'Discount properly deleted',
+		'succ_discount_edit'=>'Discount properly edited',
+
+
+
+	/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
 		'fail_controller_exists'=>"Controller already exists",
 		'fail_client_exists'=>"Client already exists",
 		'fail_profile_exists'=>"Profile already exists",
+		'fail_category_exists'=>"Category already exits",
+		'fail_category_exists'=>"Category already exits",
+    	'fail_activity_exists'=>"Activity already exits",
+   	 	'fail_aforo_incorrect'=>'Capacity can´t be less than 1',
+    	'fail_discount_incorrect'=>'Discount is not valid',
+    	'fail_discount_exists' => 'Discount already exits',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -247,8 +290,42 @@ $strings = array(
 	'service_data' => 'Service Data',
 	'service_modify' => 'Modify Service',
 
+
 	/* Horario */
-	'management_schedules'=>'Schedule Management'
+	'management_schedules'=>'Schedule Management',
+
+	/* Categorias */
+	'CATEGORY' => 'Categories',
+ 	'create_category' => 'Add Category',
+	'category_modify' => 'Modify Category',
+	'category_data'=>'Category data',
+	'management_categories' => 'Categories Management',
+
+	/* Actividades */
+    'ACTIVITY' => 'Activities',
+    'create_activity' => 'Add Activity',
+    'activity_modify' => 'Modify Activity',
+    'activity_data'=>'Activity Data',
+    'management_activities' => 'Activities Management',
+    'discount' => 'Discount',
+    'one_category' => 'Category',
+    'one_space' => 'Space',
+    'monitor' => 'Monitor',
+    'color'=>'Color',
+    'no_monitor'=> 'Without Monitor',
+    'no_discount'=>'Without Discount',
+    'no_category'=>'Without Category',
+    'no_space'=>'Without Space',
+
+
+    /*Descontos*/
+    'DISCOUNT' => 'Discounts',
+    'management_discounts'=>'Discounts Management',
+    'discount_data'=>'Discount Data',
+    'discount_type' => 'Type of Discount',
+	'create_discount' => 'Add Discount',
+    'discount_modify' => 'Modify Discount',
+
 
 )
 ?>
