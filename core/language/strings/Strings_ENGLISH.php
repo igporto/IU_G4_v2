@@ -263,6 +263,7 @@ $strings = array(
    	 	'fail_aforo_incorrect'=>'Capacity can´t be less than 1',
     	'fail_discount_incorrect'=>'Discount is not valid',
     	'fail_discount_exists' => 'Discount already exits',
+    	'fail_aforo_fail'=>'the capacity of the classroom is less than the activity',
 
 		/*ERROR*/
 		'erro_title'=>'Error',

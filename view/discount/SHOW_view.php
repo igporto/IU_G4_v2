@@ -60,6 +60,7 @@ $discounts = $view->getVariable("discountstoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['DISCOUNT'] ?></th>
+                        <th class="text-center"><?php echo $strings['discount'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -81,7 +82,12 @@ $discounts = $view->getVariable("discountstoshow");
                     foreach ($discounts as $c) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $c->getType() . "</td><td class='text-center'>";
+                        echo $c->getType() . "</td><td>";
+
+                        echo $c->getPercent() . "%</td>
+                        
+                        <td class='text-center'>";
+
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';

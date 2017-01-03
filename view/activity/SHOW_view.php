@@ -60,6 +60,9 @@ $activities = $view->getVariable("activitiestoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['ACTIVITY'] ?></th>
+                        <th class="text-center"><?php echo $strings['aforo'] ?></th>
+                        <th class="text-center"><?php echo $strings['one_space'] ?></th>
+
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -81,7 +84,12 @@ $activities = $view->getVariable("activitiestoshow");
                     foreach ($activities as $c) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $c->getActivityname() . "</td><td class='text-center'>";
+                        echo $c->getActivityname() . "</td><td>";
+
+                        echo $c->getCapacity() . "</td><td> ";
+
+                        echo $c->getSpace()->getSpacename() . "</td>
+                        <td class='text-center'>";
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';

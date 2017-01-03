@@ -254,6 +254,7 @@ $strings = array(
         'fail_aforo_incorrect'=>'O aforo non pode ser menor que 1',
         'fail_discount_incorrect'=>'O desconto non é válido',
         'fail_discount_exists' => 'O desconto xa existe',
+        'fail_aforo_fail'=>'O aforo da aula é menor que o da actividade',
 
         /*ERROR*/
         'erro_title'=>'Erro',

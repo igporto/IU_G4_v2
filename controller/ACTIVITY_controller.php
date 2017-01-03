@@ -84,18 +84,23 @@ class ActivityController extends BaseController
 
             try {
                 if (!$this->activityMapper->activitynameExists($activity->getActivityname())) {
-                    //Comprobamos que ten un aforo minimo dunha persoa
-                    if($activity->getCapacity() > 1){
+                    if($activity->getCapacity()>0){
+                        $capacitySpace = $activity->getSpace()->getCapacity();
+                        $capacityActivity = $activity->getCapacity();
+                        if($capacitySpace > $capacityActivity || $capacitySpace > $capacityActivity){
                         //Comprobamos que non se pode >100 nin <0
-                        if(($activity->getDiscount()->getPercent() < 100) && ($activity->getDiscount()->getPercent() > 0)) {
-                            $this->activityMapper->add($activity);
-                            //ENVIAR AVISO DE ACTIVIDADE ENGADIDA!!!!!!!!!!
-                            $this->view->setFlash('succ_activity_add');
+                            if(($activity->getDiscount()->getPercent() < 100) && ($activity->getDiscount()->getPercent() > 0)) {
+                                $this->activityMapper->add($activity);
+                                //ENVIAR AVISO DE ACTIVIDADE ENGADIDA!!!!!!!!!!
+                                $this->view->setFlash('succ_activity_add');
 
-                            //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das Actividades)
-                            $this->view->redirect("activity", "show");
+                                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das Actividades)
+                                $this->view->redirect("activity", "show");
+                            }else{
+                                $this->view->setFlash("fail_discount_incorrect");
+                            }
                         }else{
-                            $this->view->setFlash("fail_discount_incorrect");
+                            $this->view->setFlash("fail_aforo_fail");
                         }
                     }else{
                         $this->view->setFlash("fail_aforo_incorrect");
@@ -156,7 +161,7 @@ class ActivityController extends BaseController
                 }
             }
 
-            if(isset($_POST['capacity']) && $_POST['capacity']>0){
+            if(isset($_POST['capacity'])){
                 $activity->setCapacity((htmlentities(addslashes($_POST["capacity"]))));
             }
 
@@ -181,11 +186,21 @@ class ActivityController extends BaseController
             }
 
             try {
-                $this->activityMapper->edit($activity);
-                //ENVIAR AVISO DE ACTIVIDADE EDITADA!!!!!!!!!!
-                $this->view->setFlash("succ_activity_edit");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das actividades)
-                $this->view->redirect("activity", "show");
+                if($activity->getCapacity()>0){
+                    $capacitySpace = $activity->getSpace()->getCapacity();
+                    $capacityActivity = $activity->getCapacity();
+                    if($capacitySpace > $capacityActivity || $capacitySpace > $capacityActivity){
+                        $this->activityMapper->edit($activity);
+                        //ENVIAR AVISO DE ACTIVIDADE EDITADA!!!!!!!!!!
+                        $this->view->setFlash("succ_activity_edit");
+                        //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das actividades)
+                        $this->view->redirect("activity", "show");
+                    }else{
+                        $this->view->setFlash("fail_aforo_fail");
+                    }
+                }else{
+                    $this->view->setFlash("fail_aforo_incorrect");
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }

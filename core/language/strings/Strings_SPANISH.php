@@ -259,7 +259,8 @@ $strings = array(
     	'fail_activity_exists'=>"La actividad ya existe",
     	'fail_aforo_incorrect'=>'EL aforo no puede ser menor que 1',
     	'fail_discount_incorrect'=>'El descuento no es válido',
-   		'fail_discount_exists' => 'EL descuento ya existe',
+   		'fail_discount_exists' => 'El descuento ya existe',
+    	'fail_aforo_fail'=>'El aforo del aula es menor que el de la actividad',
 
 		/*ERROR*/
 		'erro_title'=>'Error',

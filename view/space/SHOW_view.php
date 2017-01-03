@@ -67,7 +67,9 @@ $spaces = $view->getVariable("spacestoshow");
                     <thead>
                     <tr class="row" >
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['SPACES_ID']?></th>
+                        <th class="text-center"><?php echo $strings['SPACE']?></th>
+                        <th class="text-center"><?php echo $strings['aforo']?></th>
+
                         <?php
                         if(!$edit && !$delete && !$v){ ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -90,7 +92,9 @@ $spaces = $view->getVariable("spacestoshow");
                     foreach ($spaces as $c) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $c->getSpacename()."</td><td class='text-center'>";
+                        echo $c->getSpacename()."</td><td> ";
+
+                        echo $c->getCapacity()."</td><td class='text-center'>";
                         //Botón que direcciona a vista do usuario
                         if($v){
                             echo '<button type="button" class="btn btn-primary btn-xs';
