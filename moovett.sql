@@ -25,7 +25,7 @@ DROP DATABASE IF EXISTS `moovett`;
 CREATE DATABASE IF NOT EXISTS `moovett` DEFAULT character SET utf8 collate utf8_spanish_ci;
 USE `moovett`;
 
-DROP USER 'adminMoovett'@'localhost';
+DROP USER IF EXISTS 'adminMoovett'@'localhost';
 
 
 CREATE USER 'adminMoovett'@'localhost';
