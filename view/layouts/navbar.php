@@ -37,6 +37,12 @@ $permis = $uc->getCurrentUserPerms();
     <!-- DataTables Responsive CSS -->
     <link href="lib/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
+    <!--AmaranJS for notifications-->
+    <link rel="stylesheet" href="lib/amaranjs/css/amaran.min.css">
+
+    <!--datepicker-->
+    <link rel="stylesheet" href="lib/datepicker/css/datepicker.min.css">
+
     <!--FAVICON-->
     <link rel="icon"
           type="image/ico"
@@ -44,27 +50,19 @@ $permis = $uc->getCurrentUserPerms();
 
     <!--MULTIIDIOMA-->
     <link rel="stylesheet" href="core/language/css/language.css">
+
+    <!-- fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
-    <!-- jQuery, NECESARIO para scripts JS de Bootstrap, cargar ó final do body-->
+     <!-- jQuery, NECESARIO para scripts JS de Bootstrap, cargar ó final do body-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/bootstrap/js//bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript: MENU LATERAL DESPLEGABLE -->
-    <script src="lib/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="lib/admin/js/sb-admin-2.js"></script>
-
-    <!-- DataTables JavaScript -->
+     <!-- DataTables JavaScript -->
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
 
-    <!--AmaranJS for notifications-->
-    <link rel="stylesheet" href="lib/amaranjs/css/amaran.min.css">
-    <script src="lib/amaranjs/js/jquery.amaran.js"></script>
+
 </head>
 
 <body>
@@ -171,6 +169,28 @@ $permis = $uc->getCurrentUserPerms();
 
 </div>
 <!--FIN WRAPPER-->
+
+
+<!-- SCRIPTS -->
+
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="lib/bootstrap/js//bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript: MENU LATERAL DESPLEGABLE -->
+    <script src="lib/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="lib/admin/js/sb-admin-2.js"></script>
+
+   
+
+    <!--AmaranJS for notifications-->
+    <script src="lib/amaranjs/js/jquery.amaran.js"></script>
+
+    <!-- datepicker -->
+    <script src="lib/datepicker/js/datepicker.min.js"></script>
+
 
 
  <?php 
