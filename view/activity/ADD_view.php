@@ -108,6 +108,8 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $categories = $categoryMapper->show();
 
+                                echo "<option value='NULL'>".$strings['no_category'] . "</option>";
+
                                 foreach ($categories as $category) {
                                     echo "<option value='" . $category->getCodcategory()."'>".$category->getCategoryname() . "</option>";
                                 }

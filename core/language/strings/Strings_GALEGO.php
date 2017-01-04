@@ -241,6 +241,10 @@ $strings = array(
         'succ_discount_delete'=>'Desconto borrado correctamente',
         'succ_discount_edit'=>'Desconto editado correctamente',
 
+        'succ_employee_add'=>'Empregado creado correctamente',
+        'succ_employee_delete'=>'Empregado borrado correctamente',
+        'succ_employee_edit'=>'Empregado editado correctamente',
+
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
@@ -255,6 +259,10 @@ $strings = array(
         'fail_discount_incorrect'=>'O desconto non é válido',
         'fail_discount_exists' => 'O desconto xa existe',
         'fail_aforo_fail'=>'O aforo da aula é menor que o da actividade',
+        'fail_dni_exists'=>'Xa hai un empregado con ese DNI',
+        'fail_dni_incorrect'=>'O DNI non é válido',
+        'fail_email_incorrect' => 'O email non é válido',
+        'fail_birthdate_incorrect' => 'A data de nacemento non é válida',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -314,6 +322,17 @@ $strings = array(
     'discount_data'=>'Datos do Desconto',
     'discount_type' => 'Tipo de Desconto',
     'create_discount' => 'Engadir Desconto',
-    'discount_modify' => 'Modificar Desconto'
+    'discount_modify' => 'Modificar Desconto',
+
+    /*Empleados*/
+    'EMPLOYEE' => 'Empregados',
+    'management_employees'=>'Xestión de Empregados',
+    'employee_data'=>'Datos do Empregado',
+    'employee_user' => 'Usuario',
+    'create_employee' => 'Engadir Empregado',
+    'employee_modify' => 'Modificar Empregado',
+    'employee_type' => 'Tipo de Desconto',
+    'no_user'=>'Sen Usuario',
+
 )
 ?>

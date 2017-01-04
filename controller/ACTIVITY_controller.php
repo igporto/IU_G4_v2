@@ -63,7 +63,11 @@ class ActivityController extends BaseController
             }
 
             if(isset($_POST['category'])){
-                $activity->setCategory($this->categoryMapper->view($_POST["category"]));
+                if($_POST['category'] !=NULL){
+                    $activity->setCategory($this->categoryMapper->view($_POST["category"]));
+                }else{
+                    $activity->setCategory(new Category());
+                }
             }
 
             if(isset($_POST['space'])){
@@ -87,7 +91,7 @@ class ActivityController extends BaseController
                     if($activity->getCapacity()>0){
                         $capacitySpace = $activity->getSpace()->getCapacity();
                         $capacityActivity = $activity->getCapacity();
-                        if($capacitySpace > $capacityActivity || $capacitySpace > $capacityActivity){
+                        if($capacitySpace > $capacityActivity || $capacitySpace == $capacityActivity){
                         //Comprobamos que non se pode >100 nin <0
                             if(($activity->getDiscount()->getPercent() < 100) && ($activity->getDiscount()->getPercent() > 0)) {
                                 $this->activityMapper->add($activity);
@@ -161,12 +165,16 @@ class ActivityController extends BaseController
                 }
             }
 
-            if(isset($_POST['capacity'])){
+            if(isset($_POST['capacity']) && $_POST['capacity'] >0){
                 $activity->setCapacity((htmlentities(addslashes($_POST["capacity"]))));
             }
 
             if(isset($_POST['category'])){
-                $activity->setCategory($this->categoryMapper->view($_POST["category"]));
+                if($_POST['category'] != NULL){
+                    $activity->setCategory($this->categoryMapper->view($_POST["category"]));
+                }else{
+                    $activity->setCategory(new Category());
+                }
             }
 
             if(isset($_POST['space'])){
@@ -189,7 +197,7 @@ class ActivityController extends BaseController
                 if($activity->getCapacity()>0){
                     $capacitySpace = $activity->getSpace()->getCapacity();
                     $capacityActivity = $activity->getCapacity();
-                    if($capacitySpace > $capacityActivity || $capacitySpace > $capacityActivity){
+                    if($capacitySpace > $capacityActivity || $capacitySpace = $capacityActivity){
                         $this->activityMapper->edit($activity);
                         //ENVIAR AVISO DE ACTIVIDADE EDITADA!!!!!!!!!!
                         $this->view->setFlash("succ_activity_edit");
@@ -264,7 +272,6 @@ class ActivityController extends BaseController
             try {
                 $this->view->setVariable("activitiestoshow", $this->activityMapper->search($activity));
             } catch (Exception $e) {
-                var_dump($e->getMessage());exit;
                 $this->view->setFlash("erro_general");
                 $this->view->redirect("activity", "show");
             }

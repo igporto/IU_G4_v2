@@ -41,7 +41,7 @@ class EmployeeMapper
                   INSERT INTO empleado(dni, nombre, apellidos, fech_nac, direccion_postal, email, comentario_personal, hora_entrada, hora_salida, num_cuenta, tipo_contrato, cod_usuario) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
         $stmt->execute(array(
-                $employee->getCodemployee(),
+                $employee->getEmployeedni(),
                 $employee->getEmployeename(),
                 $employee->getEmployeesurname(),
                 $employee->getBirthdate(),
@@ -51,6 +51,7 @@ class EmployeeMapper
                 $employee->getHourIn(),
                 $employee->getHourOut(),
                 $employee->getBanknum(),
+                $employee->getContracttype(),
                 $employee->getUser()->getCoduser()
             )
         );
@@ -74,7 +75,6 @@ class EmployeeMapper
         //devolve o array
         return $employees;
     }
-
 
     //devolve o obxecto Activity no que o $codactivity coincida co da tupla.
     public function view($codemployee)
@@ -109,11 +109,11 @@ class EmployeeMapper
     {
         $stmt = $this->db->prepare("
                       UPDATE empleado SET dni = ?, nombre = ?, apellidos = ?, fech_nac = ?, direccion_postal = ?, email= ?, 
-                          comentario_personal= ?, hora_entrada= ?, hora_salida= ?, num_cuenta= ?, ,tipo_contrato= ?, ,cod_usuario= ?  
+                          comentario_personal= ?, hora_entrada= ?, hora_salida= ?, num_cuenta= ?, tipo_contrato= ?, cod_usuario= ?  
                       WHERE id_empleado = ?");
         $stmt->execute(array(
                 $employee->getEmployeedni(), $employee->getEmployeename(), $employee->getEmployeesurname(), $employee->getBirthdate(), $employee->getAddress(), $employee->getEmail(),
-                $employee-> getComment(), $employee->getHourIn(), $employee->getHourOut(), $employee->getBanknum(), $employee->getContracttype(), $employee->getUser()->getCoduser()
+                $employee-> getComment(), $employee->getHourIn(), $employee->getHourOut(), $employee->getBanknum(), $employee->getContracttype(), $employee->getUser()->getCoduser(), $employee->getCodemployee()
             )
         );
     }
@@ -126,21 +126,40 @@ class EmployeeMapper
     }
 
     public function search(Employee $employee){
-        $stmt = $this->db->prepare("
-            SELECT  * FROM empleado 
-            WHERE id_empleado = ?, dni = ?, nombre like ?, apellidos like ?, fech_nac like ?, direccion_postal like ?, email = ?, hora_entrada = ?, hora_salida = ?, 
-            num_cuenta = ?, tipo_contrato = ?, cod_usuario = ?");
-        $stmt->execute(array(
-                $employee->getCodemployee(), $employee->getEmployeedni(),"%".$employee->getEmployeename()."%", "%".$employee->getEmployeesurname()."%", $employee->getBirthdate(), "%".$employee->getAddress(),"%",
-                $employee->getEmail(), $employee->getHourIn(), $employee->getHourOut(), $employee->getBanknum(), $employee->getContracttype(), $employee->getUser()->getCoduser()
-            )
-        );
-        $employees_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $stmt = $this->db->prepare("SELECT * FROM empleado 
+                                        WHERE id_empleado like ? AND dni like ? AND nombre like ? AND apellidos like ? AND fech_nac like ? 
+                                        AND direccion_postal like ? AND hora_entrada like ? AND hora_salida like ? AND num_cuenta like ? 
+                                        AND tipo_contrato like ? AND cod_usuario like ? ");
+
+        $stmt->execute(array( "%".$employee->getCodemployee()."%", "%".$employee->getEmployeedni()."%","%".$employee->getEmployeename()."%",
+            "%".$employee->getEmployeesurname()."%", $employee->getBirthdate(), "%".$employee->getAddress()."%", "%".$employee->getHourIn()."%",
+            "%".$employee->getHourOut()."%", "%".$employee->getBanknum()."%", "%".$employee->getContracttype()."%", "%".$employee->getUser()->getCoduser()."%"
+            ));
+
+        $employees_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $employees = array();
         foreach ($employees_db as $e){
             array_push($employees, $this->view($e["id_empleado"]));
         }
         return $employees;
+    }
+
+    public function validar_fecha_nac($date){
+
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($db[0]);exit;
+        if($db != NULL){
+            $actual = $db[0];
+
+            if ($date < $actual[0]['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
     }
 }

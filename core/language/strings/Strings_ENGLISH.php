@@ -248,6 +248,10 @@ $strings = array(
 		'succ_discount_delete'=>'Discount properly deleted',
 		'succ_discount_edit'=>'Discount properly edited',
 
+		'succ_employee_add'=>'Employee properly created',
+		'succ_employee_delete'=>'Employee properly deleted',
+		'succ_employee_edit'=>'Employee properly edited',
+
 
 
 	/*FAIL*/
@@ -264,6 +268,10 @@ $strings = array(
     	'fail_discount_incorrect'=>'Discount is not valid',
     	'fail_discount_exists' => 'Discount already exits',
     	'fail_aforo_fail'=>'the capacity of the classroom is less than the activity',
+		'fail_dni_exists'=>'There is already an employee with that DNI',
+		'fail_dni_incorrect'=>'DNI is not valid',
+		'fail_email_incorrect'=>'email is not valid',
+    	'fail_birthdate_incorrect' => 'Birth Date is not valid',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -318,7 +326,6 @@ $strings = array(
     'no_category'=>'Without Category',
     'no_space'=>'Without Space',
 
-
     /*Descontos*/
     'DISCOUNT' => 'Discounts',
     'management_discounts'=>'Discounts Management',
@@ -326,6 +333,15 @@ $strings = array(
     'discount_type' => 'Type of Discount',
 	'create_discount' => 'Add Discount',
     'discount_modify' => 'Modify Discount',
+
+    /*Empleados*/
+    'EMPLOYEE' => 'Employees',
+    'management_employees'=>'Employees Management',
+    'employee_data'=>'Employee Data',
+    'employee_user' => 'User',
+    'create_employee' => 'Add Employee',
+    'employee_modify' => 'Modify Employee',
+    'no_user'=>'Without User',
 
 
 )

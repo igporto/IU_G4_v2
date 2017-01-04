@@ -248,6 +248,10 @@ $strings = array(
 		'succ_discount_delete'=>'Descuento borrado correctamente',
 		'succ_discount_edit'=>'Descuento editado correctamente',
 
+		'succ_employee_add'=>'Empleado creado correctamente',
+		'succ_employee_delete'=>'Empleado borrado correctamente',
+		'succ_employee_edit'=>'Empleado editado correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -261,6 +265,10 @@ $strings = array(
     	'fail_discount_incorrect'=>'El descuento no es válido',
    		'fail_discount_exists' => 'El descuento ya existe',
     	'fail_aforo_fail'=>'El aforo del aula es menor que el de la actividad',
+		'fail_dni_exists'=>'Ya hay un empleado con ese DNI',
+		'fail_dni_incorrect'=>'El DNI no es válido',
+		'fail_email_incorrect'=>'El email no es válido',
+    	'fail_birthdate_incorrect' => 'La fecha de nacimiento no es válida',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -316,15 +324,22 @@ $strings = array(
     'no_category'=>'Sin Categoría',
     'no_space'=>'Sin Espacio',
 
-
-
     /*Descontos*/
     'DISCOUNT' => 'Descuentos',
     'management_discounts'=>'Gestión de Descuentos',
     'discount_data'=>'Datos del Descuento',
     'discount_type' => 'Tipo de Descuento',
     'create_discount' => 'Añadir Descuento',
-    'discount_modify' => 'Modificar Descuento'
+    'discount_modify' => 'Modificar Descuento',
+
+	/*Empleados*/
+    'EMPLOYEE' => 'Empleados',
+    'management_employees'=>'Gestión de Empleados',
+    'employee_data'=>'Datos del Empleado',
+    'employee_user' => 'Usuario',
+    'create_employee' => 'Añadir Empregado',
+    'employee_modify' => 'Modificar Empleado',
+    'no_user'=>'Sin Usuario',
 
 )
 ?>

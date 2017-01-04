@@ -124,6 +124,7 @@ class ActivityMapper
     }
 
     public function search(Activity $activity){
+        $activity->getCodactivity();exit;
         $stmt = $this->db->prepare("SELECT * FROM actividad WHERE id_actividad like ? AND nombre like ? AND aforo like ? AND id_categoria like ? AND id_espacio like ? AND descuento like ? AND empleado_imparte like ?");
         $stmt->execute(array(
                 "%".$activity->getCodactivity()."%", "%".$activity->getActivityname()."%", "%".$activity->getCapacity()."%", "%".$activity->getCategory()->getCodcategory()."%",

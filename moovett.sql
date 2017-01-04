@@ -83,7 +83,7 @@ CREATE TABLE  `actividad` (
   `id_actividad` int(4) NOT NULL,
   `nombre` varchar(45) NULL,
   `aforo` int(4) NULL,
-  `id_categoria` int(4) NOT NULL,
+  `id_categoria` int(4) NULL,
   `id_espacio` int(4) not null,
   `descuento` int(4) NOT NULL,
   `color` varchar(16) NOT NULL,

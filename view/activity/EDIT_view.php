@@ -118,7 +118,7 @@ $activity = $activityMapper->view($codactivity);
 
                             //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                             $categories = $categoryMapper->show();
-
+                            echo "<option value='NULL'>".$strings['no_category'] . "</option>";
                             foreach ($categories as $category) {
                                 echo "<option value='" . $category->getCodcategory()."'";
                                 if($activity->getCategory()->getCodcategory() == $category->getCodcategory()){
