@@ -30,6 +30,15 @@ $strings = array(
 	'insert_error' => 'Insert Error',
 	'database_access_error' => 'Database Access Error',
 
+	/*days of the week*/
+    'day0'=>'Monday',
+    'day1'=>'Tuesday',
+    'day2'=>'Wednesday',
+    'day3'=>'Thursday',
+    'day4'=>'Friday',
+    'day5'=>'Saturday',
+    'day6'=>'Sunday',
+
 	/*USER_ADD_view, MANAGE_USER_view, ADMIN_view, USER_SEARCH_view,
 	 USER_SHOW_view, USER_VIEW_view Strings */
 	'student' => 'Student',
@@ -124,6 +133,7 @@ $strings = array(
 	'ACTIVITY' => 'Activities',
 	'SCHEDULE'=>'Schedules',
 	'manage' => 'Manage',
+	'save'=>'Save',
 	'clean' => 'Clean',
 	'white' => 'Blanks in some field',
 	'name' => 'Name',
@@ -302,6 +312,14 @@ $strings = array(
 
 	/* Horario */
 	'management_schedules'=>'Schedule Management',
+	'create_schedule'=>'Add Schedule',
+	'datestart'=>'Starting Date',
+	'dateend'=>'Ending Date',
+	'hourstart'=>'Starting Hour',
+	'hourend'=>'Ending Hour',
+	'create_workday'=>'Weekly work day of: ',
+	'WORKDAY'=>'Work day',
+	'schedule_modify'=>'Modify Schedule',
 
 	/* Categorias */
 	'CATEGORY' => 'Categories',

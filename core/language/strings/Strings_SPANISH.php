@@ -17,6 +17,7 @@ $strings = array(
 	'username' => 'Nombre del Usuario',
 	'usersurname' => 'Apellidos del Usuario',
 	'useremail' => 'Email del Usuario',
+	'save'=>'Guardar',
 	'insert' => 'Insertar',
 	'modify' => 'Modificar',
 	'delete' => 'Borrar',
@@ -31,6 +32,15 @@ $strings = array(
 	'profile_modify' => 'Modificar Perfil',
 	'insert_error' => 'Error en la Inserción',
 	'database_access_error' => 'Error en el Acceso a la Base de Datos',
+
+	/*days of the week*/
+    'day0'=>'Lunes',
+    'day1'=>'Martes',
+    'day2'=>'Miércoles',
+    'day3'=>'Jueves',
+    'day4'=>'Viernes',
+    'day5'=>'Sábado',
+    'day6'=>'Domingo',
 
 	/*USER_ADD_view, MANAGE_USER_view, ADMIN_view, USER_SEARCH_view,
 	 USER_SHOW_view, USER_VIEW_view Strings */
@@ -299,6 +309,14 @@ $strings = array(
 
 	/* Horario */
 	'management_schedules'=>'Gestión de Horarios',
+	'create_schedule'=>'Añadir Horarios',
+	'datestart'=>'Fecha de Comienzo',
+    'dateend'=>'Fecha de Fin',
+    'hourstart'=>'Hora de Comienzo',
+	'hourend'=>'Hora de Finalización',
+    'create_workday'=>'Jornada semanal de: ',
+    'WORKDAY'=>'Jornada',
+    'schedule_modify'=>'Modificar Horario',
 
 	/* Categorias*/
 

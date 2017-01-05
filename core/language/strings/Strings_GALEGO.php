@@ -22,6 +22,7 @@ $strings = array(
     'delete' => 'Borrar',
     'consult' => 'Consultar',
     'update' => 'Actualizar',
+    'save'=>'Gardar',
     'pass_user_error' => 'Contrasinal Incorrecto',
     'user_search_error' => 'Erro na busqueda de usuarios',
     'empty_error' => 'Os campos non poden estar vacíos',
@@ -29,6 +30,15 @@ $strings = array(
     'user_modify' => 'Modificar Usuario',
     'insert_error' => 'Erro na Inserción',
     'database_access_error' => 'Erro no Acceso á Base de Datos',
+
+    /*days of the week*/
+    'day0'=>'Luns',
+    'day1'=>'Martes',
+    'day2'=>'Mércores',
+    'day3'=>'Xoves',
+    'day4'=>'Venres',
+    'day5'=>'Sábado',
+    'day6'=>'Domingo',
 
     /*USER_ADD_view, MANAGE_USER_view, ADMIN_view, USER_SEARCH_view,
      USER_SHOW_view, USER_VIEW_view Strings */
@@ -292,6 +302,13 @@ $strings = array(
 
     /* Horario */
     'management_schedules'=>'Xestión de Horarios',
+    'create_schedule'=>'Engadir Horario',
+    'datestart'=>'Data de Comezo',
+    'dateend'=>'Data de Fin',
+    'hourstart'=>'Hora de Comezo',
+    'hourend'=>'Hora de Fin',
+    'create_workday'=>'Xornada semanal de: ',
+    'schedule_modify'=>'Modificar Horario',
 
     /* Categorias*/
     'CATEGORY' => 'Categorias',
@@ -299,6 +316,7 @@ $strings = array(
     'category_modify' => 'Modificar Categoría',
     'category_data'=>'Datos da Categoría',
     'management_categories' => 'Xestión de Categorías',
+    'WORKDAY'=>'Xornada',
 
     /* Actividades */
     'ACTIVITY' => 'Actividades',

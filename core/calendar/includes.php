@@ -1,8 +1,3 @@
-
-<link href='lib/calendar/fullcalendar.css' rel='stylesheet' />
-<link href='lib/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='lib/calendar/moment.min.js'></script>
-<script src='lib/calendar/fullcalendar.min.js'></script>
 <script>
 
 	$(document).ready(function() {
@@ -72,18 +67,4 @@
 	});
 
 </script>
-<style>
-
-	body {
-		
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
-
-</style>
+ 

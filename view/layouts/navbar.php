@@ -7,9 +7,6 @@ $view = ViewManager::getInstance();
 $uc = new UserController();
 $permis = $uc->getCurrentUserPerms();
 
-
-
-
 ?><!DOCTYPE html>
 <html>
 <head lang='en'>
@@ -43,6 +40,8 @@ $permis = $uc->getCurrentUserPerms();
     <!--datepicker-->
     <link rel="stylesheet" href="lib/datepicker/css/datepicker.min.css">
 
+    
+
     <!--FAVICON-->
     <link rel="icon"
           type="image/ico"
@@ -54,13 +53,31 @@ $permis = $uc->getCurrentUserPerms();
     <!-- fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
+    
+
      <!-- jQuery, NECESARIO para scripts JS de Bootstrap, cargar ó final do body-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+    <!-- jquery UI -->
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet">
 
      <!-- DataTables JavaScript -->
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- includes for datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- calendar -->
+    <link href='lib/calendar/fullcalendar.css' rel='stylesheet' />
+    <link href='lib/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='lib/calendar/moment.min.js'></script>
+    <script src='lib/calendar/fullcalendar.min.js'></script>
 
 
 </head>
@@ -293,6 +310,7 @@ $permis = $uc->getCurrentUserPerms();
 
                 
     ?>
+
 </body>
 
 </html>
