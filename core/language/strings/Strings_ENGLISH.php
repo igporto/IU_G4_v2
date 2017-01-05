@@ -56,6 +56,9 @@ $strings = array(
 	'management_controllers' => 'Controller Management',
 	'management_users' => 'User Management',
 	'management_clients' => 'Client Management',
+    'management_payments' => 'Payment Management',
+    'management_bill' => 'Bill Management',
+    'management_domiciliation' => 'Domiciliation Management',
 	'users' => 'Users',
 	'create_user' => 'Add User',
     'create_client' => 'Add Client',
@@ -63,7 +66,7 @@ $strings = array(
 	'create_controller' => 'Add Controller',
 	'create_action' => 'Add Action',
     'create_permission' => 'Add Permission',
-
+    'create_payment' => 'Add Payment',
 	'management_user' => 'Manage User',
 	'dni' => 'DNI',
 	'name' => 'Name',
@@ -87,6 +90,7 @@ $strings = array(
 	'user_find' => 'User Find',
 	'find' => 'Find',
 	'profile_type' =>'Profile Type',
+
 	'user_profile' => 'User\'s Profile',
 	'settings' => 'Settings',
 	'close_session' => 'Close Session',
@@ -191,8 +195,8 @@ $strings = array(
 	'code'=>'Code',
 	'user_has_all_permissions'=>'This user has allways every permission',
 	'profile_has_all_permissions'=>'This profile has allways every permission',
-	'use_q'=>'Use?',   
-	
+	'use_q'=>'Use?',
+
 	/*ESPAZOS*/
 	'SPACE' => 'Spaces',
 	'space_info' => 'Space information',
@@ -211,6 +215,7 @@ $strings = array(
 	'succ_space_delete' => 'Success delete',
 	'spaces_data' => 'Space data',
 	'use_q'=>'Use?',
+	'profile_has_all_permissions'=>'This profile has allways every permission',
 
 	/*NOTIFICACIÓNS*/
 
@@ -264,7 +269,7 @@ $strings = array(
 
 
 
-	/*FAIL*/
+		/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
@@ -272,7 +277,8 @@ $strings = array(
 		'fail_client_exists'=>"Client already exists",
 		'fail_profile_exists'=>"Profile already exists",
 		'fail_category_exists'=>"Category already exits",
-		'fail_category_exists'=>"Category already exits",
+    'fail_payment_exists'=>"Payment already exits",
+    'fail_category_exists'=>"Category already exits",
     	'fail_activity_exists'=>"Activity already exits",
    	 	'fail_aforo_incorrect'=>'Capacity can´t be less than 1',
     	'fail_discount_incorrect'=>'Discount is not valid',
@@ -392,5 +398,19 @@ $strings = array(
 
 
 
+    'DOMICILIATION' => 'Domiciliations',
+    'quantity' => 'Quantity',
+    'cash' => 'Cash',
+    'creditCard' => 'Credit Card',
+	'external_client'=>'External Client',
+    'payment_data'=>'Payment Data',
+    'id'=>'ID',
+    'payment_method'=>'Payment Method',
+    'payment_modify'=>'Payment Modify',
+    'period'=>'Period',
+    'total_quantity'=>'Total quantity',
+    'months'=>'Months',
+	'domiciliation_data'=>'Domiciliation Data',
+    'domiciliation_modify'=>'Domiciliation Modify'
 )
 ?>

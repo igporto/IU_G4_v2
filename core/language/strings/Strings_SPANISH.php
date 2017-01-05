@@ -59,6 +59,9 @@ $strings = array(
     'management_controllers' => 'Gestión de Controladores',
     'management_users' => 'Gestión de Usuarios',
 	'management_clients' => 'Gestión de Clientes',
+    'management_payments' => 'Gestión de Pagos',
+    'management_bill' => 'Gestión de Facturas',
+    'management_domiciliation' => 'Gestión de Domiciliacións',
 	'users' => 'Usuarios',
 	'create_action' => 'Añadir Acción',
     'create_client' => 'Crear Cliente',
@@ -66,6 +69,9 @@ $strings = array(
 	'create_profile' => 'Añadir Perfil',
 	'create_controller' => 'Añadir Controlador',
     'create_permission' => 'Añadir Permiso',
+    'create_payment' => 'Añadir Pago',
+    'create_bill' => 'Añadir Factura',
+    'create_domiciliation' => 'Añadir Domiciliación',
 	'management_user' => 'Gestión de Usuario',
 	'dni' => 'DNI',
 	'name' => 'Nombre',
@@ -208,6 +214,7 @@ $strings = array(
 	'space_edit' => 'Editar espacio',
 	'succ_space_delete' => 'Borrado realizado con éxito',
 	'spaces_data' => 'Datos del espacio',
+	'profile_has_all_permissions'=>'Este perfil siempre tiene todos los permisos',
 
 
 	/*NOTIFICACIÓNS*/
@@ -274,6 +281,7 @@ $strings = array(
     	'fail_aforo_incorrect'=>'EL aforo no puede ser menor que 1',
     	'fail_discount_incorrect'=>'El descuento no es válido',
    		'fail_discount_exists' => 'El descuento ya existe',
+    'fail_payment_exists' => 'El pago ya existe',
     	'fail_aforo_fail'=>'El aforo del aula es menor que el de la actividad',
 		'fail_dni_exists'=>'Ya hay un empleado con ese DNI',
 		'fail_dni_incorrect'=>'El DNI no es válido',
@@ -358,6 +366,21 @@ $strings = array(
     'create_employee' => 'Añadir Empregado',
     'employee_modify' => 'Modificar Empleado',
     'no_user'=>'Sin Usuario',
+    'discount_modify' => 'Modificar Descuento',
+    'DOMICILIATION' => 'Domiciliación',
+    'quantity' => 'Cantidad',
+    'cash' => 'Efectivo',
+    'creditCard' => 'Tarjeta de Credito',
+    'external_client'=>'Cliente externo',
+    'payment_data'=>'Datos del Pago',
+	'id'=>'Identificador',
+	'payment_method'=>'Metodo de Pago',
+	'payment_modify'=>'Modificar Pago',
+	'period'=>'Periodo',
+	'total_quantity'=>'Total',
+	'months'=>'Meses',
+    'domiciliation_data'=>'Datos de la Domiciliacion',
+    'domiciliation_modify'=>'Modificar Domiciliacion'
 
 	/*Eventos*/
     'EVENTS' => 'Eventos',

@@ -56,6 +56,9 @@ $strings = array(
     'management_actions' => 'Xestión de Accións',
     'management_controllers' => 'Xestión de Controladores',
     'management_users' => 'Xestión de Usuarios',
+    'management_payments' => 'Xestión de Pagos',
+    'management_bill' => 'Xestión de Facturas',
+    'management_domiciliation' => 'Xestión de Domiciliacións',
     'management_clients' => 'Xestión de Clientes',
     'users' => 'Usuarios',
     'create_user' => 'Engadir Usuario',
@@ -64,6 +67,9 @@ $strings = array(
     'create_controller' => 'Engadir Controlador',
     'create_action' => 'Engadir Acción',
     'create_permission' => 'Engadir Permiso',
+    'create_payment' => 'Añadir Pago',
+    'create_bill' => 'Añadir Factura',
+    'create_domiciliation' => 'Añadir Domiciliación',
     'management_user' => 'Xestionar Usuario',
     'dni' => 'DNI',
     'name' => 'Nome',
@@ -189,6 +195,7 @@ $strings = array(
     'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
     'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
     'use_q'=>'Usar?',
+    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
 
 
     /*ESPAZOS*/
@@ -264,6 +271,7 @@ $strings = array(
         'fail_profile_exists'=>"O perfil xa existe",
         'fail_category_exists'=>'A categoría xa existe',
         'fail_client_exists'=>"O cliente xa existe",
+    'fail_payment_exists'=>"O pago xa existe",
         'fail_activity_exists'=>"A actividade xa existe",
         'fail_aforo_incorrect'=>'O aforo non pode ser menor que 1',
         'fail_discount_incorrect'=>'O desconto non é válido',
@@ -382,5 +390,20 @@ $strings = array(
     'succ_pupil_add' => 'Alumno engadido con éxito',
 
 
+    'discount_modify' => 'Modificar Desconto',
+    'DOMICILIATION' => 'Domiciliacións',
+    'quantity' => 'Cantidade',
+    'cash' => 'Efectivo',
+    'creditCard' => 'Tarxeta de Credito',
+    'external_client'=>'Cliente externo',
+    'payment_data'=>'Datos do Pago',
+    'id'=>'Identificador',
+    'payment_method'=>'Metodo de Pago',
+    'payment_modify'=>'Modificar Pago',
+    'period'=>'Periodo',
+    'total_quantity'=>'Cantidade total',
+    'months'=>'Meses',
+    'domiciliation_data'=>'Datos da Domiciliacion',
+    'domiciliation_modify'=>'Modificar Domiciliacion'
 )
 ?>
