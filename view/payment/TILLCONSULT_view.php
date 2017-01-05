@@ -38,6 +38,8 @@ $permissions = $view->getVariable("paymentstoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['quantity'] ?></th>
+                        <th class="text-center"><?php echo $strings['date'] ?></th>
+                        <th class="text-center"><?php echo $strings['concept'] ?></th>
                     </tr>
                     </thead>
 
@@ -52,7 +54,8 @@ $permissions = $view->getVariable("paymentstoshow");
                         echo "<tr class='row text-center' ><td> ";
                         $total = $total + intval($p->getCantidad());
                         echo $p->getCantidad() . " €</td><td class='text-center'>";
-
+                        echo $p->getFecha() . "</td><td class='text-center'>";
+                        echo $p->getConcepto() . "</td><td class='text-center'>";
                         echo "</td></tr>";
                     }
 

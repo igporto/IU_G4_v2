@@ -436,6 +436,7 @@ $strings = array(
     'create_spend'=>'Crear gasto de caija',
     'create_withdrawal'=>'Crear retirada de caja',
     'create_close'=>'Cierre de caija',
+	'concept'=>'Concepto'
 
 )
 ?>

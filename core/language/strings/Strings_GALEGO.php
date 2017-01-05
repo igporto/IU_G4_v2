@@ -441,5 +441,6 @@ $strings = array(
     'create_spend'=>'Crear gasto de caixa',
     'create_withdrawal'=>'Crear retirada de caixa',
     'create_close'=>'Cierre de caixa',
+    'concept'=>'Concepto'
 )
 ?>

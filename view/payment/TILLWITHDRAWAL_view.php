@@ -9,9 +9,9 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['create_spend']; ?></h1>
+    <h1 class="page-header"><?php echo $strings['create_withdrawal']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=payment&action=tillspend"
+          action="index.php?controller=payment&action=tillwithdrawal"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -31,17 +31,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <div id="error"></div>
                         </div>
                         <!--Campo cantidad-->
-                    </div>
-                    <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['concept'] ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="text" class="form-control" id="concepto" name="concepto"
-                                   placeholder= <?php echo $strings['concept'] ?>
-                                   required="true" maxlength="25">
-                            <div id="error"></div>
-                        </div>
-                        <!--Campo concepto-->
                     </div>
 
                 </div>

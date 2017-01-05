@@ -171,7 +171,9 @@ CREATE TABLE `calendario` (
 create table `caja` (
   `id_caja` int(4) NOT NULL,
   `cantidad` int(6) NULL,
-  `id_pago` int(4) NOT NULL
+  `id_pago` int(4) NOT NULL,
+  `fecha` date NOT NULL,
+  `concepto` varchar(20) NOT NULL
 ) ;
 
 -- --------------------------------------------------------

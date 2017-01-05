@@ -37,8 +37,8 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
             $payment->getPagado(), $payment->getTipoCliente(), $payment->getDniAlum(), $payment->getDniClienteExterno()));
 
         if ($payment->getPagado() == "1" && $payment->getMetodoPago() == "cash") {
-            $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago) values (?,?)");
-            $stmt->execute(array($payment->getCantidad(), $this->db->lastInsertId()));
+            $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago,fecha,concepto) values (?,?,?,?)");
+            $stmt->execute(array($payment->getCantidad(), $this->db->lastInsertId(), $payment->getFecha(), "PAYMENT"));
         }
 
         //devolve o ID do último elemento insertado
@@ -136,8 +136,14 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
 
     public function tillspend(Till $till)
     {
-        $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago) values (?,?)");
-        $stmt->execute(array($till->getCantidad(), 0));
+        $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago,fecha,concepto) values (?,?,?,?)");
+        $stmt->execute(array($till->getCantidad(), 0, $till->getFecha(), $till->getConcepto()));
+    }
+
+    public function tillwithdrawal(Till $till)
+    {
+        $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago,fecha,concepto) values (?,?,?,?)");
+        $stmt->execute(array($till->getCantidad(), 0, $till->getFecha(), "WITHDRAWAL"));
     }
 
     public function tillconsult()
@@ -151,7 +157,7 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         foreach ($till_db as $till) {
             //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
             //introduce no array o obxeto Payment creado a partir da query
-            array_push($tills, new Till($till["id_caja"],$till["cantidad"], $till["id_pago"]));
+            array_push($tills, new Till($till["id_caja"], $till["cantidad"], $till["id_pago"], $till["fecha"], $till["concepto"]));
         }
 
         //devolve o array

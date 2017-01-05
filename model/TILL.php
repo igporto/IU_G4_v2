@@ -13,15 +13,51 @@ class Till
     private $id_caja;
     private $cantidad;
     private $id_pago;
+    private $fecha;
+    private $concepto;
 
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($id_caja = NULL, $cantidad = NULL, $id_pago = NULL)
+    public function __construct($id_caja = NULL, $cantidad = NULL, $id_pago = NULL,$fecha = NULL,$concepto = NULL)
     {
         $this->id_caja = $id_caja;
         $this->cantidad = $cantidad;
         $this->id_pago = $id_pago;
+        $this->fecha = $fecha;
+        $this->concepto = $concepto;
+    }
+
+    /**
+     * @return null
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param null $fecha
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    }
+
+    /**
+     * @return null
+     */
+    public function getConcepto()
+    {
+        return $this->concepto;
+    }
+
+    /**
+     * @param null $concepto
+     */
+    public function setConcepto($concepto)
+    {
+        $this->concepto = $concepto;
     }
 
     /**

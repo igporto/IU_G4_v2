@@ -238,6 +238,10 @@ class PaymentController extends BaseController
                 $till = new Till();
 
                 $till->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+                date_default_timezone_set("Europe/Madrid");
+                $date = date("Y-m-d h:i:s");
+                $till->setFecha($date);
+                $till->setConcepto(htmlentities(addslashes($_POST["concepto"])));
 
                 try {
 
@@ -256,6 +260,35 @@ class PaymentController extends BaseController
             //$this->view->setLayout("navbar");
             $this->view->render("payment", "tillspend");
         }
+
+    public function tillwithdrawal()
+    {
+        if (isset($_POST["submit"])) {
+            //Creamos un obxecto Payment baleiro
+            $till = new Till();
+
+            $till->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+            date_default_timezone_set("Europe/Madrid");
+            $date = date("Y-m-d h:i:s");
+            $till->setFecha($date);
+
+            try {
+
+                $this->paymentMapper->tillspend($till);
+                //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
+                $this->view->setFlash('succ_payment_add');
+
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos payments)
+                $this->view->redirect("payment", "show");
+            } catch (ValidationException $ex) {
+                $this->view->setFlash("erro_general");
+            }
+        }
+
+        //Se non se enviou nada
+        //$this->view->setLayout("navbar");
+        $this->view->render("payment", "tillwithdrawal");
+    }
 
     public function tillconsult()
     {
