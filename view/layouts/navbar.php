@@ -244,12 +244,13 @@ $permis = $uc->getCurrentUserPerms();
                                             title:'" . $strings[$tipo."_title"] . "',
                                             message:'" . $strings[$flag] . "',
                                             info: '',
-                                            icon:'fa fa-ban',
-                                            'delay'     :10000
+                                            icon:'fa fa-ban'
+                                            
                                         },
                                         theme:'awesome error',
                                         'position'  :'bottom right',
-                                        'outEffect' :'slideBottom'
+                                        'outEffect' :'slideBottom',
+                                        'sticky': true
                                     });
                                 </script>";
                             break;
@@ -261,12 +262,13 @@ $permis = $uc->getCurrentUserPerms();
                                             title:'" . $strings[$tipo."_title"] . "',
                                             message:'" . $strings[$flag] . "',
                                             info: '',
-                                            icon:'fa fa-times',
-                                            'delay'     :10000
+                                            icon:'fa fa-times'
+                                            
                                         },
                                         theme:'awesome warning',
                                         'position'  :'bottom right',
-                                        'outEffect' :'slideBottom'
+                                        'outEffect' :'slideBottom',
+                                        'sticky': true
                                     });
                                 </script>";
                             break;
