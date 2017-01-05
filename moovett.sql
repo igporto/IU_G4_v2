@@ -390,13 +390,13 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `pago` (
   `id_pago` int(4) NOT NULL,
-  `fecha` date NOT NULL DEFAULT '0000-00-00',
+  `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
   `cantidad` smallint(6) not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
   `descuento` int(4) NOT NULL,
-  `id_inscripcion` int(4) NULL,
-  `id_servicio` int(4) NULL,
-  `id_reserva` int(4) NULL
+  `tipo_cliente` VARCHAR (19) NULL,
+  `dni_alum` VARCHAR (9) NULL,
+  `dni_cliente_externo` VARCHAR (9) NULL
 )  ;
 
 -- --------------------------------------------------------
@@ -605,7 +605,13 @@ CREATE TABLE `alumnos_recibe_notificacion` (
   `id_alumno` int(4) NOT NULL
 );
 
-
+CREATE TABLE `domiciliacion` (
+  `id_domiciliacion` int(4) NOT NULL,
+  `periodo` int(4) NOT NULL,
+  `total` int(4) NOT NULL,
+  `id_cliente` varchar(9) NOT NULL,
+  `iban` varchar (32) NOT NULL
+) ;
 
 
 
@@ -775,10 +781,7 @@ ALTER TABLE `lesion`
 --
 ALTER TABLE `pago`
   ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `descuento` (`descuento`),
-  ADD KEY `id_reserva` (`id_reserva`),
-  ADD KEY `id_inscripcion` (`id_inscripcion`),
-  ADD KEY `id_servicio` (`id_servicio`);
+  ADD KEY `descuento` (`descuento`);
 
 --
 -- Indices de la tabla `perfil`
@@ -901,8 +904,11 @@ ALTER TABLE `alumnos_recibe_notificacion`
  ADD KEY `id_alumno` (`id_alumno`),
  ADD KEY `id_notificacion` (`id_notificacion`);
 
+ALTER TABLE `domiciliacion`
+  ADD PRIMARY KEY (`id_domiciliacion`);
 
-
+ALTER TABLE `domiciliacion`
+  MODIFY `id_domiciliacion` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
