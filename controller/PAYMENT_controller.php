@@ -89,7 +89,7 @@ class PaymentController extends BaseController
         } catch (Exception $e) {
             $this->view->setFlash('erro_general');
         }
-        $this->view->render("payment", "show");
+        $this->view->render("payment", "delete");
     }
 
     public function show()
@@ -274,7 +274,7 @@ class PaymentController extends BaseController
 
             try {
 
-                $this->paymentMapper->tillspend($till);
+                $this->paymentMapper->tillwithdrawal($till);
                 //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_payment_add');
 

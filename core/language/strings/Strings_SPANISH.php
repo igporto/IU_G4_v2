@@ -433,10 +433,20 @@ $strings = array(
     'sickreason'=>'Motivo de la Baja',
     'pengingclasses'=>'Clases pendientes',
 
-    'create_spend'=>'Crear gasto de caija',
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'SI',
+    'no'=>'NO',
+    'cantidad'=>'Cantidad a Pagar',
+    'client_type'=>'Tipo de cliente',
+    'pagado'=>'Pagado',
+    'till'=>'Caja',
+    'create_spend'=>'Crear gasto de caja',
     'create_withdrawal'=>'Crear retirada de caja',
-    'create_close'=>'Cierre de caija',
-	'concept'=>'Concepto'
+    'create_close'=>'Cierre de caja',
+    'concept'=>'Concepto',
+    'withdrawal'=>'Retirada de caja',
+    'spend'=>'Gasto de caja',
+
 
 )
 ?>

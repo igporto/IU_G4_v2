@@ -446,6 +446,8 @@ $strings = array(
     'create_spend'=>'Create till spend',
     'create_withdrawal'=>'Create till withdrawal',
     'create_close'=>'Till close',
-    'concept'=>'Concept'
+    'concept'=>'Concept',
+    'withdrawal'=>'Till Withdrawal',
+    'spend'=>'Till Spend'
 )
 ?>

@@ -6,10 +6,9 @@ echo '<div class="modal fade" id="view' . $p->getIdPago() . '" tabindex="-1" rol
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="' . $p->getIdPago() . 'label">' . $strings["payment_data"] . ': </h4>
             </div>
-            <div class="modal-body">';
+            <div class="modal-body">
 
 //DATOS DO PAGO
-echo '  
             <div class="row">';
 
 if ($p->getDniAlum() != NULL) {
@@ -60,7 +59,9 @@ echo '               <div class="col-xs-12 col-md-12">';
 echo '
                     <!--Campo dni-->
                 </div>
-                </div></div><div class="modal-footer">
+                </div></div>
+                
+                <div class="modal-footer">
                 
                 <button type="button" class="btn btn-success" data-dismiss="modal">
                 <i class="fa fa-tick"></i>' . $strings["okay"] . '</button>

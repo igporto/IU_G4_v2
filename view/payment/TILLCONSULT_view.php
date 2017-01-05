@@ -55,7 +55,13 @@ $permissions = $view->getVariable("paymentstoshow");
                         $total = $total + intval($p->getCantidad());
                         echo $p->getCantidad() . " €</td><td class='text-center'>";
                         echo $p->getFecha() . "</td><td class='text-center'>";
-                        echo $p->getConcepto() . "</td><td class='text-center'>";
+                        if ($p->getConcepto() == "WITHDRAWAL") {
+                            echo $strings["withdrawal"] . "</td><td class='text-center'>";
+                        } elseif ($p->getConcepto() == "PAYMENT") {
+                            echo $strings["spend"] . "</td><td class='text-center'>";
+                        } else {
+                            echo $p->getConcepto() . "</td><td class='text-center'>";
+                        }
                         echo "</td></tr>";
                     }
 
@@ -63,14 +69,18 @@ $permissions = $view->getVariable("paymentstoshow");
                     echo "<tr class='row' ><th class='text-center'>TOTAL: " . $total . " €</th><td class='text-center'>";
                     ?>
 
-                    <tr class='row' ><th class='text-center'>
+                    <tr class='row'>
+                        <th class='text-center'>
                             -----
-                        </th><td class='text-center'>
-                    <tr class='row' ><th class='text-center'>
-                    <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
-                        <i class="fa fa-arrow-left"></i>
-                        <?php echo $strings['back'] ?></i></a>
-                        </th><td class='text-center'>
+                        </th>
+                        <td class='text-center'>
+                    <tr class='row'>
+                        <th class='text-center'>
+                            <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
+                                <i class="fa fa-arrow-left"></i>
+                                <?php echo $strings['back'] ?></i></a>
+                        </th>
+                        <td class='text-center'>
 
                     </tbody>
                 </table><!-- fin table -->
