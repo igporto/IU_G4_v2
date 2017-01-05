@@ -8,14 +8,16 @@ class Hour
     private $hourStart;
 	private $hourEnd;
     private $idSchedule;
+    private $idSession;
 	
-	public function __construct($idhour = NULL, $day = NULL, $hourStart = NULL, $hourEnd=NULL, $idSchedule=NULL)
+	public function __construct($idhour = NULL, $day = NULL, $hourStart = NULL, $hourEnd=NULL, $idSchedule=NULL,$idSession=NULL)
     {
         $this->idhour	= $idhour;
         $this->day		= $day;
         $this->hourStart	= $hourStart;
         $this->hourEnd		= $hourEnd;
         $this->idSchedule   = $idSchedule;
+        $this->idSession   = $idSession;
     }
 	
 	/**
@@ -35,7 +37,7 @@ class Hour
      *
      * @return self
      */
-    private function setIdHour($idhour)
+    public function setIdHour($idhour)
     {
         $this->idhour = $idhour;
         
@@ -131,9 +133,33 @@ class Hour
      *
      * @return self
      */
-    private function setIdSchedule($idSchedule)
+    public function setIdSchedule($idSchedule)
     {
         $this->idSchedule = $idSchedule;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of idSession.
+     *
+     * @return mixed
+     */
+    public function getIdSession()
+    {
+        return $this->idSession;
+    }
+
+    /**
+     * Sets the value of idSession.
+     *
+     * @param mixed $idSession the id session
+     *
+     * @return self
+     */
+    public function setIdSession($idSession)
+    {
+        $this->idSession = $idSession;
 
         return $this;
     }
