@@ -352,5 +352,35 @@ $strings = array(
     'employee_type' => 'Tipo de Desconto',
     'no_user'=>'Sen Usuario',
 
+    /*Eventos*/
+    'EVENTS' => 'Eventos',
+    'EVENT' => 'Eventos',
+    'management_events' => 'Xestión de Eventos',
+    'EVENTS_ID' => 'ID Eventos',
+    'create_event' => 'Crear Evento',
+    'succ_event_add' => 'Evento engadido correctamente',
+    'event_already_exists' => 'O evento xa existe',
+    'initial_hour' => 'Hora Inicio',
+    'final_hour' => 'Hora Fin',
+    'date' => 'Fecha Evento',
+    'event_id' => 'ID do evento',
+    'dni_a' => 'ID do Alumno',
+    'dni_p' => 'ID do Profesor',
+    'event_data' => 'Datos do Evento',
+    'succ_event_delete' => 'Borrado realizado con éxito',
+    'succ_event_mod' => 'Evento modificado con éxito',
+    'event_edit' => 'Modificar evento',
+    'EVENTS_NAME' => 'Nome Evento',
+    'list_of_student' => 'Lista de Alumnos',
+    'on_event' => 'no evento',
+    'id_student' => 'ID do alumno',
+    'succ_student_add' => 'Alumno engadido correctamente',
+    'student_already_exists' => 'O alumno xa existe',
+    'add_student' => 'Insertar alumno',
+    'succ_student_delete' => 'Alumno eliminado do evento',
+    'student_data' => 'Datos do alumno',
+    'succ_pupil_add' => 'Alumno engadido con éxito',
+
+
 )
 ?>
