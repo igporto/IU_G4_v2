@@ -134,7 +134,6 @@ $strings = array(
 	'EDIT' => 'Edit',
 	'VIEW' => 'View',
 	'SHOW' => 'Show',
-	'ACTIVITY' => 'Activities',
 	'SCHEDULE'=>'Schedules',
 	'manage' => 'Manage',
 	'save'=>'Save',
@@ -299,6 +298,7 @@ $strings = array(
 		'fail_dni_incorrect'=>'DNI is not valid',
 		'fail_email_incorrect'=>'email is not valid',
     	'fail_birthdate_incorrect' => 'Birth Date is not valid',
+    	'fail_price_incorrect'=>'Price is not valid',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -360,6 +360,7 @@ $strings = array(
     'no_discount'=>'Without Discount',
     'no_category'=>'Without Category',
     'no_space'=>'Without Space',
+    'price'=>'Price',
 
     /*Descontos*/
     'DISCOUNT' => 'Discounts',
@@ -387,7 +388,20 @@ $strings = array(
     'job'=>'Job',
     'sickreason'=>'Sick Reason',
     'pengingclasses'=>'Pending Classes',
-	/*Eventos*/
+
+
+    /*Documento*/
+    'DOCUMENT'=>'Documents',
+    'create_document'=>'Añadir Documento',
+    'document'=>'Document',
+    'employee'=>'Employee',
+    'without_employee'=>'Without Employee',
+    'alumn'=>'Alumn',
+    'management_documents'=>'Documents Management',
+    'document_data'=>'Document Data',
+
+
+    /*Eventos*/
     'EVENTS' => 'Events',
     'EVENT' => 'Events',
     'management_events' => 'Events Management',
@@ -397,7 +411,7 @@ $strings = array(
     'event_already_exists' => 'Event already exists',
     'initial_hour' => 'Start Time',
     'final_hour' => 'End Time',
-    'date' => 'Event Date',
+    'date' => 'Date',
     'event_id' => 'Event´s ID',
     'dni_a' => 'Student´s ID',
     'dni_p' => 'Teacher',

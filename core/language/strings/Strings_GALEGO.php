@@ -136,7 +136,6 @@ $strings = array(
     'EDIT' => 'Editar',
     'VIEW' => 'Visualizar',
     'SHOW' => 'Mostrar',
-    'ACTIVITY' => 'Actividades',
     'SCHEDULE'=>'Horarios',
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
@@ -292,6 +291,7 @@ $strings = array(
         'fail_dni_incorrect'=>'O DNI non é válido',
         'fail_email_incorrect' => 'O email non é válido',
         'fail_birthdate_incorrect' => 'A data de nacemento non é válida',
+        'fail_price_incorrect'=>'O Prezo non é válido',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -352,6 +352,7 @@ $strings = array(
     'no_discount'=>'Sen Desconto',
     'no_category'=>'Sen Categoría',
     'no_space'=>'Sen Espazo',
+    'price'=>'Prezo',
 
     /*Descontos*/
     'DISCOUNT' => 'Descontos',
@@ -381,6 +382,15 @@ $strings = array(
     'sickreason'=>'Motivo da baixa',
     'pengingclasses'=>'Clases pendentes',
 
+    /*Documento*/
+    'DOCUMENT'=>'Documentos',
+    'create_document'=>'Engadir Documento',
+    'document'=>'Documento',
+    'employee'=>'Empregado',
+    'without_employee'=>'Sen Empregado',
+    'alumn'=>'Alumno',
+    'management_documents'=>'Xestión de Documentos',
+    'document_data'=>'Datos do Documento',
 
     /*Eventos*/
     'EVENTS' => 'Eventos',
@@ -392,7 +402,7 @@ $strings = array(
     'event_already_exists' => 'O evento xa existe',
     'initial_hour' => 'Hora Inicio',
     'final_hour' => 'Hora Fin',
-    'date' => 'Fecha Evento',
+    'date' => 'Data',
     'event_id' => 'ID do evento',
     'dni_a' => 'ID do Alumno',
     'dni_p' => 'Profesor',
@@ -455,6 +465,7 @@ $strings = array(
     'client_type'=>'Tipo de cliente',
     'pagado'=>'Pagado',
     'till'=>'Caixa',
+
     'create_spend'=>'Crear gasto de caixa',
     'create_withdrawal'=>'Crear retirada de caixa',
     'create_close'=>'Cierre de caixa',

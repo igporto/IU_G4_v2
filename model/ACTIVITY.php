@@ -6,16 +6,17 @@ require_once(__DIR__."/../model/CATEGORY.php");
 
 class Activity {
 
-    public $codactivity;
-    public $activityname;
-    public $capacity;
-    public $category;
-    public $space;
-    public $discount;
-    public $employee;
+    private $codactivity;
+    private $activityname;
+    private $capacity;
+    private $category;
+    private $space;
+    private $discount;
+    private $employee;
+    private $price;
     public $color;
 
-    public function __construct($codactivity = NULL, $activityname = NULL, $capacity = NULL, Category $category = NULL, SPACE $space= NULL, Discount $discount = NULL, Employee $employee = NULL, $color = NULL)
+    public function __construct($codactivity = NULL, $activityname = NULL, $capacity = NULL, Category $category = NULL, SPACE $space= NULL, Discount $discount = NULL, Employee $employee = NULL, $price = 0.00, $color = NULL)
     {
         $this->codactivity = $codactivity;
         $this->activityname = $activityname;
@@ -24,6 +25,7 @@ class Activity {
         $this->space = $space;
         $this->discount = $discount;
         $this->employee = $employee;
+        $this->price = $price;
         $this->color = $color;
     }
 
@@ -106,6 +108,13 @@ class Activity {
     {
         $this->employee = $employee;
     }
+    public function getPrice()
+    {
+        return $this->price;
+    }
 
-    
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
 }
