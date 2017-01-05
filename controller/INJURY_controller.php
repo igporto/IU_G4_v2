@@ -24,7 +24,10 @@ class InjuryController extends BaseController {
     }
 
     public function view(){
-
+        $codinjury = $this->injuryMapper->getIdByName($_REQUEST["id_lesion"]);
+        $injury = $this->injuryMapper->view($codinjury);
+        $this->view->setVariable("id_lesion", $injury);
+        $this->view->render("injury", "view");
     }
 
     public function add()

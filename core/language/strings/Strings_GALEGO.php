@@ -427,6 +427,8 @@ $strings = array(
     'create_injury' => 'Engadir lesión',
     'succ_injury_add' => 'Lesión engadida correctamente',
     'injury_already_exists' => 'A lesión xa existe',
+    'event_name' => 'Nome do evento',
+
 
 
 //PAGOS, DESCUENTOS y FACTURAS

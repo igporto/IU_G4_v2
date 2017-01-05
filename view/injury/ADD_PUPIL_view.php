@@ -4,18 +4,18 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-$userMapper = new EventMapper();
+$injuryMapper = new InjuryMapper();
 ?>
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=event&action=addpupil"
+          action="index.php?controller=injury&action=addpupil"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_event'] ?>
+                <?php echo $strings['create_injury'] ?>
             </div>
             <div class="panel-body">
 
@@ -31,12 +31,11 @@ $userMapper = new EventMapper();
                 <div class="row">
                     <div class="col-xs-12  col-md-7 pull-right">
 
-                        <p><?php echo $strings['dni']." ".$strings['student'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['dni_a'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
-                                $s = new EventMapper();
-                                $a = $s->selectDniA();
+                                $a = $injuryMapper->selectDniA();
                                 foreach ($a as $b){
                                     echo '<option>'.$b.'</option>';
                                 }
@@ -45,14 +44,13 @@ $userMapper = new EventMapper();
                         </div></p>
                         <!--Campo dni-->
 
-                        <p><?php echo $strings['event_name'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['event_id'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="id_evento">
                                 <?php
-                                $s = new EventMapper();
-                                $a = $s->selectEventID();
+                                $a = $injuryMapper->selectEventID();
                                 foreach ($a as $b){
-                                    echo '<option>'.$s->getNameEvent($b).'</option>';
+                                    echo '<option>'.$b.'</option>';
                                 }
                                 ?>
                             </select>
@@ -69,7 +67,7 @@ $userMapper = new EventMapper();
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=event&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

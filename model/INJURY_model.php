@@ -32,9 +32,12 @@ class InjuryMapper
         return $injury;
     }
 
-    public function getIdByName($spacename)
+    public function getIdByName($injuryname)
     {
+        $stmt = $this->db->prepare("SELECT id_lesion FROM lesion WHERE  id_lesion= ?");
+        $stmt->execute(array($injuryname));
 
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id_lesion'];
     }
 
     //devolve o obxecto Injury no que o $id_lesion coincida co da tupla.
@@ -90,7 +93,6 @@ class InjuryMapper
         $stmt->execute(array($injury->getNameInjury(), $injury->getDescription(), $injury->getTreatment(), $injury->getTime(), $injury->getCodInjury()));
     }
 
-
     //borra sobre a taboa lesion a tupla con id igual a o do obxeto pasado
     public function delete($codinjury)
     {
@@ -108,5 +110,19 @@ class InjuryMapper
             array_push($in, $this->view($injur['id_lesion']));
         }
         return $in;
+    }
+
+    //Recolle os id dos alumnos
+    public function selectDniA(){
+        $stmt = $this->db->prepare("SELECT * FROM alumno");
+        $stmt->execute();
+
+        $id = array();
+        $resul = $stmt->fetchAll();
+        foreach($resul as $r){
+            array_push($id,$r['id_alumno']);
+        }
+
+        return $id;
     }
 }

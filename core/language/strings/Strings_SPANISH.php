@@ -422,6 +422,7 @@ $strings = array(
     'succ_student_delete' => 'Alumno eliminado del evento',
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
+	'event_name' => 'Nombre del evento',
 
     /*LESIONS*/
     'management_injury' => 'Gestión de Lesiones',

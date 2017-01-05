@@ -417,6 +417,8 @@ $strings = array(
 	'succ_pupil_add' => 'Success pupil add',
 	'space_name' => 'Space name',
     'confirm_msg' => 'Are you sure you want to unsubscribe from',
+    'event_name' => 'Event name',
+
 
 
     /*LESIONS*/
