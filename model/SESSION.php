@@ -14,7 +14,8 @@ class Session
 
 
 	
-	public function __construct($name=NULL,
+	public function __construct(
+                    $name=NULL,
                     $idSession=NULL,
                     $idSchedule=NULL,
                     $idFisio=NULL,

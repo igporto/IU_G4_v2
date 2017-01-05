@@ -140,16 +140,4 @@ class HourMapper
         $stmt = $this->db->prepare("DELETE from hora WHERE id_hora= '$id_hora'");
         $stmt->execute();
     }
-
-    public function hourExists(Hour $hour)
-    {
-        //implement if necessary
-    }
-
-    public function isValidHour()
-    {
-       //implement if necessary
-        //may need multiple mini-functions
-    }
-
 }
