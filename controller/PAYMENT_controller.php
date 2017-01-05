@@ -231,35 +231,35 @@ class PaymentController extends BaseController
         $this->view->render("payment", "pay");
     }
 
-        public function tillspend()
-        {
-            if (isset($_POST["submit"])) {
-                //Creamos un obxecto Payment baleiro
-                $till = new Till();
+    public function tillspend()
+    {
+        if (isset($_POST["submit"])) {
+            //Creamos un obxecto Payment baleiro
+            $till = new Till();
 
-                $till->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
-                date_default_timezone_set("Europe/Madrid");
-                $date = date("Y-m-d h:i:s");
-                $till->setFecha($date);
-                $till->setConcepto(htmlentities(addslashes($_POST["concepto"])));
+            $till->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+            date_default_timezone_set("Europe/Madrid");
+            $date = date("Y-m-d h:i:s");
+            $till->setFecha($date);
+            $till->setConcepto(htmlentities(addslashes($_POST["concepto"])));
 
-                try {
+            try {
 
-                    $this->paymentMapper->tillspend($till);
-                    //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash('succ_payment_add');
+                $this->paymentMapper->tillspend($till);
+                //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
+                $this->view->setFlash('succ_payment_add');
 
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos payments)
-                    $this->view->redirect("payment", "show");
-                } catch (ValidationException $ex) {
-                    $this->view->setFlash("erro_general");
-                }
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos payments)
+                $this->view->redirect("payment", "show");
+            } catch (ValidationException $ex) {
+                $this->view->setFlash("erro_general");
             }
-
-            //Se non se enviou nada
-            //$this->view->setLayout("navbar");
-            $this->view->render("payment", "tillspend");
         }
+
+        //Se non se enviou nada
+        //$this->view->setLayout("navbar");
+        $this->view->render("payment", "tillspend");
+    }
 
     public function tillwithdrawal()
     {
@@ -297,4 +297,10 @@ class PaymentController extends BaseController
         $this->view->render("payment", "tillconsult");
     }
 
+    public function tillclose()
+    {
+        $tills = $this->paymentMapper->tillconsult();
+        $this->view->setVariable("paymentstoshow", $tills);
+        $this->view->render("payment", "tillclose");
+    }
 }
