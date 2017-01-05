@@ -1625,7 +1625,7 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 83),
               (1, 84),
               (1, 85);
-
+              /*ENGADIDO POR BRUNO*/
 /*ENGADIDO POR IVAN */
 --
 -- Volcado de datos para la tabla `categoria`
@@ -1643,7 +1643,7 @@ INSERT INTO `categoria`(`id_categoria`, `nombre`) VALUES
 INSERT INTO `espacio`(`id_espacio`, `nombre`, `aforo`, `descripcion`) VALUES
   (1, "Aula 1.1", "30", "Aula da primeira Planta Porta 1"),
   (2, "Aula 1.2", "20", "Aula da primeira Planta Porta 2"),
-  (3, "Aula 0", "10", "Zona para as clases de TRX e zona de musculaciÃ³n");
+  (3, "Aula 0", "10", "Zona para as clases de TRX e zona de musculación");
 
 
 
@@ -1651,9 +1651,9 @@ INSERT INTO `espacio`(`id_espacio`, `nombre`, `aforo`, `descripcion`) VALUES
 -- Volcado de datos para la tabla `empleado`
 --
 INSERT INTO `empleado`(`id_empleado`, `dni`, `nombre`, `apellidos`, `fech_nac`, `direccion_postal`, `email`, `comentario_personal`, `hora_entrada`, `hora_salida`, `num_cuenta`, `tipo_contrato`, `cod_usuario`) VALUES
-(1, '44654552J', 'Lorena', 'DomÃ­nguez', "1994-01-01", "Ourense", "lorena@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111111, "Fixo", 5),
-(2, '34562321A', 'AdriÃ¡n', 'Reboredo', "1994-04-01", "Ourense", "adrian@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111112, "Fixo", 3),
-(3, '44432654I', 'IvÃ¡n', 'Guardado', "1994-02-01", "Ourense", "ivan@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111113, "Fixo", 4);
+(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01", "Ourense", "lorena@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111111, "Fixo", 5),
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Ourense", "adrian@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111112, "Fixo", 3),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Ourense", "ivan@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111113, "Fixo", 4);
 
 
 
@@ -1686,14 +1686,14 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
 --
 INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `motivo_baja`, `clases_pendientes`) VALUES
 (1, '44654552J', 'Lorena', 'DomÃ­nguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", "", 0),
-(2, '34562321A', 'AdriÃ¡n', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", "Moi caro o ximnasio", 0),
-(3, '44432654I', 'IvÃ¡n', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", "",0);
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", "Moi caro o ximnasio", 0),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", "",0);
 
 
 
 
 /* FIN DE ENGADIDO POR IVAN */
-/*Engadido por Bruno */
+/* Engadido por Bruno */
 
 --
 -- Volcado de datos para la tabla `evento`
@@ -1714,7 +1714,7 @@ INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
   (2,1),
   (2,3);
 
-
+/* Engadido por Bruno */
 /* Engadido por Lore */
 
 
@@ -1725,8 +1725,8 @@ INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
 
 INSERT INTO `cliente_externo` (`dni_cliente_externo`, `nombre`, `apellido`, `telefono`, `email`) VALUES
   ('44654552J', 'Lorena', 'DomÃ­nguez', 988656565, 'lore@email.com'),
-  ('34562321A', 'AdriÃ¡n', 'Reboredo', 600125478, 'adrian@email.com'),
-  ('44432654I', 'IvÃ¡n', 'Guardado', 902202122, 'ivÃ¡n@email.com'),
+  ('34562321A', 'Adrián', 'Reboredo', 600125478, 'adrian@email.com'),
+  ('44432654I', 'Iván', 'Guardado', 902202122, 'ivan@email.com'),
   ('34999524J', 'Javier', 'Rodeiro', 600848484, 'javi@email.com'),
   ('44612345B', 'Bruno', 'Cruz', 603456587, 'bruno@email.com'),
   ('36955684Y', 'Yeray', 'Lage', 988123123, 'yeray@email.com'),
