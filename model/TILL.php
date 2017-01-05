@@ -17,7 +17,7 @@ class Till
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($id_caja = NULL, $cantidad = NULL, $cantidad = NULL, $id_pago = NULL)
+    public function __construct($id_caja = NULL, $cantidad = NULL, $id_pago = NULL)
     {
         $this->id_caja = $id_caja;
         $this->cantidad = $cantidad;

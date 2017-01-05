@@ -56,10 +56,10 @@ $permissions = $view->getVariable("paymentstoshow");
                 <?php echo $strings["till"]; ?> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#"><?php echo $strings["create_spend"]; ?></a></li>
-                <li><a href="#"><?php echo $strings["create_withdrawal"]; ?></a></li>
-                <li><a href="#"><?php echo $strings["create_close"]; ?></a></li>
-                <li><a href="#"><?php echo $strings["consult"]; ?></a></li>
+                <li><a href="index.php?controller=payment&action=tillspend"><?php echo $strings["create_spend"]; ?></a></li>
+                <li><a href="index.php?controller=payment&action=tillwithdrawal"><?php echo $strings["create_withdrawal"]; ?></a></li>
+                <li><a href="index.php?controller=payment&action=tillclose"><?php echo $strings["create_close"]; ?></a></li>
+                <li><a href="index.php?controller=payment&action=tillconsult"><?php echo $strings["consult"]; ?></a></li>
             </ul>
         </div>
 

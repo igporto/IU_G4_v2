@@ -134,8 +134,15 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         return $payments;
     }
 
-    /*public function till()
+    public function tillspend(Till $till)
     {
+        $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago) values (?,?)");
+        $stmt->execute(array($till->getCantidad(), 0));
+    }
+
+    public function tillconsult()
+    {
+
         $stmt = $this->db->query("SELECT * FROM caja");
         $till_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -144,10 +151,10 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         foreach ($till_db as $till) {
             //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
             //introduce no array o obxeto Payment creado a partir da query
-            array_push($tills, new Till($till["id_caja"], $till["cantidad"], $till["id_pago"]));
+            array_push($tills, new Till($till["id_caja"],$till["cantidad"], $till["id_pago"]));
         }
 
         //devolve o array
         return $tills;
-    }*/
+    }
 }

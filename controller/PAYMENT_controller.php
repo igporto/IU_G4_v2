@@ -38,8 +38,6 @@ class PaymentController extends BaseController
 
     public function add()
     {
-
-
         if (isset($_POST["submit"])) {
             //Creamos un obxecto Payment baleiro
             $payment = new Payment();
@@ -232,12 +230,38 @@ class PaymentController extends BaseController
         //$this->view->setLayout("navbar");
         $this->view->render("payment", "pay");
     }
-    /*
-        public function till()
+
+        public function tillspend()
         {
-            $payment = $this->paymentMapper->till();
-            $this->view->setVariable("payment", $payment);
-            $this->view->render("payment", "till");
-        }*/
+            if (isset($_POST["submit"])) {
+                //Creamos un obxecto Payment baleiro
+                $till = new Till();
+
+                $till->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+
+                try {
+
+                    $this->paymentMapper->tillspend($till);
+                    //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash('succ_payment_add');
+
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos payments)
+                    $this->view->redirect("payment", "show");
+                } catch (ValidationException $ex) {
+                    $this->view->setFlash("erro_general");
+                }
+            }
+
+            //Se non se enviou nada
+            //$this->view->setLayout("navbar");
+            $this->view->render("payment", "tillspend");
+        }
+
+    public function tillconsult()
+    {
+        $tills = $this->paymentMapper->tillconsult();
+        $this->view->setVariable("paymentstoshow", $tills);
+        $this->view->render("payment", "tillconsult");
+    }
 
 }

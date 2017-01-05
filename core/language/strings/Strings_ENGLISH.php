@@ -443,8 +443,8 @@ $strings = array(
     'client_type'=>'Client type',
     'pagado'=>'Paid out',
     'till'=>'Till',
-    'create_spend'=>'Create spend',
-    'create_withdrawal'=>'Create withdrawal',
+    'create_spend'=>'Create till spend',
+    'create_withdrawal'=>'Create till withdrawal',
     'create_close'=>'Till close'
 )
 ?>

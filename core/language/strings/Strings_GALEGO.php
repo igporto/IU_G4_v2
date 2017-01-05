@@ -438,8 +438,8 @@ $strings = array(
     'client_type'=>'Tipo de cliente',
     'pagado'=>'Pagado',
     'till'=>'Caixa',
-    'create_spend'=>'Crear gasto',
-    'create_withdrawal'=>'Crear retirada',
-    'create_close'=>'Cierre de caixa'
+    'create_spend'=>'Crear gasto de caixa',
+    'create_withdrawal'=>'Crear retirada de caixa',
+    'create_close'=>'Cierre de caixa',
 )
 ?>

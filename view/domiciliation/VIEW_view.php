@@ -11,12 +11,13 @@ echo '<div class="modal fade" id="view' . $p->getIdDomiciliacion() . '" tabindex
 //DATOS DO PAGO
 echo '  
             <div class="row">
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["id"] . ': </label>
-                        <span class="">' . $p->getIdDomiciliacion() . '</span>
+                       <div class="col-xs-12 col-md-12" >
+                        <label for="" > ' . $strings["client"] . ': </label >
+                        <span class="" > ' . $p->getIdCliente() . '</span >
 
-                    <!--Campo id-->
-                </div>
+                    <!--Campo id cliente-->
+                </div >
+                
                 <div class="col-xs-12 col-md-12">
                         <label for="">' . $strings["period"] . ': </label>
                         <span class="">' . $p->getPeriodo() . ' ' . $strings["months"] . '</span >
@@ -31,12 +32,7 @@ echo '
                     <!--Campo total-->
                 </div >
                 
-                <div class="col-xs-12 col-md-12" >
-                        <label for="" > ' . $strings["client"] . ': </label >
-                        <span class="" > ' . $p->getIdCliente() . '</span >
-
-                    <!--Campo id cliente-->
-                </div >
+         
                 
                 <div class="col-xs-12 col-md-12" >
                         <label for="" > IBAN: </label >

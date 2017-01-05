@@ -663,8 +663,7 @@ ALTER TABLE `calendario`
 -- Indices de la tabla `caja`
 --
 ALTER TABLE `caja`
-  ADD PRIMARY KEY (`id_caja`),
-  ADD KEY `id_pago` (`id_pago`);
+  ADD PRIMARY KEY (`id_caja`);
 
 
 --
@@ -1074,12 +1073,6 @@ ALTER TABLE `alumno_tiene_lesion`
 ALTER TABLE `asistencia`
   ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `caja`
---
-ALTER TABLE `caja`
-  ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `consulta_fisio`
