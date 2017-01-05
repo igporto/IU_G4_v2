@@ -327,15 +327,20 @@ CREATE TABLE `linea_factura` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horario_actividad`
+-- Estructura de tabla para la tabla `horario`
 --
 
-CREATE TABLE `horario_actividad` (
-  `hora_comienzo` time NOT NULL DEFAULT '00:00:00',
-  `hora_final` time NOT NULL DEFAULT '00:00:00',
-  `fecha` date NOT NULL DEFAULT '0000-00-00',
-  `id_actividad` int(4) NOT NULL
-) ;
+CREATE TABLE `horario`(
+  `fecha_inicio` date NOT NULL DEFAULT '2000/01/01',
+  `fecha_fin` date NOT NULL DEFAULT '2000/01/01',
+  `id_horario` int(4) NOT NULL,
+  `nombre` varchar(40) NOT NULL
+);
+
+
+ALTER TABLE `horario`
+ADD PRIMARY KEY (`id_horario`),
+MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
 
 
 -- --------------------------------------------------------
@@ -441,6 +446,19 @@ CREATE TABLE `permiso` (
 ) ;
 
 
+CREATE TABLE `jornada`(
+  `dia_semana` int(1) NOT NULL,
+  `hora_inicio` time NOT NULL DEFAULT '09:00:00',
+  `hora_fin` time NOT NULL DEFAULT '17:00:00',
+  `id_jornada` int(11) NOT NULL,
+  `id_horario` int(4) NOT NULL
+);
+
+ALTER TABLE `jornada`
+ADD PRIMARY KEY (`id_jornada`),
+ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
+MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Estructura de tabla para la tabla `permisos_perfil`
