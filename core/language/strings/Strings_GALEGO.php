@@ -414,6 +414,21 @@ $strings = array(
     'confirm_msg' => 'Está seguro de querer dar de baixa do evento a ',
 
 
+    /*LESIONS*/
+    'management_injury' => 'Xestión de Lesións',
+    'INJURY' => 'Lesións',
+    'treatment' => 'Tratamento',
+    'time_recovery' => 'Tempo de recuperación aproximado',
+    'injury_id' => 'ID da lesión',
+    'injury_data' => 'Datos da lesión',
+    'succ_injury_delete' => 'Lesión borrada correctamente',
+    'injury_edit' => 'Editar lesión',
+    'succ_injury_mod' => 'Lesión modificada con éxito',
+    'create_injury' => 'Engadir lesión',
+    'succ_injury_add' => 'Lesión engadida correctamente',
+    'injury_already_exists' => 'A lesión xa existe',
+
+
 //PAGOS, DESCUENTOS y FACTURAS
     'discount_modify' => 'Modificar Desconto',
     'DOMICILIATION' => 'Domiciliacións',

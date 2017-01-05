@@ -423,6 +423,21 @@ $strings = array(
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
 
+    /*LESIONS*/
+    'management_injury' => 'Gestión de Lesiones',
+    'INJURY' => 'Lesiones',
+    'treatment' => 'Tratamiento',
+    'time_recovery' => 'Tiempo de recuperación aproximado',
+    'injury_id' => 'ID de la lesión',
+    'injury_data' => 'Datos de la lesión',
+    'succ_injury_delete' => 'Lesión borrada correctamente',
+    'injury_edit' => 'Editar lesión',
+    'succ_injury_mod' => 'Lesión modificada con éxito',
+    'create_injury' => 'Añadir lesión',
+    'succ_injury_add' => 'Lesión añadida correctamente',
+    'injury_already_exists' => 'La lesión ya existe',
+
+
     /*Alumno*/
     'ALUMN' => 'Alumnos',
     'management_alumns'=>'Gestión de Alumnos',

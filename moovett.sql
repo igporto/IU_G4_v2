@@ -118,7 +118,9 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -261,7 +263,9 @@ CREATE TABLE `empleado` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(3) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -371,11 +375,10 @@ CREATE TABLE `inscripcion` (
 
 CREATE TABLE `lesion` (
   `id_lesion` int(4) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
   `descripcion` varchar(250) NULL,
   `tratamiento` text NULL,
-  `fecha_lesion` date DEFAULT NULL,
-  `tiempo_recuperacion` int(4) NULL,
-  `fecha_recuperacion` date DEFAULT NULL
+  `tiempo_recuperacion` int(4) NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -1261,7 +1264,8 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (15, 'SPACE'),
 (16, 'DISCOUNT'),
 (17, 'EVENT'),
-(18, 'ALUMN');
+(18, 'ALUMN'),
+(19, 'INJURY');
 
 
 --
@@ -1370,7 +1374,12 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (18 ,2),
 (18 ,3),
 (18 ,4),
-(18 ,5);
+(18 ,5),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 4),
+(19, 5);
 
 
 
@@ -1489,7 +1498,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 87),
 (1, 88),
 (1, 89),
-(1, 90);
+(1, 90),
+(1, 91),
+(1, 92),
+(1, 93),
+(1, 94),
+(1, 95);
 
 
 
@@ -1610,7 +1624,13 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 82),
               (1, 83),
               (1, 84),
-              (1, 85);
+              (1, 85),
+              /*INJURY*/
+              (1, 91),
+              (1, 92),
+              (1, 93),
+              (1, 94),
+              (1, 95);
               /*ENGADIDO POR BRUNO*/
 /*ENGADIDO POR IVAN */
 --
@@ -1699,6 +1719,14 @@ INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
   (1,2),
   (2,1),
   (2,3);
+
+--
+-- Volcado de datos para la tabla `lesion`
+--
+
+INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion`) VALUES
+  ('Esguince','Lesión de los ligamentos por distensión, estiramiento excesivo, torsión o rasgadura, acompañada de hematoma, inflamación y dolor que impide continuar moviendo la parte lesionada.','reposo y aplicar hielo',2),
+  ('Rotura de ligamento','Lesión cerrada de la musculatura.','reposo y aplicar hielo',2);
 
 /* Engadido por Bruno */
 /* Engadido por Lore */

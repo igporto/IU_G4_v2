@@ -419,6 +419,19 @@ $strings = array(
     'confirm_msg' => 'Are you sure you want to unsubscribe from',
 
 
+    /*LESIONS*/
+    'management_injury' => 'Injury Management',
+    'INJURY' => 'Injury',
+    'treatment' => 'Treatment',
+    'time_recovery' => 'Approximate recovery time',
+    'injury_id' => 'Injury´s ID',
+    'injury_data' => 'Injury data',
+    'succ_injury_delete' => 'Success injury delete',
+    'injury_edit' => 'Edit injury',
+    'succ_injury_mod' => 'Success injury edit',
+    'create_injury' => 'Add injury',
+    'succ_injury_add' => 'Succes injury add',
+    'injury_already_exists' => 'Injury already exists',
 
 
     'DOMICILIATION' => 'Domiciliations',
