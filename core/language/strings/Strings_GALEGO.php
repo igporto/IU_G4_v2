@@ -387,7 +387,7 @@ $strings = array(
     'date' => 'Fecha Evento',
     'event_id' => 'ID do evento',
     'dni_a' => 'ID do Alumno',
-    'dni_p' => 'ID do Profesor',
+    'dni_p' => 'Profesor',
     'event_data' => 'Datos do Evento',
     'succ_event_delete' => 'Borrado realizado con éxito',
     'succ_event_mod' => 'Evento modificado con éxito',
@@ -402,6 +402,9 @@ $strings = array(
     'succ_student_delete' => 'Alumno eliminado do evento',
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
+    'space_name' => 'Nome do espazo',
+    'confirm_msg' => 'Está seguro de querer dar de baixa do evento a ',
+
 
 //PAGOS, DESCUENTOS y FACTURAS
     'discount_modify' => 'Modificar Desconto',

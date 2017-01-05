@@ -5,10 +5,11 @@ echo '
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title" id="'.$e->getCodEvent().'label">'.$strings["spaces_data"].' '.$e->getEventname().':</h4>
+                                                <h4 class="modal-title" id="'.$e->getCodEvent().'label">'.$strings["event_data"].' '.$e->getEventname().':</h4>
                                             </div>
                                             <div class="modal-body">
                                                  <label for="">' . $strings["event_id"] . ': '.$e->getCodEvent().' </label>';
+$mp = new EventMapper();
 //DATOS DO EVENTO A AMOSAR
 echo '  
                                             <div class="row">
@@ -38,13 +39,13 @@ echo '
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
-                                                        <label for="">' . $strings["space_id"] . ': </label>
-                                                        <span class="">' . $e->getCodSpace() . '</span>
+                                                        <label for="">' . $strings["space_name"] . ': </label>
+                                                        <span class="">' . $mp->getNameSpace($e->getCodSpace()) . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["dni_p"] . ': </label>
-                                                        <span class="">' . $e->getCodProf() . '</span>
+                                                        <span class="">' . $mp->getNameProf($e->getCodProf()) . '</span>
 
                                                 </div>
                                                             

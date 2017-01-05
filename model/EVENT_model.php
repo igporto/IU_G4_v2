@@ -256,4 +256,48 @@ class EventMapper
 
         return $id;
     }
+
+    //Devolve o nome do espazo a partir dun id do espazo
+    public function getNameSpace($id){
+        $stmt = $this->db->prepare("SELECT * FROM espacio WHERE id_espacio ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_sp = $r['nombre'];
+
+        return $id_sp;
+    }
+
+    //Devolve o nome do profesor co id que se lle pasa como parametro
+    public function getNameProf($id){
+        $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+    //Devolve o nome do alumno co id que se lle pasa como parametro
+    public function getNamePupil($id){
+        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+    //Devolve o nome dos eventos que coincidan co id
+    public function getNameEvent($id){
+        $stmt = $this->db->prepare("SELECT * FROM evento WHERE id_evento ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
 }

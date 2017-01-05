@@ -393,7 +393,7 @@ $strings = array(
     'date' => 'Event Date',
     'event_id' => 'Event´s ID',
     'dni_a' => 'Student´s ID',
-    'dni_p' => 'Teacher´s ID',
+    'dni_p' => 'Teacher',
     'event_data' => 'EventÂ´s Data',
     'succ_event_delete' => 'Success Event Delete',
     'succ_event_mod' => 'Event modified successfully',
@@ -408,6 +408,9 @@ $strings = array(
     'succ_student_delete' => 'Student removed from the event',
     'student_data' => 'Student data',
 	'succ_pupil_add' => 'Success pupil add',
+	'space_name' => 'Space name',
+    'confirm_msg' => 'Are you sure you want to unsubscribe from',
+
 
 
 
