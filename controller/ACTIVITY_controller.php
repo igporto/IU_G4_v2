@@ -82,6 +82,10 @@ class ActivityController extends BaseController
                 $activity->setEmployee($this->employeeMapper->view($_POST["employee"]));
             }
 
+            if(isset($_POST['price']) && $_POST['price'] !="" ){
+                $activity->setPrice(htmlentities(addslashes($_POST["price"])));
+            }
+
             if(isset($_POST['color'])){
                 $activity->setColor($_POST["color"]);
             }
@@ -94,12 +98,16 @@ class ActivityController extends BaseController
                         if($capacitySpace > $capacityActivity || $capacitySpace == $capacityActivity){
                         //Comprobamos que non se pode >100 nin <0
                             if(($activity->getDiscount()->getPercent() < 100) && ($activity->getDiscount()->getPercent() > 0)) {
-                                $this->activityMapper->add($activity);
-                                //ENVIAR AVISO DE ACTIVIDADE ENGADIDA!!!!!!!!!!
-                                $this->view->setFlash('succ_activity_add');
+                                if($activity->getPrice()>=0.00){
+                                    $this->activityMapper->add($activity);
+                                    //ENVIAR AVISO DE ACTIVIDADE ENGADIDA!!!!!!!!!!
+                                    $this->view->setFlash('succ_activity_add');
 
-                                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das Actividades)
-                                $this->view->redirect("activity", "show");
+                                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das Actividades)
+                                    $this->view->redirect("activity", "show");
+                                }else{
+                                    $this->view->setFlash("fail_price_incorrect");
+                                }
                             }else{
                                 $this->view->setFlash("fail_discount_incorrect");
                             }
@@ -189,6 +197,10 @@ class ActivityController extends BaseController
                 $activity->setEmployee($this->employeeMapper->view($_POST["employee"]));
             }
 
+            if(isset($_POST['price']) && $_POST['price'] !="" ){
+                $activity->setPrice(htmlentities(addslashes($_POST["price"])));
+            }
+
             if(isset($_POST['color'])){
                 $activity->setColor($_POST["color"]);
             }
@@ -198,11 +210,15 @@ class ActivityController extends BaseController
                     $capacitySpace = $activity->getSpace()->getCapacity();
                     $capacityActivity = $activity->getCapacity();
                     if($capacitySpace > $capacityActivity || $capacitySpace = $capacityActivity){
-                        $this->activityMapper->edit($activity);
-                        //ENVIAR AVISO DE ACTIVIDADE EDITADA!!!!!!!!!!
-                        $this->view->setFlash("succ_activity_edit");
-                        //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das actividades)
-                        $this->view->redirect("activity", "show");
+                        if($activity->getPrice()>=0.00){
+                            $this->activityMapper->edit($activity);
+                            //ENVIAR AVISO DE ACTIVIDADE EDITADA!!!!!!!!!!
+                            $this->view->setFlash("succ_activity_edit");
+                            //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das actividades)
+                            $this->view->redirect("activity", "show");
+                        }else{
+                            $this->view->setFlash("fail_price_incorrect");
+                        }
                     }else{
                         $this->view->setFlash("fail_aforo_fail");
                     }

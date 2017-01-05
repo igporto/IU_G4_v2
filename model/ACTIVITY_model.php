@@ -49,7 +49,7 @@ class ActivityMapper
     {
         //insertamos na taboa activity
 
-        $stmt = $this->db->prepare("INSERT INTO  actividad (nombre, aforo, id_categoria, id_espacio, descuento, empleado_imparte, color ) VALUES (?,?,?,?,?,?,?)");
+        $stmt = $this->db->prepare("INSERT INTO  actividad (nombre, aforo, id_categoria, id_espacio, descuento, empleado_imparte, precio,  color ) VALUES (?,?,?,?,?,?,?, ?)");
         $stmt->execute(array(
                 $activity->getActivityname(),
                 $activity->getCapacity(),
@@ -57,6 +57,7 @@ class ActivityMapper
                 $activity->getSpace()->getCodspace(),
                 $activity->getDiscount()->getCoddiscount(),
                 $activity->getEmployee()->getCodemployee(),
+                $activity->getPrice(),
                 $activity->getColor()
             )
         );
@@ -98,6 +99,7 @@ class ActivityMapper
                 $this->spaceMapper->view($acti["id_espacio"]),
                 $this->discountMapper->view($acti["descuento"]),
                 $this->employeeMapper->view($acti["empleado_imparte"]),
+                $acti["precio"],
                 $acti['color']
             );
         } else {
@@ -108,10 +110,10 @@ class ActivityMapper
     //edita a tupla correspondente co id do obxecto Activity $activity
     public function edit(Activity $activity)
     {
-        $stmt = $this->db->prepare("UPDATE actividad SET  nombre = ? , aforo = ? , id_categoria = ? , id_espacio = ? , descuento = ? , empleado_imparte = ?, color = ? WHERE id_actividad = ?");
+        $stmt = $this->db->prepare("UPDATE actividad SET  nombre = ? , aforo = ? , id_categoria = ? , id_espacio = ? , descuento = ? , empleado_imparte = ?, precio = ?, color = ? WHERE id_actividad = ?");
         $stmt->execute(array(
                         $activity->getActivityname(), $activity->getCapacity(), $activity->getCategory()->getCodcategory(), $activity->getSpace()->getCodspace(),
-                        $activity->getDiscount()->getCoddiscount(), $activity->getEmployee()->getCodemployee(), $activity->getColor(),  $activity->getCodactivity()
+                        $activity->getDiscount()->getCoddiscount(), $activity->getEmployee()->getCodemployee(), $activity->getPrice(),$activity->getColor(),  $activity->getCodactivity()
                         )
                 );
     }

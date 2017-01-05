@@ -150,6 +150,17 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>
                         <!--Campo name-->
                     </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['price'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input autofocus type="int"  type="number" min="0.01" step="0.01" max="2500000"
+                                   class="form-control" id="price" name="price"
+                                   placeholder= <?php echo $strings['price'] ?>>
+                            <div id="error"></div>
+                        </div>
+                    <!--Campo name-->
+                    </div>
                 </div>
             </div>
         </div>

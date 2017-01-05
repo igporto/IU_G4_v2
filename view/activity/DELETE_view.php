@@ -42,6 +42,12 @@ echo '
 
                                                                         <!--Campo desconto-->
                                                                     </div>
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["price"] . ': </label>
+                                                                            <span class="">' . $c->getPrice() . '€ </span>
+
+                                                                        <!--Campo desconto-->
+                                                                    </div>
                                                                    
                                                                     <div class="col-xs-12 col-md-12">
                                                                             <label for="">' . $strings["monitor"] . ': </label>
