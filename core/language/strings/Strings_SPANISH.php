@@ -269,6 +269,10 @@ $strings = array(
 		'succ_employee_delete'=>'Empleado borrado correctamente',
 		'succ_employee_edit'=>'Empleado editado correctamente',
 
+		'succ_alumn_add'=>'Alumno creado correctamente',
+		'succ_alumn_delete'=>'Alumno borrado correctamente',
+		'succ_alumn_edit'=>'Alumno editado correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -380,7 +384,7 @@ $strings = array(
 	'total_quantity'=>'Total',
 	'months'=>'Meses',
     'domiciliation_data'=>'Datos de la Domiciliacion',
-    'domiciliation_modify'=>'Modificar Domiciliacion'
+    'domiciliation_modify'=>'Modificar Domiciliacion',
 
 	/*Eventos*/
     'EVENTS' => 'Eventos',
@@ -411,5 +415,14 @@ $strings = array(
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
 
+    /*Alumno*/
+    'ALUMN' => 'Alumnos',
+    'management_alumns'=>'Gestión de Alumnos',
+    'alumn_data'=>'Datos del Alumno',
+    'create_alumn' => 'Añadir Alumno',
+    'alumn_modify' => 'Modificar Alumno',
+    'job'=>'Profesión',
+    'sickreason'=>'Motivo de la Baja',
+    'pengingclasses'=>'Clases pendientes',
 )
 ?>

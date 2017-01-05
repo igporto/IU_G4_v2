@@ -107,7 +107,6 @@ CREATE TABLE `alumno` (
   `direccion_postal` varchar(25) NOT NULL DEFAULT '',
   `email` varchar(50) DEFAULT '',
   `comentarios` text NULL,
-  `motivo_baja` text NULL,
   `clases_pendientes` int(4) NULL DEFAULT '0'
 ) ;
 
@@ -1690,10 +1689,10 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
   --
 -- Volcado de datos para la tabla `actividad`
 --
-INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `motivo_baja`, `clases_pendientes`) VALUES
-(1, '44654552J', 'Lorena', 'DomÃ­nguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", "", 0),
-(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", "Moi caro o ximnasio", 0),
-(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", "",0);
+INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `clases_pendientes`) VALUES
+(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", 0),
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", 0),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", 0);
 
 
 

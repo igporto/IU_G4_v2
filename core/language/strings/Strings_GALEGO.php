@@ -262,6 +262,9 @@ $strings = array(
         'succ_employee_delete'=>'Empregado borrado correctamente',
         'succ_employee_edit'=>'Empregado editado correctamente',
 
+        'succ_alumn_add'=>'Alumno creado correctamente',
+        'succ_alumn_delete'=>'Alumno borrado correctamente',
+        'succ_alumn_edit'=>'Alumno editado correctamente',
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
@@ -359,6 +362,17 @@ $strings = array(
     'employee_modify' => 'Modificar Empregado',
     'employee_type' => 'Tipo de Desconto',
     'no_user'=>'Sen Usuario',
+
+    /*Alumno*/
+    'ALUMN' => 'Alumnos',
+    'management_alumns'=>'Xestión de Alumnos',
+    'alumn_data'=>'Datos do Alumno',
+    'create_alumn' => 'Engadir Alumno',
+    'alumn_modify' => 'Modificar Alumno',
+    'job'=>'Profesión',
+    'sickreason'=>'Motivo da baixa',
+    'pengingclasses'=>'Clases pendentes',
+
 
     /*Eventos*/
     'EVENTS' => 'Eventos',

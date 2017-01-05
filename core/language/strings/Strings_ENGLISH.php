@@ -267,6 +267,10 @@ $strings = array(
 		'succ_employee_delete'=>'Employee properly deleted',
 		'succ_employee_edit'=>'Employee properly edited',
 
+		'succ_alumn_add'=>'Alumn properly created',
+		'succ_alumn_delete'=>'Alumn properly deleted',
+		'succ_alumn_edit'=>'Alumn properly edited',
+
 
 
 		/*FAIL*/
@@ -367,6 +371,15 @@ $strings = array(
     'employee_modify' => 'Modify Employee',
     'no_user'=>'Without User',
 
+    /*Alumno*/
+    'ALUMN' => 'Alumns',
+    'management_alumns'=>'Alumns Management',
+    'alumn_data'=>'Alumn Data',
+    'create_alumn' => 'ADD Alumn',
+    'alumn_modify' => 'Modify Alumn',
+    'job'=>'Job',
+    'sickreason'=>'Sick Reason',
+    'pengingclasses'=>'Pending Classes',
 	/*Eventos*/
     'EVENTS' => 'Events',
     'EVENT' => 'Events',
