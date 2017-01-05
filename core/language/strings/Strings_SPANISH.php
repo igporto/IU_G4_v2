@@ -59,6 +59,9 @@ $strings = array(
     'management_controllers' => 'Gestión de Controladores',
     'management_users' => 'Gestión de Usuarios',
 	'management_clients' => 'Gestión de Clientes',
+    'management_payments' => 'Gestión de Pagos',
+    'management_bill' => 'Gestión de Facturas',
+    'management_domiciliation' => 'Gestión de Domiciliacións',
 	'users' => 'Usuarios',
 	'create_action' => 'Añadir Acción',
     'create_client' => 'Crear Cliente',
@@ -66,6 +69,9 @@ $strings = array(
 	'create_profile' => 'Añadir Perfil',
 	'create_controller' => 'Añadir Controlador',
     'create_permission' => 'Añadir Permiso',
+    'create_payment' => 'Añadir Pago',
+    'create_bill' => 'Añadir Factura',
+    'create_domiciliation' => 'Añadir Domiciliación',
 	'management_user' => 'Gestión de Usuario',
 	'dni' => 'DNI',
 	'name' => 'Nombre',
@@ -208,6 +214,7 @@ $strings = array(
 	'space_edit' => 'Editar espacio',
 	'succ_space_delete' => 'Borrado realizado con éxito',
 	'spaces_data' => 'Datos del espacio',
+	'profile_has_all_permissions'=>'Este perfil siempre tiene todos los permisos',
 
 
 	/*NOTIFICACIÓNS*/
@@ -262,6 +269,18 @@ $strings = array(
 		'succ_employee_delete'=>'Empleado borrado correctamente',
 		'succ_employee_edit'=>'Empleado editado correctamente',
 
+		'succ_alumn_add'=>'Alumno creado correctamente',
+		'succ_alumn_delete'=>'Alumno borrado correctamente',
+		'succ_alumn_edit'=>'Alumno editado correctamente',
+
+    'succ_domiciliation_add'=>'Domiciliacion creada correctamente',
+    'succ_domiciliation_delete'=>'Domiciliacion borrada correctamente',
+    'succ_domiciliation_edit'=>'Domiciliacion editada correctamente',
+
+    'succ_payment_add'=>'Pago creado correctamente',
+    'succ_payment_delete'=>'Pago borrado correctamente',
+    'succ_payment_edit'=>'Pago editado correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -274,6 +293,7 @@ $strings = array(
     	'fail_aforo_incorrect'=>'EL aforo no puede ser menor que 1',
     	'fail_discount_incorrect'=>'El descuento no es válido',
    		'fail_discount_exists' => 'El descuento ya existe',
+    'fail_payment_exists' => 'El pago ya existe',
     	'fail_aforo_fail'=>'El aforo del aula es menor que el de la actividad',
 		'fail_dni_exists'=>'Ya hay un empleado con ese DNI',
 		'fail_dni_incorrect'=>'El DNI no es válido',
@@ -358,6 +378,21 @@ $strings = array(
     'create_employee' => 'Añadir Empregado',
     'employee_modify' => 'Modificar Empleado',
     'no_user'=>'Sin Usuario',
+    'discount_modify' => 'Modificar Descuento',
+    'DOMICILIATION' => 'Domiciliación',
+    'quantity' => 'Cantidad',
+    'cash' => 'Efectivo',
+    'creditCard' => 'Tarjeta de Credito',
+    'external_client'=>'Cliente externo',
+    'payment_data'=>'Datos del Pago',
+	'id'=>'Identificador',
+	'payment_method'=>'Metodo de Pago',
+	'payment_modify'=>'Modificar Pago',
+	'period'=>'Periodo',
+	'total_quantity'=>'Total',
+	'months'=>'Meses',
+    'domiciliation_data'=>'Datos de la Domiciliacion',
+    'domiciliation_modify'=>'Modificar Domiciliacion',
 
 	/*Eventos*/
     'EVENTS' => 'Eventos',
@@ -387,6 +422,47 @@ $strings = array(
     'succ_student_delete' => 'Alumno eliminado del evento',
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
+	'event_name' => 'Nombre del evento',
+
+    /*LESIONS*/
+    'management_injury' => 'Gestión de Lesiones',
+    'INJURY' => 'Lesiones',
+    'treatment' => 'Tratamiento',
+    'time_recovery' => 'Tiempo de recuperación aproximado',
+    'injury_id' => 'ID de la lesión',
+    'injury_data' => 'Datos de la lesión',
+    'succ_injury_delete' => 'Lesión borrada correctamente',
+    'injury_edit' => 'Editar lesión',
+    'succ_injury_mod' => 'Lesión modificada con éxito',
+    'create_injury' => 'Añadir lesión',
+    'succ_injury_add' => 'Lesión añadida correctamente',
+    'injury_already_exists' => 'La lesión ya existe',
+
+
+    /*Alumno*/
+    'ALUMN' => 'Alumnos',
+    'management_alumns'=>'Gestión de Alumnos',
+    'alumn_data'=>'Datos del Alumno',
+    'create_alumn' => 'Añadir Alumno',
+    'alumn_modify' => 'Modificar Alumno',
+    'job'=>'Profesión',
+    'sickreason'=>'Motivo de la Baja',
+    'pengingclasses'=>'Clases pendientes',
+
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'SI',
+    'no'=>'NO',
+    'cantidad'=>'Cantidad a Pagar',
+    'client_type'=>'Tipo de cliente',
+    'pagado'=>'Pagado',
+    'till'=>'Caja',
+    'create_spend'=>'Crear gasto de caja',
+    'create_withdrawal'=>'Crear retirada de caja',
+    'create_close'=>'Cierre de caja',
+    'concept'=>'Concepto',
+    'withdrawal'=>'Retirada de caja',
+    'spend'=>'Gasto de caja',
+
 
 )
 ?>

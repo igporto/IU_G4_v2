@@ -56,6 +56,9 @@ $strings = array(
 	'management_controllers' => 'Controller Management',
 	'management_users' => 'User Management',
 	'management_clients' => 'Client Management',
+    'management_payments' => 'Payment Management',
+    'management_bill' => 'Bill Management',
+    'management_domiciliation' => 'Domiciliation Management',
 	'users' => 'Users',
 	'create_user' => 'Add User',
     'create_client' => 'Add Client',
@@ -63,7 +66,7 @@ $strings = array(
 	'create_controller' => 'Add Controller',
 	'create_action' => 'Add Action',
     'create_permission' => 'Add Permission',
-
+    'create_payment' => 'Add Payment',
 	'management_user' => 'Manage User',
 	'dni' => 'DNI',
 	'name' => 'Name',
@@ -87,6 +90,7 @@ $strings = array(
 	'user_find' => 'User Find',
 	'find' => 'Find',
 	'profile_type' =>'Profile Type',
+
 	'user_profile' => 'User\'s Profile',
 	'settings' => 'Settings',
 	'close_session' => 'Close Session',
@@ -191,8 +195,8 @@ $strings = array(
 	'code'=>'Code',
 	'user_has_all_permissions'=>'This user has allways every permission',
 	'profile_has_all_permissions'=>'This profile has allways every permission',
-	'use_q'=>'Use?',   
-	
+	'use_q'=>'Use?',
+
 	/*ESPAZOS*/
 	'SPACE' => 'Spaces',
 	'space_info' => 'Space information',
@@ -211,6 +215,7 @@ $strings = array(
 	'succ_space_delete' => 'Success delete',
 	'spaces_data' => 'Space data',
 	'use_q'=>'Use?',
+	'profile_has_all_permissions'=>'This profile has allways every permission',
 
 	/*NOTIFICACIÓNS*/
 
@@ -262,9 +267,20 @@ $strings = array(
 		'succ_employee_delete'=>'Employee properly deleted',
 		'succ_employee_edit'=>'Employee properly edited',
 
+		'succ_alumn_add'=>'Alumn properly created',
+		'succ_alumn_delete'=>'Alumn properly deleted',
+		'succ_alumn_edit'=>'Alumn properly edited',
+
+    'succ_domiciliation_add'=>'Domiciliation properly created',
+    'succ_domiciliation_delete'=>'Domiciliation properly deleted',
+    'succ_domiciliation_edit'=>'Domiciliation properly edited',
+
+    'succ_payment_add'=>'Payment properly created',
+    'succ_payment_delete'=>'Payment properly deleted',
+    'succ_payment_edit'=>'Payment properly edited',
 
 
-	/*FAIL*/
+		/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
 		'fail_action_exists'=>'Action already exists',
@@ -272,7 +288,8 @@ $strings = array(
 		'fail_client_exists'=>"Client already exists",
 		'fail_profile_exists'=>"Profile already exists",
 		'fail_category_exists'=>"Category already exits",
-		'fail_category_exists'=>"Category already exits",
+    'fail_payment_exists'=>"Payment already exits",
+    'fail_category_exists'=>"Category already exits",
     	'fail_activity_exists'=>"Activity already exits",
    	 	'fail_aforo_incorrect'=>'Capacity can´t be less than 1',
     	'fail_discount_incorrect'=>'Discount is not valid',
@@ -361,6 +378,15 @@ $strings = array(
     'employee_modify' => 'Modify Employee',
     'no_user'=>'Without User',
 
+    /*Alumno*/
+    'ALUMN' => 'Alumns',
+    'management_alumns'=>'Alumns Management',
+    'alumn_data'=>'Alumn Data',
+    'create_alumn' => 'ADD Alumn',
+    'alumn_modify' => 'Modify Alumn',
+    'job'=>'Job',
+    'sickreason'=>'Sick Reason',
+    'pengingclasses'=>'Pending Classes',
 	/*Eventos*/
     'EVENTS' => 'Events',
     'EVENT' => 'Events',
@@ -374,7 +400,7 @@ $strings = array(
     'date' => 'Event Date',
     'event_id' => 'Event´s ID',
     'dni_a' => 'Student´s ID',
-    'dni_p' => 'Teacher´s ID',
+    'dni_p' => 'Teacher',
     'event_data' => 'EventÂ´s Data',
     'succ_event_delete' => 'Success Event Delete',
     'succ_event_mod' => 'Event modified successfully',
@@ -389,8 +415,54 @@ $strings = array(
     'succ_student_delete' => 'Student removed from the event',
     'student_data' => 'Student data',
 	'succ_pupil_add' => 'Success pupil add',
+	'space_name' => 'Space name',
+    'confirm_msg' => 'Are you sure you want to unsubscribe from',
+    'event_name' => 'Event name',
 
 
 
+    /*LESIONS*/
+    'management_injury' => 'Injury Management',
+    'INJURY' => 'Injury',
+    'treatment' => 'Treatment',
+    'time_recovery' => 'Approximate recovery time',
+    'injury_id' => 'Injury´s ID',
+    'injury_data' => 'Injury data',
+    'succ_injury_delete' => 'Success injury delete',
+    'injury_edit' => 'Edit injury',
+    'succ_injury_mod' => 'Success injury edit',
+    'create_injury' => 'Add injury',
+    'succ_injury_add' => 'Succes injury add',
+    'injury_already_exists' => 'Injury already exists',
+
+
+    'DOMICILIATION' => 'Domiciliations',
+    'quantity' => 'Quantity',
+    'cash' => 'Cash',
+    'creditCard' => 'Credit Card',
+	'external_client'=>'External Client',
+    'payment_data'=>'Payment Data',
+    'id'=>'ID',
+    'payment_method'=>'Payment Method',
+    'payment_modify'=>'Payment Modify',
+    'period'=>'Months',
+    'total_quantity'=>'Total quantity',
+    'months'=>'Months',
+	'domiciliation_data'=>'Domiciliation Data',
+    'domiciliation_modify'=>'Domiciliation Modify',
+
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'YES',
+    'no'=>'NO',
+    'cantidad'=>'Quantity to pay',
+    'client_type'=>'Client type',
+    'pagado'=>'Paid out',
+    'till'=>'Till',
+    'create_spend'=>'Create till spend',
+    'create_withdrawal'=>'Create till withdrawal',
+    'create_close'=>'Till close',
+    'concept'=>'Concept',
+    'withdrawal'=>'Till Withdrawal',
+    'spend'=>'Till Spend'
 )
 ?>

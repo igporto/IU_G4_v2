@@ -107,7 +107,6 @@ CREATE TABLE `alumno` (
   `direccion_postal` varchar(25) NOT NULL DEFAULT '',
   `email` varchar(50) DEFAULT '',
   `comentarios` text NULL,
-  `motivo_baja` text NULL,
   `clases_pendientes` int(4) NULL DEFAULT '0'
 ) ;
 
@@ -119,7 +118,9 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -171,14 +172,11 @@ CREATE TABLE `calendario` (
 
 create table `caja` (
   `id_caja` int(4) NOT NULL,
-  `cantidad_inicial` int(6) NULL,
-  `cantidad_actual` int(6) NULL,
-  `cantidad_final` int(6) NULL,
-  `id_pago` int(4) NOT NULL
+  `cantidad` int(6) NULL,
+  `id_pago` int(4) NOT NULL,
+  `fecha` date NOT NULL,
+  `concepto` varchar(20) NOT NULL
 ) ;
-
-
-
 
 -- --------------------------------------------------------
 
@@ -265,7 +263,9 @@ CREATE TABLE `empleado` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(3) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -375,11 +375,10 @@ CREATE TABLE `inscripcion` (
 
 CREATE TABLE `lesion` (
   `id_lesion` int(4) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
   `descripcion` varchar(250) NULL,
   `tratamiento` text NULL,
-  `fecha_lesion` date DEFAULT NULL,
-  `tiempo_recuperacion` int(4) NULL,
-  `fecha_recuperacion` date DEFAULT NULL
+  `tiempo_recuperacion` int(4) NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -390,13 +389,13 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `pago` (
   `id_pago` int(4) NOT NULL,
-  `fecha` date NOT NULL DEFAULT '0000-00-00',
+  `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
   `cantidad` smallint(6) not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
-  `descuento` int(4) NOT NULL,
-  `id_inscripcion` int(4) NULL,
-  `id_servicio` int(4) NULL,
-  `id_reserva` int(4) NULL
+  `pagado` BOOLEAN NOT NULL,
+  `tipo_cliente` VARCHAR (19) NULL,
+  `dni_alum` VARCHAR (9) NULL,
+  `dni_cliente_externo` VARCHAR (9) NULL
 )  ;
 
 -- --------------------------------------------------------
@@ -605,7 +604,13 @@ CREATE TABLE `alumnos_recibe_notificacion` (
   `id_alumno` int(4) NOT NULL
 );
 
-
+CREATE TABLE `domiciliacion` (
+  `id_domiciliacion` int(4) NOT NULL,
+  `periodo` int(4) NOT NULL,
+  `total` int(4) NOT NULL,
+  `id_cliente` varchar(9) NOT NULL,
+  `iban` varchar (32) NOT NULL
+) ;
 
 
 
@@ -663,8 +668,7 @@ ALTER TABLE `calendario`
 -- Indices de la tabla `caja`
 --
 ALTER TABLE `caja`
-  ADD PRIMARY KEY (`id_caja`),
-  ADD KEY `id_pago` (`id_pago`);
+  ADD PRIMARY KEY (`id_caja`);
 
 
 --
@@ -774,11 +778,7 @@ ALTER TABLE `lesion`
 -- Indices de la tabla `pago`
 --
 ALTER TABLE `pago`
-  ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `descuento` (`descuento`),
-  ADD KEY `id_reserva` (`id_reserva`),
-  ADD KEY `id_inscripcion` (`id_inscripcion`),
-  ADD KEY `id_servicio` (`id_servicio`);
+  ADD PRIMARY KEY (`id_pago`);
 
 --
 -- Indices de la tabla `perfil`
@@ -901,8 +901,11 @@ ALTER TABLE `alumnos_recibe_notificacion`
  ADD KEY `id_alumno` (`id_alumno`),
  ADD KEY `id_notificacion` (`id_notificacion`);
 
+ALTER TABLE `domiciliacion`
+  ADD PRIMARY KEY (`id_domiciliacion`);
 
-
+ALTER TABLE `domiciliacion`
+  MODIFY `id_domiciliacion` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
@@ -1077,12 +1080,6 @@ ALTER TABLE `asistencia`
   ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `caja`
---
-ALTER TABLE `caja`
-  ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `consulta_fisio`
 --
 ALTER TABLE `consulta_fisio`
@@ -1158,13 +1155,6 @@ ALTER TABLE `inscripcion`
   ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
---
--- Filtros para la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`descuento`) REFERENCES `descuento` (`id_descuento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 --
 -- Filtros para la tabla `permiso`
 --
@@ -1183,8 +1173,7 @@ ALTER TABLE `permisos_perfil`
 -- Filtros para la tabla `recibo`
 --
 ALTER TABLE `recibo`
-  ADD CONSTRAINT `recibo_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recibo_ibfk_2` FOREIGN KEY (`descuento`) REFERENCES `pago` (`descuento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `recibo_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `reserva`
@@ -1275,7 +1264,8 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (15, 'SPACE'),
 (16, 'DISCOUNT'),
 (17, 'EVENT'),
-(18, 'ALUMN');
+(18, 'ALUMN'),
+(19, 'INJURY');
 
 
 --
@@ -1384,7 +1374,12 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (18 ,2),
 (18 ,3),
 (18 ,4),
-(18 ,5);
+(18 ,5),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 4),
+(19, 5);
 
 
 
@@ -1503,7 +1498,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 87),
 (1, 88),
 (1, 89),
-(1, 90);
+(1, 90),
+(1, 91),
+(1, 92),
+(1, 93),
+(1, 94),
+(1, 95);
 
 
 
@@ -1624,7 +1624,13 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 82),
               (1, 83),
               (1, 84),
-              (1, 85);
+              (1, 85),
+              /*INJURY*/
+              (1, 91),
+              (1, 92),
+              (1, 93),
+              (1, 94),
+              (1, 95);
               /*ENGADIDO POR BRUNO*/
 /*ENGADIDO POR IVAN */
 --
@@ -1684,10 +1690,10 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
   --
 -- Volcado de datos para la tabla `actividad`
 --
-INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `motivo_baja`, `clases_pendientes`) VALUES
-(1, '44654552J', 'Lorena', 'DomÃ­nguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", "", 0),
-(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", "Moi caro o ximnasio", 0),
-(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", "",0);
+INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `clases_pendientes`) VALUES
+(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", 0),
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", 0),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", 0);
 
 
 
@@ -1713,6 +1719,14 @@ INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
   (1,2),
   (2,1),
   (2,3);
+
+--
+-- Volcado de datos para la tabla `lesion`
+--
+
+INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion`) VALUES
+  ('Esguince','Lesión de los ligamentos por distensión, estiramiento excesivo, torsión o rasgadura, acompañada de hematoma, inflamación y dolor que impide continuar moviendo la parte lesionada.','reposo y aplicar hielo',2),
+  ('Rotura de ligamento','Lesión cerrada de la musculatura.','reposo y aplicar hielo',2);
 
 /* Engadido por Bruno */
 /* Engadido por Lore */

@@ -45,10 +45,13 @@ $currentEv = $evMapper->view($evMapper->getIdByName($event));
                         </div>
                         <!--Campo aforo-->
 
-                        <p><?php echo $strings['date'].":";?><div class="form-group input-group">
+                        <label for="divdatestart"><?= $strings['datestart']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input required class="form-control" type="date" name="newfecha" placeholder="<?php echo $strings['date'];?>">
-                        </div></p>
+                            <input type="text" class="form-control" id="datestart" name="newfecha"
+                                   required="true" maxlength="10">
+                            <div id="error"></div>
+                        </div>
                         <!--Campo fecha -->
 
                         <p><?php echo $strings['space_id'].":";?><div class="form-group input-group">
@@ -125,7 +128,19 @@ $currentEv = $evMapper->view($evMapper->getIdByName($event));
     </form>
     <!--fin formulario-->
 </div>
+<script>
+    $( function() {
+        $( "#datestart" ).datepicker();
+        $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 
+<script>
+    $( function() {
+        $( "#dateend" ).datepicker();
+        $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 <script>
     //Non deixar que o campo input teña espazos
     $("input").on("keydown", function (e) {

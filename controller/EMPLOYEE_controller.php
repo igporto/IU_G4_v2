@@ -152,7 +152,7 @@ class EmployeeController extends BaseController
 
             //Engadimos os datos ao obxecto Employee
             if(isset($_POST["dni"]) && $_POST["dni"] !=""){
-                if($this->validar_dni()){
+                if($this->validar_dni(htmlentities(addslashes($_POST["dni"])))){
                     if($this->employeeMapper->employeedniExists($_POST["dni"])){
                         $employee->setEmployeedni(htmlentities(addslashes($_POST["dni"])));
                     }else{
@@ -246,51 +246,35 @@ class EmployeeController extends BaseController
 
 
             //Engadimos os datos ao obxecto Employee
-            if(isset($_POST["code"]) && $_POST["code"] !=""){
+            if(isset($_POST["code"])){
                 $employee->setCodemployee(htmlentities(addslashes($_POST["code"])));
             }
 
-            if(isset($_POST["dni"]) && $_POST["dni"] !=""){
+            if(isset($_POST["dni"])){
                 $employee->setEmployeedni(htmlentities(addslashes($_POST["dni"])));
             }
 
-            if(isset($_POST['name']) && $_POST["name"] !=""){
+            if(isset($_POST['name'])){
                 $employee->setEmployeename((htmlentities(addslashes($_POST["name"]))));
             }
 
-            if(isset($_POST['surname'])  && $_POST["surname"] !=""){
+            if(isset($_POST['surname'])){
                 $employee->setEmployeesurname($_POST["surname"]);
             }
 
-            if(isset($_POST['birthdate'])  && $_POST["birthdate"] !=""){
-                $employee->setBirthdate($_POST["birthdate"]);
-            }
-
-            if(isset($_POST['address'])  && $_POST["address"] !=""){
+            if(isset($_POST['address'])){
                 $employee->setAddress($_POST["address"]);
             }
 
-
-            if(isset($_POST['hourIn']) && $_POST["hourIn"] !=""){
-                $employee->setHourIn($_POST["hourIn"]);
-            }
-
-            if(isset($_POST['hourOut']) && $_POST["hourOut"] !=""){
-                $employee->setHourOut($_POST["hourOut"]);
-            }
-
-            if(isset($_POST['contracttype']) && $_POST["contracttype"] !=""){
+            if(isset($_POST['contracttype'])){
                 $employee->setContracttype($_POST["contracttype"]);
             }
 
-            if(isset($_POST['useemp']) && isset($_POST['user'])){
+            if(isset($_POST['useuser']) && isset($_POST['user'])){
                 $employee->setUser($this->userMapper->view($_POST["user"]));
             }else{
-                $aux = new User();
-                $aux->setCoduser("");
-                $employee->setUser($aux);
+                $employee->setUser(new User());
             }
-
 
             try {
                 $this->view->setVariable("employeestoshow", $this->employeeMapper->search($employee));

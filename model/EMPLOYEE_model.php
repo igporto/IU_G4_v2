@@ -126,16 +126,23 @@ class EmployeeMapper
     }
 
     public function search(Employee $employee){
-
-        $stmt = $this->db->prepare("SELECT * FROM empleado 
-                                        WHERE id_empleado like ? AND dni like ? AND nombre like ? AND apellidos like ? AND fech_nac like ? 
-                                        AND direccion_postal like ? AND hora_entrada like ? AND hora_salida like ? AND num_cuenta like ? 
-                                        AND tipo_contrato like ? AND cod_usuario like ? ");
-
-        $stmt->execute(array( "%".$employee->getCodemployee()."%", "%".$employee->getEmployeedni()."%","%".$employee->getEmployeename()."%",
-            "%".$employee->getEmployeesurname()."%", $employee->getBirthdate(), "%".$employee->getAddress()."%", "%".$employee->getHourIn()."%",
-            "%".$employee->getHourOut()."%", "%".$employee->getBanknum()."%", "%".$employee->getContracttype()."%", "%".$employee->getUser()->getCoduser()."%"
+        if($employee->getUser()->getCoduser() == NULL) {
+            $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado like ? AND dni like ? AND nombre like ? AND apellidos like ?
+                                        AND direccion_postal like ? AND  tipo_contrato like ? ");
+            $stmt->execute(array( "%".$employee->getCodemployee()."%", "%".$employee->getEmployeedni()."%", "%".$employee->getEmployeename()."%",
+                "%".$employee->getEmployeesurname()."%", "%".$employee->getAddress()."%",
+                "%".$employee->getContracttype()."%"
             ));
+        }else{
+            $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado like ? AND dni like ? AND nombre like ? AND apellidos like ?
+                                        AND direccion_postal like ? AND  tipo_contrato like ? AND cod_usuario = ? ");
+
+            $stmt->execute(array( "%".$employee->getCodemployee()."%", "%".$employee->getEmployeedni()."%", "%".$employee->getEmployeename()."%",
+                "%".$employee->getEmployeesurname()."%", "%".$employee->getAddress()."%",
+                "%".$employee->getContracttype()."%", $employee->getUser()->getCoduser()
+            ));
+        }
+
 
         $employees_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $employees = array();
@@ -149,11 +156,11 @@ class EmployeeMapper
 
         $stmt = $this->db->query("SELECT CURDATE()");
         $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($db[0]);exit;
+
         if($db != NULL){
             $actual = $db[0];
 
-            if ($date < $actual[0]['CURDATE()']) {
+            if ($date < $actual['CURDATE()']) {
                 return true;
             } else {
                 return false;

@@ -49,7 +49,7 @@ class ControllerMapper {
 	//Funcion de listar: devolve un array de todos obxetos Controller correspondentes á tabla Controller
 	public function show() {
 
-		$stmt = $this->db->query("SELECT * FROM controlador");
+		$stmt = $this->db->query("SELECT * FROM controlador ORDER BY nombre");
 		$controller_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$controllers = array();

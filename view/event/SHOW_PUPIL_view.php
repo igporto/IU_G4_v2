@@ -74,7 +74,7 @@ $pls = new EventMapper();
 
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $pls->getDniId($s->getCodStudent()) . "</td><td class='text-center'>";
+                        echo $pls->getNamePupil($s->getCodStudent()) . "</td><td class='text-center'>";
 
                         //Boton que direcciona a vista de eliminar
                         if ($delete) {

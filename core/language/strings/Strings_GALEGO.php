@@ -56,6 +56,9 @@ $strings = array(
     'management_actions' => 'Xestión de Accións',
     'management_controllers' => 'Xestión de Controladores',
     'management_users' => 'Xestión de Usuarios',
+    'management_payments' => 'Xestión de Pagos',
+    'management_bill' => 'Xestión de Facturas',
+    'management_domiciliation' => 'Xestión de Domiciliacións',
     'management_clients' => 'Xestión de Clientes',
     'users' => 'Usuarios',
     'create_user' => 'Engadir Usuario',
@@ -64,6 +67,9 @@ $strings = array(
     'create_controller' => 'Engadir Controlador',
     'create_action' => 'Engadir Acción',
     'create_permission' => 'Engadir Permiso',
+    'create_payment' => 'Añadir Pago',
+    'create_bill' => 'Añadir Factura',
+    'create_domiciliation' => 'Añadir Domiciliación',
     'management_user' => 'Xestionar Usuario',
     'dni' => 'DNI',
     'name' => 'Nome',
@@ -189,6 +195,7 @@ $strings = array(
     'user_has_all_permissions'=>'Este usuario sempre ten todos os permisos',
     'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
     'use_q'=>'Usar?',
+    'profile_has_all_permissions'=>'Este perfil sempre ten todos os permisos',
 
 
     /*ESPAZOS*/
@@ -255,6 +262,17 @@ $strings = array(
         'succ_employee_delete'=>'Empregado borrado correctamente',
         'succ_employee_edit'=>'Empregado editado correctamente',
 
+        'succ_alumn_add'=>'Alumno creado correctamente',
+        'succ_alumn_delete'=>'Alumno borrado correctamente',
+        'succ_alumn_edit'=>'Alumno editado correctamente',
+
+    'succ_domiciliation_add'=>'Domiciliacion creada correctamente',
+    'succ_domiciliation_delete'=>'Domiciliacion borrada correctamente',
+    'succ_domiciliation_edit'=>'Domiciliacion editada correctamente',
+
+    'succ_payment_add'=>'Pago creado correctamente',
+    'succ_payment_delete'=>'Pago borrado correctamente',
+    'succ_payment_edit'=>'Pago editado correctamente',
 
         /*FAIL*/
         'fail_title'=>'Incorrecto',
@@ -264,6 +282,7 @@ $strings = array(
         'fail_profile_exists'=>"O perfil xa existe",
         'fail_category_exists'=>'A categoría xa existe',
         'fail_client_exists'=>"O cliente xa existe",
+    'fail_payment_exists'=>"O pago xa existe",
         'fail_activity_exists'=>"A actividade xa existe",
         'fail_aforo_incorrect'=>'O aforo non pode ser menor que 1',
         'fail_discount_incorrect'=>'O desconto non é válido',
@@ -352,6 +371,17 @@ $strings = array(
     'employee_type' => 'Tipo de Desconto',
     'no_user'=>'Sen Usuario',
 
+    /*Alumno*/
+    'ALUMN' => 'Alumnos',
+    'management_alumns'=>'Xestión de Alumnos',
+    'alumn_data'=>'Datos do Alumno',
+    'create_alumn' => 'Engadir Alumno',
+    'alumn_modify' => 'Modificar Alumno',
+    'job'=>'Profesión',
+    'sickreason'=>'Motivo da baixa',
+    'pengingclasses'=>'Clases pendentes',
+
+
     /*Eventos*/
     'EVENTS' => 'Eventos',
     'EVENT' => 'Eventos',
@@ -365,7 +395,7 @@ $strings = array(
     'date' => 'Fecha Evento',
     'event_id' => 'ID do evento',
     'dni_a' => 'ID do Alumno',
-    'dni_p' => 'ID do Profesor',
+    'dni_p' => 'Profesor',
     'event_data' => 'Datos do Evento',
     'succ_event_delete' => 'Borrado realizado con éxito',
     'succ_event_mod' => 'Evento modificado con éxito',
@@ -380,7 +410,56 @@ $strings = array(
     'succ_student_delete' => 'Alumno eliminado do evento',
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
+    'space_name' => 'Nome do espazo',
+    'confirm_msg' => 'Está seguro de querer dar de baixa do evento a ',
 
 
+    /*LESIONS*/
+    'management_injury' => 'Xestión de Lesións',
+    'INJURY' => 'Lesións',
+    'treatment' => 'Tratamento',
+    'time_recovery' => 'Tempo de recuperación aproximado',
+    'injury_id' => 'ID da lesión',
+    'injury_data' => 'Datos da lesión',
+    'succ_injury_delete' => 'Lesión borrada correctamente',
+    'injury_edit' => 'Editar lesión',
+    'succ_injury_mod' => 'Lesión modificada con éxito',
+    'create_injury' => 'Engadir lesión',
+    'succ_injury_add' => 'Lesión engadida correctamente',
+    'injury_already_exists' => 'A lesión xa existe',
+    'event_name' => 'Nome do evento',
+
+
+
+//PAGOS, DESCUENTOS y FACTURAS
+    'discount_modify' => 'Modificar Desconto',
+    'DOMICILIATION' => 'Domiciliacións',
+    'quantity' => 'Cantidade',
+    'cash' => 'Efectivo',
+    'creditCard' => 'Tarxeta de Credito',
+    'external_client'=>'Cliente externo',
+    'payment_data'=>'Datos do Pago',
+    'id'=>'Identificador',
+    'payment_method'=>'Metodo de Pago',
+    'payment_modify'=>'Modificar Pago',
+    'period'=>'Meses',
+    'total_quantity'=>'Cantidade total',
+    'months'=>'Meses',
+    'domiciliation_data'=>'Datos da Domiciliacion',
+    'domiciliation_modify'=>'Modificar Domiciliacion',
+
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'SI',
+    'no'=>'NON',
+    'cantidad'=>'Cantidade a Pagar',
+    'client_type'=>'Tipo de cliente',
+    'pagado'=>'Pagado',
+    'till'=>'Caixa',
+    'create_spend'=>'Crear gasto de caixa',
+    'create_withdrawal'=>'Crear retirada de caixa',
+    'create_close'=>'Cierre de caixa',
+    'concept'=>'Concepto',
+    'withdrawal'=>'Retirada de caixa',
+    'spend'=>'Gasto de caixa'
 )
 ?>
