@@ -170,14 +170,9 @@ CREATE TABLE `calendario` (
 
 create table `caja` (
   `id_caja` int(4) NOT NULL,
-  `cantidad_inicial` int(6) NULL,
-  `cantidad_actual` int(6) NULL,
-  `cantidad_final` int(6) NULL,
+  `cantidad` int(6) NULL,
   `id_pago` int(4) NOT NULL
 ) ;
-
-
-
 
 -- --------------------------------------------------------
 
@@ -398,10 +393,6 @@ CREATE TABLE `pago` (
   `dni_cliente_externo` VARCHAR (9) NULL
 )  ;
 
-CREATE TABLE `caja` (
-  `id_pago` int(4) NOT NULL,
-  `cantidad` smallint(6) not null
-)  ;
 -- --------------------------------------------------------
 
 --

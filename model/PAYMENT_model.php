@@ -93,6 +93,11 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         $stmt->execute(array($payment->getFecha(), $payment->getCantidad(), $payment->getMetodoPago(),
             $payment->getPagado(), $payment->getTipoCliente(), $payment->getDniAlum(), $payment->getDniClienteExterno(),
             $payment->getIdPago()));
+
+        if ($payment->getPagado() == "1" && $payment->getMetodoPago() == "cash") {
+            $stmt = $this->db->prepare("INSERT INTO caja(cantidad,id_pago) values (?,?)");
+            $stmt->execute(array($payment->getCantidad(), $this->db->lastInsertId()));
+        }
     }
 
 

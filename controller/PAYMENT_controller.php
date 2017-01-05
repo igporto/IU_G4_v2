@@ -44,8 +44,8 @@ class PaymentController extends BaseController
             //Creamos un obxecto Payment baleiro
             $payment = new Payment();
 
-            date_default_timezone_set('Europe/Madrid');
-            $date = date('Y-m-d h:i:s', time());
+            date_default_timezone_set("Europe/Madrid");
+            $date = date("Y-m-d h:i:s");
 
             $payment->setFecha($date);
             $payment->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
@@ -154,6 +154,13 @@ class PaymentController extends BaseController
                 }
             }
 
+            if (isset($_POST["pagado"]) && ($_POST['pagado']) != "") {
+                $payment->setPagado(htmlentities(addslashes($_POST["pagado"])));
+            } else {
+                $aux = $payment->getPagado();
+                $payment->setPagado($aux);
+            }
+
             try {
                 $this->paymentMapper->edit($payment);
                 //ENVIAR AVISO DE ACCION EDITADA!!!!!!!!!!
@@ -189,12 +196,48 @@ class PaymentController extends BaseController
         }
 
     }
-/*
-    public function till()
+
+    public function pay()
     {
-        $payment = $this->paymentMapper->till();
-        $this->view->setVariable("payment", $payment);
-        $this->view->render("payment", "till");
-    }*/
+        if (isset($_POST["submit"])) {
+            //Creamos un obxecto payment baleiro
+            $payment_id = $_REQUEST["id_pago"];
+            $payment = $this->paymentMapper->view($payment_id);
+
+            date_default_timezone_set('Europe/Madrid');
+            $date = date("Y-m-d h:i:s");
+
+            $payment->setFecha($date);
+
+            if (isset($_POST["metodo_pago"]) && ($_POST['metodo_pago']) != "") {
+                $payment->setMetodoPago(htmlentities(addslashes($_POST["metodo_pago"])));
+            } else {
+                $aux = $payment->getMetodoPago();
+                $payment->setMetodoPago($aux);
+            }
+
+            $payment->setPagado("1");
+
+            try {
+                $this->paymentMapper->edit($payment);
+                //ENVIAR AVISO DE ACCION EDITADA!!!!!!!!!!
+                $this->view->setFlash("succ_payment_edit");
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos accions)
+                $this->view->redirect("payment", "show");
+            } catch (ValidationException $ex) {
+                $this->view->setFlash("erro_general");
+            }
+        }
+        //Se non se enviou nada
+        //$this->view->setLayout("navbar");
+        $this->view->render("payment", "pay");
+    }
+    /*
+        public function till()
+        {
+            $payment = $this->paymentMapper->till();
+            $this->view->setVariable("payment", $payment);
+            $this->view->render("payment", "till");
+        }*/
 
 }

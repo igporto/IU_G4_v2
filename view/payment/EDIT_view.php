@@ -28,8 +28,20 @@ $payment = $paymentMapper->view($id_pago);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="tipo_cliente" id="tipo_cliente">
-                                <option value="student"><?php echo $strings['student'] ?></option>
-                                <option value="external"><?php echo $strings['external_client'] ?></option>
+                                <option value="student"
+                                    <?php
+                                    if ($payment->getTipoCliente() == "student") {
+                                        echo "selected";
+                                    }
+                                    ?>>
+                                    <?php echo $strings['student'] ?></option>
+                                <option value="external"
+                                    <?php
+                                    if ($payment->getTipoCliente() == "student") {
+                                        echo "selected";
+                                    }
+                                    ?>
+                                ><?php echo $strings['external_client'] ?></option>
                             </select>
                             <div id="error"></div>
                         </div>
@@ -49,7 +61,11 @@ $payment = $paymentMapper->view($id_pago);
                                 $alumns = $alumnMapper->show();
 
                                 foreach ($alumns as $alumn) {
-                                    echo "<option value='" . $alumn->getDni() . "'>" . $alumn->getDni() . "</option>";
+                                    echo "<option value='" . $alumn->getDni() . "'";
+                                    if ($payment->getDniAlum() == $alumn->getDni()) {
+                                        echo "selected";
+                                    }
+                                echo ">" . $alumn->getDni() . "</option>";
                                 }
                                 ?>
                             </select>
@@ -68,8 +84,8 @@ $payment = $paymentMapper->view($id_pago);
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
                                    class="form-control" id="cantidad" name="cantidad"
-                                   placeholder= <?php echo $strings['quantity'] ?>
-                                   required="true">
+                                   required="true" value=<?php echo $payment->getCantidad() ?>>
+
                             <div id="error"></div>
                         </div>
                         <!--Campo cantidad-->
@@ -84,8 +100,13 @@ $payment = $paymentMapper->view($id_pago);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="pagado" id="pagado">
-                                <option value="1"><?php echo $strings['si'] ?></option>
-                                <option value="0"><?php echo $strings['no'] ?></option>
+                                <option value="1"
+                                        <?php if ($payment->getPagado() == "1") {
+                                    echo "selected";
+                                    }?>><?php echo $strings['si'] ?></option>
+                                <option value="0"<?php if ($payment->getPagado() == "0") {
+                                    echo "selected";
+                                }?>><?php echo $strings['no'] ?></option>
                             </select>
                             <div id="error"></div>
                         </div>
@@ -97,8 +118,12 @@ $payment = $paymentMapper->view($id_pago);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="metodo_pago" id="metodo_pago">
-                                <option value="cash" selected><?php echo $strings['cash'] ?></option>
-                                <option value="creditCard"><?php echo $strings['creditCard'] ?></option>
+                                <option value="cash" <?php if ($payment->getMetodoPago() == "cash") {
+                                    echo "selected";
+                                }?>><?php echo $strings['cash'] ?></option>
+                                <option value="creditCard"<?php if ($payment->getMetodoPago() == "creditCard") {
+                                    echo "selected";
+                                }?>><?php echo $strings['creditCard'] ?></option>
                             </select>
                             <div id="error"></div>
                         </div>

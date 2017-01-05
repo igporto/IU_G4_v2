@@ -136,21 +136,17 @@ $permissions = $view->getVariable("paymentstoshow");
                         }
 
                         //Botón que direcciona á vista de eliminar
-                        if ($delete) {
-
+                        if($delete){
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
-                            echo '" style="margin:2px">';
+                            echo '" data-toggle="modal" data-target="#confirmar'.$p->getIdPago().'">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
-                                            </button>';
-
+                                        </button>';
                         }
 
                         //Botón que direcciona á vista de cobrar
                         if ($p->getPagado()=="0") {
-
+                            echo "<a href=index.php?controller=payment&action=pay&id_pago=" . $p->getIdPago() . '>';
                             echo '<button type="button" class="btn btn-success btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-usd fa-fw"></i>
                                             </button>';

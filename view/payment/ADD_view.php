@@ -53,7 +53,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             </select>
                             <div id="error"></div>
                         </div>
-                        <!--Campo tipo de cliente-->
+                        <!--Campo dni de cliente-->
                     </div>
 
                 </div>
@@ -62,14 +62,14 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
                     <div class="col-xs-12 col col-md-5">
                         <label for="selectperf"><?php echo $strings['quantity'] ?></label>
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
-                                <input type="number" min="0.01" step="0.01" max="2500000" autofocus
-                                       class="form-control" id="cantidad" name="cantidad"
-                                       placeholder= <?php echo $strings['quantity'] ?>
-                                       required="true">
-                                <div id="error"></div>
-                            </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input type="number" min="0.01" step="0.01" max="2500000" autofocus
+                                   class="form-control" id="cantidad" name="cantidad"
+                                   placeholder= <?php echo $strings['quantity'] ?>
+                                   required="true">
+                            <div id="error"></div>
+                        </div>
                         <!--Campo cantidad-->
                     </div>
 
