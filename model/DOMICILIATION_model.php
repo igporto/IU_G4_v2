@@ -9,7 +9,8 @@ require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/DOMICILIATION.php");
 
 //inclues de outros obxetos que se precisen
-
+require_once(__DIR__ . "/../model/ALUMN_model.php");
+require_once(__DIR__ . "/../model/ALUMN.php");
 class DomiciliationMapper
 {
 

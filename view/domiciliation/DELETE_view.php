@@ -12,16 +12,17 @@ echo '<div class="modal fade" id="confirmar' . $p->getIdDomiciliacion() . '" tab
 echo '  
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["id"] . ': </label>
-                        <span class="">' . $p->getIdDomiciliacion() . '</span>
+                        <label for="">' . $strings["client"] . ': </label>
+                        <span class="">' . $p->getIdCliente() . '</span>
 
-                    <!--Campo id-->
+                    <!--Campo DNI cliente-->
                 </div>
+                
                 <div class="col-xs-12 col-md-12">
                         <label for="">' . $strings["period"] . ': </label>
                         <span class="">' . $p->getPeriodo() . '</span>
 
-                    <!--Campo fecha-->
+                    <!--Campo Periodo-->
                 </div>
               
                 <div class="col-xs-12 col-md-12">
@@ -32,17 +33,10 @@ echo '
                 </div>
                 
                 <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["client"] . ': </label>
-                        <span class="">' . $p->getIdCliente() . '</span>
-
-                    <!--Campo metodo domiciliacion-->
-                </div>
-                
-                <div class="col-xs-12 col-md-12">
                         <label for="">IBAN: </label>
                         <span class="">' . $p->getIban() . '</span>
 
-                    <!--Campo descuento-->
+                    <!--Campo IBAN-->
                 </div>
 
                 </div></div><div class="modal-footer">

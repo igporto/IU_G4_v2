@@ -271,6 +271,13 @@ $strings = array(
 		'succ_alumn_delete'=>'Alumn properly deleted',
 		'succ_alumn_edit'=>'Alumn properly edited',
 
+    'succ_domiciliation_add'=>'Domiciliation properly created',
+    'succ_domiciliation_delete'=>'Domiciliation properly deleted',
+    'succ_domiciliation_edit'=>'Domiciliation properly edited',
+
+    'succ_payment_add'=>'Payment properly created',
+    'succ_payment_delete'=>'Payment properly deleted',
+    'succ_payment_edit'=>'Payment properly edited',
 
 
 		/*FAIL*/

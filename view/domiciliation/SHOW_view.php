@@ -64,7 +64,9 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['DOMICILIATION'] ?></th>
+                        <th class="text-center"><?php echo $strings['dni']." ".$strings["student"] ?></th>
+                        <th class="text-center"><?php echo $strings['months'] ?></th>
+                        <th class="text-center"><?php echo $strings['quantity'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -87,7 +89,9 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
                     foreach ($domiciliations as $p) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $p->getIdDomiciliacion() . "</td><td class='text-center'>";
+                        echo $p->getIdCliente() . "</td><td class='text-center'>";
+                        echo $p->getPeriodo() . "</td><td class='text-center'>";
+                        echo $p->getTotal() . "</td><td class='text-center'>";
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';

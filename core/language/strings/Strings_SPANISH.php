@@ -273,6 +273,14 @@ $strings = array(
 		'succ_alumn_delete'=>'Alumno borrado correctamente',
 		'succ_alumn_edit'=>'Alumno editado correctamente',
 
+    'succ_domiciliation_add'=>'Domiciliacion creada correctamente',
+    'succ_domiciliation_delete'=>'Domiciliacion borrada correctamente',
+    'succ_domiciliation_edit'=>'Domiciliacion editada correctamente',
+
+    'succ_payment_add'=>'Pago creado correctamente',
+    'succ_payment_delete'=>'Pago borrado correctamente',
+    'succ_payment_edit'=>'Pago editado correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -424,5 +432,6 @@ $strings = array(
     'job'=>'Profesión',
     'sickreason'=>'Motivo de la Baja',
     'pengingclasses'=>'Clases pendientes',
+
 )
 ?>

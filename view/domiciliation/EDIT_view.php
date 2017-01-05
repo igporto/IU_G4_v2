@@ -22,24 +22,27 @@ $domiciliation = $domiciliationMapper->view($id_domiciliacion);
             </div>
             <div class="panel-body">
 
+                <!-- avisos + nome -->
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['quantity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
-                                   class="form-control" id="cantidad" name="cantidad"
-                                   placeholder= <?php echo $strings['total_quantity'] ?>
+                                   class="form-control" id="total" name="total"
+                                   value=<?php echo $domiciliation->getTotal() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
                         <!--Campo cantidad-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['period'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="number" min="0.01" step="0.01" max="2500000" autofocus
+                            <input type="number" min="1" step="1" max="250" autofocus
                                    class="form-control" id="periodo" name="periodo"
-                                   placeholder= <?php echo $strings['period'] ?>
+                                   value=<?php echo $domiciliation->getPeriodo() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
@@ -48,22 +51,37 @@ $domiciliation = $domiciliationMapper->view($id_domiciliacion);
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="number" min="0.01" step="0.01" max="2500000" autofocus
-                                   class="form-control" id="cliente" name="cliente"
-                                   placeholder= <?php echo $strings['client'] ?>
-                                   required="true">
+                            <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                            <select class=" form-control icon-menu" name="id_cliente" id="id_cliente">
+                                <?php
+                                //Engadimos unha opcion por categoria a escoller
+                                $alumnMapper = new AlumnMapper();
+
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $alumnMapper->show();
+
+                                foreach ($alumns as $alumn) {
+                                    echo "<option value='" . $alumn->getDni() . "'";
+                                    if ($domiciliation->getIdCliente() == $alumn->getDni()) {
+                                        echo "selected";
+                                    }
+                                    echo ">" . $alumn->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
                             <div id="error"></div>
                         </div>
-                        <!--Campo periodo-->
+                        <!--Campo dni de cliente-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf">IBAN</label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <input type="text"
                                    class="form-control" id="iban" name="iban"
-                                   placeholder="IBAN"
+                                   value=<?php echo $domiciliation->getIban() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
