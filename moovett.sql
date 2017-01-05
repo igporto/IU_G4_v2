@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generaciÃ³n: 25-11-2016 a las 14:25:14
--- VersiÃ³n del servidor: 10.1.16-MariaDB
--- VersiÃ³n de PHP: 5.6.24
+-- Tiempo de generaciÃƒÂ³n: 25-11-2016 a las 14:25:14
+-- VersiÃƒÂ³n del servidor: 10.1.16-MariaDB
+-- VersiÃƒÂ³n de PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -25,7 +25,7 @@ DROP DATABASE IF EXISTS `moovett`;
 CREATE DATABASE IF NOT EXISTS `moovett` DEFAULT character SET utf8 collate utf8_spanish_ci;
 USE `moovett`;
 
-DROP USER IF EXISTS 'adminMoovett'@'localhost';
+DROP USER 'adminMoovett'@'localhost';
 
 
 CREATE USER 'adminMoovett'@'localhost';
@@ -98,7 +98,8 @@ CREATE TABLE  `actividad` (
 --
 
 CREATE TABLE `alumno` (
-  `dni_alum` varchar(9) NOT NULL,
+  `id_alumno` int(4) NOT NULL,
+  `dni_alumno` varchar(9) NOT NULL,
   `nombre` varchar(15) NULL DEFAULT '',
   `apellidos` varchar(40) NULL DEFAULT '',
   `fecha_nac` date NULL DEFAULT '0000-00-00',
@@ -107,7 +108,7 @@ CREATE TABLE `alumno` (
   `email` varchar(50) DEFAULT '',
   `comentarios` text NULL,
   `motivo_baja` text NULL,
-  `clases_pendientes` varchar(50) NULL DEFAULT ''
+  `clases_pendientes` int(4) NULL DEFAULT '0'
 ) ;
 
 -- --------------------------------------------------------
@@ -117,7 +118,7 @@ CREATE TABLE `alumno` (
 --
 
 CREATE TABLE `alumno_tiene_lesion` (
-  `dni_alum` varchar(9) NOT NULL,
+  `id_alumno` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL
 ) ;
 
@@ -132,7 +133,7 @@ CREATE TABLE `asistencia` (
   `id_asistencia` int(4) NOT NULL,
   `fecha_as` date NOT NULL,
   `asiste` tinyint(1) NOT NULL,
-  `dni_alum` varchar(9) NOT NULL,
+  `id_alumno` int(4) NOT NULL,
   `id_empleado` int(3) NOT NULL
 ) ;
 
@@ -229,7 +230,7 @@ CREATE TABLE `descuento` (
 CREATE TABLE `documento` (
   `id_documento` int (4) NOT NULL,
   `fecha_firma` date NOT NULL DEFAULT '0000-00-00',
-  `dni_alum` varchar(9) NOT NULL,
+  `id_alumno` int(4) NOT NULL,
   `id_empleado` int(3) DEFAULT NULL
 ) ;
 
@@ -293,7 +294,7 @@ CREATE TABLE `evento` (
 
 CREATE TABLE `alumno_se_apunta_evento` (
   `id_evento` int(4) NOT NULL,
-  `dni_alum` varchar(9) NOT NULL
+  `id_alumno` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -327,20 +328,15 @@ CREATE TABLE `linea_factura` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horario`
+-- Estructura de tabla para la tabla `horario_actividad`
 --
 
-CREATE TABLE `horario`(
-  `fecha_inicio` date NOT NULL DEFAULT '2000/01/01',
-  `fecha_fin` date NOT NULL DEFAULT '2000/01/01',
-  `id_horario` int(4) NOT NULL,
-  `nombre` varchar(40) NOT NULL
-);
-
-
-ALTER TABLE `horario`
-ADD PRIMARY KEY (`id_horario`),
-MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
+CREATE TABLE `horario_actividad` (
+  `hora_comienzo` time NOT NULL DEFAULT '00:00:00',
+  `hora_final` time NOT NULL DEFAULT '00:00:00',
+  `fecha` date NOT NULL DEFAULT '0000-00-00',
+  `id_actividad` int(4) NOT NULL
+) ;
 
 
 -- --------------------------------------------------------
@@ -446,19 +442,6 @@ CREATE TABLE `permiso` (
 ) ;
 
 
-CREATE TABLE `jornada`(
-  `dia_semana` int(1) NOT NULL,
-  `hora_inicio` time NOT NULL DEFAULT '09:00:00',
-  `hora_fin` time NOT NULL DEFAULT '17:00:00',
-  `id_jornada` int(11) NOT NULL,
-  `id_horario` int(4) NOT NULL
-);
-
-ALTER TABLE `jornada`
-ADD PRIMARY KEY (`id_jornada`),
-ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
-MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Estructura de tabla para la tabla `permisos_perfil`
@@ -493,7 +476,7 @@ CREATE TABLE `reserva` (
   `id_reserva` int(4) NOT NULL,
   `id_espacio` int(4) NULL,
   `id_servicio` int(4) NULL,
-  `dni_alum` varchar(9) NULL,
+  `id_alumno` int(4) NULL,
   `fecha_reserva` date NOT NULL DEFAULT '0000-00-00',
   `hora_inicio` time NOT NULL DEFAULT '00:00:00',
   `hora_fin` time NOT NULL DEFAULT '00:00:00',
@@ -567,7 +550,7 @@ CREATE TABLE `log_acceso_lesion` (
   `id_log` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL,
   `id_empleado` int(3) NULL,
-  `dni_alum` VARCHAR(9) NULL,
+  `id_alumno` int(4) NULL,
   `cod_usuario` int(4) NOT NULL,
   `fecha` DATE NULL
 ) ;
@@ -619,7 +602,7 @@ CREATE TABLE `usuario_recibe_alerta` (
 
 CREATE TABLE `alumnos_recibe_notificacion` (
   `id_notificacion` int(4) NOT NULL,
-  `dni_alum` varchar(9) NOT NULL
+  `id_alumno` int(4) NOT NULL
 );
 
 
@@ -628,7 +611,7 @@ CREATE TABLE `alumnos_recibe_notificacion` (
 
 
 --
--- Ãndices para tablas volcadas
+-- ÃƒÂndices para tablas volcadas
 --
 
 --
@@ -645,15 +628,15 @@ ALTER TABLE `actividad`
 -- Indices de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  ADD PRIMARY KEY (`dni_alum`);
+  ADD PRIMARY KEY (`id_alumno`);
 
 --
 -- Indices de la tabla `alumno_tiene_lesion`
 --
 ALTER TABLE `alumno_tiene_lesion`
-  ADD PRIMARY KEY (`id_lesion`,`dni_alum`),
+  ADD PRIMARY KEY (`id_lesion`,`id_alumno`),
   ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `dni_alum` (`dni_alum`);
+  ADD KEY `id_alumno` (`id_alumno`);
 
 
 --
@@ -661,7 +644,7 @@ ALTER TABLE `alumno_tiene_lesion`
 --
 ALTER TABLE `asistencia`
   ADD PRIMARY KEY (`id_asistencia`),
-  ADD KEY `dni_alum` (`dni_alum`),
+  ADD KEY `id_alumno` (`id_alumno`),
   ADD KEY `id_empleado` (`id_empleado`);
 
 --
@@ -711,7 +694,7 @@ ALTER TABLE `descuento`
 ALTER TABLE `documento`
   ADD PRIMARY KEY (`id_documento`),
   ADD KEY `id_empleado` (`id_empleado`),
-  ADD KEY `dni_alum` (`dni_alum`);
+  ADD KEY `id_alumno` (`id_alumno`);
 
 --
 -- Indices de la tabla `empleado`
@@ -741,7 +724,7 @@ ALTER TABLE `evento`
 -- Indices de la tabla `alumno_se_apunta_evento`
 --
 ALTER TABLE `alumno_se_apunta_evento`
- ADD PRIMARY KEY (`id_evento`,`dni_alum`);
+ ADD PRIMARY KEY (`id_evento`,`id_alumno`);
 
 --
 -- Indices de la tabla `factura`
@@ -842,7 +825,7 @@ ALTER TABLE `recibo`
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`id_reserva`),
   ADD KEY `id_espacio` (`id_espacio`),
-  ADD KEY `dni_alum` (`dni_alum`);
+  ADD KEY `id_alumno` (`id_alumno`);
 
 
 --
@@ -880,7 +863,7 @@ ALTER TABLE `servicio`
 ALTER TABLE `log_acceso_lesion`
   ADD PRIMARY KEY (`id_log`),
   ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `dni_alum`(`dni_alum`),
+  ADD KEY `id_alumno`(`id_alumno`),
   ADD KEY `id_empleado`(`id_empleado`),
   ADD KEY `cod_usuario` (`cod_usuario`);
 
@@ -914,8 +897,8 @@ ALTER TABLE `usuario_recibe_alerta`
 -- indexes for table `alumno_recibe_notificacion`
 --
 ALTER TABLE `alumnos_recibe_notificacion`
- ADD PRIMARY KEY (`dni_alum`,`id_notificacion`),
- ADD KEY `dni_alum` (`dni_alum`),
+ ADD PRIMARY KEY (`id_alumno`,`id_notificacion`),
+ ADD KEY `id_alumno` (`id_alumno`),
  ADD KEY `id_notificacion` (`id_notificacion`);
 
 
@@ -923,7 +906,10 @@ ALTER TABLE `alumnos_recibe_notificacion`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
-
+-- AUTO_INCREMENT de la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  MODIFY `id_alumno` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `actividad`
 --
@@ -1028,6 +1014,10 @@ ALTER TABLE `perfil`
 ALTER TABLE `recibo`
   MODIFY `id_recibo` int(4) NOT NULL AUTO_INCREMENT;
  --
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `id_empleado` int(3) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
@@ -1077,13 +1067,13 @@ ALTER TABLE `actividad`
 --
 ALTER TABLE `alumno_tiene_lesion`
   ADD CONSTRAINT `alumno_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `alumno_tiene_lesion_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `alumno_tiene_lesion_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1103,7 +1093,7 @@ ALTER TABLE `consulta_fisio`
 --
 ALTER TABLE `documento`
   ADD CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `documento_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `documento_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
@@ -1132,7 +1122,7 @@ ALTER TABLE `evento`
 --
 ALTER TABLE `alumno_se_apunta_evento`
   ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `factura`
@@ -1202,7 +1192,7 @@ ALTER TABLE `recibo`
 ALTER TABLE `reserva`
   ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `reserva_ibfk_4` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reserva_ibfk_5` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `reserva_ibfk_5` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario_tiene_permiso`
@@ -1229,7 +1219,7 @@ ALTER TABLE `servicio`
 --
 ALTER TABLE `log_acceso_lesion`
   ADD CONSTRAINT `log_acceso_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `log_acceso_lesion_ibfk_2` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `log_acceso_lesion_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `log_acceso_lesion_ibfk_3` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `log_acceso_lesion_ibfk_4` FOREIGN KEY (`cod_usuario`) REFERENCES `usuario` (`cod_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -1259,7 +1249,7 @@ ADD CONSTRAINT `fk_usuario_recibe_alerta_usuario1` FOREIGN KEY (`cod_usuario`) R
 -- constraints for table `alumnos_recibe_notificacion`
 --
 ALTER TABLE `alumnos_recibe_notificacion`
-ADD CONSTRAINT `fk_alumnos_recibe_notificacione_alumno1` FOREIGN KEY (`dni_alum`) REFERENCES `alumno` (`dni_alum`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_alumnos_recibe_notificacione_alumno1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_notificacion`) REFERENCES `notificacion` (`id_notificacion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
@@ -1284,7 +1274,8 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (14, 'EMPLOYEE'),
 (15, 'SPACE'),
 (16, 'DISCOUNT'),
-(17, 'EVENT');
+(17, 'EVENT'),
+(18, 'ALUMN');
 
 
 --
@@ -1388,7 +1379,12 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (17 ,2),
 (17 ,3),
 (17 ,4),
-(17 ,5);
+(17 ,5),
+(18 ,1),
+(18 ,2),
+(18 ,3),
+(18 ,4),
+(18 ,5);
 
 
 
@@ -1502,7 +1498,13 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 82),
 (1, 83),
 (1, 84),
-(1, 85);
+(1, 85),
+(1, 86),
+(1, 87),
+(1, 88),
+(1, 89),
+(1, 90);
+
 
 
 
@@ -1609,6 +1611,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 78),
               (1, 79),
               (1, 80),
+              /*ALUMN*/
+              (1, 86),
+              (1, 87),
+              (1, 88),
+              (1, 89),
+              (1, 90),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
@@ -1617,7 +1625,7 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 83),
               (1, 84),
               (1, 85);
-
+              /*ENGADIDO POR BRUNO*/
 /*ENGADIDO POR IVAN */
 --
 -- Volcado de datos para la tabla `categoria`
@@ -1673,11 +1681,40 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
   ( 4, "ZUMBA", 20 , 2, 2, 7, 1, "#000000");
 
 
+  --
+-- Volcado de datos para la tabla `actividad`
+--
+INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `motivo_baja`, `clases_pendientes`) VALUES
+(1, '44654552J', 'Lorena', 'DomÃ­nguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", "", 0),
+(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", "Moi caro o ximnasio", 0),
+(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", "",0);
+
+
 
 
 /* FIN DE ENGADIDO POR IVAN */
+/* Engadido por Bruno */
+
+--
+-- Volcado de datos para la tabla `evento`
+--
 
 
+INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`) VALUES
+  ('Danza', '10:00:00', '12:00:00', '2017-20-12', 300, 1, 1),
+  ('Zumba', '12:05:00', '13:30:00', '2017-23-12', 150, 1, 1);
+
+--
+-- Volcado de datos para la tabla `alumno_se_apunta_evento`
+--
+
+INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
+  (1,1),
+  (1,2),
+  (2,1),
+  (2,3);
+
+/* Engadido por Bruno */
 /* Engadido por Lore */
 
 
@@ -1687,13 +1724,13 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
 
 
 INSERT INTO `cliente_externo` (`dni_cliente_externo`, `nombre`, `apellido`, `telefono`, `email`) VALUES
-  ('44654552J', 'Lorena', 'Domínguez', 988656565, 'lore@email.com'),
+  ('44654552J', 'Lorena', 'DomÃ­nguez', 988656565, 'lore@email.com'),
   ('34562321A', 'Adrián', 'Reboredo', 600125478, 'adrian@email.com'),
-  ('44432654I', 'Iván', 'Guardado', 902202122, 'iván@email.com'),
+  ('44432654I', 'Iván', 'Guardado', 902202122, 'ivan@email.com'),
   ('34999524J', 'Javier', 'Rodeiro', 600848484, 'javi@email.com'),
   ('44612345B', 'Bruno', 'Cruz', 603456587, 'bruno@email.com'),
   ('36955684Y', 'Yeray', 'Lage', 988123123, 'yeray@email.com'),
-  ('48575233D', 'Daniel', 'Resúa', 603125125, 'dani@email.com');
+  ('48575233D', 'Daniel', 'ResÃºa', 603125125, 'dani@email.com');
 
 --
 -- Volcado de datos para la tabla `servicio`

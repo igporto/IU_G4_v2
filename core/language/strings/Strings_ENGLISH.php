@@ -361,6 +361,36 @@ $strings = array(
     'employee_modify' => 'Modify Employee',
     'no_user'=>'Without User',
 
+	/*Eventos*/
+    'EVENTS' => 'Events',
+    'EVENT' => 'Events',
+    'management_events' => 'Events Management',
+    'EVENTS_ID' => 'Events ID',
+    'create_event' => 'Create Event',
+    'succ_event_add' => 'Success event add',
+    'event_already_exists' => 'Event already exists',
+    'initial_hour' => 'Start Time',
+    'final_hour' => 'End Time',
+    'date' => 'Event Date',
+    'event_id' => 'Event´s ID',
+    'dni_a' => 'Student´s ID',
+    'dni_p' => 'Teacher´s ID',
+    'event_data' => 'EventÂ´s Data',
+    'succ_event_delete' => 'Success Event Delete',
+    'succ_event_mod' => 'Event modified successfully',
+    'event_edit' => 'Edit event',
+    'EVENTS_NAME' => 'Event Name',
+    'list_of_student' => 'List of Students',
+    'on_event' => 'on event',
+    'id_student' => 'Student´s ID',
+    'succ_student_add' => 'Success student add',
+    'student_already_exists' => 'Student already exists',
+    'add_student' => 'Add student',
+    'succ_student_delete' => 'Student removed from the event',
+    'student_data' => 'Student data',
+	'succ_pupil_add' => 'Success pupil add',
+
+
 
 )
 ?>
