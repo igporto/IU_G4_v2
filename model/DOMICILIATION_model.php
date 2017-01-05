@@ -24,7 +24,6 @@ class DomiciliationMapper
     //Inserta na base de datos unha tupla cos datos do obxeto $domiciliation
     public function add(Domiciliation $domiciliation)
     {
-
         //cambiar a sentencia acorde á taboa que referencia
         //IMPORTANTE: se a PK da táboa é autoincremental, non se inserta manualmente (non se pon nos 'campo' nin nos '?')
         $stmt = $this->db->prepare("INSERT INTO domiciliacion(id_domiciliacion, periodo,total,id_cliente,iban) values (?,?,?,?,?)"); //1 ? por campo a insertar

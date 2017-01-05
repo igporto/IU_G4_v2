@@ -38,7 +38,6 @@ $permissions = $view->getVariable("paymentstoshow");
             <?php echo $strings['find']; ?>
         </a>
 
-
         <!--BOTÓN ENGADIR-->
         <?php if ($add) {
             echo '  
@@ -50,10 +49,24 @@ $permissions = $view->getVariable("paymentstoshow");
                             </a>
                         ';
         } ?>
+
+        <!--BOTÓN CAJA-->
+        <div class="btn-group">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $strings["till"]; ?> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#"><?php echo $strings["create_spend"]; ?></a></li>
+                <li><a href="#"><?php echo $strings["create_withdrawal"]; ?></a></li>
+                <li><a href="#"><?php echo $strings["create_close"]; ?></a></li>
+                <li><a href="#"><?php echo $strings["consult"]; ?></a></li>
+            </ul>
+        </div>
+
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
-    <div class="row" style="margin-top: 20px">
+    <div class="row" style="margin-top: 20px; width: 150%">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?php echo $strings['list_of'] . ' ' . $strings['PAYMENT']; ?>
@@ -61,11 +74,14 @@ $permissions = $view->getVariable("paymentstoshow");
             </div>
             <div class="panel-body">
                 <table id="dataTable" class="table-responsive   table-hover"
-                       style="width:80%; margin-right: 10%; margin-left: 10%">
+                       style="width:85%; margin-right: 10%; margin-left: 10%">
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['PAYMENT'] ?></th>
+                        <th class="text-center"><?php echo $strings['dni'] ?></th>
+                        <th class="text-center"><?php echo $strings['quantity'] ?></th>
+                        <th class="text-center"><?php echo $strings['pagado'] ?></th>
+                        <th class="text-center"><?php echo $strings['date'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -88,7 +104,18 @@ $permissions = $view->getVariable("paymentstoshow");
                     foreach ($permissions as $p) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $p->getIdPago() . "</td><td class='text-center'>";
+                        echo $p->getDniAlum() . "</td><td class='text-center'>";
+                        echo $p->getCantidad() . " €</td><td class='text-center'>";
+
+                        if ($p->getPagado() == 1) {
+                            echo $strings["si"];
+                        } else {
+                            echo $strings["no"];
+                        }
+
+                        echo "</td><td class='text-center'>";
+                        echo $p->getFecha() . "</td><td class='text-center'>";
+
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
@@ -101,20 +128,31 @@ $permissions = $view->getVariable("paymentstoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                                echo "<a href=index.php?controller=payment&action=edit&id_pago=" . $p->getIdPago() . '>';
-                                echo "<button class='btn btn-warning btn-xs ";
-                                echo "' style='margin:2px'>";
-                                echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                            echo "<a href=index.php?controller=payment&action=edit&id_pago=" . $p->getIdPago() . '>';
+                            echo "<button class='btn btn-warning btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
 
                         }
 
                         //Botón que direcciona á vista de eliminar
                         if ($delete) {
 
-                                echo '<button type="button" class="btn btn-danger btn-xs';
-                                echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
-                                echo '" style="margin:2px">';
-                                echo '<i class="fa fa-trash-o fa-fw"></i>
+                            echo '<button type="button" class="btn btn-danger btn-xs';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
+                            echo '" style="margin:2px">';
+                            echo '<i class="fa fa-trash-o fa-fw"></i>
+                                            </button>';
+
+                        }
+
+                        //Botón que direcciona á vista de cobrar
+                        if ($p->getPagado()=="0") {
+
+                            echo '<button type="button" class="btn btn-success btn-xs';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
+                            echo '" style="margin:2px">';
+                            echo '<i class="fa fa-usd fa-fw"></i>
                                             </button>';
 
                         }

@@ -420,10 +420,21 @@ $strings = array(
     'id'=>'ID',
     'payment_method'=>'Payment Method',
     'payment_modify'=>'Payment Modify',
-    'period'=>'Period',
+    'period'=>'Months',
     'total_quantity'=>'Total quantity',
     'months'=>'Months',
 	'domiciliation_data'=>'Domiciliation Data',
-    'domiciliation_modify'=>'Domiciliation Modify'
+    'domiciliation_modify'=>'Domiciliation Modify',
+
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'YES',
+    'no'=>'NO',
+    'cantidad'=>'Quantity to pay',
+    'client_type'=>'Client type',
+    'pagado'=>'Paid out',
+    'till'=>'Till',
+    'create_spend'=>'Create spend',
+    'create_withdrawal'=>'Create withdrawal',
+    'create_close'=>'Till close'
 )
 ?>

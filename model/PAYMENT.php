@@ -14,21 +14,21 @@ class Payment
     private $fecha;
     private $cantidad;
     private $metodo_pago;
-    private $descuento;
+    private $pagado;
     private $tipo_cliente;
     private $dni_alum;
     private $dni_cliente_externo;
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($id_pago = NULL, $fecha = NULL, $cantidad = NULL, $metodo_pago = NULL, $descuento = NULL,
+    public function __construct($id_pago = NULL, $fecha = NULL, $cantidad = NULL, $metodo_pago = NULL, $pagado = NULL,
                                 $tipo_cliente = NULL, $dni_alum = NULL, $dni_cliente_externo = NULL)
     {
         $this->id_pago = $id_pago;
         $this->fecha = $fecha;
         $this->cantidad = $cantidad;
         $this->metodo_pago = $metodo_pago;
-        $this->descuento = $descuento;
+        $this->pagado = $pagado;
         $this->tipo_cliente = $tipo_cliente;
         $this->dni_alum = $dni_alum;
         $this->dni_cliente_externo = $dni_cliente_externo;
@@ -101,17 +101,17 @@ class Payment
     /**
      * @return mixed
      */
-    public function getDescuento()
+    public function getPagado()
     {
-        return $this->descuento;
+        return $this->pagado;
     }
 
     /**
-     * @param mixed $descuento
+     * @param mixed $pagado
      */
-    public function setDescuento($descuento)
+    public function setPagado($pagado)
     {
-        $this->descuento = $descuento;
+        $this->pagado = $pagado;
     }
 
     /**

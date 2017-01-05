@@ -392,12 +392,16 @@ CREATE TABLE `pago` (
   `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
   `cantidad` smallint(6) not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
-  `descuento` int(4) NOT NULL,
+  `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
   `dni_alum` VARCHAR (9) NULL,
   `dni_cliente_externo` VARCHAR (9) NULL
 )  ;
 
+CREATE TABLE `caja` (
+  `id_pago` int(4) NOT NULL,
+  `cantidad` smallint(6) not null
+)  ;
 -- --------------------------------------------------------
 
 --
@@ -779,8 +783,7 @@ ALTER TABLE `lesion`
 -- Indices de la tabla `pago`
 --
 ALTER TABLE `pago`
-  ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `descuento` (`descuento`);
+  ADD PRIMARY KEY (`id_pago`);
 
 --
 -- Indices de la tabla `perfil`
@@ -1163,13 +1166,6 @@ ALTER TABLE `inscripcion`
   ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-
---
--- Filtros para la tabla `pago`
---
-ALTER TABLE `pago`
-  ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`descuento`) REFERENCES `descuento` (`id_descuento`) ON DELETE CASCADE ON UPDATE CASCADE;
-
 --
 -- Filtros para la tabla `permiso`
 --
@@ -1188,8 +1184,7 @@ ALTER TABLE `permisos_perfil`
 -- Filtros para la tabla `recibo`
 --
 ALTER TABLE `recibo`
-  ADD CONSTRAINT `recibo_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recibo_ibfk_2` FOREIGN KEY (`descuento`) REFERENCES `pago` (`descuento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `recibo_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `reserva`

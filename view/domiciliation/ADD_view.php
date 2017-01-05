@@ -22,7 +22,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
-                                   class="form-control" id="cantidad" name="cantidad"
+                                   class="form-control" id="total" name="total"
                                    placeholder= <?php echo $strings['total_quantity'] ?>
                                    required="true">
                             <div id="error"></div>
@@ -46,7 +46,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
-                                   class="form-control" id="cliente" name="cliente"
+                                   class="form-control" id="id_cliente" name="id_cliente"
                                    placeholder= <?php echo $strings['client'] ?>
                                    required="true">
                             <div id="error"></div>

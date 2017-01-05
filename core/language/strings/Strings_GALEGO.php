@@ -403,7 +403,7 @@ $strings = array(
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
 
-
+//PAGOS, DESCUENTOS y FACTURAS
     'discount_modify' => 'Modificar Desconto',
     'DOMICILIATION' => 'Domiciliacións',
     'quantity' => 'Cantidade',
@@ -414,10 +414,21 @@ $strings = array(
     'id'=>'Identificador',
     'payment_method'=>'Metodo de Pago',
     'payment_modify'=>'Modificar Pago',
-    'period'=>'Periodo',
+    'period'=>'Meses',
     'total_quantity'=>'Cantidade total',
     'months'=>'Meses',
     'domiciliation_data'=>'Datos da Domiciliacion',
-    'domiciliation_modify'=>'Modificar Domiciliacion'
+    'domiciliation_modify'=>'Modificar Domiciliacion',
+
+    //PAGOS, DESCUENTOS y FACTURAS
+    'si'=>'SI',
+    'no'=>'NON',
+    'cantidad'=>'Cantidade a Pagar',
+    'client_type'=>'Tipo de cliente',
+    'pagado'=>'Pagado',
+    'till'=>'Caixa',
+    'create_spend'=>'Crear gasto',
+    'create_withdrawal'=>'Crear retirada',
+    'create_close'=>'Cierre de caixa'
 )
 ?>

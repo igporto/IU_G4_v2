@@ -1,15 +1,14 @@
 <?php
-echo '<div class="modal fade" id="view' . $p->getIdPago() . '" tabindex="-1" role="dialog" aria-labelledby="' . $p->getIdPago() . 'viewlabel" aria-hidden="true" style="display: none;">
+echo '<div class="modal fade" id="view' . $p->getIdTill() . '" tabindex="-1" role="dialog" aria-labelledby="' . $p->getIdTill() . 'viewlabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="' . $p->getIdPago() . 'label">' . $strings["payment_data"] . ': </h4>
+                <h4 class="modal-title" id="' . $p->getIdTill() . 'label">' . $strings["payment_data"] . ': </h4>
             </div>
-            <div class="modal-body">';
+            <div class="modal-body">
 
 //DATOS DO PAGO
-echo '  
             <div class="row">';
 
 if ($p->getDniAlum() != NULL) {
@@ -50,9 +49,9 @@ echo '</span>
 if ($p->getPagado() == 1) {
     echo '<div class="col-xs-12 col-md-12">
                         <label for="">' . $strings["payment_method"] . ': </label>
-                        <span class="">' . $p->getMetodoPago() . '</span>
+                        <span class="">' . $p->getMetodoTill() . '</span>
 
-                    <!--Campo metodo pago-->
+                    <!--Campo metodo till-->
                 </div>';
 }
 echo '               <div class="col-xs-12 col-md-12">';
@@ -60,7 +59,9 @@ echo '               <div class="col-xs-12 col-md-12">';
 echo '
                     <!--Campo dni-->
                 </div>
-                </div></div><div class="modal-footer">
+                </div></div>
+                
+                <div class="modal-footer">
                 
                 <button type="button" class="btn btn-success" data-dismiss="modal">
                 <i class="fa fa-tick"></i>' . $strings["okay"] . '</button>

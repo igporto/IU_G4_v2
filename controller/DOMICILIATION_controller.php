@@ -46,7 +46,7 @@ class DomiciliationController extends BaseController
 
             $domiciliation->setPeriodo(htmlentities(addslashes($_POST["periodo"])));
             $domiciliation->setTotal(htmlentities(addslashes($_POST["total"])));
-            $domiciliation->setIdCliente(htmlentities(addslashes($_POST["cliente"])));
+            $domiciliation->setIdCliente(htmlentities(addslashes($_POST["id_cliente"])));
             $domiciliation->setIban(htmlentities(addslashes($_POST["iban"])));
 
             try {
@@ -103,10 +103,12 @@ class DomiciliationController extends BaseController
             $domiciliation_id = $_REQUEST["id_domiciliacion"];
             $domiciliation = $this->domiciliationMapper->view($domiciliation_id);
 
-            date_default_timezone_set('Europe/Madrid');
-            $date = date('Y-m-d h:i:s', time());
-
-            $domiciliation->setPeriodo($date);
+            if (isset($_POST["periodo"]) && ($_POST['periodo']) != "") {
+                $domiciliation->setPeriodo(htmlentities(addslashes($_POST["periodo"])));
+            } else {
+                $aux = $domiciliation->getPeriodo();
+                $domiciliation->setPeriodo($aux);
+            }
             if (isset($_POST["total"]) && ($_POST['total']) != "") {
                 $domiciliation->setTotal(htmlentities(addslashes($_POST["total"])));
             } else {
@@ -124,23 +126,6 @@ class DomiciliationController extends BaseController
             } else {
                 $aux = $domiciliation->getIban();
                 $domiciliation->setIban($aux);
-            }
-            $domiciliation->setDescuento(1); //TODO
-
-            if ($_POST["iban"] == "student") {
-                if (isset($_POST["dni"]) && ($_POST['dni']) != "") {
-                    $domiciliation->setDniAlum(htmlentities(addslashes($_POST["dni"])));
-                } else {
-                    $aux = $domiciliation->getDniAlum();
-                    $domiciliation->setDniAlum($aux);
-                }
-            } else {
-                if (isset($_POST["dni"]) && ($_POST['dni']) != "") {
-                    $domiciliation->setDniClienteExterno(htmlentities(addslashes($_POST["dni"])));
-                } else {
-                    $aux = $domiciliation->getDniClienteExterno();
-                    $domiciliation->setDniClienteExterno($aux);
-                }
             }
 
             try {

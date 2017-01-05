@@ -4,49 +4,13 @@ echo '<div class="modal fade" id="confirmar' . $p->getIdPago() . '" tabindex="-1
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="' . $p->getIdPago() . 'label">' . $strings["confirm_message"] . ' ' . $p->getIdPago() . '?</h4>
+                <h4 class="modal-title" id="' . $p->getDniAlum() . 'label">' . $strings["confirm_message"] . ' ' . $p->getDniAlum() . '?</h4>
             </div>
             <div class="modal-body">
-                 <label for="">' . $strings["payment_data"] . ': </label>';
+                 <label for="">' . $strings["payment_data"] . ': </label>
+
+<div class="row">';
 //DATOS DO PAGO A BORRAR
-echo '  
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["id"] . ': </label>
-                        <span class="">' . $p->getIdPago() . '</span>
-
-                    <!--Campo id-->
-                </div>
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["date"] . ': </label>
-                        <span class="">' . $p->getFecha() . '</span>
-
-                    <!--Campo fecha-->
-                </div>
-              
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["quantity"] . ': </label>
-                        <span class="">' . $p->getCantidad() . '</span>
-
-                    <!--Campo cantidad-->
-                </div>
-                
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["payment_method"] . ': </label>
-                        <span class="">' . $p->getMetodoPago() . '</span>
-
-                    <!--Campo metodo pago-->
-                </div>
-                
-                <div class="col-xs-12 col-md-12">
-                        <label for="">' . $strings["discount"] . ': </label>
-                        <span class="">' . $p->getDescuento() . '</span>
-
-                    <!--Campo descuento-->
-                </div>
-                
-                <div class="col-xs-12 col-md-12">';
-
 if ($p->getDniAlum() != NULL) {
     echo '
                     <label for="">' . $strings["student"] . ': </label>
@@ -56,21 +20,56 @@ if ($p->getDniAlum() != NULL) {
                         <span class="">' . $p->getDniClienteExterno() . '</span>';
 }
 
+echo '<div class="col-xs-12 col-md-12">
+                        <label for="">' . $strings["date"] . ': </label>
+                        <span class="">' . $p->getFecha() . '</span>
+
+                    <!--Campo fecha-->
+                </div>
+              
+                <div class="col-xs-12 col-md-12">
+                        <label for="">' . $strings["quantity"] . ': </label>
+                        <span class="">' . $p->getCantidad() . ' €</span>
+
+                    <!--Campo cantidad-->
+                </div>
+                
+                <div class="col-xs-12 col-md-12">
+                        <label for="">' . $strings["pagado"] . ': </label>
+                        <span class="">';
+if ($p->getPagado() == 1) {
+    echo $strings["si"];
+} else {
+    echo $strings["no"];
+}
+echo '</span>
+
+                    <!--Campo pagado-->
+                </div>';
+if ($p->getPagado() == 1) {
+    echo '<div class="col-xs-12 col-md-12">
+                        <label for="">' . $strings["payment_method"] . ': </label>
+                        <span class="">' . $p->getMetodoPago() . '</span>
+
+                    <!--Campo metodo pago-->
+                </div>';
+}
+echo '               <div class="col-xs-12 col-md-12">';
+
 echo '
                     <!--Campo dni-->
                 </div>
-                </div></div><div class="modal-footer">
+                </div></div>
                 
-                <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
+                <div class="modal-footer">
                 
-                <a href="index.php?controller=payment&action=delete&id_pago=' . $p->getIdPago() . '">
-                <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
-                </a>
+                <button type="button" class="btn btn-success" data-dismiss="modal">
+                <i class="fa fa-tick"></i>' . $strings["okay"] . '</button>
+                
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>';
-
 ?>

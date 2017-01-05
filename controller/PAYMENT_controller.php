@@ -50,15 +50,18 @@ class PaymentController extends BaseController
             $payment->setFecha($date);
             $payment->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
             $payment->setMetodoPago(htmlentities(addslashes($_POST["metodo_pago"])));
-            $payment->setDescuento(1); //TODO
             $payment->setTipoCliente(htmlentities(addslashes($_POST["tipo_cliente"])));
+
             if ($_POST["tipo_cliente"] == "student") {
                 $payment->setDniAlum(htmlentities(addslashes($_POST["dni"])));
             } else {
                 $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni"])));
             }
 
+            $payment->setPagado(htmlentities(addslashes($_POST["pagado"])));
+
             try {
+
                 $this->paymentMapper->add($payment);
                 //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_payment_add');
@@ -134,7 +137,6 @@ class PaymentController extends BaseController
                 $aux = $payment->getTipoCliente();
                 $payment->setTipoCliente($aux);
             }
-            $payment->setDescuento(1); //TODO
 
             if ($_POST["tipo_cliente"] == "student") {
                 if (isset($_POST["dni"]) && ($_POST['dni']) != "") {
@@ -187,4 +189,12 @@ class PaymentController extends BaseController
         }
 
     }
+/*
+    public function till()
+    {
+        $payment = $this->paymentMapper->till();
+        $this->view->setVariable("payment", $payment);
+        $this->view->render("payment", "till");
+    }*/
+
 }
