@@ -134,7 +134,6 @@ $strings = array(
 	'EDIT' => 'Edit',
 	'VIEW' => 'View',
 	'SHOW' => 'Show',
-	'ACTIVITY' => 'Activities',
 	'SCHEDULE'=>'Schedules',
 	'manage' => 'Manage',
 	'save'=>'Save',
@@ -299,6 +298,7 @@ $strings = array(
 		'fail_dni_incorrect'=>'DNI is not valid',
 		'fail_email_incorrect'=>'email is not valid',
     	'fail_birthdate_incorrect' => 'Birth Date is not valid',
+    	'fail_price_incorrect'=>'Price is not valid',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -360,6 +360,7 @@ $strings = array(
     'no_discount'=>'Without Discount',
     'no_category'=>'Without Category',
     'no_space'=>'Without Space',
+    'price'=>'Price',
 
     /*Descontos*/
     'DISCOUNT' => 'Discounts',
@@ -387,7 +388,21 @@ $strings = array(
     'job'=>'Job',
     'sickreason'=>'Sick Reason',
     'pengingclasses'=>'Pending Classes',
-	/*Eventos*/
+
+
+    /*Documento*/
+    'DOCUMENT'=>'Documents',
+    'create_document'=>'Añadir Documento',
+    'document'=>'Document',
+    'employee'=>'Employee',
+    'without_employee'=>'Without Employee',
+    'alumn'=>'Alumn',
+    'management_documents'=>'Documents Management',
+    'document_data'=>'Document Data',
+    'no_documents'=>'Don´t have documents',
+
+
+    /*Eventos*/
     'EVENTS' => 'Events',
     'EVENT' => 'Events',
     'management_events' => 'Events Management',
@@ -397,7 +412,7 @@ $strings = array(
     'event_already_exists' => 'Event already exists',
     'initial_hour' => 'Start Time',
     'final_hour' => 'End Time',
-    'date' => 'Event Date',
+    'date' => 'Date',
     'event_id' => 'Event´s ID',
     'dni_a' => 'Student´s ID',
     'dni_p' => 'Teacher',
@@ -417,8 +432,28 @@ $strings = array(
 	'succ_pupil_add' => 'Success pupil add',
 	'space_name' => 'Space name',
     'confirm_msg' => 'Are you sure you want to unsubscribe from',
+    'event_name' => 'Event name',
+    'injury_name' => 'Injury name',
+    'date_recovery' => 'Recovery date',
+    'date_injury' => 'Injury date',
 
 
+
+    /*LESIONS*/
+    'management_injury' => 'Injury Management',
+    'INJURY' => 'Injury',
+    'treatment' => 'Treatment',
+    'time_recovery' => 'Approximate recovery time',
+    'injury_id' => 'Injury´s ID',
+    'injury_data' => 'Injury data',
+    'succ_injury_delete' => 'Success injury delete',
+    'injury_edit' => 'Edit injury',
+    'succ_injury_mod' => 'Success injury edit',
+    'create_injury' => 'Add injury',
+    'succ_injury_add' => 'Succes injury add',
+    'injury_already_exists' => 'Injury already exists',
+    'add_employer'  => 'Add employer',
+    'list_of_employer' =>'List of employer',
 
 
     'DOMICILIATION' => 'Domiciliations',

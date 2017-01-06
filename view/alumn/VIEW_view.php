@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__."/../../model/DOCUMENT_model.php");
 echo '
                                     <div class="modal fade" id="view'. $c->getCodalumn(). '" tabindex="-1" role="dialog" aria-labelledby="'. $c->getAlumnname() .'viewlabel" aria-hidden="true" style="display: none;">
                                                         <div class="modal-dialog">
@@ -60,6 +61,36 @@ echo '
 
                                                                         <!--Campo -->
                                                                     </div>
+                                                                    <div class="col-xs-12 col-md-6 col-md-offset-3">
+                                                                        <div class="panel panel-info">
+                                                                            <div class="panel-heading">
+                                                                                <h4 class="panel-title">
+                                                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapsev' . $c->getCodAlumn() . '" aria-expanded="true" class="">'.$strings["DOCUMENT"].': </a>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div id="collapsev' . $c->getCodAlumn() . '" class="panel-collapse collapse" aria-expanded="true">
+                                                                                <div class="panel-body">
+                                                                                    <ul>';
+
+                                                                                    $dm = new DocumentMapper();
+                                                                                    $docs = $dm->showdocsAlumn($c->getCodAlumn());
+
+                                                                                    if ($docs == NULL) {
+                                                                                        echo $strings['no_documents'];
+                                                                                    }else{
+                                                                                        foreach ($docs as $doc){
+                                                                                            echo '<li>';
+                                                                                            echo "<a href=index.php?controller=document&action=view&coddocument=" . $doc->getCoddocument() . '>';
+                                                                                            echo "<button class='btn btn-primary btn-xs ";
+                                                                                            echo "' style='margin:2px'>";
+                                                                                            echo "<i class='fa fa-eye fa-fw'></i></button></a>";
+                                                                                            echo '<span class="">'.$doc->getName().'</span></li>';
+                                                                                        }
+                                                                                    }
+                                                                            echo '</ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> 
                                                                 
                                                                
                                                                 </div><div class="modal-footer">

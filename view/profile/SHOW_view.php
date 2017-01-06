@@ -105,10 +105,18 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     //Botón que direcciona á vista do editar
                                     if($edit){
 
-                                        echo "<a href=index.php?controller=profile&action=edit&profile_id=". $c->getCodprofile().'>';
-                                        echo "<button class='btn btn-warning btn-xs ";
-                                        echo "' style='margin:2px'>";
-                                        echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                                        if($c->getProfilename() == "admin"){
+                                            echo "<a href=index.php?controller=profile&action=edit&profile_id=". $c->getCodprofile().'>';
+                                            echo "<button class='btn btn-warning btn-xs ";
+                                            echo "' disabled style='margin:2px'>";
+                                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                                        }else{
+                                            echo "<a href=index.php?controller=profile&action=edit&profile_id=". $c->getCodprofile().'>';
+                                            echo "<button class='btn btn-warning btn-xs ";
+                                            echo "' style='margin:2px'>";
+                                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                                        }
+
                                     }
                                    
                                     //Botón que direcciona á vista de eliminar
@@ -119,8 +127,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                             echo '" disabled style="margin:2px">';
                                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                                 </button>';
-                                        }
-                                        else
+                                        }else
                                         {
                                             echo '<button type="button" class="btn btn-danger btn-xs';
                                             echo '" data-toggle="modal" data-target="#confirmar'.$c->getCodprofile().'';

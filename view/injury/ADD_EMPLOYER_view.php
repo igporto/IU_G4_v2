@@ -4,18 +4,18 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-$userMapper = new EventMapper();
+$injuryMapper = new InjuryMapper();
 ?>
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
+    <h1 class="page-header"><?php echo $strings['add_employer']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=event&action=addpupil"
+          action="index.php?controller=injury&action=addemployer"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_event'] ?>
+                <?php echo $strings['create_employee'] ?>
             </div>
             <div class="panel-body">
 
@@ -29,52 +29,61 @@ $userMapper = new EventMapper();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col col-md-5">
+                    <div class="col-xs-12  col-md-7 pull-right">
 
-                        <label for="divdatestart"><?= $strings['dni']." ".$strings['student']  ?></label>
-                        <div class="form-group input-group">
+                        <p><?php echo $strings['dni']." ".$strings['employee'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
-                                $s = new EventMapper();
-                                $a = $s->selectDniA();
+                                $a = $injuryMapper->selectDniE();
                                 foreach ($a as $b){
-                                    echo '<option value="'.$b.'">'.$s->getDniId($b).'</option>';
+                                    echo '<option>'.$b.'</option>';
                                 }
                                 ?>
                             </select>
-                        </div>
+                        </div></p>
                         <!--Campo dni-->
-                    </div>
-                    <div class="col-xs-12 col col-md-5">
 
-                        <label for="divdatestart"><?= $strings['EVENTS_NAME']  ?></label><div class="form-group input-group">
+                        <p><?php echo $strings['injury_name'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="id_evento">
+                            <select name="id_lesion">
                                 <?php
-                                $s = new EventMapper();
-                                $a = $s->selectEventID();
+                                $a = $injuryMapper->selectInjuryID();
                                 foreach ($a as $b){
-                                    echo '<option value="'.$b.'">'.$s->getNameEvent($b).'</option>';
+                                    echo '<option>'.$b.'</option>';
                                 }
                                 ?>
                             </select>
-                            <!--Campo name-->
+                        </div></p>
+
+                        <label for="divdatestart"><?= $strings['date_injury']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="date_injury"
+                                   required="true" maxlength="10">
+                            <div id="error"></div>
+                        </div>
+
+                        <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="date_recovery"
+                                   required="true" maxlength="10">
+                            <div id="error"></div>
                         </div>
 
                     </div>
-
-                </div>
+                    <!--Campo name-->
                 </div>
 
             </div>
-
+        </div>
 
         <div class="row">
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=event&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
@@ -96,4 +105,18 @@ $userMapper = new EventMapper();
     </form>
     <!--fin formulario-->
 </div>
+
+<script>
+    $( function() {
+        $( "#datestart" ).datepicker();
+        $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
+
+<script>
+    $( function() {
+        $( "#dateend" ).datepicker();
+        $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 

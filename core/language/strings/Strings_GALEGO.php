@@ -136,7 +136,6 @@ $strings = array(
     'EDIT' => 'Editar',
     'VIEW' => 'Visualizar',
     'SHOW' => 'Mostrar',
-    'ACTIVITY' => 'Actividades',
     'SCHEDULE'=>'Horarios',
     'manage' => 'Xestionar',
     'clean' => 'Limpar',
@@ -292,6 +291,7 @@ $strings = array(
         'fail_dni_incorrect'=>'O DNI non é válido',
         'fail_email_incorrect' => 'O email non é válido',
         'fail_birthdate_incorrect' => 'A data de nacemento non é válida',
+        'fail_price_incorrect'=>'O Prezo non é válido',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -352,6 +352,7 @@ $strings = array(
     'no_discount'=>'Sen Desconto',
     'no_category'=>'Sen Categoría',
     'no_space'=>'Sen Espazo',
+    'price'=>'Prezo',
 
     /*Descontos*/
     'DISCOUNT' => 'Descontos',
@@ -381,6 +382,16 @@ $strings = array(
     'sickreason'=>'Motivo da baixa',
     'pengingclasses'=>'Clases pendentes',
 
+    /*Documento*/
+    'DOCUMENT'=>'Documentos',
+    'create_document'=>'Engadir Documento',
+    'document'=>'Documento',
+    'employee'=>'Empregado',
+    'without_employee'=>'Sen Empregado',
+    'alumn'=>'Alumno',
+    'management_documents'=>'Xestión de Documentos',
+    'document_data'=>'Datos do Documento',
+    'no_documents'=>'Non ten documentos',
 
     /*Eventos*/
     'EVENTS' => 'Eventos',
@@ -392,7 +403,7 @@ $strings = array(
     'event_already_exists' => 'O evento xa existe',
     'initial_hour' => 'Hora Inicio',
     'final_hour' => 'Hora Fin',
-    'date' => 'Fecha Evento',
+    'date' => 'Data',
     'event_id' => 'ID do evento',
     'dni_a' => 'ID do Alumno',
     'dni_p' => 'Profesor',
@@ -414,6 +425,29 @@ $strings = array(
     'confirm_msg' => 'Está seguro de querer dar de baixa do evento a ',
 
 
+    /*LESIONS*/
+    'management_injury' => 'Xestión de Lesións',
+    'INJURY' => 'Lesións',
+    'treatment' => 'Tratamento',
+    'time_recovery' => 'Tempo de recuperación aproximado',
+    'injury_id' => 'ID da lesión',
+    'injury_data' => 'Datos da lesión',
+    'succ_injury_delete' => 'Lesión borrada correctamente',
+    'injury_edit' => 'Editar lesión',
+    'succ_injury_mod' => 'Lesión modificada con éxito',
+    'create_injury' => 'Engadir lesión',
+    'succ_injury_add' => 'Lesión engadida correctamente',
+    'injury_already_exists' => 'A lesión xa existe',
+    'event_name' => 'Nome do evento',
+    'injury_name' => 'Nome da lesión',
+    'date_recovery' => 'Data de recuperación',
+    'date_injury' => 'Data da lesión',
+    /////////////////////////////////////////
+    'add_employer'  => 'Engadir empregado',
+    'list_of_employer' =>'Lista de empregados',
+
+
+
 //PAGOS, DESCUENTOS y FACTURAS
     'discount_modify' => 'Modificar Desconto',
     'DOMICILIATION' => 'Domiciliacións',
@@ -431,6 +465,7 @@ $strings = array(
     'domiciliation_data'=>'Datos da Domiciliacion',
     'domiciliation_modify'=>'Modificar Domiciliacion',
 
+
     //PAGOS, DESCUENTOS y FACTURAS
     'si'=>'SI',
     'no'=>'NON',
@@ -438,6 +473,7 @@ $strings = array(
     'client_type'=>'Tipo de cliente',
     'pagado'=>'Pagado',
     'till'=>'Caixa',
+
     'create_spend'=>'Crear gasto de caixa',
     'create_withdrawal'=>'Crear retirada de caixa',
     'create_close'=>'Cierre de caixa',

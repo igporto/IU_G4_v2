@@ -84,14 +84,10 @@ echo '
                                                                             <span class="">' . $c->getComment().' </span>
 
                                                                         <!--Campo commentario-->
-                                                                    </div>
-                                                                
-                                                               
+                                                                    </div>                                                                                                                              
                                                                 </div><div class="modal-footer">
-                                                                    
                                                                     <button type="button" class="btn btn-success" data-dismiss="modal">
                                                                     <i class="fa fa-tick"></i>'.$strings["okay"].'</button>
-                                                                    
                                                                 </div>
                                                             </div>
                                                             <!-- /.modal-content -->

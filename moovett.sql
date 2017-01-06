@@ -71,6 +71,9 @@ DROP TABLE IF EXISTS `alerta`;
 DROP TABLE IF EXISTS `notificacion`;
 DROP TABLE IF EXISTS `usuario_recibe_alerta`;
 DROP TABLE IF EXISTS `alumnos_recibe_notificacion`;
+DROP TABLE IF EXISTS `horario`;
+DROP TABLE IF EXISTS `jornada`;
+
 
 
 -- --------------------------------------------------------
@@ -87,6 +90,7 @@ CREATE TABLE  `actividad` (
   `id_espacio` int(4) not null,
   `descuento` int(4) NOT NULL,
   `color` varchar(16) NOT NULL,
+  `precio` float(10) NOT NULL DEFAULT '0.00',
   `empleado_imparte` int(3) NOT NULL
 );
 
@@ -133,7 +137,7 @@ CREATE TABLE `asistencia` (
   `fecha_as` date NOT NULL,
   `asiste` tinyint(1) NOT NULL,
   `id_alumno` int(4) NOT NULL,
-  `id_empleado` int(3) NOT NULL
+  `id_empleado` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -171,9 +175,7 @@ CREATE TABLE `calendario` (
 create table `caja` (
   `id_caja` int(4) NOT NULL,
   `cantidad` int(6) NULL,
-  `id_pago` int(4) NOT NULL,
-  `fecha` date NOT NULL,
-  `concepto` varchar(20) NOT NULL
+  `id_pago` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -226,8 +228,10 @@ CREATE TABLE `descuento` (
 CREATE TABLE `documento` (
   `id_documento` int (4) NOT NULL,
   `fecha_firma` date NOT NULL DEFAULT '0000-00-00',
+  `nombre` varchar(50) NOT NULL,
+  `ruta` varchar(250) NOT NULL,
   `id_alumno` int(4) NOT NULL,
-  `id_empleado` int(3) DEFAULT NULL
+  `id_empleado` int(4) DEFAULT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -237,7 +241,7 @@ CREATE TABLE `documento` (
 --
 
 CREATE TABLE `empleado` (
-  `id_empleado` int(3) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `nombre` varchar(15) NULL,
   `apellidos` varchar(40) NULL,
@@ -252,7 +256,22 @@ CREATE TABLE `empleado` (
   `cod_usuario` int(4) NULL
 ) ;
 
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `lesion`
+--
+
+
+CREATE TABLE `lesion` (
+  `id_lesion` int(4) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `descripcion` varchar(250) NULL,
+  `tratamiento` text NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `tiempo_recuperacion` int(4) NULL,
+  `fecha_recuperacion` date DEFAULT NULL
+  ) ;
 -- --------------------------------------------------------
 
 --
@@ -260,7 +279,7 @@ CREATE TABLE `empleado` (
 --
 
 CREATE TABLE `empleado_tiene_lesion` (
-  `id_empleado` int(3) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL
 ) ;
 
@@ -279,7 +298,7 @@ CREATE TABLE `evento` (
   `fecha_evento` date NOT NULL DEFAULT '0000-00-00',
   `aforo` int(4) NOT NULL,
   `id_espacio` int(4) NOT NULL,
-  `id_empleado` int(3) NOT NULL
+  `id_empleado` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -365,20 +384,6 @@ CREATE TABLE `inscripcion` (
   `id_pago` int(4) NOT NULL
 ) ;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `lesion`
---
-
-CREATE TABLE `lesion` (
-  `id_lesion` int(4) NOT NULL,
-  `descripcion` varchar(250) NULL,
-  `tratamiento` text NULL,
-  `fecha_lesion` date DEFAULT NULL,
-  `tiempo_recuperacion` int(4) NULL,
-  `fecha_recuperacion` date DEFAULT NULL
-) ;
 
 -- --------------------------------------------------------
 
@@ -547,7 +552,7 @@ CREATE TABLE `servicio` (
 CREATE TABLE `log_acceso_lesion` (
   `id_log` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL,
-  `id_empleado` int(3) NULL,
+  `id_empleado` int(4) NULL,
   `id_alumno` int(4) NULL,
   `cod_usuario` int(4) NOT NULL,
   `fecha` DATE NULL
@@ -612,6 +617,68 @@ CREATE TABLE `domiciliacion` (
 ) ;
 
 
+-- ENTÉNDASE COMO HORAS LIBRES
+-- horario furrula
+-- formato 'YYYY/MM/DD'
+CREATE TABLE `horario`(
+  `fecha_inicio` date NOT NULL DEFAULT '2000/01/01',
+  `fecha_fin` date NOT NULL DEFAULT '2000/01/01',
+  `id_horario` int(4) NOT NULL,
+  `nombre` varchar(40) NOT NULL
+);
+
+
+ALTER TABLE `horario`
+ADD PRIMARY KEY (`id_horario`),
+MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `jornada`(
+  `dia_semana` int(1) NOT NULL,
+  `hora_inicio` time NOT NULL DEFAULT '09:00:00',
+  `hora_fin` time NOT NULL DEFAULT '17:00:00',
+  `id_jornada` int(11) NOT NULL,
+  `id_horario` int(4) NOT NULL
+);
+
+ALTER TABLE `jornada`
+ADD PRIMARY KEY (`id_jornada`),
+ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
+MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
+
+
+CREATE TABLE `sesion`(
+  `fecha` date NOT NULL DEFAULT '2000/01/01',
+  `hora_inicio` time NOT NULL DEFAULT '10:00:00',
+    `hora_fin` time NOT NULL DEFAULT '11:30:00',
+  `id_empleado` int(4),
+  `id_espacio` int(4) NOT NULL,
+  `id_actividad` int(4),
+  `id_evento` int(4),
+  `id_sesion` int(11) NOT NULL
+);
+
+
+
+ALTER TABLE `sesion`
+ADD PRIMARY KEY (`id_sesion`),
+MODIFY `id_sesion` int(11) NOT NULL AUTO_INCREMENT,
+ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE `asistencia`(
+  `id_sesion` int(11),
+  `id_alumno` int(4),
+  `asiste` tinyint(1)
+);
+
+ALTER TABLE `asistencia`
+ADD PRIMARY KEY (`id_sesion`, `id_alumno`),
+ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
@@ -667,7 +734,8 @@ ALTER TABLE `calendario`
 -- Indices de la tabla `caja`
 --
 ALTER TABLE `caja`
-  ADD PRIMARY KEY (`id_caja`);
+  ADD PRIMARY KEY (`id_caja`),
+  ADD KEY `id_pago` (`id_pago`);
 
 
 --
@@ -1017,7 +1085,7 @@ ALTER TABLE `recibo`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `id_empleado` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empleado` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
@@ -1075,6 +1143,12 @@ ALTER TABLE `alumno_tiene_lesion`
 ALTER TABLE `asistencia`
   ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `caja`
+--
+ALTER TABLE `caja`
+  ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `consulta_fisio`
@@ -1254,7 +1328,9 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (15, 'SPACE'),
 (16, 'DISCOUNT'),
 (17, 'EVENT'),
-(18, 'ALUMN');
+(18, 'ALUMN'),
+(19, 'INJURY'),
+(20, 'DOCUMENT');
 
 
 --
@@ -1363,7 +1439,17 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (18 ,2),
 (18 ,3),
 (18 ,4),
-(18 ,5);
+(18 ,5),
+(19 ,1),
+(19 ,2),
+(19 ,3),
+(19 ,4),
+(19 ,5),
+(20 ,1),
+(20 ,2),
+(20 ,3),
+(20 ,4),
+(20 ,5);
 
 
 
@@ -1482,7 +1568,17 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 87),
 (1, 88),
 (1, 89),
-(1, 90);
+(1, 90),
+(1, 91),
+(1, 92),
+(1, 93),
+(1, 94),
+(1, 95),
+(1, 96),
+(1, 97),
+(1, 98),
+(1, 99),
+(1, 100);
 
 
 
@@ -1596,6 +1692,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 88),
               (1, 89),
               (1, 90),
+              /*DOCUMENT*/
+              (1, 96),
+              (1, 97),
+              (1, 98),
+              (1, 99),
+              (1, 100),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
@@ -1603,7 +1705,15 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 82),
               (1, 83),
               (1, 84),
-              (1, 85);
+              (1, 85),
+              (1, 91),
+              (1, 92),
+              (1, 93),
+              (1, 94),
+              (1, 95);
+;
+
+;
               /*ENGADIDO POR BRUNO*/
 /*ENGADIDO POR IVAN */
 --
@@ -1653,11 +1763,11 @@ INSERT INTO `descuento`(`id_descuento`, `tipo`, `porcentaje`, `descripcion`) VAL
 --
 -- Volcado de datos para la tabla `actividad`
 --
-INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_espacio`, `descuento`, `empleado_imparte`, `color`) VALUES
-  ( 1, "ZUMBA KIDS", 30 , 1, 1, 6, 2, "#000000"),
-  ( 2, "ZUMBA JUNIOR", 20 , 2, 2, 7, 1, "#000000"),
-  ( 3, "TRX", 10, 1, 3, 6, 3, "#000000"),
-  ( 4, "ZUMBA", 20 , 2, 2, 7, 1, "#000000");
+INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_espacio`, `descuento`, `empleado_imparte`, `precio`, `color`) VALUES
+  ( 1, "ZUMBA KIDS", 30 , 1, 1, 6, 2, 25.0 ,"#000000"),
+  ( 2, "ZUMBA JUNIOR", 20 , 2, 2, 7, 1, 35.50, "#000000"),
+  ( 3, "TRX", 10, 1, 3, 6, 3, 46.90, "#000000"),
+  ( 4, "ZUMBA", 20 , 2, 2, 7, 1, 19.99, "#000000");
 
 
   --
@@ -1692,6 +1802,14 @@ INSERT INTO `alumno_se_apunta_evento` (`id_evento`, `id_alumno`) VALUES
   (1,2),
   (2,1),
   (2,3);
+
+
+--
+-- Volcado de datos para la tabla `lesion`
+--
+INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion`) VALUES
+  ('Esguince','Lesión de los ligamentos por distensión, estiramiento excesivo, torsión o rasgadura, acompañada de hematoma, inflamación y dolor que impide continuar moviendo la parte lesionada.','reposo y aplicar hielo',2),
+  ('Rotura de ligamento','Lesión cerrada de la musculatura.','reposo y aplicar hielo',2);
 
 /* Engadido por Bruno */
 /* Engadido por Lore */
