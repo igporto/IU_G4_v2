@@ -22,26 +22,14 @@ $permissions = $view->getVariable("linestoshow");
 
 <div class="col-xs-12 col-md-8 ">
 
-    <h1 class="page-header"><?php echo $strings['management_line'].": ".$_REQUEST["nombre_factura"]?></h1>
+    <h1 class="page-header"><?php echo $strings['management_line'] . ": " . $_REQUEST["nombre_factura"] ?></h1>
 
     <div class="row">
-
-
-        <!--BOTÓN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline" href="index.php?controller=bill&action=show">
-            <i class="fa fa-search-minus"></i>
-            <?php echo $strings['clean']; ?>
-        </a>
-        <!--BOTÓN BUSCAR-->
-        <a class="btn btn-primary" href="index.php?controller=bill&action=search">
-            <i class="fa fa-fw fa-search"></i>
-            <?php echo $strings['find']; ?>
-        </a>
 
         <!--BOTÓN ENGADIR-->
         <?php if ($add) {
             echo '  
-                            <a href="index.php?controller=bill&action=add">
+                            <a href="index.php?controller=bill&action=addline&id_factura=' . $_REQUEST["id_factura"] . '">
                                 <button type="button" class="btn btn-success">
                                 <i class="fa fa-fw fa-plus"></i>
                                     ' . $strings['ADD'] . '
@@ -95,7 +83,7 @@ $permissions = $view->getVariable("linestoshow");
 
                         echo $p->getConcepto() . "</td><td class='text-center'>";
                         echo $p->getPrecio() . " €</td><td class='text-center'>";
-                        echo $p->getIva() . " </td><td class='text-center'>";
+                        echo $p->getIva() . " %</td><td class='text-center'>";
                         echo $p->getUnidades() . " </td><td class='text-center'>";
                         echo $p->getTotal() . " €</td><td class='text-center'>";
 
@@ -111,7 +99,7 @@ $permissions = $view->getVariable("linestoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=bill&action=editline&id_factura=" . $p->getIdLinea() . '>';
+                            echo "<a href=index.php?controller=bill&action=editline&id_factura=" . $p->getIdFactura() . "&id_linea=" . $p->getIdLinea() . ">";
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";

@@ -1,21 +1,24 @@
 <!-- CONTIDO DA PAXINA -->
-<?php
-require_once(__DIR__ . "/../../core/ViewManager.php");
 
-$view = ViewManager::getInstance();
+<?php
+require_once(__DIR__ . "/../../model/PAYMENT_model.php");
+
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+$id_linea = $_REQUEST["id_linea"];
+$billMapper = new BillMapper();
+$bill = $billMapper->viewline($id_linea);
 ?>
 
-
-<div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['add_line']; ?></h1>
-    <form name="form" id="form" method="POST"
-          action="index.php?controller=bill&action=addline&id_factura=<?php echo $_REQUEST["id_factura"] ?>"
+<div class="col-md-6">
+    <h1 class="page-header"><?php echo $strings['line_modify'] . ': ' . $bill->getIdLinea() ?></h1>
+    <form method="POST" name="editform" id="editform"
+          action="index.php?controller=bill&action=editline&id_linea=<?php echo $bill->getIdLinea(); ?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['add_line'] ?>
+                <?php include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php'); ?>
+                <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
 
@@ -26,7 +29,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="concepto" name="concepto"
-                                   placeholder= <?php echo $strings['concept'] ?>
+                                   value=<?php echo $bill->getConcepto() ?>
                                    required="true" maxlength="25">
                             <div id="error"></div>
                         </div>
@@ -39,7 +42,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-chevron-right fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
                                    class="form-control" id="precio" name="precio"
-                                   placeholder= <?php echo $strings['price'] ?>
+                                   value=<?php echo $bill->getPrecio() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
@@ -56,7 +59,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-chevron-right fa-fw"></i></span>
                             <input type="number" min="1" step="1" max="2500000" autofocus
                                    class="form-control" id="cantidad" name="cantidad"
-                                   placeholder= <?php echo $strings['quantity'] ?>
+                                   value=<?php echo $bill->getUnidades() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
@@ -69,7 +72,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-chevron-right fa-fw"></i></span>
                             <input type="number"
                                    class="form-control" id="iva" name="iva"
-                                   placeholder="IVA"
+                                   value=<?php echo $bill->getIva() ?>
                                    required="true">
                             <div id="error"></div>
                         </div>
@@ -79,32 +82,37 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </div>
             </div>
         </div>
-</div>
 
-<div class="row">
+        <div class="row">
 
-    <div class="col-xs-12">
-        <div class="pull-left">
-            <a class="btn btn-default btn-md" href="index.php?controller=bill&action=show">
-                <i class="fa fa-arrow-left"></i>
-                <?php echo $strings['back'] ?></i></a>
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=bill&action=show">
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
+                </div>
+
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                        <?php echo $strings['clean'] ?></i></button>
+
+                    <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                        <i class="fa fa-edit"></i>
+                        <?php echo $strings['EDIT'] ?></i></button>
+                    <?php
+
+                    ?>
+                </div>
+            </div>
+
         </div>
-
-        <div class="pull-right">
-            <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
-
-            <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                <i class="fa fa-plus"></i>
-                <?php echo $strings['ADD'] ?></i></button>
-            <?php
-
-            ?>
-        </div>
-    </div>
-
+    </form>
+    <!--fin formulario-->
 </div>
-</form>
 
-<!--fin formulario-->
-</div>
+<script>
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
+</script>

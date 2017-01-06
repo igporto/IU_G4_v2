@@ -487,6 +487,8 @@ $strings = array(
     'units'=>'Unidades',
     'price'=>'Prezo',
     'total'=>'Total',
-    'management_line'=>'Xestion de lineas'
+    'management_line'=>'Xestion de lineas',
+    'add_line'=>'Engadir linea',
+    'line_modify'=>'Modificar linea'
 )
 ?>

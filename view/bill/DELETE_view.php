@@ -38,7 +38,7 @@ echo '<div class="col-xs-12 col-md-12">
                                                                     
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
                                                                     
-                                                                    <a href="index.php?controller=bill&action=delete&codbill=' . $p->getIdFactura() . '">
+                                                                    <a href="index.php?controller=bill&action=delete&id_factura=' . $p->getIdFactura() . '">
                                                                     <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
                                                                     </a>
                                                                 </div>

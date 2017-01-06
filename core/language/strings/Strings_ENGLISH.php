@@ -491,7 +491,9 @@ $strings = array(
     'units'=>'Units',
     'price'=>'Prize',
 	'total'=>'Total',
-    'management_line'=>'Lines management'
+    'management_line'=>'Lines management',
+    'add_line'=>'Add line',
+    'line_modify'=>'Line Modify'
 
 )
 ?>

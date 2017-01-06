@@ -116,36 +116,6 @@ class BillMapper
         return $bills;
     }
 
-    public function tillspend(Till $till)
-    {
-        $stmt = $this->db->prepare("INSERT INTO caja(numero,id_factura,nombre,concepto) values (?,?,?,?)");
-        $stmt->execute(array($till->getCantidad(), 0, $till->getFecha(), $till->getConcepto()));
-    }
-
-    public function tillwithdrawal(Till $till)
-    {
-        $stmt = $this->db->prepare("INSERT INTO caja(numero,id_factura,nombre,concepto) values (?,?,?,?)");
-        $stmt->execute(array($till->getCantidad(), 0, $till->getFecha(), "WITHDRAWAL"));
-    }
-
-    public function tillconsult()
-    {
-
-        $stmt = $this->db->query("SELECT * FROM caja");
-        $till_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $tills = array();
-
-        foreach ($till_db as $till) {
-            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
-            //introduce no array o obxeto Bill creado a partir da query
-            array_push($tills, new Till($till["id_caja"], $till["numero"], $till["id_factura"], $till["nombre"], $till["concepto"]));
-        }
-
-        //devolve o array
-        return $tills;
-    }
-
     public function showlines()
     {
 
@@ -163,5 +133,50 @@ class BillMapper
 
         //devolve o array
         return $bills;
+    }
+
+    public function addline(BillLine $line)
+    {
+        //cambiar a sentencia acorde á taboa que referencia
+        //IMPORTANTE: se a PK da táboa é autoincremental, non se inserta manualmente (non se pon nos 'campo' nin nos '?')
+        $stmt = $this->db->prepare("INSERT INTO linea_factura(id_factura, id_linea,concepto,precio,iva,unidades,total)
+ values (?,?,?,?,?,?,?)"); //1 ? por campo a insertar
+
+        //cada elemento do array será insertado no correspondente ? da query
+        $stmt->execute(array($line->getIdFactura(), $line->getIdLinea(), $line->getConcepto(), $line->getPrecio()
+        , $line->getIva(), $line->getUnidades(), $line->getTotal()));
+
+        //devolve o ID do último elemento insertado
+        return $this->db->lastInsertId();
+    }
+
+    public function deleteline($line)
+    {
+        $stmt = $this->db->prepare("DELETE from linea_factura WHERE id_linea =?");
+        $stmt->execute(array($line));
+    }
+
+    public function viewline($line_campo_id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM linea_factura WHERE id_linea =?");
+        $stmt->execute(array($line_campo_id));
+        $line = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($line != null) {
+            return new BillLine($line["id_factura"], $line["id_linea"], $line["concepto"],
+                $line["precio"], $line["iva"], $line["unidades"], $line["total"]);
+        } else {
+            return NULL;
+        }
+    }
+
+    public function editline(BillLine $line)
+    {
+        $stmt = $this->db->prepare("UPDATE linea_factura set id_factura =?, concepto =?, precio =?, iva =?, unidades =?,
+              total =? where id_linea =?");
+
+        $stmt->execute(array($line->getIdFactura(), $line->getConcepto(), $line->getPrecio(), $line->getIva(),
+            $line->getUnidades(), $line->getTotal(), $line->getIdLinea()));
+
     }
 }
