@@ -31,7 +31,7 @@ $userMapper = new EventMapper();
                 <div class="row">
                     <div class="col-xs-12  col-md-7 pull-right">
 
-                        <p><?php echo $strings['dni']." ".$strings['student'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['dni_a'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
@@ -45,14 +45,14 @@ $userMapper = new EventMapper();
                         </div></p>
                         <!--Campo dni-->
 
-                        <p><?php echo $strings['event_name'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['event_id'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="id_evento">
                                 <?php
                                 $s = new EventMapper();
                                 $a = $s->selectEventID();
                                 foreach ($a as $b){
-                                    echo '<option>'.$s->getNameEvent($b).'</option>';
+                                    echo '<option>'.$b.'</option>';
                                 }
                                 ?>
                             </select>

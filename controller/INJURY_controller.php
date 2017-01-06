@@ -4,7 +4,7 @@ require_once(__DIR__."/../core/ViewManager.php");
 
 require_once(__DIR__."/../model/INJURY.php");
 require_once(__DIR__."/../model/INJURY_model.php");
-
+require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 class InjuryController extends BaseController {
@@ -155,4 +155,55 @@ class InjuryController extends BaseController {
         }
     }
 
+    public function addpupil(){
+        if (isset($_POST["submit"])) {
+            $pupil = new Pupil_has_injury();
+
+            $pupil->setCodInjury(htmlentities(addslashes($_POST['id_lesion'])));
+            $pupil->setCodPupil(htmlentities(addslashes($_POST['codpupil'])));
+            $pupil->setDateInjury(htmlentities(addslashes($_POST['date_injury'])));
+            $pupil->setDateRecovery(htmlentities(addslashes($_POST['date_recovery'])));
+
+            try {
+                if(!$this->injuryMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_lesion'])))){
+                    $this->injuryMapper->addpupil($pupil);
+                    //ENVIAR AVISO DE ALUMNO ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash("succ_pupil_add");
+
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos alumnos na lesion)
+                    $this->view->redirect("injury", "show");
+                } else {
+                    $this->view->setFlash("student_already_exists");
+                }
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        $this->view->render("injury", "add_pupil");
+    }
+
+
+    public function showpupil(){
+        $pupils = $this->injuryMapper->showpupil();
+        $this->view->setVariable("pupilstoshow", $pupils);
+        $this->view->render("injury", "show_pupil");
+    }
+
+    public function deletepupil(){
+        try{
+            if (isset($_GET['codpupil'])) {
+                $this->injuryMapper->deletepupil(htmlentities(addslashes($_GET["codpupil"])),htmlentities(addslashes($_GET["id_lesion"])));
+                $this->view->setFlash('succ_injury_delete');
+                $this->view->redirect("injury", "show");
+            }
+
+        }catch (Exception $e) {
+            $errors = $e->getErrors();
+            $this->view->setVariable("errors", $errors);
+        }
+        $this->view->render("injury", "show");
+
+    }
 }

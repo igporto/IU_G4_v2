@@ -31,7 +31,7 @@ $injuryMapper = new InjuryMapper();
                 <div class="row">
                     <div class="col-xs-12  col-md-7 pull-right">
 
-                        <p><?php echo $strings['dni_a'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['dni']." ".$strings['student'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
@@ -44,17 +44,33 @@ $injuryMapper = new InjuryMapper();
                         </div></p>
                         <!--Campo dni-->
 
-                        <p><?php echo $strings['event_id'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['injury_name'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="id_evento">
+                            <select name="id_lesion">
                                 <?php
-                                $a = $injuryMapper->selectEventID();
+                                $a = $injuryMapper->selectInjuryID();
                                 foreach ($a as $b){
                                     echo '<option>'.$b.'</option>';
                                 }
                                 ?>
                             </select>
                         </div></p>
+
+                        <label for="divdatestart"><?= $strings['date_injury']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="date_injury"
+                                   required="true" maxlength="10">
+                            <div id="error"></div>
+                        </div>
+
+                        <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="date_recovery"
+                                   required="true" maxlength="10">
+                            <div id="error"></div>
+                        </div>
 
                     </div>
                     <!--Campo name-->
@@ -89,4 +105,18 @@ $injuryMapper = new InjuryMapper();
     </form>
     <!--fin formulario-->
 </div>
+
+<script>
+    $( function() {
+        $( "#datestart" ).datepicker();
+        $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
+
+<script>
+    $( function() {
+        $( "#dateend" ).datepicker();
+        $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 

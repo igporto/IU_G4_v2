@@ -432,6 +432,9 @@ $strings = array(
 	'space_name' => 'Space name',
     'confirm_msg' => 'Are you sure you want to unsubscribe from',
     'event_name' => 'Event name',
+    'injury_name' => 'Injury name',
+    'date_recovery' => 'Recovery date',
+    'date_injury' => 'Injury date',
 
 
 

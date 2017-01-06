@@ -53,6 +53,19 @@ $injury = $view->getVariable("injurystoshow");
                             </a>
                         ';
         } ?>
+
+        <?php if($add) {
+            echo '  
+                            <a href="index.php?controller=injury&action=addpupil">
+                                <button type="button" class="btn btn-success">
+                                <i class="fa fa-fw fa-plus"></i>
+                                    '. $strings['add_student'].'
+                                </button>
+                            </a>
+                        ';
+        }
+
+        ?>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
@@ -118,6 +131,12 @@ $injury = $view->getVariable("injurystoshow");
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
+                        }
+                        if ($v) {
+                            echo "<a href=index.php?controller=injury&action=showpupil&id_lesion=" . $c->getCodInjury() . '>';
+                            echo "<button class='btn btn-info btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-male fa-fw'></i></button></a>";
                         }
 
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA ACCIÓN
