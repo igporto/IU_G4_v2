@@ -6,13 +6,15 @@ require_once(__DIR__ . "/../../model/EMPLOYEE_model.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+
+
 ?>
 
 
 <div class="col-md-6 " style="margin-top: 20px">
     <h1 class="page-header"><?php echo $strings['create_document']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=document&action=add&codemployee="<?php echo htmlentities(addslashes($_GET['codemployee']))?>
+          action="index.php?controller=document&action=add&codemployee=<?php echo $_GET['codemployee'];?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">

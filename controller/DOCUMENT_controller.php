@@ -38,7 +38,7 @@ class DocumentController extends BaseController{
             $document->setSigndate($this->documentMapper->getDay());
             $document->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_POST['codalumn']))));
             if(isset($_GET['codemployee']) ){
-                $document->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_POST['codemployee']))));
+                $document->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_GET['codemployee']))));
             }else{
                 $document->setEmployee(new Employee());
             }
