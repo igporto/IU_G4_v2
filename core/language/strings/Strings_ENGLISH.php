@@ -432,6 +432,9 @@ $strings = array(
 	'space_name' => 'Space name',
     'confirm_msg' => 'Are you sure you want to unsubscribe from',
     'event_name' => 'Event name',
+    'injury_name' => 'Injury name',
+    'date_recovery' => 'Recovery date',
+    'date_injury' => 'Injury date',
 
 
 
@@ -448,6 +451,8 @@ $strings = array(
     'create_injury' => 'Add injury',
     'succ_injury_add' => 'Succes injury add',
     'injury_already_exists' => 'Injury already exists',
+    'add_employer'  => 'Add employer',
+    'list_of_employer' =>'List of employer',
 
 
     'DOMICILIATION' => 'Domiciliations',

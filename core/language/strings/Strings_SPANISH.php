@@ -449,6 +449,11 @@ $strings = array(
     'create_injury' => 'Añadir lesión',
     'succ_injury_add' => 'Lesión añadida correctamente',
     'injury_already_exists' => 'La lesión ya existe',
+    'injury_name' => 'Nombre de la lesión',
+    'date_recovery' => 'Fecha de recuperación',
+    'date_injury' => 'Fecha de la lesión',
+    'add_employer'  => 'Añadir empleado',
+    'list_of_employer' =>'Lista de empleados',
 
 
     /*Alumno*/

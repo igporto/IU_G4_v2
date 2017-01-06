@@ -209,7 +209,7 @@ class EventMapper
         $id = array();
         $resul = $stmt->fetchAll();
         foreach($resul as $r){
-            array_push($id,$r['dni_alumno']);
+            array_push($id,$r['id_alumno']);
         }
 
         return $id;

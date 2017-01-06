@@ -123,6 +123,11 @@ $employees = $view->getVariable("employeestoshow");
 
                         }
 
+                        echo "<a href=index.php?controller=document&action=add&codemployee=" . $c->getCodemployee() . '>';
+                        echo "<button class='btn btn-success btn-xs ";
+                        echo "' style='margin:2px'>";
+                        echo "<i class='fa fa-file-text-o fa-fw'></i></button></a>";
+
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA CATEGORIA
                         include(__DIR__ . '/DELETE_view.php');
 

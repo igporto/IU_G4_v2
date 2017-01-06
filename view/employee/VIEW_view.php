@@ -84,20 +84,7 @@ echo '
                                                                             <span class="">' . $c->getComment().' </span>
 
                                                                         <!--Campo commentario-->
-                                                                    </div>
-                                                                <!--BOTÓN ENGADIR DOCUMENTO-->
-                                                                ';
-                                                                if ($add) {
-                                                                    echo '  
-                                                                        <a href="index.php?controller=document&action=add&codemployee='.$c->getCodemployee().'">
-                                                                            <button type="button" class="btn btn-block">
-                                                                            <i class="fa fa-file-text-o fa-plus"></i>
-                                                                                ' . $strings['ADD'] . '
-                                                                            </button>
-                                                                        </a>
-                                                                    ';
-                                                                }
-                                                                echo ' 
+                                                                    </div>                                                              
                                                                 </div><div class="modal-footer">
                                                               
                                                                   

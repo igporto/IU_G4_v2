@@ -60,12 +60,12 @@ $documents = $view->getVariable("documentstoshow");
                         }else{
                             echo $c->getEmployee()->getEmployeename();
                         }
-                        echo "</td> <td> ";
+                        echo "</td> <td class='text-center'> ";
                         echo "<a href=index.php?controller=document&action=view&coddocument=" . $c->getCoddocument() . '>';
                         echo "<button class='btn btn-primary btn-xs ";
                         echo "' style='margin:2px'>";
                         echo "<i class='fa fa-eye fa-fw'></i></button></a>";
-                        echo "</td><td class='text-center'>";
+                        echo "</td>";
 
 
                         echo "</td></tr>";

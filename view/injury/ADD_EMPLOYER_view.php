@@ -9,13 +9,13 @@ $injuryMapper = new InjuryMapper();
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
+    <h1 class="page-header"><?php echo $strings['add_employer']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=injury&action=addpupil"
+          action="index.php?controller=injury&action=addemployer"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_injury'] ?>
+                <?php echo $strings['create_employee'] ?>
             </div>
             <div class="panel-body">
 
@@ -31,11 +31,11 @@ $injuryMapper = new InjuryMapper();
                 <div class="row">
                     <div class="col-xs-12  col-md-7 pull-right">
 
-                        <p><?php echo $strings['dni']." ".$strings['student'].":";?><div class="form-group input-group">
+                        <p><?php echo $strings['dni']." ".$strings['employee'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
-                                $a = $injuryMapper->selectDniA();
+                                $a = $injuryMapper->selectDniE();
                                 foreach ($a as $b){
                                     echo '<option>'.$b.'</option>';
                                 }

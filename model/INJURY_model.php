@@ -2,7 +2,8 @@
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/INJURY.php");
-
+require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
+require_once(__DIR__ . "/../model/EMPLOYER_HAS_INJURY.php");
 
 class InjuryMapper
 {
@@ -125,4 +126,167 @@ class InjuryMapper
 
         return $id;
     }
+
+    //Recolle os id das lesions
+    public function selectInjuryID(){
+        $stmt = $this->db->prepare("SELECT * FROM lesion");
+        $stmt->execute();
+
+        $id = array();
+        $resul = $stmt->fetchAll();
+        foreach($resul as $r){
+            array_push($id,$r['id_lesion']);
+        }
+
+        return $id;
+    }
+
+    //Recolle o nome da lesion
+    public function getNameInjury($id){
+        $stmt = $this->db->prepare("SELECT * FROM lesion WHERE id_lesion ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+    //Engade unha lesion a un alumno
+    public function addpupil(Pupil_has_injury $pupil)
+    {
+        //insertamos na taboa
+        $stmt = $this->db->prepare("INSERT INTO alumno_tiene_lesion(id_alumno,id_lesion,fecha_lesion,fecha_recuperacion) values (?,?,?,?)");
+        $stmt->execute(array(
+                $pupil->getCodPupil(),
+                $pupil->getCodInjury(),
+                $pupil->getDateInjury(),
+                $pupil->getDateRecovery()
+            )
+        );
+        return $this->db->lastInsertId();
+    }
+
+    //Indica si un alumno con esa lesion xa existe
+    public function pupilCodExists($pupilCod,$id)
+    {
+        $stmt = $this->db->prepare("SELECT count(*) FROM alumno_tiene_lesion where id_alumno=? AND id_lesion = ?");
+        $stmt->execute(array($pupilCod,$id));
+
+        if ($stmt->fetchColumn() > 0) {
+            return true;
+        }
+    }
+
+    //Amosa os alumnos con lesion
+    public function showpupil(){
+        $w = $_GET['id_lesion'];
+        $pupil = $this->db->query("SELECT * FROM alumno_tiene_lesion WHERE id_lesion = $w");
+        $pupil_db = $pupil->fetchAll(PDO::FETCH_ASSOC);
+
+        $pu = array();
+
+        foreach ($pupil_db as $pup) {
+            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
+            //introduce no array o obxeto Controller creado a partir da query
+            array_push($pu, new Pupil_has_injury($pup["id_alumno"],$pup['id_lesion'],$pup['fecha_lesion'], $pup['fecha_recuperacion']));
+        }
+
+        //devolve o array
+        return $pu;
+    }
+
+    //Recolle o nome do alumno
+    public function getNamePupil($id){
+        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+    //Elimina a lesion da lista de lesions do alumno
+    public function deletepupil($cod,$id){
+        $stmt = $this->db->prepare("DELETE from alumno_tiene_lesion WHERE id_alumno = '$cod' AND id_lesion = '$id'");
+        $stmt->execute();
+    }
+
+    //Recolle o dni do empregado
+    public function selectDniE(){
+        $stmt = $this->db->prepare("SELECT * FROM empleado");
+        $stmt->execute();
+
+        $id = array();
+        $resul = $stmt->fetchAll();
+        foreach($resul as $r){
+            array_push($id,$r['id_empleado']);
+        }
+
+        return $id;
+    }
+
+    //Engade unha lesion a un empregado
+    public function addemployer(Employer_has_injury $emp)
+    {
+        //insertamos na taboa
+        $stmt = $this->db->prepare("INSERT INTO empleado_tiene_lesion(id_empleado,id_lesion,fecha_lesion,fecha_recuperacion) values (?,?,?,?)");
+        $stmt->execute(array(
+                $emp->getCodEmpl(),
+                $emp->getCodInjury(),
+                $emp->getDateInjury(),
+                $emp->getDateRecovery()
+            )
+        );
+        return $this->db->lastInsertId();
+    }
+
+    //Recolle o nome da lesion
+    public function getNameInjuryEmp($id){
+        $stmt = $this->db->prepare("SELECT * FROM lesion WHERE id_lesion ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+    //Amosa os empregados con lesion
+    public function showemployer(){
+        $w = $_GET['id_lesion'];
+        $pupil = $this->db->query("SELECT * FROM empleado_tiene_lesion WHERE id_lesion = $w");
+        $pupil_db = $pupil->fetchAll(PDO::FETCH_ASSOC);
+
+        $pu = array();
+
+        foreach ($pupil_db as $pup) {
+            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
+            //introduce no array o obxeto Controller creado a partir da query
+            array_push($pu, new Employer_has_injury($pup["id_empleado"],$pup['id_lesion'],$pup['fecha_lesion'], $pup['fecha_recuperacion']));
+        }
+
+        //devolve o array
+        return $pu;
+    }
+
+    //Elimina a lesion da lista de lesions do empregado
+    public function deleteemployer($cod,$id){
+        $stmt = $this->db->prepare("DELETE from empleado_tiene_lesion WHERE id_empleado = '$cod' AND id_lesion = '$id'");
+        $stmt->execute();
+    }
+
+    //Recolle o nome do alumno
+    public function getNameEmp($id){
+        $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado ='$id'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_pr = $r['nombre'];
+
+        return $id_pr;
+    }
+
+
 }
