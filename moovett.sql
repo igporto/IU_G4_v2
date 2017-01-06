@@ -301,8 +301,9 @@ CREATE TABLE `alumno_se_apunta_evento` (
 
 CREATE TABLE `factura` (
   `id_factura` int(4) NOT NULL,
-  `fecha` int(4) NOT NULL,
-  `id_pago` int(4) NOT NULL
+  `nombre` text NOT NULL,
+  `numero` int(4) NOT NULL,
+  `fecha` date NOT NULL
 ) ;
 
 
@@ -313,12 +314,13 @@ CREATE TABLE `factura` (
 --
 
 CREATE TABLE `linea_factura` (
-  `id_linea_factura` int(4) not null,
   `id_factura` int(4) not null,
-  `concepto` text DEFAULT NULL,
-  `unidades` int(4) DEFAULT NULL,
-  `importe` smallint(6) DEFAULT NULL,
-  `descuento` int(4) NOT NULL
+  `id_linea` int(4) not null,
+  `concepto` text NOT NULL,
+  `precio` double NOT NULL,
+  `iva` int(4) DEFAULT NULL,
+  `unidades` int(4) NOT NULL,
+  `total` double NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -731,16 +733,14 @@ ALTER TABLE `alumno_se_apunta_evento`
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`id_factura`),
-  ADD KEY `id_pago` (`id_pago`);
+  ADD PRIMARY KEY (`id_factura`);
 
   --
 -- Indices de la tabla `linea_factura`
 --
 ALTER TABLE `linea_factura`
-  ADD PRIMARY KEY (`id_linea_factura`,`id_factura`),
-  ADD KEY `id_factura` (`id_factura`),
-  ADD KEY `descuento` (`descuento`);
+  ADD PRIMARY KEY (`id_linea`,`id_factura`),
+  ADD KEY `id_factura` (`id_factura`);
 
 --
 -- Indices de la tabla `horario_actividad`
@@ -984,7 +984,7 @@ ALTER TABLE `lesion`
 -- AUTO_INCREMENT de la tabla `linea_factura`
 --
 ALTER TABLE `linea_factura`
-  MODIFY `id_linea_factura` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_linea` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
@@ -1119,17 +1119,10 @@ ALTER TABLE `alumno_se_apunta_evento`
   ADD CONSTRAINT `alumno_se_apunta_evento_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `linea_factura`
 --
 ALTER TABLE `linea_factura`
-  ADD CONSTRAINT `linea_factura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `linea_factura_ibfk_2` FOREIGN KEY (`descuento`) REFERENCES `descuento` (`id_descuento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `linea_factura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
@@ -1729,3 +1722,10 @@ INSERT INTO `servicio` (`fecha`, `coste`, `descripcion`, `dni_cliente_externo`) 
   ('2016-12-14',69, 'Servicio 4', '34999524J');
 
 /* Engadido por Lore */
+
+INSERT INTO `moovett`.`factura` (`id_factura`, `nombre`, `numero`, `fecha`) VALUES
+(1, 'Primera factura', '12345', '2017-01-01');
+
+INSERT INTO `moovett`.`linea_factura` (`id_factura`, `id_linea`, `concepto`, `precio`, `iva`, `unidades`, `total`) VALUES
+ ('1', NULL, 'Concepto de la linea', '12.5', '10', '1', '15');
+/* Engadido por Yeray */
