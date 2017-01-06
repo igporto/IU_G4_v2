@@ -385,7 +385,7 @@ CREATE TABLE `inscripcion` (
 CREATE TABLE `pago` (
   `id_pago` int(4) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
-  `cantidad` smallint(6) not null,
+  `cantidad` DOUBLE not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
   `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
@@ -1850,4 +1850,7 @@ INSERT INTO `moovett`.`factura` (`id_factura`, `nombre`, `numero`, `fecha`) VALU
 
 INSERT INTO `moovett`.`linea_factura` (`id_factura`, `id_linea`, `concepto`, `precio`, `iva`, `unidades`, `total`) VALUES
  ('1', NULL, 'Concepto de la linea', '12.5', '10', '1', '15');
+
+ INSERT INTO `moovett`.`pago` (`id_pago`, `fecha`, `cantidad`, `metodo_pago`, `pagado`, `tipo_cliente`, `dni_alum`, `dni_cliente_externo`)
+ VALUES (NULL, '2017-01-01 00:00:00', '12.5', 'creditCard', '1', 'student', '44654552J', NULL);
 /* Engadido por Yeray */

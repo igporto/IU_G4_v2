@@ -116,10 +116,11 @@ class BillMapper
         return $bills;
     }
 
-    public function showlines()
+    public function showlines($id_factura)
     {
 
-        $stmt = $this->db->query("SELECT * FROM linea_factura");
+        $stmt = $this->db->query("SELECT * FROM linea_factura WHERE id_factura=?");
+        $stmt->execute(array($id_factura));
         $bill_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $bills = array();
