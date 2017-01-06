@@ -29,41 +29,46 @@ $userMapper = new EventMapper();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12  col-md-7 pull-right">
+                    <div class="col-xs-12 col col-md-5">
 
-                        <p><?php echo $strings['dni_a'].":";?><div class="form-group input-group">
+                        <label for="divdatestart"><?= $strings['dni']." ".$strings['student']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="codpupil">
                                 <?php
                                 $s = new EventMapper();
                                 $a = $s->selectDniA();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value="'.$b.'">'.$s->getDniId($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
+                        </div>
                         <!--Campo dni-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
 
-                        <p><?php echo $strings['event_id'].":";?><div class="form-group input-group">
+                        <label for="divdatestart"><?= $strings['EVENTS_NAME']  ?></label><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
                             <select name="id_evento">
                                 <?php
                                 $s = new EventMapper();
                                 $a = $s->selectEventID();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value="'.$b.'">'.$s->getNameEvent($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
+                            <!--Campo name-->
+                        </div>
 
                     </div>
-                    <!--Campo name-->
+
+                </div>
                 </div>
 
             </div>
-        </div>
+
 
         <div class="row">
 
