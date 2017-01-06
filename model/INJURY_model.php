@@ -308,5 +308,13 @@ class InjuryMapper
         return $id_pr;
     }
 
+    public function dateM($d1,$d2){
+        if(strtotime($d1) > strtotime($d2)){
+            return false;
+        }
+
+        return true;
+    }
+
 
 }

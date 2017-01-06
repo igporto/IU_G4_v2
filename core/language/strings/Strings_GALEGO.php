@@ -445,6 +445,7 @@ $strings = array(
     /////////////////////////////////////////
     'add_employer'  => 'Engadir empregado',
     'list_of_employer' =>'Lista de empregados',
+    'date_error' => 'Error nas datas',
 
 
 

@@ -10,7 +10,7 @@ $injuryMapper = new InjuryMapper();
 
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_employer']; ?></h1>
-    <form name="form" id="form" method="POST"
+    <form name="form" id="form" method="POST" onblur="validarFechaMenor(datestart,dateend)"
           action="index.php?controller=injury&action=addemployer"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
@@ -126,5 +126,23 @@ $injuryMapper = new InjuryMapper();
         $( "#dateend" ).datepicker();
         $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
     } );
+</script>
+
+<script>
+    function validarFechaMenor(date,d)
+    {
+        var date1 = new Date(date,'Y-m-d');
+        var date2= new Date(d, 'Y-m-d');
+
+        if (date1>date2)
+        {
+        echo '<div id="error"></div>';
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 </script>
 

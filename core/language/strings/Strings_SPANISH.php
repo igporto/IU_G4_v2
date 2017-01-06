@@ -455,6 +455,8 @@ $strings = array(
     'date_injury' => 'Fecha de la lesión',
     'add_employer'  => 'Añadir empleado',
     'list_of_employer' =>'Lista de empleados',
+    'date_error' => 'Error en las fechas',
+
 
 
     /*Alumno*/

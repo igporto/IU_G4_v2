@@ -11,7 +11,7 @@ $injuryMapper = new InjuryMapper();
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=injury&action=addpupil"
+          action="index.php?controller=injury&action=addpupil" onblur="validarFechaMenor(date_injury,date_recovery)"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -130,3 +130,19 @@ $injuryMapper = new InjuryMapper();
     } );
 </script>
 
+<script>
+    function validarFechaMenor(date,d)
+    {
+        var date1 = new Date(date,'Y-m-d');
+        var date2= new Date(d, 'Y-m-d');
+
+        if (date1>date2)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
