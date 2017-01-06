@@ -122,7 +122,9 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date NOT NULL,
+  `fecha_recuperacion` date NULL
 ) ;
 
 
@@ -267,7 +269,9 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date NOT NULL,
+  `fecha_recuperacion` date NULL
 ) ;
 
 
