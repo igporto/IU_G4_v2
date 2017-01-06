@@ -36,9 +36,9 @@ class DocumentController extends BaseController{
             $document = new Document();
 
             $document->setSigndate($this->documentMapper->getDay());
-            $document->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_POST['codalumn']))));
-            if(isset($_GET['codemployee']) ){
-                $document->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_GET['codemployee']))));
+            $document->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_REQUEST['codalumn']))));
+            if(isset($_REQUEST['codemployee']) ){
+                $document->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_REQUEST['codemployee']))));
             }else{
                 $document->setEmployee(new Employee());
             }
@@ -47,6 +47,7 @@ class DocumentController extends BaseController{
             $ruta = __DIR__."/../media/documents/";
             $dest = $ruta.$document->getAlumn()->getDni()."_".$_FILES['document']['name'];
             copy($_FILES['document']['tmp_name'],$dest);
+            $document->setName($_FILES['document']['name']);
             $document->setRoute("media/documents/".$document->getAlumn()->getDni()."_".$_FILES['document']['name']);
 
             try {

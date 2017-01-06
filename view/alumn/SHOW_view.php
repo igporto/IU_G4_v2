@@ -55,7 +55,7 @@ $alumns = $view->getVariable("alumnstoshow");
             </div>
             <div class="panel-body">
                 <table id="dataTable" class="table-responsive   table-hover"
-                       style="width:80%; margin-right: 10%; margin-left: 10%">
+                       style="width:100%; margin-right: 10%;">
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
@@ -113,6 +113,11 @@ $alumns = $view->getVariable("alumnstoshow");
                                         </button>';
 
                         }
+
+                        echo "<a href=index.php?controller=document&action=add&codalumn=" . $c->getCodalumn() . '>';
+                        echo "<button class='btn btn-success btn-xs ";
+                        echo "' style='margin:2px'>";
+                        echo "<i class='fa fa-file-text-o fa-fw'></i></button></a>";
 
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA CATEGORIA
                         include(__DIR__ . '/DELETE_view.php');

@@ -225,6 +225,7 @@ CREATE TABLE `descuento` (
 CREATE TABLE `documento` (
   `id_documento` int (4) NOT NULL,
   `fecha_firma` date NOT NULL DEFAULT '0000-00-00',
+  `nombre` varchar(50) NOT NULL,
   `ruta` varchar(250) NOT NULL,
   `id_alumno` int(4) NOT NULL,
   `id_empleado` int(3) DEFAULT NULL

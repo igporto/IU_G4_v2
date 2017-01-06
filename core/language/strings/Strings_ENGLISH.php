@@ -399,6 +399,7 @@ $strings = array(
     'alumn'=>'Alumn',
     'management_documents'=>'Documents Management',
     'document_data'=>'Document Data',
+    'no_documents'=>'Don´t have documents',
 
 
     /*Eventos*/
