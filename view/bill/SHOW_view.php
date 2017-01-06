@@ -38,7 +38,6 @@ $permissions = $view->getVariable("billstoshow");
             <?php echo $strings['find']; ?>
         </a>
 
-
         <!--BOTÓN ENGADIR-->
         <?php if ($add) {
             echo '  
@@ -50,10 +49,11 @@ $permissions = $view->getVariable("billstoshow");
                             </a>
                         ';
         } ?>
+
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
-    <div class="row" style="margin-top: 20px">
+    <div class="row" style="margin-top: 20px; width: 130%">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?php echo $strings['list_of'] . ' ' . $strings['BILL']; ?>
@@ -61,11 +61,13 @@ $permissions = $view->getVariable("billstoshow");
             </div>
             <div class="panel-body">
                 <table id="dataTable" class="table-responsive   table-hover"
-                       style="width:80%; margin-right: 10%; margin-left: 10%">
+                       style="width:100%; margin-right: 20%; ">
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['BILL'] ?></th>
+                        <th class="text-center"><?php echo $strings['bill_number'] ?></th>
+                        <th class="text-center"><?php echo $strings['name'] ?></th>
+                        <th class="text-center"><?php echo $strings['date'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -84,15 +86,18 @@ $permissions = $view->getVariable("billstoshow");
                     <?php
 
 
-                    //Para cada pago, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
+                    //Para cada factura, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
                     foreach ($permissions as $p) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $p->getIdPago() . "</td><td class='text-center'>";
+                        echo $p->getNumero() . "</td><td class='text-center'>";
+                        echo $p->getNombre() . "</td><td class='text-center'>";
+                        echo $p->getFecha() . " </td><td class='text-center'>";
+
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
-                            echo '" data-toggle="modal" data-target="#view' . $p->getIdPago() . '';
+                            echo '" data-toggle="modal" data-target="#view' . $p->getIdFactura() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-eye fa-fw"></i>
                                         </button>';
@@ -101,39 +106,28 @@ $permissions = $view->getVariable("billstoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                            if ($p->getIdPago() == "admin") {
-
-                                echo "<button class='btn btn-warning btn-xs disabled";
-                                echo "' style='margin:2px'>";
-                                echo "<i class='fa fa-edit fa-fw'></i></button>";
-                            } else {
-                                echo "<a href=index.php?controller=bill&action=edit&id_pago=" . $p->getIdPago() . '>';
-                                echo "<button class='btn btn-warning btn-xs ";
-                                echo "' style='margin:2px'>";
-                                echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-                            }
-
+                            echo "<a href=index.php?controller=bill&action=edit&id_factura=" . $p->getIdFactura() . '>';
+                            echo "<button class='btn btn-warning btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
 
                         }
 
                         //Botón que direcciona á vista de eliminar
                         if ($delete) {
-
-                            if ($p->getIdPago() == "admin") {
-                                echo '<button type="button" class="btn btn-danger btn-xs';
-                                echo '" disabled style="margin:2px">';
-                                echo '<i class="fa fa-trash-o fa-fw"></i>
-                                                </button>';
-                            } else {
-                                echo '<button type="button" class="btn btn-danger btn-xs';
-                                echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '';
-                                echo '" style="margin:2px">';
-                                echo '<i class="fa fa-trash-o fa-fw"></i>
-                                            </button>';
-                            }
-
-
+                            echo '<button type="button" class="btn btn-danger btn-xs';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdFactura() . '">';
+                            echo '<i class="fa fa-trash-o fa-fw"></i>
+                                        </button>';
                         }
+
+                        //Botón que direcciona á vista das liñas
+                        echo "<a href=index.php?controller=bill&action=lines&id_factura=" . $p->getIdFactura() . '>';
+                        echo '<button type="button" class="btn btn-success btn-xs';
+                        echo '" style="margin:2px ">' . $strings["lines"] . '</button>';
+                        echo '<i class="fa fa fa-fw"></i>
+                                            </button></a>';
+
 
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA ACCIÓN
                         include(__DIR__ . '/DELETE_view.php');

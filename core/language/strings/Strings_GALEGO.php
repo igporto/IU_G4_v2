@@ -479,6 +479,10 @@ $strings = array(
     'create_close'=>'Cierre de caixa',
     'concept'=>'Concepto',
     'withdrawal'=>'Retirada de caixa',
-    'spend'=>'Gasto de caixa'
+    'spend'=>'Gasto de caixa',
+    'bill_number'=>'Numero de factura',
+    'lines'=>'XESTION LIÑAS',
+    'bill_data'=>'Datos da factura',
+    'bill_modify'=>'Modificar factura'
 )
 ?>

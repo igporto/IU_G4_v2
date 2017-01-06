@@ -32,73 +32,99 @@ $currentEv = $evMapper->view($evMapper->getIdByName($event));
                         </div>
 
                     </div>
-                    <div class="col-xs-12  col-md-7 pull-right">
+                </div>
 
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+
+                        <label for="divdatestart"><?= $strings['EVENTS_NAME']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="text" name="newname"  placeholder="<?php echo $strings['name'];?>">
+                            <input required class="form-control" type="text" name="name" placeholder="<?php echo $strings['EVENTS_NAME'];?>">
                         </div>
                         <!--Campo nome-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['aforo']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="number" name="newafor"  placeholder="<?php echo $strings['aforo'];?>">
+                            <input required class="form-control" type="number" name="afor" placeholder="<?php echo $strings['aforo'];?>">
                         </div>
                         <!--Campo aforo-->
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
                         <label for="divdatestart"><?= $strings['datestart']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="datestart" name="newfecha"
+                            <input type="text" class="form-control" id="datestart" name="fecha"
                                    required="true" maxlength="10">
                             <div id="error"></div>
                         </div>
                         <!--Campo fecha -->
+                    </div>
 
-                        <p><?php echo $strings['space_id'].":";?><div class="form-group input-group">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['space_id']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-                            <select name="newid_espacio">
+                            <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                            <select name="id_espacio">
                                 <?php
                                 $s = new EventMapper();
                                 $a = $s->selectSpaceId();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value='.$b.'>'.$s->getNameSpace($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
-                        <!--Campo id espacio-->
+                        </div>
+                        <!--Campo id evento-->
+                    </div>
+                </div>
 
-                        <p><?php echo $strings['initial_hour'].":";?><div class="form-group input-group">
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['initial_hour']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="time" name="newhora_ini" placeholder="<?php echo $strings['initial_hour'];?>">
-                        </div></p>
+                            <input required class="form-control" type="time" name="hora_ini" placeholder="<?php echo $strings['hora_ini'];?>">
+                        </div>
                         <!--Campo hora_ini-->
-
-                        <p><?php echo $strings['final_hour'].":";?><div class="form-group input-group">
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['final_hour']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="time" name="newhora_fin" placeholder="<?php echo $strings['final_hour'];?>">
-                        </div></p>
+                            <input required class="form-control" type="time" name="hora_fin" placeholder="<?php echo $strings['hora_fin'];?>">
+                        </div>
                         <!--Campo hora_fin-->
-
-                        <p><?php echo $strings['dni_p'].":";?><div class="form-group input-group">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['dni_p']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="newdni_p">
+                            <select name="dni_p">
                                 <?php
                                 $s = new EventMapper();
                                 $a = $s->selectIdP();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value='.$b.'>'.$s->getNameProf($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
+                        </div>
                         <!--Campo dni_prof-->
                     </div>
-                    <!--Campo name-->
                 </div>
-
-
             </div>
+
+
+
         </div>
 
 

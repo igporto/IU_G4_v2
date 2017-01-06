@@ -480,6 +480,10 @@ $strings = array(
     'concept'=>'Concepto',
     'withdrawal'=>'Retirada de caja',
     'spend'=>'Gasto de caja',
+	'bill_number'=>'Numero de factura',
+	'lines'=>'GESTION LINEAS',
+	'bill_data'=>'Datos de la factura',
+	'bill_modify'=>'Modificar factura'
 
 
 )

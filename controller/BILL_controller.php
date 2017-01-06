@@ -45,7 +45,12 @@ class BillController extends BaseController
             $bill = new Bill();
 
             //Engadimos a cantidade ao Bill
-            $bill->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+            $bill->setNombre(htmlentities(addslashes($_POST["name"])));
+            $bill->setNumero(htmlentities(addslashes($_POST["number"])));
+
+            date_default_timezone_set('Europe/Madrid');
+            $date = date("Y-m-d");
+            $bill->setFecha($date);
 
             try {
                 $this->billMapper->add($bill);
@@ -99,15 +104,10 @@ class BillController extends BaseController
     {
         if (isset($_POST["submit"])) {
             //Creamos un obxecto bill baleiro
-            $bill_id = $this->billMapper->getIdByName($_REQUEST["billName"]);
-            $bill = $this->billMapper->view($bill_id);
+            $bill = $this->billMapper->view($_REQUEST["id_factura"]);
 
-            if ($this->billMapper->billnameExists($bill->getBillname())) {
-                $this->view->setFlash("fail_bill_exists");
-                $this->view->redirect("bill", "edit", "billName=" . $_REQUEST["billName"]);
-            }
-
-            $bill->setBillname($_REQUEST["newname"]);
+            $bill->setNombre($_REQUEST["name"]);
+            $bill->setNumero($_REQUEST["number"]);
 
             try {
                 $this->billMapper->edit($bill);

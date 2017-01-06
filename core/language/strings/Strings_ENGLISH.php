@@ -483,6 +483,10 @@ $strings = array(
     'create_close'=>'Till close',
     'concept'=>'Concept',
     'withdrawal'=>'Till Withdrawal',
-    'spend'=>'Till Spend'
+    'spend'=>'Till Spend',
+    'bill_number'=>'Bill number',
+    'lines'=>'MANAGE LINES',
+    'bill_data'=>'Bill data',
+    'bill_modify'=>'Bill modify'
 )
 ?>

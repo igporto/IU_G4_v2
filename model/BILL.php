@@ -11,64 +11,85 @@ class Bill
 {
 
     //cada un dos campos da tupla é un atributo
-    private $codexample;
-    private $campo1;
-
+    private $id_factura;
+    private $nombre;
+    private $numero;
+    private $fecha;
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($codexample = NULL, $campo1 = NULL)
+    public function __construct($id_factura = NULL, $nombre = NULL, $numero = NULL, $fecha = NULL)
     {
-        $this->codexample = $codexample;
-        $this->campo1 = $campo1;
-
+        $this->id_factura = $id_factura;
+        $this->nombre = $nombre;
+        $this->numero = $numero;
+        $this->fecha = $fecha;
     }
 
     //GETTERS E SETTERS DO OBXETO
     /**
-     * Gets the value of codexample.
-     *
-     * @return mixed
+     * @return null
      */
-    public function getCodexample()
+    public function getIdFactura()
     {
-        return $this->codexample;
+        return $this->id_factura;
     }
 
     /**
-     * Gets the value of campo1.
-     *
-     * @return mixed
+     * @param null $id_factura
      */
-    public function getCampo1()
+    public function setIdFactura($id_factura)
     {
-        return $this->campo1;
-    }
-
-    //poden necesitarse métodos autocomprobantes como 'readyForInsert'
-
-    /**
-     * Sets the value of codexample.
-     *
-     * @param mixed $codexample the codexample
-     *
-     * @return self
-     */
-    private function setCodexample($codexample)
-    {
-        $this->codexample = $codexample;
-
+        $this->id_factura = $id_factura;
     }
 
     /**
-     * Sets the value of campo1.
-     *
-     * @param mixed $campo1 the campo1
-     *
-     * @return self
+     * @return null
      */
-    private function setCampo1($campo1)
+    public function getNombre()
     {
-        $this->campo1 = $campo1;
+        return $this->nombre;
     }
+
+    /**
+     * @param null $nombre
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    /**
+     * @return null
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * @param null $numero
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+    }
+
+    /**
+     * @return null
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param null $fecha
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    }
+
+
 }
