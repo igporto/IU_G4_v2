@@ -126,19 +126,6 @@ CREATE TABLE `alumno_tiene_lesion` (
 ) ;
 
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `asistencia`
---
-
-CREATE TABLE `asistencia` (
-  `id_asistencia` int(4) NOT NULL,
-  `fecha_as` date NOT NULL,
-  `asiste` tinyint(1) NOT NULL,
-  `id_alumno` int(4) NOT NULL,
-  `id_empleado` int(4) NOT NULL
-) ;
 
 -- --------------------------------------------------------
 
@@ -567,7 +554,8 @@ CREATE TABLE `alerta` (
 `id_alerta` int(4) NOT NULL,
   `descripcion` text NOT NULL,
   `id_pago` int(4) NULL,
-  `id_asistencia` int(4) NULL,
+  `id_empleado` int(4) NULL,
+  `id_sesion` int(4) NULL,
   `cod_usuario` int(4) NULL
 );
 
@@ -626,9 +614,7 @@ CREATE TABLE `horario`(
 );
 
 
-ALTER TABLE `horario`
-ADD PRIMARY KEY (`id_horario`),
-MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
+
 
 CREATE TABLE `jornada`(
   `dia_semana` int(1) NOT NULL,
@@ -638,11 +624,6 @@ CREATE TABLE `jornada`(
   `id_horario` int(4) NOT NULL
 );
 
-ALTER TABLE `jornada`
-ADD PRIMARY KEY (`id_jornada`),
-ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
-MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
 
 
 CREATE TABLE `sesion`(
@@ -658,13 +639,6 @@ CREATE TABLE `sesion`(
 
 
 
-ALTER TABLE `sesion`
-ADD PRIMARY KEY (`id_sesion`),
-MODIFY `id_sesion` int(11) NOT NULL AUTO_INCREMENT,
-ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 CREATE TABLE `asistencia`(
@@ -673,10 +647,6 @@ CREATE TABLE `asistencia`(
   `asiste` tinyint(1)
 );
 
-ALTER TABLE `asistencia`
-ADD PRIMARY KEY (`id_sesion`, `id_alumno`),
-ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
@@ -707,14 +677,6 @@ ALTER TABLE `alumno_tiene_lesion`
   ADD KEY `id_lesion` (`id_lesion`),
   ADD KEY `id_alumno` (`id_alumno`);
 
-
---
--- Indices de la tabla `asistencia`
---
-ALTER TABLE `asistencia`
-  ADD PRIMARY KEY (`id_asistencia`),
-  ADD KEY `id_alumno` (`id_alumno`),
-  ADD KEY `id_empleado` (`id_empleado`);
 
 --
 -- Indices de la tabla `espacio`
@@ -938,8 +900,10 @@ ALTER TABLE `log_acceso_lesion`
 ALTER TABLE `alerta`
  ADD PRIMARY KEY (`id_alerta`),
  ADD KEY `id_pago` (`id_pago`),
- ADD KEY `id_asistencia` (`id_asistencia`),
  ADD KEY `cod_usuario` (`cod_usuario`);
+
+
+
 
 
 --
@@ -984,10 +948,7 @@ ALTER TABLE `alumno`
 ALTER TABLE `actividad`
   MODIFY `id_actividad` int(4) NOT NULL AUTO_INCREMENT;
   --
--- AUTO_INCREMENT de la tabla `asistencia`
---
-ALTER TABLE `asistencia`
-  MODIFY `id_asistencia` int(4) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
@@ -1117,6 +1078,30 @@ ALTER TABLE `notificacion`
   MODIFY `id_notificacion` int(4) NOT NULL AUTO_INCREMENT;
 
 
+ALTER TABLE `horario`
+ADD PRIMARY KEY (`id_horario`),
+MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `jornada`
+ADD PRIMARY KEY (`id_jornada`),
+ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
+MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `sesion`
+ADD PRIMARY KEY (`id_sesion`),
+MODIFY `id_sesion` int(11) NOT NULL AUTO_INCREMENT,
+ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `asistencia`
+ADD PRIMARY KEY (`id_sesion`, `id_alumno`),
+ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -1137,12 +1122,6 @@ ALTER TABLE `alumno_tiene_lesion`
   ADD CONSTRAINT `alumno_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_tiene_lesion_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `asistencia`
---
-ALTER TABLE `asistencia`
-  ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `asistencia_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `caja`
@@ -1289,7 +1268,8 @@ ALTER TABLE `log_acceso_lesion`
 
 ALTER TABLE `alerta`
 ADD CONSTRAINT `fk_alerta_pago1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`)  ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `fk_alerta_asistencia1` FOREIGN KEY (`id_asistencia`) REFERENCES `asistencia` (`id_asistencia`) ON DELETE CASCADE ON UPDATE CASCADE,
+-- ADD CONSTRAINT `fk_alerta_asistencia1` FOREIGN KEY (`id_empleado`) REFERENCES `asistencia` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+-- ADD CONSTRAINT `fk_alerta_asistencia2` FOREIGN KEY (`id_sesion`) REFERENCES `asistencia` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `fk_alerta_usuario1` FOREIGN KEY (`cod_usuario`) REFERENCES `usuario` (`cod_usuario`)  ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -1311,6 +1291,10 @@ ADD CONSTRAINT `fk_usuario_recibe_alerta_usuario1` FOREIGN KEY (`cod_usuario`) R
 ALTER TABLE `alumnos_recibe_notificacion`
 ADD CONSTRAINT `fk_alumnos_recibe_notificacione_alumno1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_notificacion`) REFERENCES `notificacion` (`id_notificacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+
 
 
 --
