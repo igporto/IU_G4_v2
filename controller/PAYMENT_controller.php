@@ -303,4 +303,5 @@ class PaymentController extends BaseController
         $this->view->setVariable("paymentstoshow", $tills);
         $this->view->render("payment", "tillclose");
     }
+
 }

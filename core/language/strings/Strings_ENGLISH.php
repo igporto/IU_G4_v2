@@ -487,6 +487,11 @@ $strings = array(
     'bill_number'=>'Bill number',
     'lines'=>'MANAGE LINES',
     'bill_data'=>'Bill data',
-    'bill_modify'=>'Bill modify'
+    'bill_modify'=>'Bill modify',
+    'units'=>'Units',
+    'price'=>'Prize',
+	'total'=>'Total',
+    'management_line'=>'Lines management'
+
 )
 ?>

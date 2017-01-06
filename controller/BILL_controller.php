@@ -149,4 +149,11 @@ class BillController extends BaseController
         }
 
     }
+
+    public function showlines()
+    {
+        $lines = $this->billMapper->showlines($_REQUEST["id_factura"]);
+        $this->view->setVariable("linestoshow", $lines);
+        $this->view->render("bill", "showlines");
+    }
 }

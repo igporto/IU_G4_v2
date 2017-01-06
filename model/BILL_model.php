@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/BILL.php");
 
 //inclues de outros obxetos que se precisen
-
+require_once(__DIR__ . "/../model/BILL-LINE.php");
 
 class BillMapper
 {
@@ -78,7 +78,7 @@ class BillMapper
     {
         $stmt = $this->db->prepare("UPDATE factura set nombre =?, numero =?, fecha =? where id_factura =?");
 
-        $stmt->execute(array($bill->getNombre(), $bill->getNumero(), $bill->getFecha(),$bill->getIdFactura()));
+        $stmt->execute(array($bill->getNombre(), $bill->getNumero(), $bill->getFecha(), $bill->getIdFactura()));
 
     }
 
@@ -144,5 +144,24 @@ class BillMapper
 
         //devolve o array
         return $tills;
+    }
+
+    public function showlines()
+    {
+
+        $stmt = $this->db->query("SELECT * FROM linea_factura");
+        $bill_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $bills = array();
+
+        foreach ($bill_db as $bill) {
+            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
+            //introduce no array o obxeto Bill creado a partir da query
+            array_push($bills, new BillLine($bill["id_factura"], $bill["id_linea"], $bill["concepto"],
+                $bill["precio"], $bill["iva"], $bill["unidades"], $bill["total"]));
+        }
+
+        //devolve o array
+        return $bills;
     }
 }
