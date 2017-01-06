@@ -71,6 +71,9 @@ DROP TABLE IF EXISTS `alerta`;
 DROP TABLE IF EXISTS `notificacion`;
 DROP TABLE IF EXISTS `usuario_recibe_alerta`;
 DROP TABLE IF EXISTS `alumnos_recibe_notificacion`;
+DROP TABLE IF EXISTS `horario`;
+DROP TABLE IF EXISTS `jornada`;
+
 
 
 -- --------------------------------------------------------
@@ -612,7 +615,34 @@ CREATE TABLE `domiciliacion` (
 ) ;
 
 
+-- ENTÉNDASE COMO HORAS LIBRES
+-- horario furrula
+-- formato 'YYYY/MM/DD'
+CREATE TABLE `horario`(
+  `fecha_inicio` date NOT NULL DEFAULT '2000/01/01',
+  `fecha_fin` date NOT NULL DEFAULT '2000/01/01',
+  `id_horario` int(4) NOT NULL,
+  `nombre` varchar(40) NOT NULL
+);
 
+
+ALTER TABLE `horario`
+ADD PRIMARY KEY (`id_horario`),
+MODIFY `id_horario` int(4) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `jornada`(
+  `dia_semana` int(1) NOT NULL,
+  `hora_inicio` time NOT NULL DEFAULT '09:00:00',
+  `hora_fin` time NOT NULL DEFAULT '17:00:00',
+  `id_jornada` int(11) NOT NULL,
+  `id_horario` int(4) NOT NULL
+);
+
+ALTER TABLE `jornada`
+ADD PRIMARY KEY (`id_jornada`),
+ADD CONSTRAINT `jornada_ibfk_1` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CHECK (`dia_semana`>=0 AND `dia_semana`<7),
+MODIFY `id_jornada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- ÃƒÂndices para tablas volcadas
