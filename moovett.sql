@@ -134,7 +134,7 @@ CREATE TABLE `asistencia` (
   `fecha_as` date NOT NULL,
   `asiste` tinyint(1) NOT NULL,
   `id_alumno` int(4) NOT NULL,
-  `id_empleado` int(3) NOT NULL
+  `id_empleado` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -228,7 +228,7 @@ CREATE TABLE `documento` (
   `nombre` varchar(50) NOT NULL,
   `ruta` varchar(250) NOT NULL,
   `id_alumno` int(4) NOT NULL,
-  `id_empleado` int(3) DEFAULT NULL
+  `id_empleado` int(4) DEFAULT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -238,7 +238,7 @@ CREATE TABLE `documento` (
 --
 
 CREATE TABLE `empleado` (
-  `id_empleado` int(3) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `nombre` varchar(15) NULL,
   `apellidos` varchar(40) NULL,
@@ -276,7 +276,7 @@ CREATE TABLE `lesion` (
 --
 
 CREATE TABLE `empleado_tiene_lesion` (
-  `id_empleado` int(3) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL
 ) ;
 
@@ -295,7 +295,7 @@ CREATE TABLE `evento` (
   `fecha_evento` date NOT NULL DEFAULT '0000-00-00',
   `aforo` int(4) NOT NULL,
   `id_espacio` int(4) NOT NULL,
-  `id_empleado` int(3) NOT NULL
+  `id_empleado` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -547,7 +547,7 @@ CREATE TABLE `servicio` (
 CREATE TABLE `log_acceso_lesion` (
   `id_log` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL,
-  `id_empleado` int(3) NULL,
+  `id_empleado` int(4) NULL,
   `id_alumno` int(4) NULL,
   `cod_usuario` int(4) NOT NULL,
   `fecha` DATE NULL
@@ -1020,7 +1020,7 @@ ALTER TABLE `recibo`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `id_empleado` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empleado` int(4) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
