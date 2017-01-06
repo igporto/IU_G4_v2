@@ -452,6 +452,8 @@ $strings = array(
     'injury_name' => 'Nombre de la lesión',
     'date_recovery' => 'Fecha de recuperación',
     'date_injury' => 'Fecha de la lesión',
+    'add_employer'  => 'Añadir empleado',
+    'list_of_employer' =>'Lista de empleados',
 
 
     /*Alumno*/

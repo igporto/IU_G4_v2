@@ -441,6 +441,9 @@ $strings = array(
     'injury_name' => 'Nome da lesión',
     'date_recovery' => 'Data de recuperación',
     'date_injury' => 'Data da lesión',
+    /////////////////////////////////////////
+    'add_employer'  => 'Engadir empregado',
+    'list_of_employer' =>'Lista de empregados',
 
 
 
@@ -460,6 +463,7 @@ $strings = array(
     'months'=>'Meses',
     'domiciliation_data'=>'Datos da Domiciliacion',
     'domiciliation_modify'=>'Modificar Domiciliacion',
+
 
     //PAGOS, DESCUENTOS y FACTURAS
     'si'=>'SI',

@@ -65,6 +65,17 @@ $injury = $view->getVariable("injurystoshow");
                         ';
         }
 
+        if($add) {
+            echo '  
+                            <a href="index.php?controller=injury&action=addemployer">
+                                <button type="button" class="btn btn-success">
+                                <i class="fa fa-fw fa-plus"></i>
+                                    '. $strings['add_employer'].'
+                                </button>
+                            </a>
+                        ';
+        }
+
         ?>
     </div>
 
@@ -137,6 +148,13 @@ $injury = $view->getVariable("injurystoshow");
                             echo "<button class='btn btn-info btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-male fa-fw'></i></button></a>";
+                        }
+
+                        if ($v) {
+                            echo "<a href=index.php?controller=injury&action=showemployer&id_lesion=" . $c->getCodInjury() . '>';
+                            echo "<button class='btn btn-default btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-user fa-fw'></i></button></a>";
                         }
 
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA ACCIÓN

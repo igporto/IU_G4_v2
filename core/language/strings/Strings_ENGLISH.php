@@ -451,6 +451,8 @@ $strings = array(
     'create_injury' => 'Add injury',
     'succ_injury_add' => 'Succes injury add',
     'injury_already_exists' => 'Injury already exists',
+    'add_employer'  => 'Add employer',
+    'list_of_employer' =>'List of employer',
 
 
     'DOMICILIATION' => 'Domiciliations',
