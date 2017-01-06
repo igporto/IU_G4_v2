@@ -1802,18 +1802,18 @@ INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion
 -- Volcado de datos para la tabla `alumno_tiene_lesion`
 --
 INSERT INTO `alumno_tiene_lesion`(`id_alumno`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
-(1,1,'2016-20-12','2016-29-12']),
-(2,1,'2016-15-12','2017-05-1']),
-(1,2,'2016-03-02','2016-04-08']);
+(1,1,'2016-20-12','2016-29-12'),
+(2,1,'2016-15-12','2017-05-1'),
+(1,2,'2016-03-02','2016-04-08');
 
 
 --
 -- Volcado de datos para la tabla `empleado_tiene_lesion`
 --
 INSERT INTO `empleado_tiene_lesion`(`id_empleado`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
-(1,1,'2016-20-12','2016-29-12']),
-(2,1,'2016-14-11','2017-07-1']),
-(2,2,'2016-05-02','2016-04-08']);
+(1,1,'2016-20-12','2016-29-12'),
+(2,1,'2016-14-11','2017-07-1'),
+(2,2,'2016-05-02','2016-04-08');
 
 --
 -- Volcado de datos para la tabla `cliente_externo`
