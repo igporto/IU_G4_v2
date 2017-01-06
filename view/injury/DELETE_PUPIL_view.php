@@ -26,6 +26,19 @@ echo '
                                 <!--Campo id_alumno-->
                            </div>
                           
+                            <div class="col-xs-12 col-md-12">
+                                    <label for="">' . $strings["date_injury"] . ': </label>
+                                    <span class="">' . $s->getDateInjury() . '</span>
+        
+                                <!--Campo id_alumno-->
+                           </div>
+                           <div class="col-xs-12 col-md-12">
+                                    <label for="">' . $strings["date_recovery"] . ': </label>
+                                    <span class="">' . $s->getDateRecovery() . '</span>
+        
+                                <!--Campo id_alumno-->
+                           </div>
+                           
                              <div id="collapse' . $s->getCodPupil() . '" class="panel-collapse collapse" aria-expanded="true">
                                  <div class="panel-body">
                                 <ul>';
@@ -50,7 +63,7 @@ echo '
                             <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
                             </a>
                         </div>
-                    </div>
+                    </div></div>
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal-dialog -->
