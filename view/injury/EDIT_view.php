@@ -29,35 +29,46 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         </div>
 
                     </div>
-                    <div class="col-xs-12  col-md-5 pull-right">
-                        <p><?php echo $strings['name'].":" ?></p><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input class="form-control" type="text" name="name" value="<?php echo $injury->getNameInjury() ?>"
-                                   autofocus    placeholder=<?php echo $strings['name'];?> >
-                        </div>
+                </div>
 
-                        <p><?php echo $strings['treatment'].":" ?></p><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input class="form-control" type="text" name="treatment" value="<?php echo $injury->getTreatment() ?>"
-                                   autofocus    placeholder=<?php echo $strings['treatment'];?> >
-                        </div>
-
-                        <p><?php echo $strings['description'].":" ?></p><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input class="form-control" type="text" name="description" value="<?php echo $injury->getDescription() ?>"
-                                   autofocus    placeholder=<?php echo $strings['description'];?> >
-                        </div>
-
-                        <p><?php echo $strings['time_recovery'].":" ?></p><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input class="form-control" type="number" name="time_recovery" value="<?php echo $injury->getTime() ?>"
-                                   autofocus    placeholder=<?php echo $strings['time_recovery'];?> >
+                <div class="row">
+                    <div class="col-xs-12  col-md-5 ">
+                        <label for="divdatestart"><?= $strings['name']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input autofocus required class="form-control" type="text" name="name" placeholder="<?php echo $strings['name'];?>" >
                         </div>
                     </div>
                     <!--Campo name-->
+
+
+                    <div class="col-xs-12  col-md-5 ">
+                        <label for="divdatestart"><?= $strings['time_recovery']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                            <input required class="form-control" type="number" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
+                        </div>
+                    </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-xs-12  col-md-5">
+                        <label for="divdatestart"><?= $strings['treatment']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                            <input required class="form-control" type="text" name="treatment" placeholder="<?php echo $strings['treatment'];?>">
+                        </div>
+                    </div>
 
+                    <div class="col-xs-12  col-md-5">
+                        <label for="divdatestart"><?= $strings['description']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                            <input required class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>">
+                        </div>
+                    </div>
+                </div>
+                <!--Campo name-->
             </div>
         </div>
 

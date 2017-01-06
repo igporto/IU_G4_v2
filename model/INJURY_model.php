@@ -113,8 +113,18 @@ class InjuryMapper
         return $in;
     }
 
-    //Recolle os id dos alumnos
-    public function selectDniA(){
+    //Recolle os dni dos alumnos que se pasan como $b
+    public function selectDniA($b){
+        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno=$b");
+        $stmt->execute();
+
+        $resul = $stmt->fetch();
+
+        return $resul['dni_alumno'];
+    }
+
+    //Recolle os ids dos alumnos
+    public function selectIDA(){
         $stmt = $this->db->prepare("SELECT * FROM alumno");
         $stmt->execute();
 
