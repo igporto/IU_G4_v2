@@ -21,7 +21,6 @@ $documents = $view->getVariable("documentstoshow");
 <div class="col-xs-12 col-md-8 ">
 
     <h1 class="page-header"><?php echo $strings['management_documents'] ?></h1>
-
     <!--PANEL TABOA DE LISTADO-->
     <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
@@ -35,7 +34,7 @@ $documents = $view->getVariable("documentstoshow");
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['date'] ?></th>
+                        <th class="text-center"><?php echo $strings['name'] ?></th>
                         <th class="text-center"><?php echo $strings['ALUMN'] ?></th>
                         <th class="text-center"><?php echo $strings['employee'] ?></th>
                         <th class="text-center"><?php echo $strings['ACTION'] ?></th>
@@ -51,7 +50,7 @@ $documents = $view->getVariable("documentstoshow");
                     foreach ($documents as $c) {
                         echo "<tr class='row text-center' > <td> ";
 
-                        echo $c->getSigndate() . "</td> <td>";
+                        echo $c->getName() . "</td> <td>";
 
                         echo $c->getAlumn()->getAlumnname() . "</td> <td> ";
 

@@ -404,6 +404,7 @@ $strings = array(
     'alumn'=>'Alumno',
     'management_documents'=>'Gestión de Documentos',
     'document_data'=>'Datos del Documento',
+    'no_documents'=>'No tiene documentos',
 
 
 	/*Eventos*/

@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__."/../core/PDOConnection.php");
+require_once(__DIR__."/../model/DOCUMENT.php");
 require_once(__DIR__."/../model/ALUMN_model.php");
 require_once(__DIR__."/../model/EMPLOYEE_model.php");
 
@@ -27,8 +28,8 @@ class DocumentMapper {
 
     public function add(Document $document) {
 
-        $stmt = $this->db->prepare("INSERT INTO documento(fecha_firma, id_alumno, ruta, id_empleado) VALUES (?, ? , ?, ?)");
-        $stmt->execute(array($document->getSigndate(), $document->getAlumn()->getCodalumn(), $document->getRoute(), $document->getEmployee()->getCodemployee()));
+        $stmt = $this->db->prepare("INSERT INTO documento(fecha_firma, id_alumno, nombre, ruta, id_empleado) VALUES (?, ? , ?, ?, ?)");
+        $stmt->execute(array($document->getSigndate(), $document->getAlumn()->getCodalumn(), $document->getName(), $document->getRoute(), $document->getEmployee()->getCodemployee()));
 
         return $this->db->lastInsertId();
     }
@@ -56,6 +57,7 @@ class DocumentMapper {
             return new Document(
                 $doc["id_documento"],
                 $doc["fecha_firma"],
+                $doc["nombre"],
                 $doc["ruta"],
                 $this->alumnMapper->view($doc["id_alumno"]),
                 $this->employeeMapper->view($doc["id_empleado"])
@@ -63,6 +65,19 @@ class DocumentMapper {
         } else {
             return new Document();
         }
+    }
+
+    public function showdocsAlumn($codalumn) {
+
+        $stmt = $this->db->prepare("SELECT * FROM documento WHERE id_alumno = ?");
+        $stmt->execute(array($codalumn));
+        $docs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $docs = array();
+
+        foreach ($docs_db as $doc) {
+            array_push($docs, $this->view($doc["id_documento"]));
+        }
+        return $docs;
     }
 
 

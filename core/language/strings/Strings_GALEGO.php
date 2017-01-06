@@ -391,6 +391,7 @@ $strings = array(
     'alumn'=>'Alumno',
     'management_documents'=>'Xestión de Documentos',
     'document_data'=>'Datos do Documento',
+    'no_documents'=>'Non ten documentos',
 
     /*Eventos*/
     'EVENTS' => 'Eventos',
