@@ -32,10 +32,10 @@ class SessionMapper
     public function add(Session $session){
         $stmt = $this->db->prepare("INSERT INTO sesion(id_espacio, id_evento, id_actividad, id_empleado, hora_inicio, hora_fin, fecha) values (?,?,?,?,?,?,?)");
         $stmt->execute(array(
-                $session->getSpace()->getIdSpace(),
-                $session->getEvent()->getIdEvent(),
-                $session->getActivity()->getIdActivity(),
-                $session->getEmployee()->getIdEmployee(),
+                $session->getSpace()->getCodspace(),
+                $session->getEvent()->getCodevent(),
+                $session->getActivity()->getCodactivity(),
+                $session->getEmployee()->getCodemployee(),
                 $session->getHourStart(),
                 $session->getHourEnd(),
                 $session->getDate()
@@ -103,10 +103,10 @@ class SessionMapper
     {
         $stmt = $this->db->prepare("UPDATE sesion  set id_espacio = ?, id_evento = ?, id_actividad = ?, id_empleado = ?, hora_inicio = ?, hora_fin = ?, fecha WHERE id_sesion = ?");
         $stmt->execute(array(
-                $session->getSpace()->getIdSpace(),
-                $session->getEvent()->getIdEvent(),
-                $session->getActivity()->getIdActivity(),
-                $session->getEmployee()->getIdEmployee(),
+                $session->getSpace()->getCodspace(),
+                $session->getEvent()->getCodevent(),
+                $session->getActivity()->getCodactivity(),
+                $session->getEmployee()->getCodemployee(),
                 $session->getHourStart(),
                 $session->getHourEnd(),
                 $session->getDate(),

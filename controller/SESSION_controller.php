@@ -10,8 +10,6 @@ require_once(__DIR__ . "/../model/ACTIVITY.php");
 require_once(__DIR__ . "/../model/ACTIVITY_model.php");
 require_once(__DIR__ . "/../model/SPACE.php");
 require_once(__DIR__ . "/../model/SPACE_model.php");
-require_once(__DIR__ . "/../model/FISIO.php");
-require_once(__DIR__ . "/../model/FISIO_model.php");
 require_once(__DIR__ . "/../model/EMPLOYEE.php");
 require_once(__DIR__ . "/../model/EMPLOYEE_model.php");
 require_once(__DIR__ . "/../model/EVENT.php");
@@ -22,58 +20,127 @@ require_once(__DIR__ . "/../controller/BaseController.php");
 
 
 /**
- * Class ActionsController
+ * Class SessionsController
  *
- * Controller to login, logout and action data managing
+ * Controller to login, logout and session data managing
  */
-class ActionController extends BaseController
+class SessionController extends BaseController
 {
 
     /**
-     * Reference to the ActionMapper to interact
+     * Reference to the SessionMapper to interact
      * with the database
      *
-     * @var ActionMapper
+     * @var SessionMapper
      */
-    private $actionMapper;
-    private $profileMapper;
+    private $sessionMapper;
+    private $scheduleMapper;
+    private $activityMapper;
+    private $spaceMapper;
+    private $eventMapper;
+    private $employeeMapper;
 
     public function __construct()
     {
         parent::__construct();
 
 
-        $this->actionMapper = new ActionMapper();
-        $this->profileMapper = new ProfileMapper();
+        $this->sessionMapper = new SessionMapper();
+        $this->scheduleMapper = new ScheduleMapper();
+        $this->activityMapper = new ActivityMapper();
+        $this->spaceMapper = new SpaceMapper();
+        $this->eventMapper = new EventMapper();
+        $this->employeeMapper = new EmployeeMapper();
 
-        // Actions controller operates in a "welcome" layout
+        // Sessions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
         // menu is displayed
         $this->view->setLayout("navbar");
     }
+
+    //comproba se o rango de horas dado pode insertarse na data pasada
+    //e nese espacio determinado
+    public isValidRange( $date, $hourstart, $hourend, $space){
+        $time = strtotime($date);
+        $dayoweek = date('N',$time);
+
+        $schedule = $this->scheduleMapper->getDateSchedule($fecha);
+        $workday = NULL;
+
+        //escoller a xornada do día correspondente a esa data
+        foreach ($schedule->getScheduleWorkdays() as $wd) {
+            if ($wd->getDay() == $dawoweek) {
+                $workday = $wd;
+            }
+        }
+
+        // 1. comprobar que rango de horas estea dentro do da xornada
+        if  (
+                (($hourstart > $workday->getHourStart()) &&
+                 ($hourstart < $workday->getHourEnd())) 
+                    ||
+                (($hourend < $workday->getHourEnd()) &&
+                 ($hourend > $workday->getHourStart()))
+            )
+            {
+                return false;
+            }
+
+        //obtemos todas as sesións que compartan ese espazo ese día 
+        $sessiontocompare = array();
+        foreach ($this->sessionMapper->show() as $session) {
+            if (($session->getSpace()->getCodspace() == $space->getCodspace())
+                && ($session->getDate() == $date)) {
+                array_push($sessiontocompare,$session);
+            }     
+        }
+
+
+
+        // 2. Comprobamos que a sesión non se pise con outras
+        foreach ($sessiontocompare as $session) {
+            if  (
+                (($hourstart > $session->getHourStart()) &&
+                 ($hourstart < $session->getHourEnd())) 
+                    ||
+                (($hourend < $session->getHourEnd()) &&
+                 ($hourend > $session->getHourStart()))
+            )
+            {
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+        
+        
+    
 
     public function add()
     {
 
 
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto Action baleiro
-            $action = new Action();
+            //Creamos un obxecto Session baleiro
+            $session = new Session();
 
-            //Engadimos o nome ao Action
-            $action->setActionname(htmlentities(addslashes($_POST["actionname"])));
+            //Engadimos o nome ao Session
+            $session->setSessionname(htmlentities(addslashes($_POST["sessionname"])));
 
             try {
-                if (!$this->actionMapper->actionnameExists($_POST["actionname"])) {
-                    //$action->checkIsValidForCreate();
-                    $this->actionMapper->add($action);
+                if (!$this->sessionMapper->sessionnameExists($_POST["sessionname"])) {
+                    //$session->checkIsValidForCreate();
+                    $this->sessionMapper->add($session);
                     //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash('succ_action_add');
+                    $this->view->setFlash('succ_session_add');
 
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos actions)
-                    $this->view->redirect("action", "show");
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos sessions)
+                    $this->view->redirect("session", "show");
                 } else {
-                    $this->view->setFlash("fail_action_exists");
+                    $this->view->setFlash("fail_session_exists");
                 }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
@@ -82,90 +149,90 @@ class ActionController extends BaseController
 
         //Se non se enviou nada
         //$this->view->setLayout("navbar");
-        $this->view->render("action", "add");
+        $this->view->render("session", "add");
     }
 
     public function delete()
     {
         try {
-            if (isset($_GET['actionName'])) {
-                $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
-                $action = $this->actionMapper->view($action_id);
-                $this->actionMapper->delete($action);
-                $this->view->setFlash('succ_action_delete');
-                $this->view->redirect("action", "show");
+            if (isset($_GET['sessionName'])) {
+                $session_id = $this->sessionMapper->getIdByName($_REQUEST["sessionName"]);
+                $session = $this->sessionMapper->view($session_id);
+                $this->sessionMapper->delete($session);
+                $this->view->setFlash('succ_session_delete');
+                $this->view->redirect("session", "show");
             }
         } catch (Exception $e) {
            $this->view->setFlash('erro_general');
         }
-        $this->view->render("action", "show");
+        $this->view->render("session", "show");
     }
 
     public function show()
     {
-        $actions = $this->actionMapper->show();
-        $this->view->setVariable("actionstoshow", $actions);
-        $this->view->render("action", "show");
+        $sessions = $this->sessionMapper->show();
+        $this->view->setVariable("sessionstoshow", $sessions);
+        $this->view->render("session", "show");
     }
 
     public function view()
     {
-        $actionid = $this->actionMapper->getIdByName($_REQUEST["action"]);
-        $action = $this->actionMapper->view($actionid);
-        $this->view->setVariable("action", $action);
-        $this->view->render("action", "view");
+        $sessionid = $this->sessionMapper->getIdByName($_REQUEST["session"]);
+        $session = $this->sessionMapper->view($sessionid);
+        $this->view->setVariable("session", $session);
+        $this->view->render("session", "view");
     }
 
     public function edit()
     {
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto action baleiro
-            $action_id = $this->actionMapper->getIdByName($_REQUEST["actionName"]);
-            $action = $this->actionMapper->view($action_id);
+            //Creamos un obxecto session baleiro
+            $session_id = $this->sessionMapper->getIdByName($_REQUEST["sessionName"]);
+            $session = $this->sessionMapper->view($session_id);
 
-            $action->setActionname($_REQUEST["newname"]);
+            $session->setSessionname($_REQUEST["newname"]);
 
-            if ($this->actionMapper->actionnameExists($action->getActionname())) {
-                $this->view->setFlash("fail_action_exists");
-                $this->view->redirect("action", "edit", "actionName=".$_REQUEST["actionName"]);
+            if ($this->sessionMapper->sessionnameExists($session->getSessionname())) {
+                $this->view->setFlash("fail_session_exists");
+                $this->view->redirect("session", "edit", "sessionName=".$_REQUEST["sessionName"]);
             }
 
             try {
-                $this->actionMapper->edit($action);
+                $this->sessionMapper->edit($session);
                 //ENVIAR AVISO DE ACCION EDITADA!!!!!!!!!!
-                $this->view->setFlash("succ_action_edit");
+                $this->view->setFlash("succ_session_edit");
                 //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos accions)
-                $this->view->redirect("action", "show");
+                $this->view->redirect("session", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
         }
         //Se non se enviou nada
         //$this->view->setLayout("navbar");
-        $this->view->render("action", "edit");
+        $this->view->render("session", "edit");
     }
 
     public function search(){
         if(isset($_POST["submit"])){
-            $action = new Action();
-            if(isset($_POST['actionname'])){
-                $action->setActionname((htmlentities(addslashes($_POST["actionname"]))));
+            $session = new Session();
+            if(isset($_POST['sessionname'])){
+                $session->setSessionname((htmlentities(addslashes($_POST["sessionname"]))));
             }
-            if(isset($_POST["codaction"])){
-                $action->setCodaction(htmlentities(addslashes($_POST["codaction"])));
+            if(isset($_POST["codsession"])){
+                $session->setCodsession(htmlentities(addslashes($_POST["codsession"])));
             }
             try {
                 
-                $this->view->setVariable("actionstoshow", $this->actionMapper->search($action));
+                $this->view->setVariable("sessionstoshow", $this->sessionMapper->search($session));
 
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");
-                $this->view->redirect("action", "show");
+                $this->view->redirect("session", "show");
             }
             //render dado que non se pode settear a variable antes de un redirect
-            $this->view->render("action","show");
+            $this->view->render("session","show");
         }else{
-            $this->view->render("action", "search");
+            $this->view->render("session", "search");
         }
 
     }

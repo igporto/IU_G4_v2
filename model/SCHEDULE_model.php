@@ -27,6 +27,21 @@ class ScheduleMapper
         $this->workdayMapper = new WorkdayMapper();
     }
 
+    public function getDateSchedule($date){
+        $stmt = $this->db->prepare("SELECT * FROM horario WHERE  fecha_inicio <= ? AND fecha_fin >= ?");
+        $stmt->execute(array($date,$date));
+
+        $schedule = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return new Schedule(
+                    $schedule['id_horario'],
+                    $schedule['nombre'],
+                    $schedule['fecha_inicio'],
+                    $schedule['fecha_fin']
+                );
+
+    }
+
     public function getIdByName($scname){
         $stmt = $this->db->prepare("SELECT id_horario FROM horario WHERE  nombre= ?");
         $stmt->execute(array($scname));
