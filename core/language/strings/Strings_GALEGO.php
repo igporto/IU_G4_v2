@@ -417,7 +417,7 @@ $strings = array(
     'id_student' => 'ID do alumno',
     'succ_student_add' => 'Alumno engadido correctamente',
     'student_already_exists' => 'O alumno xa existe',
-    'add_student' => 'Insertar alumno',
+    'add_student' => 'Engadir alumno',
     'succ_student_delete' => 'Alumno eliminado do evento',
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
@@ -445,6 +445,7 @@ $strings = array(
     /////////////////////////////////////////
     'add_employer'  => 'Engadir empregado',
     'list_of_employer' =>'Lista de empregados',
+    'date_error' => 'Error nas datas',
 
 
 
@@ -483,6 +484,12 @@ $strings = array(
     'bill_number'=>'Numero de factura',
     'lines'=>'XESTION LIÑAS',
     'bill_data'=>'Datos da factura',
-    'bill_modify'=>'Modificar factura'
+    'bill_modify'=>'Modificar factura',
+    'units'=>'Unidades',
+    'price'=>'Prezo',
+    'total'=>'Total',
+    'management_line'=>'Xestion de lineas',
+    'add_line'=>'Engadir linea',
+    'line_modify'=>'Modificar linea'
 )
 ?>

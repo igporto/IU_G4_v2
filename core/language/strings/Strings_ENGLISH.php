@@ -454,6 +454,8 @@ $strings = array(
     'injury_already_exists' => 'Injury already exists',
     'add_employer'  => 'Add employer',
     'list_of_employer' =>'List of employer',
+    'date_error' => 'Date error',
+
 
 
     'DOMICILIATION' => 'Domiciliations',
@@ -487,6 +489,13 @@ $strings = array(
     'bill_number'=>'Bill number',
     'lines'=>'MANAGE LINES',
     'bill_data'=>'Bill data',
-    'bill_modify'=>'Bill modify'
+    'bill_modify'=>'Bill modify',
+    'units'=>'Units',
+    'price'=>'Prize',
+	'total'=>'Total',
+    'management_line'=>'Lines management',
+    'add_line'=>'Add line',
+    'line_modify'=>'Line Modify'
+
 )
 ?>

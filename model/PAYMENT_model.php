@@ -121,15 +121,19 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
 
     public function search(Payment $payment)
     {
-        $stmt = $this->db->prepare("SELECT * FROM pago WHERE id_pago like ? ");
-        $stmt->execute(array(" % " . $payment->getIdPago() . " % "));
+        $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND fecha like ? 
+            AND metodo_pago like ? AND tipo_cliente = ? AND pagado like ? AND dni_alum like ?");
+        
+        $stmt->execute(array("%" . $payment->getCantidad() . "%", "%" . $payment->getFecha() . "%",
+            "%" . $payment->getMetodoPago() . "%", "%" . $payment->getTipoCliente() . "%",
+            "%" . $payment->getPagado() . "%", "%" . $payment->getDniAlum() . "%"));
         $payments_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $payments = array();
         foreach ($payments_db as $p) {
-            array_push($payments, new Payment(
-                    $p['id_pago'])
-            );
+            array_push($payments, new Payment($p["id_pago"], $p["fecha"], $p["cantidad"],
+                $p["metodo_pago"], $p["pagado"], $p["tipo_cliente"], $p["dni_alum"],
+                $p["dni_cliente_externo"]));
         }
         return $payments;
     }

@@ -122,7 +122,9 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date NOT NULL,
+  `fecha_recuperacion` date NULL
 ) ;
 
 
@@ -267,7 +269,9 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date NOT NULL,
+  `fecha_recuperacion` date NULL
 ) ;
 
 
@@ -381,7 +385,7 @@ CREATE TABLE `inscripcion` (
 CREATE TABLE `pago` (
   `id_pago` int(4) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
-  `cantidad` smallint(6) not null,
+  `cantidad` DOUBLE not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
   `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
@@ -1798,6 +1802,22 @@ INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion
 /* Engadido por Bruno */
 /* Engadido por Lore */
 
+--
+-- Volcado de datos para la tabla `alumno_tiene_lesion`
+--
+INSERT INTO `alumno_tiene_lesion`(`id_alumno`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
+(1,1,'2016-20-12','2016-29-12'),
+(2,1,'2016-15-12','2017-05-1'),
+(1,2,'2016-03-02','2016-04-08');
+
+
+--
+-- Volcado de datos para la tabla `empleado_tiene_lesion`
+--
+INSERT INTO `empleado_tiene_lesion`(`id_empleado`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
+(1,1,'2016-20-12','2016-29-12'),
+(2,1,'2016-14-11','2017-07-1'),
+(2,2,'2016-05-02','2016-04-08');
 
 --
 -- Volcado de datos para la tabla `cliente_externo`
@@ -1830,4 +1850,7 @@ INSERT INTO `moovett`.`factura` (`id_factura`, `nombre`, `numero`, `fecha`) VALU
 
 INSERT INTO `moovett`.`linea_factura` (`id_factura`, `id_linea`, `concepto`, `precio`, `iva`, `unidades`, `total`) VALUES
  ('1', NULL, 'Concepto de la linea', '12.5', '10', '1', '15');
+
+ INSERT INTO `moovett`.`pago` (`id_pago`, `fecha`, `cantidad`, `metodo_pago`, `pagado`, `tipo_cliente`, `dni_alum`, `dni_cliente_externo`)
+ VALUES (NULL, '2017-01-01 00:00:00', '12.5', 'creditCard', '1', 'student', '44654552J', NULL);
 /* Engadido por Yeray */

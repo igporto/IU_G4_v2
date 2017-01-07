@@ -113,8 +113,18 @@ class InjuryMapper
         return $in;
     }
 
-    //Recolle os id dos alumnos
-    public function selectDniA(){
+    //Recolle os dni dos alumnos que se pasan como $b
+    public function selectDniA($b){
+        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno=$b");
+        $stmt->execute();
+
+        $resul = $stmt->fetch();
+
+        return $resul['dni_alumno'];
+    }
+
+    //Recolle os ids dos alumnos
+    public function selectIDA(){
         $stmt = $this->db->prepare("SELECT * FROM alumno");
         $stmt->execute();
 
@@ -213,8 +223,8 @@ class InjuryMapper
         $stmt->execute();
     }
 
-    //Recolle o dni do empregado
-    public function selectDniE(){
+    //Recolle o id do empregado
+    public function selectIDE(){
         $stmt = $this->db->prepare("SELECT * FROM empleado");
         $stmt->execute();
 
@@ -225,6 +235,16 @@ class InjuryMapper
         }
 
         return $id;
+    }
+
+    //Recolle o dni do empleado que se pasa como id
+    public function selectDniE($b){
+        $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado=$b");
+        $stmt->execute();
+
+        $resul = $stmt->fetch();
+
+        return $resul['dni'];
     }
 
     //Engade unha lesion a un empregado
@@ -286,6 +306,14 @@ class InjuryMapper
         $id_pr = $r['nombre'];
 
         return $id_pr;
+    }
+
+    public function dateM($d1,$d2){
+        if(strtotime($d1) > strtotime($d2)){
+            return false;
+        }
+
+        return true;
     }
 
 
