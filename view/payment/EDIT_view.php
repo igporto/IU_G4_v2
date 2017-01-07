@@ -139,7 +139,7 @@ $payment = $paymentMapper->view($id_pago);
                         <label for="selectperf"><?php echo $strings['pagado'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
-                            <select class=" form-control icon-menu" name="pagado" id="pagado">
+                            <select class=" form-control icon-menu" name="pagado" id="pagado" onchange="pagar()">
                                 <option value="1"
                                     <?php if ($payment->getPagado() == "1") {
                                         echo "selected";
@@ -153,7 +153,11 @@ $payment = $paymentMapper->view($id_pago);
                         <!--Pagado-->
                     </div>
 
-                    <div class="col-xs-12 col col-md-5">
+                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="<?php if ($payment->getPagado() == "0") {
+                        echo "display: none";
+                    } else {
+                        echo "display: block";
+                    } ?>">
                         <label for="selectperf"><?php echo $strings['payment_method'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
@@ -169,7 +173,17 @@ $payment = $paymentMapper->view($id_pago);
                         </div>
                         <!--Campo metodo de pago-->
                     </div>
+                    <script>
+                        function pagar() {
+                            var pagado = document.getElementById("pagado").selectedIndex;
 
+                            if (pagado == 0) {
+                                document.getElementById("div_metodo").style = "display: block";
+                            } else {
+                                document.getElementById("div_metodo").style = "display: none";
+                            }
+                        }
+                    </script>
                 </div>
             </div>
         </div>
