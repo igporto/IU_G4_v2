@@ -33,7 +33,7 @@ $injuryMapper = new InjuryMapper();
 
                         <p><?php echo $strings['dni']." ".$strings['employee'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="codpupil">
+                            <select class="form-control icon-menu" name="codpupil">
                                 <?php
                                 $a = $injuryMapper->selectDniE();
                                 foreach ($a as $b){
@@ -46,7 +46,7 @@ $injuryMapper = new InjuryMapper();
 
                         <p><?php echo $strings['injury_name'].":";?><div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="id_lesion">
+                            <select class="form-control icon-menu" name="id_lesion">
                                 <?php
                                 $a = $injuryMapper->selectInjuryID();
                                 foreach ($a as $b){
@@ -67,7 +67,7 @@ $injuryMapper = new InjuryMapper();
                         <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="datestart" name="date_recovery"
+                            <input type="text" class="form-control" id="dateend" name="date_recovery"
                                    required="true" maxlength="10">
                             <div id="error"></div>
                         </div>
