@@ -340,6 +340,10 @@ $strings = array(
 	'WORKDAY'=>'Work day',
 	'schedule_modify'=>'Modify Schedule',
 
+	/* sesión */
+    'SESSION'=>'Sessions',
+    'management_sessions'=>'Session Management',
+
 	/* Categorias */
 	'CATEGORY' => 'Categories',
  	'create_category' => 'Add Category',

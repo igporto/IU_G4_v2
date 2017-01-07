@@ -15,23 +15,23 @@ include(__DIR__."/../../view/layouts/datatable_lang_select.php");
 include(__DIR__."/../../view/layouts/show_flag_setter.php"); 
 
  //obtemos o contido a mostrar
-    $actions = $view->getVariable("actionstoshow");              
+    $session = $view->getVariable("sessionstoshow");              
 ?>
 
 <div class="col-xs-12 col-md-8 " >
 
-<h1 class="page-header"><?php echo $strings['management_actions'] ?></h1>
+<h1 class="page-header"><?php echo $strings['management_sessions'] ?></h1>
 
     <div class="row">
 
             
             <!--BOTÓN QUITAR FILTRO-->               
-                    <a class="btn btn-warning btn-outline"  href="index.php?controller=action&action=show">
+                    <a class="btn btn-warning btn-outline"  href="index.php?controller=session&action=show">
                                 <i class="fa fa-search-minus"></i>
                                 <?php echo $strings['clean'];?>
                     </a>
                 <!--BOTÓN BUSCAR-->
-                    <a class="btn btn-primary" href="index.php?controller=action&action=search">
+                    <a class="btn btn-primary" href="index.php?controller=session&action=search">
                         <i class="fa fa-fw fa-search"></i>
                         <?php echo $strings['find']; ?>
                     </a>
@@ -44,7 +44,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
             <!--BOTÓN ENGADIR-->
             <?php if ($add) {
                 echo '  
-                            <a href="index.php?controller=action&action=add">
+                            <a href="index.php?controller=session&action=add">
                                 <button type="button" class="btn btn-success">
                                 <i class="fa fa-fw fa-plus"></i>
                                     '. $strings['ADD'].'
@@ -58,7 +58,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 <div class="row" style="margin-top: 20px">
 <div class="panel panel-default">
                         <div class="panel-heading">
-                            <?php echo $strings['list_of'].' '.$strings['ACTION']; ?>
+                            <?php echo $strings['list_of'].' '.$strings['SESSION']; ?>
 
                         </div>
                         <div class="panel-body">
@@ -66,7 +66,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class="text-center"><?php echo $strings['ACTION']?></th>
+                                    <th class="text-center"><?php echo $strings['name']?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
                                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -85,14 +85,14 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <?php  
 
                                 //Para cada usuario, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
-                                foreach ($actions as $c) {
+                                foreach ($session as $c) {
                                     echo "<tr class='row text-center' ><td> ";
 
-                                    echo $c->getActionname()."</td><td class='text-center'>";
+                                    echo $c->getIdSession()."</td><td class='text-center'>";
                                     //Botón que direcciona a vista do usuario
                                     if($v){
                                         echo '<button type="button" class="btn btn-primary btn-xs';
-                                        echo '" data-toggle="modal" data-target="#view'.$c->getActionname().'">';
+                                        echo '" data-toggle="modal" data-target="#view'.$c->getIdSession().'">';
                                         
                                         echo '<i class="fa fa-eye fa-fw"></i>
                                         </button>';
@@ -100,7 +100,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     //Botón que direcciona á vista do editar
                                     if($edit){
 
-                                        echo "<a href=index.php?controller=action&action=edit&actionName=". $c->getActionname().'>';
+                                        echo "<a href=index.php?controller=session&action=edit&actionName=". $c->getIdSession().'>';
                                         echo "<button class='btn btn-warning btn-xs ";
                                         echo "' style='margin:2px'>";
                                         echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -109,7 +109,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     //Botón que direcciona á vista de eliminar
                                     if($delete){
                                         echo '<button type="button" class="btn btn-danger btn-xs';
-                                        echo '" data-toggle="modal" data-target="#confirmar'.$c->getActionname().'">';
+                                        echo '" data-toggle="modal" data-target="#confirmar'.$c->getIdSession().'">';
                                         
                                         echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';

@@ -341,6 +341,10 @@ $strings = array(
     'WORKDAY'=>'Jornada',
     'schedule_modify'=>'Modificar Horario',
 
+    /* sesión */
+    'SESSION'=>'Sesiones',
+    'management_sessions'=>'Gestión de Sesiones',
+
 	/* Categorias*/
 
 	 'CATEGORY' => 'Categorías',

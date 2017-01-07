@@ -332,6 +332,10 @@ $strings = array(
     'create_workday'=>'Xornada semanal de: ',
     'schedule_modify'=>'Modificar Horario',
 
+    /* sesión */
+    'SESSION'=>'Sesións',
+    'management_sessions'=>'Xestión de Sesións',
+
     /* Categorias*/
     'CATEGORY' => 'Categorias',
     'create_category' => 'Engadir Categoría',

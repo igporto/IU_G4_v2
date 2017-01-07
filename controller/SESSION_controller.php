@@ -155,9 +155,8 @@ class SessionController extends BaseController
     public function delete()
     {
         try {
-            if (isset($_GET['sessionName'])) {
-                $session_id = $this->sessionMapper->getIdByName($_REQUEST["sessionName"]);
-                $session = $this->sessionMapper->view($session_id);
+            if (isset($_GET['sessionid'])) {
+                $session = $this->sessionMapper->view($_REQUEST["sessionid"]);
                 $this->sessionMapper->delete($session);
                 $this->view->setFlash('succ_session_delete');
                 $this->view->redirect("session", "show");
