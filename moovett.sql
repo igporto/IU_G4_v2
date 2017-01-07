@@ -50,8 +50,6 @@ DROP TABLE IF EXISTS `empleado_tiene_lesion`;
 DROP TABLE IF EXISTS `evento`;
 DROP TABLE IF EXISTS `factura`;
 DROP TABLE IF EXISTS `linea_factura`;
-DROP TABLE IF EXISTS `horario_actividad`;
-DROP TABLE IF EXISTS `horas_posibles`;
 DROP TABLE IF EXISTS `inscripcion`;
 DROP TABLE IF EXISTS `lesion`;
 DROP TABLE IF EXISTS `pago`;
@@ -73,6 +71,7 @@ DROP TABLE IF EXISTS `usuario_recibe_alerta`;
 DROP TABLE IF EXISTS `alumnos_recibe_notificacion`;
 DROP TABLE IF EXISTS `horario`;
 DROP TABLE IF EXISTS `jornada`;
+DROP TABLE IF EXISTS `sesion`;
 
 
 
@@ -335,31 +334,10 @@ CREATE TABLE `linea_factura` (
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `horario_actividad`
---
-
-CREATE TABLE `horario_actividad` (
-  `hora_comienzo` time NOT NULL DEFAULT '00:00:00',
-  `hora_final` time NOT NULL DEFAULT '00:00:00',
-  `fecha` date NOT NULL DEFAULT '0000-00-00',
-  `id_actividad` int(4) NOT NULL
-) ;
 
 
 -- --------------------------------------------------------
 
---
--- table structure for table `horas_posibles`
---
-
-CREATE TABLE `horas_posibles` (
-  `id_hora` int(4) not null,
-  `dia` date not null,
-  `hora_inicio` time not null,
-  `hora_fin` time not null,
-  `id_calendario` int(4) not null
-) ;
 
 
 -- --------------------------------------------------------
@@ -776,20 +754,7 @@ ALTER TABLE `linea_factura`
   ADD PRIMARY KEY (`id_linea`,`id_factura`),
   ADD KEY `id_factura` (`id_factura`);
 
---
--- Indices de la tabla `horario_actividad`
---
-ALTER TABLE `horario_actividad`
-  ADD PRIMARY KEY (`fecha`,`hora_comienzo`,`id_actividad`),
-  ADD KEY `id_actividad` (`id_actividad`);
 
-
---
--- Indices de la tabla `horas_posibles`
---
-ALTER TABLE `horas_posibles`
-  ADD PRIMARY KEY (`id_hora`),
-  ADD KEY `id_calendario` (`id_calendario`);
 
 --
 -- Indices de la tabla `inscripcion`
@@ -999,11 +964,7 @@ ALTER TABLE `espacio`
 ALTER TABLE `factura`
   MODIFY `id_factura` int(4) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `horas_posibles`
---
-ALTER TABLE `horas_posibles`
-  MODIFY `id_hora` int(4) NOT NULL AUTO_INCREMENT;
---
+
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
@@ -1180,19 +1141,6 @@ ALTER TABLE `alumno_se_apunta_evento`
 --
 ALTER TABLE `linea_factura`
   ADD CONSTRAINT `linea_factura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
---
--- Filtros para la tabla `horario_actividad`
---
-ALTER TABLE `horario_actividad`
-  ADD CONSTRAINT `horario_actividad_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `horas_posibles`
---
-ALTER TABLE `horas_posibles`
-  ADD CONSTRAINT `horas_posibles_ibfk_1` FOREIGN KEY (`id_calendario`) REFERENCES `calendario` (`id_calendario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
