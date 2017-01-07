@@ -39,6 +39,7 @@ class SessionController extends BaseController
     private $spaceMapper;
     private $eventMapper;
     private $employeeMapper;
+    private $workdayMapper;
 
     public function __construct()
     {
@@ -51,6 +52,7 @@ class SessionController extends BaseController
         $this->spaceMapper = new SpaceMapper();
         $this->eventMapper = new EventMapper();
         $this->employeeMapper = new EmployeeMapper();
+        $this->workdayMapper = new WorkdayMapper();
 
         // Sessions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
@@ -64,15 +66,18 @@ class SessionController extends BaseController
         $time = strtotime($date);
         $dayoweek = date('N',$time);
 
-        $schedule = $this->scheduleMapper->getDateSchedule($fecha);
+        $schedule = $this->scheduleMapper->getDateSchedule($date);
         $workday = NULL;
 
+
         //escoller a xornada do día correspondente a esa data
-        foreach ($schedule->getScheduleWorkdays() as $wd) {
-            if ($wd->getDay() == $dawoweek) {
+        foreach ($this->workdayMapper->getScheduleWorkdays($schedule->getIdSchedule()) as $wd) {
+            if ($wd->getDay() == $dayoweek) {
                 $workday = $wd;
             }
         }
+
+        if($workday == NULL) return false;
 
         // 1. comprobar que rango de horas estea dentro do da xornada
         if  (
@@ -127,21 +132,28 @@ class SessionController extends BaseController
             //Creamos un obxecto Session baleiro
             $session = new Session();
 
-            //Engadimos o nome ao Session
-            $session->setSessionname(htmlentities(addslashes($_POST["sessionname"])));
+            if ($_POST["selector"] == "ac") {
+                $session->setActivity($this->activityMapper->view($_POST["selactivity"]));
+            }else{
+                 $session->setEvent($this->eventMapper->view($_POST["selevent"]));
+            }
 
-            try {
-                if (!$this->sessionMapper->sessionnameExists($_POST["sessionname"])) {
-                    //$session->checkIsValidForCreate();
-                    $this->sessionMapper->add($session);
-                    //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash('succ_session_add');
+            $session->setEmployee($this->employeeMapper->view($_POST["selemployee"]));
 
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos sessions)
+            if ($this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]))) {
+                $session->setSpace($this->spaceMapper->view($_POST["selspace"]));
+                $session->setDate($_POST["date"]);
+                $session->setHourStart($_POST["hourstart"]);
+                $session->setHourEnd($_POST["hourend"]);
+            }
+            else{
+                $this->view->setFlash('fail_session_not_valid');
                     $this->view->redirect("session", "show");
-                } else {
-                    $this->view->setFlash("fail_session_exists");
-                }
+            }
+            try {
+                    $this->sessionMapper->add($session);
+                    $this->view->setFlash('succ_session_add');
+                    $this->view->redirect("session", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }

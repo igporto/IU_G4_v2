@@ -30,9 +30,7 @@ $employee = $view->getVariable("employee");
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
-                        <!--  <div class="row">
-                            <?php echo $strings['max_length'] ?>: 25
-                        </div>-->
+                      
                          
                     </div>
                     
@@ -104,7 +102,7 @@ $employee = $view->getVariable("employee");
                     <label for="3"><?= $strings['hourstart'] ?></label>
                         <div id="3" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input type="text" class="form-control" id="hourstart" name="hourstart"
+                            <input type="time" class="form-control" id="hourstart" name="hourstart"
                                    placeholder= "HH:MM"
                                    required="true" maxlength="5">
                             
@@ -115,7 +113,7 @@ $employee = $view->getVariable("employee");
                     <label for="4"><?= $strings['hourend'] ?></label>
                         <div id="4" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input type="text" class="form-control" id="hourend" name="hourend"
+                            <input type="time" class="form-control" id="hourend" name="hourend"
                                    placeholder= "HH:MM"
                                    required="true" maxlength="25">
                             <div id="error"></div>
