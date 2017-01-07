@@ -3,14 +3,11 @@
 require_once(__DIR__."/../core/ViewManager.php");
 
 require_once(__DIR__."/../model/EVENT.php");
-require_once(__DIR__ . "/../model/PUPILATTENDSEVENT.php");
+require_once(__DIR__."/../model/PUPIL_ATTENDS_EVENT.php");
 require_once(__DIR__."/../model/EVENT_model.php");
-require_once(__DIR__."/../model/SPACE_model.php");
-require_once(__DIR__."/../model/EMPLOYEE_model.php");
-require_once(__DIR__."/../model/ALUMN_model.php");
-//require_once(__DIR__."/SESSION_controller.php");
 
 require_once(__DIR__."/../model/PERMISSION_model.php");
+
 require_once(__DIR__."/../controller/BaseController.php");
 /**
  * Class EventController
@@ -19,239 +16,206 @@ require_once(__DIR__."/../controller/BaseController.php");
  */
 class EventController extends BaseController {
 
-    private $spaceMapper;
-    private $employeeMapper;
-    private $eventMapper;
-    private $alumnMapper;
 
 
     public function __construct() {
         parent::__construct();
 
-        $this->eventMapper = new EventMapper();
-        $this->employeeMapper = new EmployeeMapper();
-        $this->spaceMapper = new SpaceMapper();
-        $this->alumnMapper = new AlumnMapper();
-
+        $this->EventMapper = new EventMapper();
         $this->view->setLayout("navbar");
 
     }
 
-    public function add()
-    {
+    public function  show(){
+        $events = $this->EventMapper->show();
+        $this->view->setVariable("eventstoshow", $events);
+        $this->view->render("event", "show");
+    }
+
+    public function view(){
+        $eventid = $this->EventMapper->getIdByName($_REQUEST["name"]);
+        $event = $this->EventMapper->view($eventid);
+        $this->view->setVariable("id_evento", $event);
+        $this->view->render("event", "view");
+    }
+
+    public function add(){
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto Event baleiro
+            //Creamos un obxecto evento baleiro
             $event = new Event();
-            //Engadimos os datos do obxecto
-            $event->setName(htmlentities(addslashes($_POST["name"])));
-            $event->setIniHour(htmlentities(addslashes($_POST["inihour"])));
-            $event->setFinHour(htmlentities(addslashes($_POST["finhour"])));
-            $event->setDate(htmlentities(addslashes($_POST["date"])));
-            $event->setCapacity(htmlentities(addslashes($_POST["capacity"])));
-            $event->setSpace($this->spaceMapper->view(htmlentities(addslashes($_POST["space"]))));
-            $event->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_POST["employee"]))));
-            $event->setFreeplaces(htmlentities(addslashes($_POST["capacity"])));
+
+            //Engadimos o id, aforo e descripción ao espazo
+            $event->setEventname(htmlentities(addslashes($_POST["name"])));
+            $event->setCapacity(htmlentities(addslashes($_POST['afor'])));
+            $event->setCodProf(htmlentities(addslashes($_POST['dni_p'])));
+            $event->setDate(htmlentities(addslashes($_POST['fecha'])));
+            $event->setFinalHour(htmlentities(addslashes($_POST['hora_fin'])));
+            $event->setInitialHour(htmlentities(addslashes($_POST['hora_ini'])));
+            $event->setCodSpace(htmlentities(addslashes($_POST['id_espacio'])));
 
             try {
-                if(!$this->eventMapper->EventNameExists($event->getName())){
-                    if($event->getCapacity()>0){
-                        if($event->getCapacity()<= $event->getSpace()->getCapacity()){
-                            //if(isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour())) {
-                                $this->eventMapper->add($event);
-                                $this->view->setFlash('succ_event_add');
-                                $this->view->redirect("event", "show");
-                            /*}else{
-                                $this->view->setFlash("fail_hour_incorrect");
-                            }*/
-                        }else{
-                            $this->view->setFlash("fail_aforo_fail_event");
-                        }
-                    } else {
-                        $this->view->setFlash("fail_aforo_incorrect");
-                    }
-                }else{
-                    $this->view->setFlash("fail_event_exists");
+                if(!$this->EventMapper->EventNameExists(htmlentities(addslashes($_POST["name"])))){
+                    $this->EventMapper->add($event);
+                    //ENVIAR AVISO DE EVENTO ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash("succ_event_add");
+
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos eventos)
+                    $this->view->redirect("event", "show");
+                } else {
+                    $this->view->setFlash("event_already_exists");
                 }
-            } catch (ValidationException $ex) {
-                $this->view->setFlash("erro_general");
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
             }
         }
         //Se non se enviou nada
-
         $this->view->render("event", "add");
     }
 
-    public function edit()
-    {
+    public function edit(){
         if (isset($_POST["submit"])) {
+            $ev = $this->EventMapper->view($_REQUEST['id_evento']);
+            $ev->setCodEvent($_REQUEST['id_evento']);
 
-            //creamos un obxecto Evento cos datos da actividade a editar
-            $event = $this->eventMapper->view($_GET["codevent"]);
-
-
-            if(isset($_POST['name']) && $_POST['name']!="") {
-                $event->setName(htmlentities(addslashes($_POST["name"])));
-                if ($this->eventMapper->eventnameExists($event->getName())) {
-                    $this->view->setFlash("fail_event_exists");
-                    $this->view->redirect("event", "edit", "codevent=" . $_GET["codevent"]);
-                }
+            //Engadimos o novo id_espazo ao evento (se non deixamos o que ten)
+            if(isset($_POST["newid_espacio"])&& addslashes($_POST['newid_espacio'])!=""){
+                $ev->setCodSpace(htmlentities(addslashes($_POST["newid_espacio"])));
+            }else{
+                $af = $ev->getCodSpace();
+                $ev->setCodSpace($af);
             }
 
-            if(isset($_POST['capacity']) && $_POST['capacity'] != ""){
-                $apuntados = $event->getCapacity() - $event->getFreeplaces();
-                if($apuntados < $_POST['capacity']){
-                    $event->setCapacity(htmlentities(addslashes($_POST["capacity"])));
-                    $event->setFreeplaces($event->getCapacity() - $apuntados);
-                }else{
-                    $this->view->setFlash("fail_capacity_less_apuntados");
-                    $this->view->redirect("event", "edit", "codevent=" . $_GET["codevent"]);
-                }
+            //Engadimos o novo nome do evento ao evento(se non deixamos o que ten)
+            if(isset($_POST["newname"])&& addslashes($_POST['newname'])!=""){
+                $ev->setEventname(htmlentities(addslashes($_POST["newname"])));
+            }else{
+                $af = $ev->getEventname();
+                $ev->setEventname($af);
             }
 
-            if(isset($_POST['date']) && $_POST['date'] != ""){
-                $event->setDate(htmlentities(addslashes($_POST["capacity"])));
+            //Engadimos a nova fecha ao evento (se non deixamos o que ten)
+            if(isset($_POST["newfecha"])&& addslashes($_POST['newfecha'])!=""){
+                $ev->setDate(htmlentities(addslashes($_POST["newfecha"])));
+            }else{
+                $af = $ev->getDate();
+                $ev->setDate($af);
             }
 
-            if(isset($_POST['inihour']) && $_POST['inihour'] != ""){
-                $event->setIniHour(htmlentities(addslashes($_POST["inihour"])));
+            //Engadimos a nova hora_ini ao evento (se non deixamos o que ten)
+            if(isset($_POST["newhora_ini"])&& addslashes($_POST['newhora_ini'])!=""){
+                $ev->setInitialHour(htmlentities(addslashes($_POST["newhora_ini"])));
+            }else{
+                $af = $ev->getInitialHour();
+                $ev->setInitialHour($af);
             }
 
-            if(isset($_POST['finhour']) && $_POST['finhour'] != ""){
-                $event->setFinHour(htmlentities(addslashes($_POST["finhour"])));
+            //Engadimos a nova hora_fin ao evento (se non deixamos o que ten)
+            if(isset($_POST["newhora_fin"])&& addslashes($_POST['newhora_fin'])!=""){
+                $ev->setFinalHour(htmlentities(addslashes($_POST["newhora_fin"])));
+            }else{
+                $af = $ev->getFinalHour();
+                $ev->setFinalHour($af);
             }
 
-            if(isset($_POST['space'])){
-                $event->setSpace($this->spaceMapper->view(htmlentities(addslashes($_POST["space"]))));
+            //Engadimos o novo aforo ao evento (se non deixamos o que ten)
+            if(isset($_POST["newafor"])&& addslashes($_POST['newafor'])!=""){
+                $ev->setCapacity(htmlentities(addslashes($_POST["newafor"])));
+            }else{
+                $af = $ev->getCapacity();
+                $ev->setCapacity($af);
             }
 
-            if(isset($_POST['employee'])){
-                $event->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_POST["employee"]))));
+            //Engadimos o novo dni do profesor ao evento (se non deixamos o que ten)
+            if(isset($_POST["newdni_p"])&& addslashes($_POST['newdni_p'])!=""){
+                $ev->setCodProf(htmlentities(addslashes($_POST["newdni_p"])));
+            }else{
+                $des = $ev->getCodProf();
+                $ev->setCodProf($des);
             }
-
 
             try {
-                if($event->getCapacity()>0){
-                    if($event->getCapacity() <= $event->getSpace()->getCapacity()){
-                        //if(isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour())) {
-                            $this->eventMapper->edit($event);
-                            $this->view->setFlash("succ_event_edit");
-                            $this->view->redirect("event", "show");
-                        /*}else{
-                            $this->view->setFlash("fail_hour_incorrect");
-                        }*/
-                    }else{
-                        $this->view->setFlash("fail_aforo_fail_event");
-                    }
-                } else {
-                    $this->view->setFlash("fail_aforo_incorrect");
-                }
-
-            } catch (ValidationException $ex) {
-                $this->view->setFlash("erro_general");
+                $this->EventMapper->edit($ev);
+                //ENVIAR AVISO DE ESPAZO EDITADO!!!!!!!!!!
+                $this->view->setFlash("succ_event_mod");
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos eventos)
+                $this->view->redirect("event", "show");
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
             }
         }
         //Se non se enviou nada
         $this->view->render("event", "edit");
     }
 
-    public function show()
-    {
-        $events = $this->eventMapper->show();
-        $this->view->setVariable("eventstoshow", $events);
-        $this->view->render("event", "show");
-    }
-
-    public function view()
-    {
-        $event = $this->eventMapper->view(htmlentities(addslashes($_REQUEST["codevent"])));
-        $this->view->setVariable("event", $event);
-        $this->view->render("event", "view");
-    }
-
-    public function delete()
-    {
-        try {
-            if (isset($_GET['codevent'])) {
-                $this->eventMapper->delete(htmlentities(addslashes($_GET['codevent'])));
+    public function delete(){
+        try{
+            if (isset($_GET['id_evento'])) {
+                $this->EventMapper->delete($_GET["id_evento"]);
                 $this->view->setFlash('succ_event_delete');
                 $this->view->redirect("event", "show");
             }
-        } catch (Exception $e) {
-            $this->view->setFlash('erro_general');
+
+        }catch (Exception $e) {
+            $errors = $e->getErrors();
+            $this->view->setVariable("errors", $errors);
         }
         $this->view->render("event", "show");
+
     }
 
-    public function search()
-    {
-        if (isset($_POST["submit"])) {
+    public function search(){
+        if(isset($_POST["submit"])){
             $event = new Event();
 
-
-            if (isset($_POST['name']) && $_POST['name'] != "") {
-                $event->setName(htmlentities(addslashes($_POST["name"])));
+            if(!empty($_POST["event_id"])){
+                $event->setCodEvent(htmlentities(addslashes($_POST["event_id"])));
             }
-
-            if (isset($_POST['capacity']) && $_POST['capacity'] != "") {
+            if(!empty($_POST['name'])){
+                $event->setEventname(htmlentities(addslashes($_POST["name"])));
+            }
+            if(!empty($_POST["ini_hour"])){
+                $event->setInitialHour(htmlentities(addslashes($_POST["ini_hour"])));
+            }
+            if(!empty($_POST["capacity"])){
                 $event->setCapacity(htmlentities(addslashes($_POST["capacity"])));
             }
-
-            if (isset($_POST['date']) && $_POST['date'] != "") {
-                $event->setDate(htmlentities(addslashes($_POST["capacity"])));
+            if(!empty($_POST["fin_hour"])){
+                $event->setFinalHour(htmlentities(addslashes($_POST["fin_hour"])));
+            }
+            if(!empty($_POST["space_id"])){
+                $event->setCodSpace(htmlentities(addslashes($_POST["space_id"])));
+            }
+            if(!empty($_POST["date"])){
+                $event->setDate(htmlentities(addslashes($_POST["date"])));
+            }
+            if(!empty($_POST["dni_prof"])){
+                $event->setCodProf(htmlentities(addslashes($_POST["dni_prof"])));
             }
 
-            if (isset($_POST['inihour']) && $_POST['inihour'] != "") {
-                $event->setIniHour(htmlentities(addslashes($_POST["inihour"])));
-            }
-
-            if (isset($_POST['finhour']) && $_POST['finhour'] != "") {
-                $event->setFinHour(htmlentities(addslashes($_POST["finhour"])));
-            }
-
-            if (isset($_POST['space']) && $_POST['space'] != "") {
-                $event->setSpace($this->spaceMapper->view(htmlentities(addslashes($_POST["date"]))));
-            } else {
-                $event->setSpace(new Space(""));
-            }
-
-            if (isset($_POST['employee']) && $_POST['employee'] != "") {
-                $event->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_POST["employee"]))));
-            } else {
-                $event->setEmployee(new Employee(""));
-            }
-
-            try {
-                $this->view->setVariable("eventstoshow", $this->eventMapper->search($event));
-            } catch (Exception $e) {
-                $this->view->setFlash("erro_general");
-                $this->view->redirect("event", "show");
-            }
-            //render dado que non se pode settear a variable antes de un redirect
-            $this->view->render("event", "show");
-        } else {
+            $this->view->setVariable("eventstoshow", $this->EventMapper->search($event) );
+            $this->view->render("event","show");
+        }else{
             $this->view->render("event", "search");
         }
     }
 
     public function addpupil(){
         if (isset($_POST["submit"])) {
-            $pupil = new PupilAttendsEvent();
+            $pupil = new Pupil_attends_event();
 
-            $pupil->setEvent($this->eventMapper->view(htmlentities(addslashes($_REQUEST['codevent']))));
-            $pupil->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_POST['codpupil']))));
-
+            $pupil->setCodEvent(htmlentities(addslashes($_POST['id_evento'])));
+            $pupil->setCodStudent(htmlentities(addslashes($_POST['codpupil'])));
 
             try {
-                if(!$this->eventMapper->pupilannotated($pupil)){
-                    if($pupil->getEvent()->getFreeplaces()>0){
-                        $this->eventMapper->addpupil($pupil);
-                        //ENVIAR AVISO DE ALUMNO ENGADIDO!!!!!!!!!!
-                        $this->view->setFlash("succ_pupil_add");
-                        //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos alumnos no evento)
-                        $this->view->redirect("event", "showpupil" , "codevent=".$pupil->getEvent()->getCodevent());
-                    }else{
-                        $this->view->setFlash("fail_no_places");
-                    }
+                if(!$this->EventMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_evento'])))){
+                    $this->EventMapper->addpupil($pupil);
+                    //ENVIAR AVISO DE ALUMNO ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash("succ_pupil_add");
+
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos alumnos no evento)
+                    $this->view->redirect("event", "show");
                 } else {
                     $this->view->setFlash("student_already_exists");
                 }
@@ -261,31 +225,29 @@ class EventController extends BaseController {
             }
         }
         //Se non se enviou nada
-        $this->view->render("event", "addpupil");
+        $this->view->render("event", "add_pupil");
     }
 
     public function showpupil(){
-        $pupils = $this->eventMapper->showPupils($_GET['codevent']);
+        $pupils = $this->EventMapper->showpupil();
         $this->view->setVariable("pupilstoshow", $pupils);
-        $this->view->render("event", "showpupil", "codevent=".$_GET['codevent']);
+        $this->view->render("event", "show_pupil");
     }
 
-    public function deletepupil()
-    {
-
+    public function deletepupil(){
         try{
             if (isset($_GET['codpupil'])) {
-
-                $alumn = $this->alumnMapper->view($_GET['codpupil']);
-                $event = $this->eventMapper->view($_GET['codevent']);
-                $this->eventMapper->deletePupil(new PupilAttendsEvent($event, $alumn));
+                $this->EventMapper->deletepupil(htmlentities(addslashes($_GET["codpupil"])),htmlentities(addslashes($_GET["id_evento"])));
                 $this->view->setFlash('succ_student_delete');
-                $this->view->redirect("event", "showpupil" , "codevent=".$event->getCodevent());
+                $this->view->redirect("event", "show");
             }
-        }catch (Exception $e) {
-            $this->view->setFlash('erro_general');
-        }
 
+        }catch (Exception $e) {
+            $errors = $e->getErrors();
+            $this->view->setVariable("errors", $errors);
+        }
         $this->view->render("event", "show");
+
     }
+
 }

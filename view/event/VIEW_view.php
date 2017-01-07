@@ -1,30 +1,31 @@
 <?php
 echo '
-                                <div class="modal fade" id="view'.$e->getCodevent().'" tabindex="-1" role="dialog" aria-labelledby="'.$e->getName().'viewlabel" aria-hidden="true" style="display: none;">
+                                <div class="modal fade" id="view'.$e->getEventname().'" tabindex="-1" role="dialog" aria-labelledby="'.$e->getEventname().'viewlabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title" id="'.$e->getCodevent().'label">'.$strings["event_data"].' '.$e->getName().':</h4>
+                                                <h4 class="modal-title" id="'.$e->getCodEvent().'label">'.$strings["event_data"].' '.$e->getEventname().':</h4>
                                             </div>
-                                            <div class="modal-body">';
-
+                                            <div class="modal-body">
+                                                 <label for="">' . $strings["event_id"] . ': '.$e->getCodEvent().' </label>';
+$mp = new EventMapper();
 //DATOS DO EVENTO A AMOSAR
 echo '  
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["name"] . ': </label>
-                                                        <span class="">' . $e->getName() . '</span>
+                                                        <span class="">' . $e->getEventname() . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["initial_hour"] . ': </label>
-                                                        <span class="">' . $e->getIniHour() . '</span>
+                                                        <span class="">' . $e->getInitialHour() . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["final_hour"] . ': </label>
-                                                        <span class="">' . $e->getFinHour() . '</span>
+                                                        <span class="">' . $e->getFinalHour() . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
@@ -39,12 +40,12 @@ echo '
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["space_name"] . ': </label>
-                                                        <span class="">' . $e->getSpace()->getSpacename() . '</span>
+                                                        <span class="">' . $mp->getNameSpace($e->getCodSpace()) . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["dni_p"] . ': </label>
-                                                        <span class="">' . $e->getEmployee()->getEmployeename() . '</span>
+                                                        <span class="">' . $mp->getNameProf($e->getCodProf()) . '</span>
 
                                                 </div>
                                                             
@@ -70,7 +71,7 @@ echo '
 
                                             <div class="modal-footer">
                                                 
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">'.$strings["okay"].'</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["okay"].'</button>
                                                 
                                                 
                                             </div>

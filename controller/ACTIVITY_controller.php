@@ -112,7 +112,7 @@ class ActivityController extends BaseController
                                 $this->view->setFlash("fail_discount_incorrect");
                             }
                         }else{
-                            $this->view->setFlash("fail_aforo_fail_activity");
+                            $this->view->setFlash("fail_aforo_fail");
                         }
                     }else{
                         $this->view->setFlash("fail_aforo_incorrect");
@@ -220,7 +220,7 @@ class ActivityController extends BaseController
                             $this->view->setFlash("fail_price_incorrect");
                         }
                     }else{
-                        $this->view->setFlash("fail_aforo_fail_activity");
+                        $this->view->setFlash("fail_aforo_fail");
                     }
                 }else{
                     $this->view->setFlash("fail_aforo_incorrect");

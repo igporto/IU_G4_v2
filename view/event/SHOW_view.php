@@ -54,6 +54,18 @@ $events = $view->getVariable("eventstoshow");
                         ';
         } ?>
 
+        <?php if($add) {
+            echo '  
+                            <a href="index.php?controller=event&action=addpupil">
+                                <button type="button" class="btn btn-success">
+                                <i class="fa fa-fw fa-plus"></i>
+                                    '. $strings['add_student'].'
+                                </button>
+                            </a>
+                        ';
+        }
+
+        ?>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
@@ -92,10 +104,10 @@ $events = $view->getVariable("eventstoshow");
 
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $e->getName() . "</td><td class='text-center'>";
+                        echo $e->getEventname() . "</td><td class='text-center'>";
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
-                            echo '" data-toggle="modal" data-target="#view' . $e->getCodevent() . '';
+                            echo '" data-toggle="modal" data-target="#view' . $e->getEventname() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-eye fa-fw"></i>
                                         </button>';
@@ -104,7 +116,7 @@ $events = $view->getVariable("eventstoshow");
                         //Boton que direcciona a vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=event&action=edit&codevent=" . $e->getCodevent() . '>';
+                            echo "<a href=index.php?controller=event&action=edit&id_evento=" . $e->getCodEvent() . '>';
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -114,20 +126,18 @@ $events = $view->getVariable("eventstoshow");
                         //Boton que direcciona a vista de eliminar
                         if ($delete) {
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $e->getCodevent() . '';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $e->getEventname() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
                         }
 
                         if ($v) {
-                            echo "<a href=index.php?controller=event&action=showpupil&codevent=" . $e->getCodevent() . '>';
+                            echo "<a href=index.php?controller=event&action=showpupil&id_evento=" . $e->getCodEvent() . '>';
                             echo "<button class='btn btn-info btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-male fa-fw'></i></button></a>";
                         }
-
-
                         //MODAL DE CONFIRMACION DE BORRADO PARA CADA ACCION
                         include(__DIR__ . '/DELETE_view.php');
 

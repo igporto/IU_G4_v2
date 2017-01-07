@@ -49,7 +49,7 @@ $userMapper = new EventMapper();
                             <label for="divdatestart"><?= $strings['aforo']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="number" name="capacity"  min="1" max="500" placeholder="<?php echo $strings['aforo'];?>">
+                            <input required class="form-control" type="number" name="afor"  min="1" max="500" placeholder="<?php echo $strings['aforo'];?>">
                             <div id="error"></div>
                         </div>
                         <!--Campo aforo-->

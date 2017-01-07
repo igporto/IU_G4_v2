@@ -1,20 +1,21 @@
 <!-- CONTIDO DA PAXINA -->
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
-require_once(__DIR__ . "/../../model/ALUMN_model.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-$codevent =   $_GET['codevent'];
+
+$userMapper = new EventMapper();
 ?>
+
 
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=event&action=addpupil&codevent=<?php echo $codevent?>"
+          action="index.php?controller=event&action=addpupil"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['add_student'] ?>
+                <?php echo $strings['create_event'] ?>
             </div>
             <div class="panel-body">
 
@@ -29,23 +30,42 @@ $codevent =   $_GET['codevent'];
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['alumn']  ?></label>
+
+                        <label for="divdatestart"><?= $strings['dni']." ".$strings['student']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="codpupil" class='form-control icon-menu''>
-                            <?php
-                            $s = new AlumnMapper();
-                            $emps = $s->show();
-                            foreach ($emps as $emp){
-                                echo '<option value='.$emp->getCodalumn().'>'.$emp->getAlumnname().'</option>';
-                            }
-                            ?>
+                            <select name="codpupil">
+                                <?php
+                                $s = new EventMapper();
+                                $a = $s->selectDniA();
+                                foreach ($a as $b){
+                                    echo '<option value="'.$b.'">'.$s->getDniId($b).'</option>';
+                                }
+                                ?>
                             </select>
                         </div>
-                        <!--Campo dni_prof-->
+                        <!--Campo dni-->
                     </div>
+                    <div class="col-xs-12 col col-md-5">
+
+                        <label for="divdatestart"><?= $strings['EVENTS_NAME']  ?></label><div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
+                            <select name="id_evento">
+                                <?php
+                                $s = new EventMapper();
+                                $a = $s->selectEventID();
+                                foreach ($a as $b){
+                                    echo '<option value="'.$b.'">'.$s->getNameEvent($b).'</option>';
+                                }
+                                ?>
+                            </select>
+                            <!--Campo name-->
+                        </div>
+
+                    </div>
+
                 </div>
-            </div>
+                </div>
 
             </div>
 
@@ -54,7 +74,7 @@ $codevent =   $_GET['codevent'];
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=event&action=showpupil">
+                    <a class="btn btn-default btn-md" href="index.php?controller=event&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
