@@ -293,7 +293,10 @@ $strings = array(
     	'fail_discount_incorrect'=>'El descuento no es válido',
    		'fail_discount_exists' => 'El descuento ya existe',
     	'fail_payment_exists' => 'El pago ya existe',
-    	'fail_aforo_fail'=>'El aforo del aula es menor que el de la actividad',
+		'fail_aforo_fail_activity'=>'El aforo del aula es menor que el de la actividad',
+		'fail_aforo_fail_event'=>'El aforo del aula aula es menor que el del evento',
+    	'fail_capacity_less_apuntados'=>'El aforo es menor que la gente ya apuntada',
+    	'fail_no_places'=>'No quedan prazas libres',
 		'fail_dni_exists'=>'Ya hay un empleado con ese DNI',
 		'fail_dni_incorrect'=>'El DNI no es válido',
 		'fail_email_incorrect'=>'El email no es válido',
@@ -431,7 +434,7 @@ $strings = array(
     'id_student' => 'ID del alumno',
     'succ_student_add' => 'Alumno añadido correctamente',
     'student_already_exists' => 'El alumno ya existe',
-    'add_student' => 'Añadir alumno',
+    'add_student' => 'Insertar alumno',
     'succ_student_delete' => 'Alumno eliminado del evento',
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
@@ -455,8 +458,6 @@ $strings = array(
     'date_injury' => 'Fecha de la lesión',
     'add_employer'  => 'Añadir empleado',
     'list_of_employer' =>'Lista de empleados',
-    'date_error' => 'Error en las fechas',
-
 
 
     /*Alumno*/
@@ -485,13 +486,7 @@ $strings = array(
 	'bill_number'=>'Numero de factura',
 	'lines'=>'GESTION LINEAS',
 	'bill_data'=>'Datos de la factura',
-	'bill_modify'=>'Modificar factura',
-	'units'=>'Unidades',
-	'price'=>'Precio',
-    'total'=>'Total',
-	'management_line'=>'Gestion de lineas',
-	'add_line'=>'Añadir linea',
-	'line_modify'=>'Modificar linea'
+	'bill_modify'=>'Modificar factura'
 
 
 )
