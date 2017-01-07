@@ -10,7 +10,7 @@ $injuryMapper = new InjuryMapper();
 
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_employer']; ?></h1>
-    <form name="form" id="form" method="POST"
+    <form name="form" id="form" method="POST" onblur="validarFechaMenor(datestart,dateend)"
           action="index.php?controller=injury&action=addemployer"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
@@ -29,33 +29,39 @@ $injuryMapper = new InjuryMapper();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12  col-md-7 pull-right">
-
-                        <p><?php echo $strings['dni']." ".$strings['employee'].":";?><div class="form-group input-group">
+                    <div class="col-xs-12  col-md-7 ">
+                        <label for="divdatestart"><?= $strings['dni']." ".$strings['employee']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="codpupil">
+                            <select class="form-control icon-menu" name="codpupil">
                                 <?php
-                                $a = $injuryMapper->selectDniE();
+                                $a = $injuryMapper->selectIDE();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value="'.$b.'">'.$injuryMapper->selectDniE($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
+                        </div>
                         <!--Campo dni-->
+                    </div>
 
-                        <p><?php echo $strings['injury_name'].":";?><div class="form-group input-group">
+                    <div class="col-xs-12  col-md-7 ">
+                        <label for="divdatestart"><?= $strings['injury_name']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="id_lesion">
+                            <select class="form-control icon-menu" name="id_lesion">
                                 <?php
                                 $a = $injuryMapper->selectInjuryID();
                                 foreach ($a as $b){
-                                    echo '<option>'.$b.'</option>';
+                                    echo '<option value="'.$b.'">'.$injuryMapper->getNameInjury($b).'</option>';
                                 }
                                 ?>
                             </select>
-                        </div></p>
-
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12  col-md-7 ">
                         <label for="divdatestart"><?= $strings['date_injury']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
@@ -63,21 +69,23 @@ $injuryMapper = new InjuryMapper();
                                    required="true" maxlength="10">
                             <div id="error"></div>
                         </div>
+                    </div>
 
+                    <div class="col-xs-12  col-md-7 ">
                         <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="datestart" name="date_recovery"
+                            <input type="text" class="form-control" id="dateend" name="date_recovery"
                                    required="true" maxlength="10">
                             <div id="error"></div>
                         </div>
+                    </div>
 
                     </div>
                     <!--Campo name-->
                 </div>
 
             </div>
-        </div>
 
         <div class="row">
 
@@ -118,5 +126,23 @@ $injuryMapper = new InjuryMapper();
         $( "#dateend" ).datepicker();
         $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
     } );
+</script>
+
+<script>
+    function validarFechaMenor(date,d)
+    {
+        var date1 = new Date(date,'Y-m-d');
+        var date2= new Date(d, 'Y-m-d');
+
+        if (date1>date2)
+        {
+        echo '<div id="error"></div>';
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 </script>
 

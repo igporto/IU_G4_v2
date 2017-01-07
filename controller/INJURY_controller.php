@@ -45,6 +45,7 @@ class InjuryController extends BaseController {
             $injury->setNameInjury(htmlentities(addslashes($_POST['name'])));
 
             try {
+
                 if(!$this->injuryMapper->injuryNameExists($injury->getNameInjury())){
                     $this->injuryMapper->add($injury);
                     //ENVIAR AVISO DE ESPAZO ENGADIDO!!!!!!!!!!
@@ -167,7 +168,9 @@ class InjuryController extends BaseController {
             $pupil->setDateRecovery(htmlentities(addslashes($_POST['date_recovery'])));
 
             try {
-                if(!$this->injuryMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_lesion'])))){
+                if(!$this->injuryMapper->dateM(htmlentities(addslashes($_POST["date_injury"])),htmlentities(addslashes($_POST["date_recovery"])))){
+                    $this->view->setFlash("date_error");
+                }else if(!$this->injuryMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_lesion'])))){
                     $this->injuryMapper->addpupil($pupil);
                     //ENVIAR AVISO DE ALUMNO ENGADIDO!!!!!!!!!!
                     $this->view->setFlash("succ_pupil_add");
@@ -219,7 +222,9 @@ class InjuryController extends BaseController {
             $pupil->setDateRecovery(htmlentities(addslashes($_POST['date_recovery'])));
 
             try {
-                if(!$this->injuryMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_lesion'])))){
+                if(!$this->injuryMapper->dateM(htmlentities(addslashes($_POST["date_injury"])),htmlentities(addslashes($_POST["date_recovery"])))){
+                    $this->view->setFlash("date_error");
+                }else if(!$this->injuryMapper->pupilCodExists(htmlentities(addslashes($_POST["codpupil"])),htmlentities(addslashes($_POST['id_lesion'])))){
                     $this->injuryMapper->addemployer($pupil);
                     //ENVIAR AVISO DE ALUMNO ENGADIDO!!!!!!!!!!
                     $this->view->setFlash("succ_employee_add");

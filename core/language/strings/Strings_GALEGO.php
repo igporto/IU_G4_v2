@@ -281,15 +281,12 @@ $strings = array(
         'fail_profile_exists'=>"O perfil xa existe",
         'fail_category_exists'=>'A categoría xa existe',
         'fail_client_exists'=>"O cliente xa existe",
-        'fail_payment_exists'=>"O pago xa existe",
+    'fail_payment_exists'=>"O pago xa existe",
         'fail_activity_exists'=>"A actividade xa existe",
         'fail_aforo_incorrect'=>'O aforo non pode ser menor que 1',
         'fail_discount_incorrect'=>'O desconto non é válido',
         'fail_discount_exists' => 'O desconto xa existe',
-        'fail_aforo_fail_activity'=>'O aforo da aula é menor que o da actividade',
-        'fail_aforo_fail_event'=>'O aforo da aula é menor que o da actividade',
-        'fail_capacity_less_apuntados'=>'O aforo é menor que a xente xa apuntada',
-        'fail_no_places'=>'Non quedan prazas libres',
+        'fail_aforo_fail'=>'O aforo da aula é menor que o da actividade',
         'fail_dni_exists'=>'Xa hai un empregado con ese DNI',
         'fail_dni_incorrect'=>'O DNI non é válido',
         'fail_email_incorrect' => 'O email non é válido',
@@ -365,7 +362,6 @@ $strings = array(
     'create_discount' => 'Engadir Desconto',
     'discount_modify' => 'Modificar Desconto',
 
-
     /*Empleados*/
     'EMPLOYEE' => 'Empregados',
     'management_employees'=>'Xestión de Empregados',
@@ -420,8 +416,8 @@ $strings = array(
     'on_event' => 'no evento',
     'id_student' => 'ID do alumno',
     'succ_student_add' => 'Alumno engadido correctamente',
+    'add_student' => 'Engadir alumno',
     'student_already_exists' => 'O alumno xa esta anotado neste evento',
-    'add_student' => 'Insertar alumno',
     'succ_student_delete' => 'Alumno eliminado do evento',
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
@@ -449,6 +445,7 @@ $strings = array(
     /////////////////////////////////////////
     'add_employer'  => 'Engadir empregado',
     'list_of_employer' =>'Lista de empregados',
+    'date_error' => 'Error nas datas',
 
 
 

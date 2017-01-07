@@ -11,7 +11,7 @@ $injuryMapper = new InjuryMapper();
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=injury&action=addpupil"
+          action="index.php?controller=injury&action=addpupil" onblur="validarFechaMenor(date_injury,date_recovery)"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -34,7 +34,7 @@ $injuryMapper = new InjuryMapper();
                         <label for="divdatestart"><?= $strings['student']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="codpupil">
+                            <select class="form-control icon-menu" name="codpupil">
                                 <?php
                                 $a = $injuryMapper->selectIDA();
                                 foreach ($a as $b){
@@ -50,7 +50,7 @@ $injuryMapper = new InjuryMapper();
                         <label for="divdatestart"><?= $strings['injury_name']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select name="id_lesion">
+                            <select class="form-control icon-menu" name="id_lesion">
                                 <?php
                                 $a = $injuryMapper->selectInjuryID();
                                 foreach ($a as $b){
@@ -130,3 +130,19 @@ $injuryMapper = new InjuryMapper();
     } );
 </script>
 
+<script>
+    function validarFechaMenor(date,d)
+    {
+        var date1 = new Date(date,'Y-m-d');
+        var date2= new Date(d, 'Y-m-d');
+
+        if (date1>date2)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+</script>
