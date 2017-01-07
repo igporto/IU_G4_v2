@@ -1,25 +1,32 @@
-<!-- CONTIDO DA PAXINA -->
+5<!-- CONTIDO DA PAXINA -->
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
+$activity = $view->getVariable("activity");
+$event = $view->getVariable("event");
+$space = $view->getVariable("space");
+$employee = $view->getVariable("employee");
+
+
 ?>
 
 
-<div class="col-md-6 " style="margin-top: 20px">
-    <h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
+<div class="col-md-6 " style="margin-top: 20px; margin-bottom: 20px">
+    <h1 class="page-header"><?php echo $strings['create_session']; ?></h1>
     <form name="form" id="form" method="POST" 
-          action="index.php?controller=action&action=add"
+          action="index.php?controller=session&action=add"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_action'] ?>
+                <?php echo $strings['create_session'] ?>
             </div>
             <div class="panel-body">
-
-                <div class="row">
-                    <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                
+                
+                <div class="row" style="margin-bottom: 10px">
+                    <div class="col-xs-12 text-info float-left" style="margin-left: 10px">
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
@@ -28,24 +35,140 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>-->
                          
                     </div>
-                    <div class="col-xs-12 col col-md-5">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="text" class="form-control" id="actionname" name="actionname"
-                                   placeholder= <?php echo $strings['name'] ?>
+                    
+                </div>
+                <label for="asd"><?= $strings['activity']."/".$strings['event'] ?></label>
+                <div id="asd" class="well">
+                    <div class="row">
+                        <div id="selector" class="row">
+                            <div class="col-xs-12">
+                                 <div class="form-group input-group">
+                                <label class="radio-inline"><input checked value="ac" type="radio" name="selector"><?= $strings["ACTIVITY"] ?></label>
+                                <label class="radio-inline"><input value="ev" type="radio" name="selector"><?= $strings["EVENT"]?></label>
+
+                                </div>
+                            </div>                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <label for="2"><?= $strings['activity'] ?></label>
+                                <div id="2" class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                                    <select  class="form-control" id="selactivity" name="selactivity">
+                                        
+                                        <?php 
+                                            foreach ($activity as $ac) {
+                                                echo "<option value='".$ac->getCodactivity()."'>".$ac->getActivityname()."</option>";
+                                            }
+
+                                         ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6">
+                                <label for="2"><?= $strings['event'] ?></label>
+                                <div id="2" class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                                    <select  class="form-control" id="selevent" name="selevent">
+                                            <?php 
+                                            foreach ($event as $ev) {
+                                                echo "<option value='".$ev->getCodevent()."'>".$ev->getName()."</option>";
+                                            }
+
+                                         ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <label for="1"><?= $strings['SCHEDULE'] ?></label>
+                <div id="1" class="well">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                        <label for="2"><?= $strings['date'] ?></label>
+                        <div id="2" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="date" name="date"
+                                   required="true" maxlength="5">
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-6">
+                    <label for="3"><?= $strings['hourstart'] ?></label>
+                        <div id="3" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
+                            <input type="text" class="form-control" id="hourstart" name="hourstart"
+                                   placeholder= "HH:MM"
+                                   required="true" maxlength="5">
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 col-md-offset-6">
+                    <label for="4"><?= $strings['hourend'] ?></label>
+                        <div id="4" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
+                            <input type="text" class="form-control" id="hourend" name="hourend"
+                                   placeholder= "HH:MM"
                                    required="true" maxlength="25">
                             <div id="error"></div>
                         </div>
-                        <!--Campo action-->
+                    </div>
                     </div>
                 </div>
+
+                <label><?= $strings['space'] ?></label>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group input-group">
+                                        <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                                        <select  class="form-control" id="selspace" name="selspace">
+                                                <?php 
+                                                foreach ($space as $sp) {
+                                                    echo "<option value='".$sp->getCodspace()."'>".$sp->getSpacename()."</option>";
+                                                }
+
+                                             ?>
+                                        </select>
+                                    </div>
+                        </div>
+                        
+                    </div>
+
+                <label><?= $strings['monitor'] ?></label>
+                    <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group input-group">
+                                    <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                                    <select  class="form-control" id="selemployee" name="selemployee">
+                                            <?php 
+                                            foreach ($employee as $em) {
+                                                echo "<option value='".$em->getCodemployee()."'>".$em->getEmployeename()."</option>";
+                                            }
+
+                                         ?>
+                                    </select>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+                
             </div>
         </div>
         <div class="row">
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=action&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=session&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
@@ -67,6 +190,13 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     </form>
     <!--fin formulario-->
 </div>
+
+<script>
+  $( function() {
+    $( "#date" ).datepicker();
+    $( "#date" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+  } );
+  </script>
 
 <script>
     //Non deixar que o campo input teña espazos

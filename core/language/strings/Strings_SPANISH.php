@@ -344,6 +344,11 @@ $strings = array(
     /* sesión */
     'SESSION'=>'Sesiones',
     'management_sessions'=>'Gestión de Sesiones',
+    'create_session'=>'Añadir Sesión',
+    'activity'=>'Actividad',
+    'event'=>'Evento',
+    'monitor'=>'Monitor',
+    'space'=>'Lugar',
 
 	/* Categorias*/
 

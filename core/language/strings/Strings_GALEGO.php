@@ -335,6 +335,11 @@ $strings = array(
     /* sesión */
     'SESSION'=>'Sesións',
     'management_sessions'=>'Xestión de Sesións',
+    'create_session'=>'Engadir Sesión',
+    'activity'=>'Actividade',
+    'event'=>'Evento',
+    'monitor'=>'Monitor',
+    'space'=>'Lugar',
 
     /* Categorias*/
     'CATEGORY' => 'Categorias',
