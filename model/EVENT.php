@@ -1,95 +1,123 @@
 <?php
 
 require_once(__DIR__."/../core/ValidationException.php");
-require_once(__DIR__."/../model/PROFILE.php");
-require_once(__DIR__."/../model/PERMISSION.php");
+require_once(__DIR__."/../model/EMPLOYEE_model.php");
+require_once(__DIR__."/../model/SPACE_model.php");
 
 class Event {
 
-    public $codEvent;
+    public $codevent;
     public $name;
     public $ini_hour;
     public $fin_hour;
     public $date;
     public $capacity;
-    public $codSpace;
-    public $cod_prof;
+    public $space;
+    public $employee;
+    public $freeplaces;
 
-
-
-    public function __construct($codEvent=NULL,$name=NULL,$ini_hour=NULL,$fin_hour=NULL,$date=NULL,$capacity=NULL,$codSpace=NULL,$cod_prof=NULL)
+    public function __construct($codevent = NULL, $name = NULL, $ini_hour = NULL, $fin_hour = NULL, $date = NULL, $capacity = NULL, Space $space = NULL, Employee $employee = NULL, $freeplace = NULL)
     {
-        $this->codEvent = $codEvent;
+        $this->codevent = $codevent;
         $this->name = $name;
         $this->ini_hour = $ini_hour;
         $this->fin_hour = $fin_hour;
         $this->date = $date;
         $this->capacity = $capacity;
-        $this->codSpace = $codSpace;
-        $this->cod_prof = $cod_prof;
+        $this->space = $space;
+        $this->employee = $employee;
+        $this->freeplaces = $freeplace;
     }
 
-    public function getCodEvent(){
-        return $this->codEvent;
+    public function getCodevent()
+    {
+        return $this->codevent;
     }
 
-    public function setCodEvent($codEvent){
-        $this->codEvent = $codEvent;
+    public function setCodevent($codevent)
+    {
+        $this->codevent = $codevent;
     }
 
-    public function getEventname(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setEventname($name){
+
+    public function setName($name)
+    {
         $this->name = $name;
     }
-    public function getInitialHour(){
+
+    public function getIniHour()
+    {
         return $this->ini_hour;
     }
 
-    public function setInitialHour($ini_hour){
+    public function setIniHour($ini_hour)
+    {
         $this->ini_hour = $ini_hour;
     }
 
-    public function getFinalHour(){
+    public function getFinHour()
+    {
         return $this->fin_hour;
     }
 
-    public function setFinalHour($fin_hour){
+    public function setFinHour($fin_hour)
+    {
         $this->fin_hour = $fin_hour;
     }
 
-    public function getDate(){
+    public function getDate()
+    {
         return $this->date;
     }
 
-    public function setDate($date){
+    public function setDate($date)
+    {
         $this->date = $date;
     }
 
-    public function getCapacity(){
+    public function getCapacity()
+    {
         return $this->capacity;
     }
 
-    public function setCapacity($capacity){
+    public function setCapacity($capacity)
+    {
         $this->capacity = $capacity;
     }
 
-    public function getCodSpace(){
-        return $this->codSpace;
+    public function getSpace()
+    {
+        return $this->space;
     }
 
-    public function setCodSpace($cod_space){
-        $this->codSpace = $cod_space;
+    public function setSpace(Space $space)
+    {
+        $this->space = $space;
     }
 
-    public function getCodProf(){
-        return $this->cod_prof;
+    public function getEmployee()
+    {
+        return $this->employee;
     }
 
-    public function setCodProf($cod_prof){
-        $this->cod_prof = $cod_prof;
+    public function setEmployee(Employee $employee)
+    {
+        $this->employee = $employee;
+    }
+
+    public function getFreeplaces()
+    {
+        return $this->freeplaces;
+    }
+
+    public function setFreeplaces($freeplaces)
+    {
+        $this->freeplaces = $freeplaces;
     }
 
 }

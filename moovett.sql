@@ -288,7 +288,8 @@ CREATE TABLE `evento` (
   `fecha_evento` date NOT NULL DEFAULT '0000-00-00',
   `aforo` int(4) NOT NULL,
   `id_espacio` int(4) NOT NULL,
-  `id_empleado` int(4) NOT NULL
+  `id_empleado` int(4) NOT NULL,
+  `plazas_libres` int(4) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -613,7 +614,7 @@ CREATE TABLE `jornada`(
 CREATE TABLE `sesion`(
   `fecha` date NOT NULL DEFAULT '2000/01/01',
   `hora_inicio` time NOT NULL DEFAULT '10:00:00',
-    `hora_fin` time NOT NULL DEFAULT '11:30:00',
+  `hora_fin` time NOT NULL DEFAULT '11:30:00',
   `id_empleado` int(4),
   `id_espacio` int(4) NOT NULL,
   `id_actividad` int(4),
@@ -1725,9 +1726,9 @@ INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_na
 --
 
 
-INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`) VALUES
-  ('Danza', '10:00:00', '12:00:00', '2017-20-12', 300, 1, 1),
-  ('Zumba', '12:05:00', '13:30:00', '2017-23-12', 150, 1, 1);
+INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`, `plazas_libres`) VALUES
+  ('Danza', '10:00:00', '12:00:00', '2017-20-12', 300, 1, 1, 300),
+  ('Zumba', '12:05:00', '13:30:00', '2017-23-12', 150, 1, 1, 150);
 
 --
 -- Volcado de datos para la tabla `alumno_se_apunta_evento`

@@ -2,40 +2,26 @@
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/EVENT.php");
-require_once(__DIR__ . "/../model/PERMISSION.php");
-require_once(__DIR__ . "/../model/PERMISSION_model.php");
-
+require_once(__DIR__ . "/../model/EMPLOYEE_model.php");
+require_once(__DIR__ . "/../model/SPACE_model.php");
+require_once(__DIR__ . "/../model/ALUMN_model.php");
 
 
 class EventMapper
 {
 
     private $db;
-    private $permMapper;
+    private $alumnMapper;
+    private $employeeMapper;
+    private $spaceMapper;
 
 
     public function __construct()
     {
         $this->db = PDOConnection::getInstance();
-        $this->permMapper = new PermissionMapper();
-    }
-
-    //Funcion de listar: devolve un array de todos obxetos event correspondentes á tabla evento
-    public function show()
-    {
-        $event = $this->db->query("SELECT * FROM evento");
-        $event_db = $event->fetchAll(PDO::FETCH_ASSOC);
-
-        $event = array();
-
-        foreach ($event_db as $ev) {
-            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
-            //introduce no array o obxeto Controller creado a partir da query
-            array_push($event, new Event($ev["id_evento"],$ev['nombre'], $ev["hora_inicio"], $ev["hora_fin"], $ev["fecha_evento"], $ev["aforo"], $ev["id_espacio"], $ev["id_empleado"]));
-        }
-
-        //devolve o array
-        return $event;
+        $this->employeeMapper = new EmployeeMapper();
+        $this->spaceMapper = new SpaceMapper();
+        $this->alumnMapper = new AlumnMapper();
     }
 
     public function getIdByName($eventname)
@@ -44,28 +30,6 @@ class EventMapper
         $stmt->execute(array($eventname));
 
         return $stmt->fetch(PDO::FETCH_ASSOC)['id_evento'];
-    }
-
-    //devolve o obxecto event no que o $id_evento coincida co da tupla.
-    public function view($id_event)
-    {
-        $stmt = $this->db->prepare("SELECT id_evento,nombre,hora_inicio,hora_fin,fecha_evento,aforo,id_espacio,id_empleado FROM evento WHERE nombre=?");
-        $stmt->execute(array($id_event));
-        $sp = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($sp != null) {
-            return new Event(
-                $sp['nombre'],
-                $sp['hora_inicio'],
-                $sp['hora_fin'],
-                $sp['fecha_evento'],
-                $sp['aforo'],
-                $sp['id_espacio'],
-                $sp['id_empleado']
-            );
-        } else {
-            return new Event();
-        }
     }
 
     //Comproba se existe un evento con ese id
@@ -79,226 +43,125 @@ class EventMapper
         }
     }
 
-    //engade un evento á táboa evento
-    public function add(Event $event)
-    {
-        //insertamos na taboa evento
-        $stmt = $this->db->prepare("INSERT INTO evento(nombre,hora_inicio, hora_fin, fecha_evento, aforo, id_espacio, id_empleado) values (?,?,?,?,?,?,?)");
-        $stmt->execute(array(
-                $event->getEventname(),
-                $event->getInitialHour(),
-                $event->getFinalHour(),
-                $event->getDate(),
-                $event->getCapacity(),
-                $event->getCodSpace(),
-                $event->getCodProf()
-            )
-        );
+    //Inserta na base de datos unha tupla cos datos do obxeto $event
+    public function add(Event $event) {
+        $stmt = $this->db->prepare("INSERT INTO evento( nombre, hora_inicio, hora_fin, fecha_evento, aforo, id_espacio, id_empleado, plazas_libres) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute(array($event->getName(), $event->getIniHour(), $event->getFinHour(), $event->getDate(), $event->getCapacity(), $event->getSpace()->getCodspace(), $event->getEmployee()->getCodemployee(), $event->freeplaces));
+
         return $this->db->lastInsertId();
     }
 
-    //Selecciona todos os id dos espazos que hai na bd
-    public function selectSpaceId(){
-        $stmt = $this->db->prepare("SELECT * FROM espacio");
-        $stmt->execute();
 
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_espacio']);
+    //Funcion de listar: devolve un array de todos obxetos Event correspondentes á tabla Accion
+    public function show() {
+
+        $stmt = $this->db->query("SELECT * FROM evento");
+        $event_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $events = array();
+
+        foreach ($event_db as $event) {
+            array_push($events, $this->view($event['id_evento']));
         }
 
-        return $id;
+        return $events;
     }
 
-    //Selecciona todos os dn dos empleados que hai na bd
-    public function selectIdP(){
-        $stmt = $this->db->prepare("SELECT * FROM empleado");
-        $stmt->execute();
 
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_empleado']);
+
+    //devolve o obxecto Event no que o $event_campo_id coincida co da tupla.
+    public function view($codevent){
+        $stmt = $this->db->prepare("SELECT * FROM evento WHERE id_evento=?");
+        $stmt->execute(array($codevent));
+        $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($event != null) {
+            return new Event(
+                $event["id_evento"],
+                $event['nombre'],
+                $event["hora_inicio"],
+                $event["hora_fin"],
+                $event["fecha_evento"],
+                $event["aforo"],
+                $this->spaceMapper->view($event["id_espacio"]),
+                $this->employeeMapper->view($event['id_empleado']),
+                $event['plazas_libres']
+            );
+        } else {
+            return new Event();
         }
-
-        return $id;
     }
 
-    //edita a tupla correspondente co id do obxecto event
-    public function edit(Event $events)
-    {
-        $stmt = $this->db->prepare("UPDATE evento SET id_evento=?, nombre=?, hora_inicio = ?, hora_fin = ?, fecha_evento = ?, aforo = ?, id_espacio = ?, id_empleado = ? where id_evento=?");
-        $stmt->execute(array($events->getCodEvent(),$events->getEventname(),$events->getInitialHour(), $events->getFinalHour(), $events->getDate(),$events->getCapacity(), $events->getCodSpace(), $events->getCodProf(), $events->getCodEvent()));
+
+    //edita a tupla correspondente co id do obxecto Event $event
+    public function edit(Event $event) {
+        $stmt = $this->db->prepare("UPDATE evento SET nombre = ?,hora_inicio = ?,hora_fin = ?,fecha_evento = ?,aforo = ?,id_espacio = ?,id_empleado = ?, plazas_libres = ? WHERE id_evento = ?");
+        $stmt->execute(array($event->getName(), $event->getIniHour(), $event->getFinHour(), $event->getDate(), $event->getCapacity(), $event->getSpace()->getCodspace(),
+                            $event->getEmployee()->getCodemployee(), $event->freeplaces,  $event->getCodevent()));
     }
 
-    //borra sobre a taboa evento a tupla con id igual a o do obxeto pasado
-    //borra tamen todos os alumnos apuntados a ese evento
-    public function delete($cod)
-    {
-        $stmt = $this->db->prepare("DELETE from evento WHERE id_evento = '$cod'");
-        $stmt->execute();
-        $stmt2 = $this->db->prepare("DELETE from alumno_se_apunta_evento WHERE id_evento = '$cod'");
-        $stmt2->execute();
+
+    //borra sobre a taboa accion a tupla con id igual a o do obxeto pasado
+    public function delete($codevent) {
+        $stmt = $this->db->prepare("DELETE from evento WHERE id_evento=?");
+        $stmt->execute(array($codevent));
     }
 
     public function search(Event $event){
+        $stmt = $this->db->prepare("SELECT * FROM evento WHERE id_evento like ? AND nombre like ? AND aforo like ? AND id_espacio like ? AND id_empleado like ?");
+        $stmt->execute(array("%".$event->getCodevent()."%","%".$event->getName()."%", "%".$event->getCapacity()."%", "%".$event->getSpace()->getCodspace()."%",
+                            "%".$event->getEmployee()->getCodemployee()."%" ));
+        $events_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $this->db->prepare("SELECT * FROM evento WHERE id_evento like ? AND nombre like ? AND hora_inicio like ? AND hora_fin like ? AND fecha_evento like ? AND aforo like ? AND id_espacio like ? AND id_empleado like ?");
-        $stmt->execute(array("%".$event->getCodEvent()."%",
-            "%".$event->getEventname()."%",
-            "%".$event->getInitialHour()."%",
-            "%".$event->getFinalHour()."%",
-            "%".$event->getDate()."%",
-            "%".$event->getCapacity()."%",
-            "%".$event->getCodSpace()."%"
-        , "%".$event->getCodProf()."%"));
-        $ev_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $ev = array();
-        foreach ($ev_db as $e){
-            array_push($ev, new Event(
-                $e['id_evento'],
-                $e['nombre'],
-                $e['hora_inicio'],
-                $e['hora_fin'],
-                $e['fecha_evento'],
-                $e['aforo'],
-                $e['id_espacio'],
-                $e['id_empleado']
-            ));
+        $events = array();
+        foreach ($events_db as $a){
+            array_push($events, $this->view($a['id_evento']));
         }
-        return $ev;
+        return $events;
     }
 
-    //Mostra os alumnos engadidos a un evento
-    public function showpupil(){
-        $w = $_GET['id_evento'];
-        $pupil = $this->db->query("SELECT * FROM alumno_se_apunta_evento WHERE id_evento = $w");
-        $pupil_db = $pupil->fetchAll(PDO::FETCH_ASSOC);
-
-        $pu = array();
-
-        foreach ($pupil_db as $pup) {
-            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
-            //introduce no array o obxeto Controller creado a partir da query
-            array_push($pu, new pupil_attends_event($pup["id_evento"],$pup['id_alumno']));
-        }
-
-        //devolve o array
-        return $pu;
-    }
-
-    //engade un alumno a taboa alumno_se_apunta_evento
-    public function addpupil(pupil_attends_event $pupil){
+    public function addpupil(PupilAttendsEvent $pae){
         //insertamos na taboa
         $stmt = $this->db->prepare("INSERT INTO alumno_se_apunta_evento(id_evento,id_alumno) values (?,?)");
         $stmt->execute(array(
-                $pupil->getCodEvent(),
-                $pupil->getCodStudent()
+            $pae->getEvent()->getCodevent(),
+                $pae->getAlumn()->getCodalumn()
             )
         );
         return $this->db->lastInsertId();
     }
 
-    //Recolle os id dos alumnos
-    public function selectDniA(){
-        $stmt = $this->db->prepare("SELECT * FROM alumno");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_alumno']);
-        }
-
-        return $id;
-    }
-
-    //Recolle os id dos eventos
-    public function selectEventID(){
-        $stmt = $this->db->prepare("SELECT * FROM evento");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_evento']);
-        }
-
-        return $id;
-    }
-
-    //Comproba se existe un alumno con ese dni en el evento que se pasa como $id
-    public function pupilCodExists($pupilCod,$id)
-    {
-        $stmt = $this->db->prepare("SELECT count(*) FROM alumno_se_apunta_evento where id_alumno=? AND id_evento = ?");
-        $stmt->execute(array($pupilCod,$id));
+    public function pupilannotated(PupilAttendsEvent $pae){
+        $stmt = $this->db->prepare("SELECT count(*) FROM alumno_se_apunta_evento where id_evento = ? AND id_alumno = ?");
+        $stmt->execute(array($pae->getEvent()->getCodevent(), $pae->getAlumn()->getCodalumn()));
 
         if ($stmt->fetchColumn() > 0) {
             return true;
         }
     }
 
-    //Elimina un alumno do evento que se pasa como $id
-    public function deletepupil($cod,$id){
-        $stmt = $this->db->prepare("DELETE from alumno_se_apunta_evento WHERE id_alumno = '$cod' AND id_evento = '$id'");
-        $stmt->execute();
+    public function showPupils($codevent){
+
+        $stmt = $this->db->query("SELECT * FROM alumno_se_apunta_evento WHERE id_evento = '$codevent'");
+        $pupils_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $pupils = array();
+
+        foreach ($pupils_db as $pupil) {
+            $alumn = $this->alumnMapper->view($pupil['id_alumno']);
+            $event = $this->view($pupil['id_evento']);
+            array_push($pupils, new PupilAttendsEvent($event, $alumn));
+        }
+
+        return $pupils;
     }
 
-    //Devolve os dni dos alumnos que coinciden cun id
-    public function getDniId($i){
-        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno ='$i'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id = $r['dni_alumno'];
-
-        return $id;
+    public function deletePupil(PupilAttendsEvent $pae){
+        //insertamos na taboa
+        $stmt = $this->db->prepare("DELETE FROM alumno_se_apunta_evento WHERE id_evento = ? AND id_alumno = ?");
+        $stmt->execute(array(
+                $pae->getEvent()->getCodevent(),
+                $pae->getAlumn()->getCodalumn()
+            )
+        );
+        return $this->db->lastInsertId();
     }
-
-    //Devolve o nome do espazo a partir dun id do espazo
-    public function getNameSpace($id){
-        $stmt = $this->db->prepare("SELECT * FROM espacio WHERE id_espacio ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_sp = $r['nombre'];
-
-        return $id_sp;
-    }
-
-    //Devolve o nome do profesor co id que se lle pasa como parametro
-    public function getNameProf($id){
-        $stmt = $this->db->prepare("SELECT * FROM empleado WHERE id_empleado ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_pr = $r['nombre'];
-
-        return $id_pr;
-    }
-
-    //Devolve o nome do alumno co id que se lle pasa como parametro
-    public function getNamePupil($id){
-        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_pr = $r['nombre'];
-
-        return $id_pr;
-    }
-
-    //Devolve o nome dos eventos que coincidan co id
-    public function getNameEvent($id){
-        $stmt = $this->db->prepare("SELECT * FROM evento WHERE id_evento ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_pr = $r['nombre'];
-
-        return $id_pr;
-    }
-
 }

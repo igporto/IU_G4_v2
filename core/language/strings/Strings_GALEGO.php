@@ -416,8 +416,8 @@ $strings = array(
     'on_event' => 'no evento',
     'id_student' => 'ID do alumno',
     'succ_student_add' => 'Alumno engadido correctamente',
-    'student_already_exists' => 'O alumno xa existe',
     'add_student' => 'Engadir alumno',
+    'student_already_exists' => 'O alumno xa esta anotado neste evento',
     'succ_student_delete' => 'Alumno eliminado do evento',
     'student_data' => 'Datos do alumno',
     'succ_pupil_add' => 'Alumno engadido con éxito',
@@ -484,12 +484,6 @@ $strings = array(
     'bill_number'=>'Numero de factura',
     'lines'=>'XESTION LIÑAS',
     'bill_data'=>'Datos da factura',
-    'bill_modify'=>'Modificar factura',
-    'units'=>'Unidades',
-    'price'=>'Prezo',
-    'total'=>'Total',
-    'management_line'=>'Xestion de lineas',
-    'add_line'=>'Engadir linea',
-    'line_modify'=>'Modificar linea'
+    'bill_modify'=>'Modificar factura'
 )
 ?>

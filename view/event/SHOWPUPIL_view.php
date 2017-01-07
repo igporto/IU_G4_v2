@@ -5,7 +5,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 require_once(__DIR__ . "/../../model/CONTROLLER_model.php");
-require_once(__DIR__ . "/../../model/PUPIL_ATTENDS_EVENT.php");
+require_once(__DIR__ . "/../../model/PUPILATTENDSEVENT.php");
 
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
@@ -20,7 +20,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
 //obtemos o contido a mostrar
 $pupils = $view->getVariable("pupilstoshow");
-$pls = new EventMapper();
+$eventMapper = new EventMapper();
 
 ?>
 
@@ -32,11 +32,21 @@ $pls = new EventMapper();
 
 
         <!--BOTÃƒâ€œN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline"  href="index.php?controller=event&action=showpupil&id_evento=<?php echo $_GET['id_evento']?>">
+        <a class="btn btn-warning btn-outline"  href="index.php?controller=event&action=showpupil&codevent=<?php echo $_GET['codevent']?>">
             <i class="fa fa-search-minus"></i>
             <?php echo $strings['clean'];?>
         </a>
+
+        <a href="index.php?controller=event&action=addpupil&codevent=<?php echo $_GET['codevent']?>">
+            <button type="button" class="btn btn-success">
+            <i class="fa fa-fw fa-plus"></i>
+                 <?php echo $strings['add_student'] ?>
+            </button>
+        </a>
+
     </div>
+
+
 
     <!--PANEL TABOA DE LISTADO-->
     <div class="row" style="margin-top: 20px">
@@ -70,16 +80,16 @@ $pls = new EventMapper();
 
 
                     //Para cada evento, imprimimos o seu nome e as acciÃ³nns que se poden realizar nel (view,edit e delete)
-                    foreach ($pupils as $s) {
+                    foreach ($pupils as $p) {
 
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $pls->getNamePupil($s->getCodStudent()) . "</td><td class='text-center'>";
+                        echo $p->getAlumn()->getAlumnname() . "</td><td class='text-center'>";
 
                         //Boton que direcciona a vista de eliminar
                         if ($delete) {
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $s->getCodStudent() . '';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getAlumn()->getCodalumn() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
@@ -87,7 +97,7 @@ $pls = new EventMapper();
 
 
                         //MODAL DE CONFIRMACION DE BORRADO PARA CADA ACCION
-                        include(__DIR__ . '/DELETE_PUPIL_view.php');
+                        include(__DIR__ . '/DELETEPUPIL_view.php');
 
 
                         echo "</td></tr>";
