@@ -24,7 +24,7 @@ class SessionMapper
         $this->db = PDOConnection::getInstance();
         $this->spaceMapper = new SpaceMapper();
         $this->eventMapper = new EventMapper();
-        $this->employeeMapper = EmployeeMapper();
+        $this->employeeMapper = new EmployeeMapper();
         $this->activityMapper = new ActivityMapper();
     }
 
@@ -60,7 +60,7 @@ class SessionMapper
                     $this->spaceMapper->view($session['id_espacio']),
                     $this->eventMapper->view($session['id_evento']),
                     $this->activityMapper->view($session['id_actividad']),
-                    $this->employeeMapper->view($session['id_empleado']),
+                    $this->employeeMapper->view($session['id_empleado'])
                 )
             );
         }
@@ -89,7 +89,7 @@ class SessionMapper
                     $this->spaceMapper->view($session['id_espacio']),
                     $this->eventMapper->view($session['id_evento']),
                     $this->activityMapper->view($session['id_actividad']),
-                    $this->employeeMapper->view($session['id_empleado']),
+                    $this->employeeMapper->view($session['id_empleado'])
                 )
             );
         }

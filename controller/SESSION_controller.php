@@ -60,7 +60,7 @@ class SessionController extends BaseController
 
     //comproba se o rango de horas dado pode insertarse na data pasada
     //e nese espacio determinado
-    public isValidRange( $date, $hourstart, $hourend, $space){
+    public function isValidRange( $date, $hourstart, $hourend, $space){
         $time = strtotime($date);
         $dayoweek = date('N',$time);
 
