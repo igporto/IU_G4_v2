@@ -167,4 +167,24 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         //devolve o array
         return $tills;
     }
+
+    public function pending()
+    {
+
+        $stmt = $this->db->query("SELECT * FROM pago WHERE pagado = 0");
+        $payment_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $payments = array();
+
+        foreach ($payment_db as $payment) {
+            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
+            //introduce no array o obxeto Payment creado a partir da query
+            array_push($payments, new Payment($payment["id_pago"], $payment["fecha"], $payment["cantidad"],
+                $payment["metodo_pago"], $payment["pagado"], $payment["tipo_cliente"], $payment["dni_alum"],
+                $payment["dni_cliente_externo"]));
+        }
+
+        //devolve o array
+        return $payments;
+    }
 }

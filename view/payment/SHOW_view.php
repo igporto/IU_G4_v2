@@ -21,26 +21,27 @@ $permissions = $view->getVariable("paymentstoshow");
 ?>
 
 <div class="col-xs-12 col-md-8 ">
-
-    <h1 class="page-header"><?php echo $strings['management_payments'] ?></h1>
-
+    <?php if ($_REQUEST["action"] == "show") {
+        echo "<h1 class='page-header'>" . $strings['management_payments'] . "</h1>";
+    } else {
+        echo "<h1 class='page-header'>" . $strings['pending_payments'] . "</h1>";
+    } ?>
     <div class="row">
 
-
-        <!--BOTÓN QUITAR FILTRO-->
+        <?php if ($_REQUEST["action"] == "show") {
+            echo '
         <a class="btn btn-warning btn-outline" href="index.php?controller=payment&action=show">
             <i class="fa fa-search-minus"></i>
-            <?php echo $strings['clean']; ?>
+            ' . $strings['clean'] . '
         </a>
-        <!--BOTÓN BUSCAR-->
+        
         <a class="btn btn-primary" href="index.php?controller=payment&action=search">
             <i class="fa fa-fw fa-search"></i>
-            <?php echo $strings['find']; ?>
-        </a>
+            ' . $strings['find'] . '
+        </a>';
 
-        <!--BOTÓN ENGADIR-->
-        <?php if ($add) {
-            echo '  
+            if ($add) {
+                echo '  
                             <a href="index.php?controller=payment&action=add">
                                 <button type="button" class="btn btn-success">
                                 <i class="fa fa-fw fa-plus"></i>
@@ -48,23 +49,23 @@ $permissions = $view->getVariable("paymentstoshow");
                                 </button>
                             </a>
                         ';
-        } ?>
+            }
 
-        <!--BOTÓN CAJA-->
+            echo '<!--BOTÓN CAJA-->
         <div class="btn-group">
             <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                <?php echo $strings["till"]; ?> <span class="caret"></span>
+                ' . $strings["till"] . ' <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="index.php?controller=payment&action=tillspend"><?php echo $strings["create_spend"]; ?></a>
+                <li><a href="index.php?controller=payment&action=tillspend">' . $strings["create_spend"] . '</a>
                 </li>
                 <li>
-                    <a href="index.php?controller=payment&action=tillwithdrawal"><?php echo $strings["create_withdrawal"]; ?></a>
+                    <a href="index.php?controller=payment&action=tillwithdrawal">' . $strings["create_withdrawal"] . '</a>
                 </li>
-                <li><a href="index.php?controller=payment&action=tillclose"><?php echo $strings["create_close"]; ?></a>
+                <li><a href="index.php?controller=payment&action=tillclose">' . $strings["create_close"] . '</a>
                 </li>
-                <li><a href="index.php?controller=payment&action=tillconsult"><?php echo $strings["consult"]; ?></a>
+                <li><a href="index.php?controller=payment&action=tillconsult">' . $strings["consult"] . '</a>
                 </li>
             </ul>
         </div>
@@ -72,10 +73,15 @@ $permissions = $view->getVariable("paymentstoshow");
         <a href="index.php?controller=payment&action=pending">
             <button type="button" class="btn btn-danger">
                 <i class="fa fa-fw-alert fa"></i>
-                <?php echo $strings['pending_payments'] ?>
+                ' . $strings['pending_payments'] . '
             </button>
-        </a>
-
+        </a>';
+        } else {
+            echo ' <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
+                        <i class="fa fa-arrow-left"></i>
+                        ' . $strings['back'] . '</i></a>';
+        }
+        ?>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->

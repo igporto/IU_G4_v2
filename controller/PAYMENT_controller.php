@@ -305,4 +305,11 @@ class PaymentController extends BaseController
         $this->view->render("payment", "tillclose");
     }
 
+    public function pending()
+    {
+        $payments = $this->paymentMapper->pending();
+        $this->view->setVariable("paymentstoshow", $payments);
+        $this->view->render("payment", "show");
+    }
+
 }
