@@ -21,6 +21,7 @@ $permissions = $view->getVariable("paymentstoshow");
 ?>
 
 <div class="col-xs-12 col-md-8 ">
+
     <?php if ($_REQUEST["action"] == "show") {
         echo "<h1 class='page-header'>" . $strings['management_payments'] . "</h1>";
     } else {
@@ -69,13 +70,14 @@ $permissions = $view->getVariable("paymentstoshow");
                 </li>
             </ul>
         </div>
-
-        <a href="index.php?controller=payment&action=pending">
-            <button type="button" class="btn btn-danger">
-                <i class="fa fa-fw-alert fa"></i>
-                ' . $strings['pending_payments'] . '
-            </button>
-        </a>';
+</div>
+<div class="row" style="margin-top: 5px;margin-bottom:-10px">
+        <div class="alert alert-danger alert-dismissable" role="alert" id="pendingAlert" style="display: none">' .
+                $strings['have_pending_payments'] .
+                '<a href="index.php?controller=payment&action=pending" id="pendiente" style="display: none;">
+            <button type="button" class="btn btn-danger" >
+                <i class="fa fa-fw-alert fa"></i>'. $strings['pending_payments'] . '</button>
+        </a></div>';
         } else {
             echo ' <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
                         <i class="fa fa-arrow-left"></i>
@@ -83,7 +85,6 @@ $permissions = $view->getVariable("paymentstoshow");
         }
         ?>
     </div>
-
     <!--PANEL TABOA DE LISTADO-->
     <div class="row" style="margin-top: 20px; width: 150%">
         <div class="panel panel-default">
@@ -169,6 +170,7 @@ $permissions = $view->getVariable("paymentstoshow");
 
                         //Botón que direcciona á vista de cobrar
                         if ($p->getPagado() == "0") {
+                            echo '<script>document.getElementById("pendiente").style = "display: block;float:left;";</script>';
                             echo "<a href=index.php?controller=payment&action=pay&id_pago=" . $p->getIdPago() . '>';
                             echo '<button type="button" class="btn btn-success btn-xs';
                             echo '" style="margin:2px">';
@@ -184,12 +186,19 @@ $permissions = $view->getVariable("paymentstoshow");
 
                         echo "</td></tr>";
                     }
-                    ?>
+                ?><a style=""></a>
 
+                    <script>
+                        disp = document.getElementById("pendiente").style.display;
+                        if (disp.toString() == "block") {
+                            document.getElementById("pendingAlert").style = "font-size: 20px;display: block;text-align:right;height:65px";
+                        }
+                    </script>
+            </div><!-- fin
                     </tbody>
                 </table><!-- fin table -->
-            </div>
-        </div><!-- fin panel -->
+        </div>
 
     </div><!-- fin row -->
+
 </div><!-- fin contedor -->

@@ -505,6 +505,7 @@ $strings = array(
     'line_modify'=>'Modificar linea',
     'add_line'=>'Engadir Linea',
     'pending_payments'=>'Pagos pendentes',
-    'pay'=>'Pagar'
+    'pay'=>'Pagar',
+    'have_pending_payments'=>'Tes pagos pendentes'
 )
 ?>
