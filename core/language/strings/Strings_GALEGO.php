@@ -493,6 +493,9 @@ $strings = array(
     'bill_data'=>'Datos da factura',
     'bill_modify'=>'Modificar factura',
     'till_quantity'=>'Cantidade (Num negativo)',
-    'payment'=>'PAGO'
+    'payment'=>'PAGO',
+    'units'=>'Unidades',
+    'management_line'=>'Xestion de linea',
+    'total'=>'Total'
 )
 ?>

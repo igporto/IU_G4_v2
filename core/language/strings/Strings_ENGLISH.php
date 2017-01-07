@@ -495,6 +495,9 @@ $strings = array(
     'bill_data'=>'Bill data',
     'bill_modify'=>'Bill modify',
     'till_quantity'=>'Quantity (Negative num)',
-    'payment'=>'PAYMENT'
+    'payment'=>'PAYMENT',
+    'units'=>'Units',
+    'management_line'=>'Line management',
+    'total'=>'Total'
 )
 ?>
