@@ -11,7 +11,7 @@ $bill = $billMapper->viewline($id_linea);
 ?>
 
 <div class="col-md-6">
-    <h1 class="page-header"><?php echo $strings['line_modify'] . ': ' . $bill->getIdLinea() ?></h1>
+    <h1 class="page-header"><?php echo $strings['line_modify'] . ': ' . $bill->getConcepto() ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=bill&action=editline&id_linea=<?php echo $bill->getIdLinea(); ?>"
           enctype="multipart/form-data">
@@ -29,7 +29,7 @@ $bill = $billMapper->viewline($id_linea);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="concepto" name="concepto"
-                                   value=<?php echo $bill->getConcepto() ?>
+                                   value='<?php echo $bill->getConcepto() ?>'
                                    required="true" maxlength="25">
                             <div id="error"></div>
                         </div>
@@ -87,11 +87,10 @@ $bill = $billMapper->viewline($id_linea);
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=bill&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=bill&action=showlines&id_factura=<?php echo $bill->getIdFactura()?>&nombre_factura=<?php echo $_REQUEST["nombre_factura"]?>">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
-
                 <div class="pull-right">
                     <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
                         <?php echo $strings['clean'] ?></i></button>

@@ -162,7 +162,9 @@ CREATE TABLE `calendario` (
 create table `caja` (
   `id_caja` int(4) NOT NULL,
   `cantidad` int(6) NULL,
-  `id_pago` int(4) NOT NULL
+  `id_pago` int(4) NOT NULL,
+  `fecha` date NOT NULL,
+  `concepto` varchar(10) null
 ) ;
 
 -- --------------------------------------------------------
@@ -1122,13 +1124,6 @@ ALTER TABLE `actividad`
 ALTER TABLE `alumno_tiene_lesion`
   ADD CONSTRAINT `alumno_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_tiene_lesion_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
---
--- Filtros para la tabla `caja`
---
-ALTER TABLE `caja`
-  ADD CONSTRAINT `caja_ibfk_1` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `consulta_fisio`

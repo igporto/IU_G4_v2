@@ -498,6 +498,15 @@ $strings = array(
     'bill_number'=>'Bill number',
     'lines'=>'MANAGE LINES',
     'bill_data'=>'Bill data',
-    'bill_modify'=>'Bill modify'
+    'bill_modify'=>'Bill modify',
+    'till_quantity'=>'Quantity (Negative num)',
+    'payment'=>'PAYMENT',
+    'units'=>'Units',
+    'management_line'=>'Line management',
+    'total'=>'Total',
+    'line_modify'=>'Line modify',
+    'add_line'=>'Add Line',
+    'pending_payments'=>'Pending payments',
+    'pay'=>'Pay'
 )
 ?>

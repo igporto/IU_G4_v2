@@ -52,16 +52,29 @@ $permissions = $view->getVariable("paymentstoshow");
 
         <!--BOTÓN CAJA-->
         <div class="btn-group">
-            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
                 <?php echo $strings["till"]; ?> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="index.php?controller=payment&action=tillspend"><?php echo $strings["create_spend"]; ?></a></li>
-                <li><a href="index.php?controller=payment&action=tillwithdrawal"><?php echo $strings["create_withdrawal"]; ?></a></li>
-                <li><a href="index.php?controller=payment&action=tillclose"><?php echo $strings["create_close"]; ?></a></li>
-                <li><a href="index.php?controller=payment&action=tillconsult"><?php echo $strings["consult"]; ?></a></li>
+                <li><a href="index.php?controller=payment&action=tillspend"><?php echo $strings["create_spend"]; ?></a>
+                </li>
+                <li>
+                    <a href="index.php?controller=payment&action=tillwithdrawal"><?php echo $strings["create_withdrawal"]; ?></a>
+                </li>
+                <li><a href="index.php?controller=payment&action=tillclose"><?php echo $strings["create_close"]; ?></a>
+                </li>
+                <li><a href="index.php?controller=payment&action=tillconsult"><?php echo $strings["consult"]; ?></a>
+                </li>
             </ul>
         </div>
+
+        <a href="index.php?controller=payment&action=pending">
+            <button type="button" class="btn btn-danger">
+                <i class="fa fa-fw-alert fa"></i>
+                <?php echo $strings['pending_payments'] ?>
+            </button>
+        </a>
 
     </div>
 
@@ -104,7 +117,12 @@ $permissions = $view->getVariable("paymentstoshow");
                     foreach ($permissions as $p) {
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $p->getDniAlum() . "</td><td class='text-center'>";
+                        if ($p->getTipoCliente() == "student") {
+                            echo $p->getDniAlum() . "</td><td class='text-center'>";
+                        } else {
+                            echo $p->getDniClienteExterno() . "</td><td class='text-center'>";
+                        }
+
                         echo $p->getCantidad() . " €</td><td class='text-center'>";
 
                         if ($p->getPagado() == 1) {
@@ -136,20 +154,19 @@ $permissions = $view->getVariable("paymentstoshow");
                         }
 
                         //Botón que direcciona á vista de eliminar
-                        if($delete){
+                        if ($delete) {
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar'.$p->getIdPago().'">';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $p->getIdPago() . '">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
                         }
 
                         //Botón que direcciona á vista de cobrar
-                        if ($p->getPagado()=="0") {
+                        if ($p->getPagado() == "0") {
                             echo "<a href=index.php?controller=payment&action=pay&id_pago=" . $p->getIdPago() . '>';
                             echo '<button type="button" class="btn btn-success btn-xs';
                             echo '" style="margin:2px">';
-                            echo '<i class="fa fa-usd fa-fw"></i>
-                                            </button>';
+                            echo '<i class="fa fa-usd fa-fw"></i></button></a>';
 
                         }
 
