@@ -60,7 +60,7 @@ $dateActual = date("Y-m-d");
                             if ($p->getConcepto() == "WITHDRAWAL") {
                                 echo $strings["withdrawal"] . "</td><td class='text-center'>";
                             } elseif ($p->getConcepto() == "PAYMENT") {
-                                echo $strings["spend"] . "</td><td class='text-center'>";
+                                echo $strings["payment"] . "</td><td class='text-center'>";
                             } else {
                                 echo $p->getConcepto() . "</td><td class='text-center'>";
                             }

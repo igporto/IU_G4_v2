@@ -8,7 +8,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 ?>
 
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-6" style="margin-bottom: 30px;width:55%;">
     <h1 class="page-header"><?php echo $strings['create_spend']; ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=payment&action=tillspend"
@@ -21,7 +21,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 <div class="row">
 
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['quantity'] ?></label>
+                        <label for="selectperf"><?php echo $strings['till_quantity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input type="number" min="-2500000" step="0.01" max="0" autofocus
