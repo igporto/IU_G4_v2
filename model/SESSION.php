@@ -3,35 +3,35 @@
 class Session
 {   
    
+	private $name;
 	private $idSession;
-    private $date;
-    private $hourstart;
-    private $hourend;
-    private $space;
-    private $event;
-    private $activity;
-    private $employee;
+    private $idSchedule;
+    private $idFisio;
+    private $idSpace;
+    private $idEvent;
+    private $idActivity;
+    private $idEmployee;
 
 
 	
 	public function __construct(
+                    $name=NULL,
                     $idSession=NULL,
-                    $date=NULL,
-                    $hourstart=NULL,
-                    $hourend=NULL,
-                    $space=NULL,
-                    $event=NULL,
-                    $activity=NULL,
-                    $employee=NULL)
+                    $idSchedule=NULL,
+                    $idFisio=NULL,
+                    $idSpace=NULL,
+                    $idEvent=NULL,
+                    $idActivity=NULL,
+                    $idEmployee=NULL)
     {
+        $this->name = $name;
         $this->idSession = $idSession;
-        $this->date = $date;
-        $this->hourstart = $hourstart;
-        $this->hourend = $hourend;
-        $this->space = $space;
-        $this->event = $event;
-        $this->activity = $activity;
-        $this->employee = $employee;
+        $this->idSchedule = $idSchedule;
+        $this->idFisio = $idFisio;
+        $this->idSpace = $idSpace;
+        $this->idEvent = $idEvent;
+        $this->idActivity = $idActivity;
+        $this->idEmployee = $idEmployee;
 
     }
 	
@@ -47,45 +47,78 @@ class Session
     }
 
     /**
-     * Gets the value of space.
+     * Gets the value of idSchedule.
      *
      * @return mixed
      */
-    public function getSpace()
+    public function getIdSchedule()
     {
-        return $this->space;
+        return $this->idSchedule;
     }
 
     /**
-     * Gets the value of event.
+     * Gets the value of idFisio.
      *
      * @return mixed
      */
-    public function getEvent()
+    public function getIdFisio()
     {
-        return $this->event;
+        return $this->idFisio;
     }
 
     /**
-     * Gets the value of activity.
+     * Gets the value of idSpace.
      *
      * @return mixed
      */
-    public function getActivity()
+    public function getIdSpace()
     {
-        return $this->activity;
+        return $this->idSpace;
     }
 
     /**
-     * Gets the value of employee.
+     * Gets the value of idEvent.
      *
      * @return mixed
      */
-    public function getEmployee()
+    public function getIdEvent()
     {
-        return $this->employee;
+        return $this->idEvent;
     }
 
+    /**
+     * Gets the value of idActivity.
+     *
+     * @return mixed
+     */
+    public function getIdActivity()
+    {
+        return $this->idActivity;
+    }
+
+    /**
+     * Gets the value of idEmployee.
+     *
+     * @return mixed
+     */
+    public function getIdEmployee()
+    {
+        return $this->idEmployee;
+    }
+
+    /**
+     * Sets the value of idSchedule.
+     *
+     * @param mixed $idSchedule the id schedule
+     *
+     * @return self
+     */
+    public function setIdSchedule($idSchedule)
+    {
+        $this->idSchedule = $idSchedule;
+
+        return $this;
+    }
 
     /**
      * Sets the value of idSession.
@@ -101,133 +134,96 @@ class Session
         return $this;
     }
 
-
-
     /**
-     * Sets the value of space.
+     * Sets the value of idFisio.
      *
-     * @param mixed $space the id space
+     * @param mixed $idFisio the id fisio
      *
      * @return self
      */
-    public function setSpace(Space $space)
+    public function setIdFisio($idFisio)
     {
-        $this->space = $space;
+        $this->idFisio = $idFisio;
 
         return $this;
     }
 
     /**
-     * Sets the value of event.
+     * Sets the value of idSpace.
      *
-     * @param mixed $event the id event
+     * @param mixed $idSpace the id space
      *
      * @return self
      */
-    public function setEvent(Event $event)
+    public function setIdSpace($idSpace)
     {
-        $this->event = $event;
+        $this->idSpace = $idSpace;
 
         return $this;
     }
 
     /**
-     * Sets the value of activity.
+     * Sets the value of idEvent.
      *
-     * @param mixed $activity the iactivity
+     * @param mixed $idEvent the id event
      *
      * @return self
      */
-    public function setActivity(Activity $activity)
+    public function setIdEvent($idEvent)
     {
-        $this->activity = $activity;
+        $this->idEvent = $idEvent;
 
         return $this;
     }
 
     /**
-     * Sets the value of employee.
+     * Sets the value of idActivity.
      *
-     * @param mixed $employee the id employee
+     * @param mixed $idActivity the id activity
      *
      * @return self
      */
-    public function setEmployee(Employee $employee)
+    public function setIdActivity($idActivity)
     {
-        $this->employee = $employee;
+        $this->idActivity = $idActivity;
 
         return $this;
     }
 
+    /**
+     * Sets the value of idEmployee.
+     *
+     * @param mixed $idEmployee the id employee
+     *
+     * @return self
+     */
+    public function setIdEmployee($idEmployee)
+    {
+        $this->idEmployee = $idEmployee;
+
+        return $this;
+    }
 
     /**
-     * Gets the value of date.
+     * Gets the value of name.
      *
      * @return mixed
      */
-    public function getDate()
+    public function getName()
     {
-        return $this->date;
+        return $this->name;
     }
 
     /**
-     * Sets the value of date.
+     * Sets the value of name.
      *
-     * @param mixed $date the date
+     * @param mixed $name the name
      *
      * @return self
      */
-    public function setDate($date)
+    public function setName($name)
     {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of hourstart.
-     *
-     * @return mixed
-     */
-    public function getHourstart()
-    {
-        return $this->hourstart;
-    }
-
-    /**
-     * Sets the value of hourstart.
-     *
-     * @param mixed $hourstart the hourstart
-     *
-     * @return self
-     */
-    public function setHourstart($hourstart)
-    {
-        $this->hourstart = $hourstart;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of hourend.
-     *
-     * @return mixed
-     */
-    public function getHourend()
-    {
-        return $this->hourend;
-    }
-
-    /**
-     * Sets the value of hourend.
-     *
-     * @param mixed $hourend the hourend
-     *
-     * @return self
-     */
-    public function setHourend($hourend)
-    {
-        $this->hourend = $hourend;
+        $this->name = $name;
 
         return $this;
     }

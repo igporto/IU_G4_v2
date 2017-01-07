@@ -283,6 +283,7 @@ class EventController extends BaseController {
                 $this->view->redirect("event", "showpupil" , "codevent=".$event->getCodevent());
             }
         }catch (Exception $e) {
+            var_dump($e->getMessage());exit;
             $this->view->setFlash('erro_general');
         }
 

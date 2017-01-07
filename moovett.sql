@@ -50,6 +50,8 @@ DROP TABLE IF EXISTS `empleado_tiene_lesion`;
 DROP TABLE IF EXISTS `evento`;
 DROP TABLE IF EXISTS `factura`;
 DROP TABLE IF EXISTS `linea_factura`;
+DROP TABLE IF EXISTS `horario_actividad`;
+DROP TABLE IF EXISTS `horas_posibles`;
 DROP TABLE IF EXISTS `inscripcion`;
 DROP TABLE IF EXISTS `lesion`;
 DROP TABLE IF EXISTS `pago`;
@@ -71,7 +73,6 @@ DROP TABLE IF EXISTS `usuario_recibe_alerta`;
 DROP TABLE IF EXISTS `alumnos_recibe_notificacion`;
 DROP TABLE IF EXISTS `horario`;
 DROP TABLE IF EXISTS `jornada`;
-DROP TABLE IF EXISTS `sesion`;
 
 
 
@@ -121,9 +122,7 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL,
-  `fecha_lesion` date NOT NULL,
-  `fecha_recuperacion` date NULL
+  `id_lesion` int(4) NOT NULL
 ) ;
 
 
@@ -268,9 +267,7 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL,
-  `fecha_lesion` date NOT NULL,
-  `fecha_recuperacion` date NULL
+  `id_lesion` int(4) NOT NULL
 ) ;
 
 
@@ -335,10 +332,31 @@ CREATE TABLE `linea_factura` (
 
 -- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `horario_actividad`
+--
+
+CREATE TABLE `horario_actividad` (
+  `hora_comienzo` time NOT NULL DEFAULT '00:00:00',
+  `hora_final` time NOT NULL DEFAULT '00:00:00',
+  `fecha` date NOT NULL DEFAULT '0000-00-00',
+  `id_actividad` int(4) NOT NULL
+) ;
 
 
 -- --------------------------------------------------------
 
+--
+-- table structure for table `horas_posibles`
+--
+
+CREATE TABLE `horas_posibles` (
+  `id_hora` int(4) not null,
+  `dia` date not null,
+  `hora_inicio` time not null,
+  `hora_fin` time not null,
+  `id_calendario` int(4) not null
+) ;
 
 
 -- --------------------------------------------------------
@@ -364,7 +382,7 @@ CREATE TABLE `inscripcion` (
 CREATE TABLE `pago` (
   `id_pago` int(4) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT '0000-00-00 00:00',
-  `cantidad` DOUBLE not null,
+  `cantidad` smallint(6) not null,
   `metodo_pago` varchar(15) NOT NULL DEFAULT '',
   `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
@@ -755,7 +773,20 @@ ALTER TABLE `linea_factura`
   ADD PRIMARY KEY (`id_linea`,`id_factura`),
   ADD KEY `id_factura` (`id_factura`);
 
+--
+-- Indices de la tabla `horario_actividad`
+--
+ALTER TABLE `horario_actividad`
+  ADD PRIMARY KEY (`fecha`,`hora_comienzo`,`id_actividad`),
+  ADD KEY `id_actividad` (`id_actividad`);
 
+
+--
+-- Indices de la tabla `horas_posibles`
+--
+ALTER TABLE `horas_posibles`
+  ADD PRIMARY KEY (`id_hora`),
+  ADD KEY `id_calendario` (`id_calendario`);
 
 --
 -- Indices de la tabla `inscripcion`
@@ -965,7 +996,11 @@ ALTER TABLE `espacio`
 ALTER TABLE `factura`
   MODIFY `id_factura` int(4) NOT NULL AUTO_INCREMENT;
 --
-
+-- AUTO_INCREMENT de la tabla `horas_posibles`
+--
+ALTER TABLE `horas_posibles`
+  MODIFY `id_hora` int(4) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
@@ -1142,6 +1177,19 @@ ALTER TABLE `alumno_se_apunta_evento`
 --
 ALTER TABLE `linea_factura`
   ADD CONSTRAINT `linea_factura_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `factura` (`id_factura`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Filtros para la tabla `horario_actividad`
+--
+ALTER TABLE `horario_actividad`
+  ADD CONSTRAINT `horario_actividad_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `horas_posibles`
+--
+ALTER TABLE `horas_posibles`
+  ADD CONSTRAINT `horas_posibles_ibfk_1` FOREIGN KEY (`id_calendario`) REFERENCES `calendario` (`id_calendario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 --
@@ -1751,22 +1799,6 @@ INSERT INTO `lesion`(`nombre`,`descripcion`, `tratamiento`, `tiempo_recuperacion
 /* Engadido por Bruno */
 /* Engadido por Lore */
 
---
--- Volcado de datos para la tabla `alumno_tiene_lesion`
---
-INSERT INTO `alumno_tiene_lesion`(`id_alumno`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
-(1,1,'2016-20-12','2016-29-12'),
-(2,1,'2016-15-12','2017-05-1'),
-(1,2,'2016-03-02','2016-04-08');
-
-
---
--- Volcado de datos para la tabla `empleado_tiene_lesion`
---
-INSERT INTO `empleado_tiene_lesion`(`id_empleado`, `id_lesion`, `fecha_lesion`, `fecha_recuperacion`) VALUES
-(1,1,'2016-20-12','2016-29-12'),
-(2,1,'2016-14-11','2017-07-1'),
-(2,2,'2016-05-02','2016-04-08');
 
 --
 -- Volcado de datos para la tabla `cliente_externo`
@@ -1799,7 +1831,4 @@ INSERT INTO `moovett`.`factura` (`id_factura`, `nombre`, `numero`, `fecha`) VALU
 
 INSERT INTO `moovett`.`linea_factura` (`id_factura`, `id_linea`, `concepto`, `precio`, `iva`, `unidades`, `total`) VALUES
  ('1', NULL, 'Concepto de la linea', '12.5', '10', '1', '15');
-
- INSERT INTO `moovett`.`pago` (`id_pago`, `fecha`, `cantidad`, `metodo_pago`, `pagado`, `tipo_cliente`, `dni_alum`, `dni_cliente_externo`)
- VALUES (NULL, '2017-01-01 00:00:00', '12.5', 'creditCard', '1', 'student', '44654552J', NULL);
 /* Engadido por Yeray */

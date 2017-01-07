@@ -181,7 +181,6 @@ class PaymentController extends BaseController
             if (isset($_POST['id_pago'])) {
                 $payment->setIdPago((htmlentities(addslashes($_POST["id_pago"]))));
             }
-
             try {
                 $this->view->setVariable("paymentstoshow", $this->paymentMapper->search($payment));
             } catch (Exception $e) {
@@ -304,5 +303,4 @@ class PaymentController extends BaseController
         $this->view->setVariable("paymentstoshow", $tills);
         $this->view->render("payment", "tillclose");
     }
-
 }

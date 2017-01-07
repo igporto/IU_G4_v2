@@ -122,8 +122,7 @@ $permissions = $view->getVariable("billstoshow");
                         }
 
                         //Botón que direcciona á vista das liñas
-                        echo "<a href='index.php?controller=bill&action=showlines&id_factura=" . $p->getIdFactura() .
-                            "&nombre_factura=" . $p->getNombre() . "'>";
+                        echo "<a href=index.php?controller=bill&action=lines&id_factura=" . $p->getIdFactura() . '>';
                         echo '<button type="button" class="btn btn-success btn-xs';
                         echo '" style="margin:2px ">' . $strings["lines"] . '</button>';
                         echo '<i class="fa fa fa-fw"></i>

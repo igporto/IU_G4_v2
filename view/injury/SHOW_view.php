@@ -87,7 +87,7 @@ $injury = $view->getVariable("injurystoshow");
 
             </div>
             <div class="panel-body">
-                <table id="dataTable" class="table-responsive   table-hover" style="width:80%">
+                <table id="dataTable" class="table-responsive   table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">
                     <thead>
                     <tr class="row" >
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->

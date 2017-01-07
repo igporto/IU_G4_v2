@@ -16,7 +16,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_schedule'] ?>
+                <?php echo $strings['create_action'] ?>
             </div>
             <div class="panel-body">
 

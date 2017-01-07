@@ -1,5 +1,5 @@
 <?php
-echo '<div class="modal fade" id="confirmar' . $p->getIdPago() . '" tabindex="-1" role="dialog" aria-labelledby="' . $p->getIdPago() . 'viewlabel" aria-hidden="true" style="display: none;">
+echo '<div class="modal fade" id="view' . $p->getIdPago() . '" tabindex="-1" role="dialog" aria-labelledby="' . $p->getIdPago() . 'viewlabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

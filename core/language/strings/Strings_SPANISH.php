@@ -434,7 +434,7 @@ $strings = array(
     'id_student' => 'ID del alumno',
     'succ_student_add' => 'Alumno añadido correctamente',
     'student_already_exists' => 'El alumno ya existe',
-    'add_student' => 'Añadir alumno',
+    'add_student' => 'Insertar alumno',
     'succ_student_delete' => 'Alumno eliminado del evento',
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
@@ -458,8 +458,6 @@ $strings = array(
     'date_injury' => 'Fecha de la lesión',
     'add_employer'  => 'Añadir empleado',
     'list_of_employer' =>'Lista de empleados',
-    'date_error' => 'Error en las fechas',
-
 
 
     /*Alumno*/
@@ -488,13 +486,7 @@ $strings = array(
 	'bill_number'=>'Numero de factura',
 	'lines'=>'GESTION LINEAS',
 	'bill_data'=>'Datos de la factura',
-	'bill_modify'=>'Modificar factura',
-	'units'=>'Unidades',
-	'price'=>'Precio',
-    'total'=>'Total',
-	'management_line'=>'Gestion de lineas',
-	'add_line'=>'Añadir linea',
-	'line_modify'=>'Modificar linea'
+	'bill_modify'=>'Modificar factura'
 
 
 )

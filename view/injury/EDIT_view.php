@@ -46,8 +46,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <label for="divdatestart"><?= $strings['time_recovery']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input required class="form-control" type="number"  min="1" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
-                            <div id="error"></div>
+                            <input required class="form-control" type="number" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
                         </div>
                     </div>
                 </div>
