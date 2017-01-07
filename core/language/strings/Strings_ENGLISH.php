@@ -498,6 +498,8 @@ $strings = array(
     'payment'=>'PAYMENT',
     'units'=>'Units',
     'management_line'=>'Line management',
-    'total'=>'Total'
+    'total'=>'Total',
+    'line_modify'=>'Line modify',
+    'add_line'=>'Add Line'
 )
 ?>

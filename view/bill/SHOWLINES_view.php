@@ -29,7 +29,7 @@ $permissions = $view->getVariable("linestoshow");
         <!--BOTÓN ENGADIR-->
         <?php if ($add) {
             echo '  
-                            <a href="index.php?controller=bill&action=addline&id_factura=' . $_REQUEST["id_factura"] . '">
+                            <a href="index.php?controller=bill&action=addline&id_factura=' . $_REQUEST["id_factura"] . '&nombre_factura='.$_REQUEST["nombre_factura"].'">
                                 <button type="button" class="btn btn-success">
                                 <i class="fa fa-fw fa-plus"></i>
                                     ' . $strings['ADD'] . '
@@ -99,7 +99,8 @@ $permissions = $view->getVariable("linestoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=bill&action=editline&id_factura=" . $p->getIdFactura() . "&id_linea=" . $p->getIdLinea() . ">";
+                            echo "<a href=index.php?controller=bill&action=editline&id_factura=" . $p->getIdFactura() .
+                                "&id_linea=" . $p->getIdLinea() . "&nombre_factura=" . $_REQUEST["nombre_factura"] . ">";
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -126,7 +127,18 @@ $permissions = $view->getVariable("linestoshow");
 
                     </tbody>
                 </table><!-- fin table -->
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="pull-left">
+                            <a class="btn btn-default btn-md" href="index.php?controller=bill&action=show">
+                                <i class="fa fa-arrow-left"></i>
+                                <?php echo $strings['back'] ?></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div><!-- fin panel -->
 
     </div><!-- fin row -->

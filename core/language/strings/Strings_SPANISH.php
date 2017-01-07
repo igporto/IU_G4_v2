@@ -495,7 +495,9 @@ $strings = array(
 	'payment'=>'PAGO',
 	'units'=>'Unidades',
 	'management_line'=>'Gestion de linea',
-    'total'=>'Total'
+    'total'=>'Total',
+	'line_modify'=>'Modificar linea',
+	'add_line'=>'Añadir Linea'
 
 
 )
