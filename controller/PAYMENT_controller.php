@@ -53,7 +53,7 @@ class PaymentController extends BaseController
             if ($_POST["tipo_cliente"] == "student") {
                 $payment->setDniAlum(htmlentities(addslashes($_POST["dni"])));
             } else {
-                $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni"])));
+                $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni_external"])));
             }
 
             $payment->setPagado(htmlentities(addslashes($_POST["pagado"])));

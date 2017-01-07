@@ -21,13 +21,15 @@ $payment = $paymentMapper->view($id_pago);
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
+
                 <div class="row">
 
                     <div class="col-xs-12 col col-md-5">
                         <label for="selectperf"><?php echo $strings['client_type'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
-                            <select class=" form-control icon-menu" name="tipo_cliente" id="tipo_cliente">
+                            <select class=" form-control icon-menu" name="tipo_cliente" id="tipo_cliente"
+                                    onchange="tipoCliente()">
                                 <option value="student"
                                     <?php
                                     if ($payment->getTipoCliente() == "student") {
@@ -37,7 +39,7 @@ $payment = $paymentMapper->view($id_pago);
                                     <?php echo $strings['student'] ?></option>
                                 <option value="external"
                                     <?php
-                                    if ($payment->getTipoCliente() == "student") {
+                                    if ($payment->getTipoCliente() == "external") {
                                         echo "selected";
                                     }
                                     ?>
@@ -49,10 +51,26 @@ $payment = $paymentMapper->view($id_pago);
                     </div>
 
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
+                        <label for="selectperf" id="label1"
+                               style='<?php if ($payment->getTipoCliente() == "student") {
+                                   echo "display: block";
+                               } else {
+                                   echo "display: none";
+                               } ?>'><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
+                        <label for="selectperf" id="label2"
+                               style='<?php if ($payment->getTipoCliente() == "external") {
+                                   echo "display: block";
+                               } else {
+                                   echo "display: none";
+                               } ?>'><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
-                            <select class=" form-control icon-menu" name="dni" id="dni">
+                            <select class=" form-control icon-menu" name="dni" id="dni"
+                                    style='<?php if ($payment->getTipoCliente() == "student") {
+                                        echo "display: block";
+                                    } else {
+                                        echo "display: none";
+                                    } ?>'>
                                 <?php
                                 //Engadimos unha opcion por categoria a escoller
                                 $alumnMapper = new AlumnMapper();
@@ -65,17 +83,39 @@ $payment = $paymentMapper->view($id_pago);
                                     if ($payment->getDniAlum() == $alumn->getDni()) {
                                         echo "selected";
                                     }
-                                echo ">" . $alumn->getDni() . "</option>";
+                                    echo ">" . $alumn->getDni() . "</option>";
                                 }
                                 ?>
                             </select>
+                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external"
+                                   style='<?php if ($payment->getTipoCliente() == "external") {
+                                       echo "display: block";
+                                   } else {
+                                       echo "display: none";
+                                   } ?>' value=<?php echo $payment->getDniClienteExterno() ?>>
                             <div id="error"></div>
                         </div>
-                        <!--Campo tipo de cliente-->
+                        <!--Campo dni-->
                     </div>
 
                 </div>
+                <script>
+                    function tipoCliente() {
+                        var tipo = document.getElementById("tipo_cliente").selectedIndex;
 
+                        if (tipo == 0) {
+                            document.getElementById("dni").style = "display: block";
+                            document.getElementById("label1").style = "display: block";
+                            document.getElementById("label2").style = "display: none";
+                            document.getElementById("dni_external").style = "display: none";
+                        } else {
+                            document.getElementById("dni").style = "display: none";
+                            document.getElementById("label1").style = "display: none";
+                            document.getElementById("label2").style = "display: block";
+                            document.getElementById("dni_external").style = "display: block";
+                        }
+                    }
+                </script>
                 <div class="row">
 
                     <div class="col-xs-12 col col-md-5">
@@ -101,12 +141,12 @@ $payment = $paymentMapper->view($id_pago);
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="pagado" id="pagado">
                                 <option value="1"
-                                        <?php if ($payment->getPagado() == "1") {
-                                    echo "selected";
-                                    }?>><?php echo $strings['si'] ?></option>
+                                    <?php if ($payment->getPagado() == "1") {
+                                        echo "selected";
+                                    } ?>><?php echo $strings['si'] ?></option>
                                 <option value="0"<?php if ($payment->getPagado() == "0") {
                                     echo "selected";
-                                }?>><?php echo $strings['no'] ?></option>
+                                } ?>><?php echo $strings['no'] ?></option>
                             </select>
                             <div id="error"></div>
                         </div>
@@ -120,10 +160,10 @@ $payment = $paymentMapper->view($id_pago);
                             <select class=" form-control icon-menu" name="metodo_pago" id="metodo_pago">
                                 <option value="cash" <?php if ($payment->getMetodoPago() == "cash") {
                                     echo "selected";
-                                }?>><?php echo $strings['cash'] ?></option>
+                                } ?>><?php echo $strings['cash'] ?></option>
                                 <option value="creditCard"<?php if ($payment->getMetodoPago() == "creditCard") {
                                     echo "selected";
-                                }?>><?php echo $strings['creditCard'] ?></option>
+                                } ?>><?php echo $strings['creditCard'] ?></option>
                             </select>
                             <div id="error"></div>
                         </div>
