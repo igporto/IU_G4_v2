@@ -147,8 +147,12 @@ class SessionController extends BaseController
             }
         }
 
-        //Se non se enviou nada
-        //$this->view->setLayout("navbar");
+        
+        $this->view->setVariable("activity", $this->activityMapper->show());
+        $this->view->setVariable("employee", $this->employeeMapper->show());
+        $this->view->setVariable("space", $this->spaceMapper->show());
+        $this->view->setVariable("event", $this->eventMapper->show());
+
         $this->view->render("session", "add");
     }
 
