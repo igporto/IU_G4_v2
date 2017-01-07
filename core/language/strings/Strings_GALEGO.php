@@ -498,6 +498,8 @@ $strings = array(
     'management_line'=>'Xestion de linea',
     'total'=>'Total',
     'line_modify'=>'Modificar linea',
-    'add_line'=>'Engadir Linea'
+    'add_line'=>'Engadir Linea',
+    'pending_payments'=>'Pagos pendentes',
+    'pay'=>'Pagar'
 )
 ?>

@@ -69,6 +69,13 @@ $permissions = $view->getVariable("paymentstoshow");
             </ul>
         </div>
 
+        <a href="index.php?controller=payment&action=pending">
+            <button type="button" class="btn btn-danger">
+                <i class="fa fa-fw-alert fa"></i>
+                <?php echo $strings['pending_payments'] ?>
+            </button>
+        </a>
+
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
@@ -115,7 +122,7 @@ $permissions = $view->getVariable("paymentstoshow");
                         } else {
                             echo $p->getDniClienteExterno() . "</td><td class='text-center'>";
                         }
-                        
+
                         echo $p->getCantidad() . " €</td><td class='text-center'>";
 
                         if ($p->getPagado() == 1) {
@@ -159,8 +166,7 @@ $permissions = $view->getVariable("paymentstoshow");
                             echo "<a href=index.php?controller=payment&action=pay&id_pago=" . $p->getIdPago() . '>';
                             echo '<button type="button" class="btn btn-success btn-xs';
                             echo '" style="margin:2px">';
-                            echo '<i class="fa fa-usd fa-fw"></i>
-                                            </button>';
+                            echo '<i class="fa fa-usd fa-fw"></i></button></a>';
 
                         }
 

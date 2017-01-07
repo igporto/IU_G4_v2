@@ -11,7 +11,7 @@ $payment = $paymentMapper->view($id_pago);
 ?>
 
 <div class="col-md-6">
-    <h1 class="page-header"><?php echo $strings['payment_modify'] . ': ' . $payment->getDniAlum() ?></h1>
+    <h1 class="page-header"><?php echo $strings['pay'] . ': ' . $payment->getDniAlum() ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=payment&action=pay&id_pago=<?php echo $id_pago; ?>"
           enctype="multipart/form-data">

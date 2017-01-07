@@ -500,6 +500,8 @@ $strings = array(
     'management_line'=>'Line management',
     'total'=>'Total',
     'line_modify'=>'Line modify',
-    'add_line'=>'Add Line'
+    'add_line'=>'Add Line',
+    'pending_payments'=>'Pending payments',
+    'pay'=>'Pay'
 )
 ?>
