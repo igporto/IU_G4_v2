@@ -53,20 +53,37 @@ echo '</ul>
                         </div>';
 
 //fin dos datos do alumno
+$w = new InjuryMapper();
+$user = $_SESSION['currentuser'];
+if($w->getIdPUser($user) == 1) {
 echo '
                         </div>
                         <div class="modal-footer">
                             
                             <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
-                            
-                            <a href="index.php?controller=injury&action=deleteemployer&codpupil=' . $s->getCodEmpl() . '&id_lesion='.$s->getCodInjury().'">
-                            <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
-                            </a>
+                               <a href="index.php?controller=injury&action=deleteemployer&codpupil=' . $s->getCodEmpl() . '&id_lesion=' . $s->getCodInjury() . '">
+                                        <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
+                                </a>
+                           
                         </div>
                     </div></div>
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal-dialog -->
             </div>';
+}else{
+    echo '
+                        </div>
+                        <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
+                           
+                        </div>
+                    </div></div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>';
+}
 
 ?>

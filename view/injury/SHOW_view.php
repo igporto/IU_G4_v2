@@ -54,7 +54,12 @@ $injury = $view->getVariable("injurystoshow");
                         ';
         } ?>
 
-        <?php if($add) {
+        <?php
+            $user = $_SESSION['currentuser'];
+            $w = new InjuryMapper();
+            $id_p = $w->getIdPUser($user);
+
+        if($add && $id_p == 1) {
             echo '  
                             <a href="index.php?controller=injury&action=addpupil">
                                 <button type="button" class="btn btn-success">
@@ -65,7 +70,7 @@ $injury = $view->getVariable("injurystoshow");
                         ';
         }
 
-        if($add) {
+        if($add && $id_p == 1) {
             echo '  
                             <a href="index.php?controller=injury&action=addemployer">
                                 <button type="button" class="btn btn-success">

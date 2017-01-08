@@ -189,7 +189,6 @@ class InjuryController extends BaseController {
         $this->view->render("injury", "add_pupil");
     }
 
-
     public function showpupil(){
         $pupils = $this->injuryMapper->showpupil();
         $this->view->setVariable("pupilstoshow", $pupils);
@@ -263,5 +262,107 @@ class InjuryController extends BaseController {
         }
         $this->view->render("injury", "show");
 
+    }
+
+    public function editpupil(){
+        if (isset($_POST["submit"])) {
+
+            $in = new Pupil_has_injury();
+
+            if(isset($_POST["date_injury"])&& addslashes($_POST['date_injury'])!=""){
+                $in->setDateInjury(htmlentities(addslashes($_POST["date_injury"])));
+            }else{
+                $injur = $in->getDateInjury();
+                $in->setDateInjury($injur);
+            }
+
+
+            if(isset($_POST["date_recovery"])&& addslashes($_POST['date_recovery'])!=""){
+                $in->setDateRecovery(htmlentities(addslashes($_POST["date_recovery"])));
+            }else{
+                $des = $in->getDateRecovery();
+                $in->setDateRecovery($des);
+            }
+
+
+            if(isset($_GET["id_lesion"])&& addslashes($_GET['id_lesion'])!=""){
+                $in->setCodInjury(htmlentities(addslashes($_GET["id_lesion"])));
+            }else{
+                $trea = $in->getCodInjury();
+                $in->setCodInjury($trea);
+            }
+
+
+            if(isset($_GET["id_pupil"])&& addslashes($_GET['id_pupil'])!=""){
+                $in->setCodPupil(htmlentities(addslashes($_GET["id_pupil"])));
+            }else{
+                $tim = $in->getCodPupil();
+                $in->setCodPupil($tim);
+            }
+
+            try {
+                $this->injuryMapper->editpupil($in);
+                //ENVIAR AVISO DE ESPAZO EDITADO!!!!!!!!!!
+                $this->view->setFlash("succ_injury_mod");
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos lesions)
+                $this->view->redirect("injury", "show");
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        $this->view->render("injury", "edit_pupil");
+    }
+
+    public function editemployer(){
+        if (isset($_POST["submit"])) {
+
+            $in = new Employer_has_injury();
+
+            if(isset($_POST["date_injury"])&& addslashes($_POST['date_injury'])!=""){
+                $in->setDateInjury(htmlentities(addslashes($_POST["date_injury"])));
+            }else{
+                $injur = $in->getDateInjury();
+                $in->setDateInjury($injur);
+            }
+
+
+            if(isset($_POST["date_recovery"])&& addslashes($_POST['date_recovery'])!=""){
+                $in->setDateRecovery(htmlentities(addslashes($_POST["date_recovery"])));
+            }else{
+                $des = $in->getDateRecovery();
+                $in->setDateRecovery($des);
+            }
+
+
+            if(isset($_GET["id_lesion"])&& addslashes($_GET['id_lesion'])!=""){
+                $in->setCodInjury(htmlentities(addslashes($_GET["id_lesion"])));
+            }else{
+                $trea = $in->getCodInjury();
+                $in->setCodInjury($trea);
+            }
+
+
+            if(isset($_GET["id_employer"])&& addslashes($_GET['id_employer'])!=""){
+                $in->setCodEmpl(htmlentities(addslashes($_GET["id_employer"])));
+            }else{
+                $tim = $in->getCodEmpl();
+                $in->setCodEmpl($tim);
+            }
+
+            try {
+                $this->injuryMapper->editemployer($in);
+                //ENVIAR AVISO DE ESPAZO EDITADO!!!!!!!!!!
+                $this->view->setFlash("succ_injury_mod");
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos lesions)
+                $this->view->redirect("injury", "show");
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        $this->view->render("injury", "edit_employer");
     }
 }

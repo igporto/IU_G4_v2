@@ -316,5 +316,27 @@ class InjuryMapper
         return true;
     }
 
+    public function getIdPUser($user){
+        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE user ='$user'");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_p = $r['id_perfil'];
+
+        return $id_p;
+    }
+
+    public function editpupil(Pupil_has_injury $injury){
+        $stmt = $this->db->prepare("UPDATE alumno_tiene_lesion SET id_alumno = ?, id_lesion = ?, fecha_lesion = ?, fecha_recuperacion = ? where id_lesion=? and id_alumno = ?");
+        $stmt->execute(array($injury->getCodPupil(),$injury->getCodInjury(),$injury->getDateInjury(), $injury->getDateRecovery(), $injury->getCodInjury(), $injury->getCodPupil()));
+
+    }
+
+    public function editemployer(Employer_has_injury $injury){
+        $stmt = $this->db->prepare("UPDATE empleado_tiene_lesion SET id_empleado = ?, id_lesion = ?, fecha_lesion = ?, fecha_recuperacion = ? where id_lesion=? and id_empleado = ?");
+        $stmt->execute(array($injury->getCodEmpl(),$injury->getCodInjury(),$injury->getDateInjury(), $injury->getDateRecovery(), $injury->getCodInjury(), $injury->getCodEmpl()));
+
+    }
+
 
 }

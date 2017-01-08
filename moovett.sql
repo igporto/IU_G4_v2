@@ -122,7 +122,9 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `alumno_tiene_lesion` (
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -257,9 +259,7 @@ CREATE TABLE `lesion` (
   `nombre` varchar(25) NOT NULL,
   `descripcion` varchar(250) NULL,
   `tratamiento` text NULL,
-  `fecha_lesion` date DEFAULT NULL,
-  `tiempo_recuperacion` int(4) NULL,
-  `fecha_recuperacion` date DEFAULT NULL
+  `tiempo_recuperacion` int(4) NULL
   ) ;
 -- --------------------------------------------------------
 
@@ -269,7 +269,9 @@ CREATE TABLE `lesion` (
 
 CREATE TABLE `empleado_tiene_lesion` (
   `id_empleado` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 

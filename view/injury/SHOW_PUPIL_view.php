@@ -85,6 +85,14 @@ $pls = new InjuryMapper();
                                         </button>';
                         }
 
+                        $user = $_SESSION['currentuser'];
+                        if($edit && $pls->getIdPUser($user) == 1){
+                            echo "<a href=index.php?controller=injury&action=editpupil&id_lesion=".$s->getCodInjury().'&id_pupil='.$s->getCodPupil().'>';
+                            echo "<button class='btn btn-warning btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
+                        }
+
                         //MODAL DE CONFIRMACION DE BORRADO PARA CADA ACCION
                         include(__DIR__ . '/DELETE_PUPIL_view.php');
 

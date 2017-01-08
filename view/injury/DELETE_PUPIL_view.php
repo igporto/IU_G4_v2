@@ -53,7 +53,10 @@ echo '</ul>
                         </div>';
 
 //fin dos datos do alumno
-echo '
+$w = new InjuryMapper();
+$user = $_SESSION['currentuser'];
+if($w->getIdPUser($user) == 1) {
+    echo '
                         </div>
                         <div class="modal-footer">
                             
@@ -68,5 +71,19 @@ echo '
                 </div>
                 <!-- /.modal-dialog -->
             </div>';
+}else{
+    echo '
+                        </div>
+                        <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
+                           
+                        </div>
+                    </div></div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>';
+}
 
 ?>

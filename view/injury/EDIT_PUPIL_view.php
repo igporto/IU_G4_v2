@@ -4,18 +4,20 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-$injuryMapper = new InjuryMapper();
+$inMapper = new InjuryMapper();
+//Recuperamos o id do usuario a editar
+$injury = $inMapper->view($_REQUEST['id_lesion']);
+
 ?>
 
-
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['add_student']; ?></h1>
+    <h1 class="page-header"><?php echo $strings['injury_edit'].": ".$injury->getNameInjury() ; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=injury&action=addpupil" onblur="validarFechaMenor(date_injury,date_recovery)"
+          action="index.php?controller=injury&action=editpupil&id_lesion=<?php echo $injury->getCodInjury(); ?>&id_pupil=<?php echo $_GET['id_pupil']?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_injury'] ?>
+                <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
 
@@ -28,39 +30,7 @@ $injuryMapper = new InjuryMapper();
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12  col-md-7">
 
-                        <label for="divdatestart"><?= $strings['student']  ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select class="form-control icon-menu" name="codpupil">
-                                <?php
-                                $a = $injuryMapper->selectIDA();
-                                foreach ($a as $b){
-                                    echo '<option value="'.$b.'">'.$injuryMapper->selectDniA($b).'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <!--Campo dni-->
-                    </div>
-                    <div class="col-xs-12  col-md-7">
-
-                        <label for="divdatestart"><?= $strings['injury_name']  ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-file fa-fw"></i></span>
-                            <select class="form-control icon-menu" name="id_lesion">
-                                <?php
-                                $a = $injuryMapper->selectInjuryID();
-                                foreach ($a as $b){
-                                    echo '<option value="'.$b.'">'.$injuryMapper->getNameInjury($b).'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-xs-12  col-md-7">
                         <label for="divdatestart"><?= $strings['date_injury']  ?></label>
@@ -83,17 +53,17 @@ $injuryMapper = new InjuryMapper();
                     </div>
                 </div>
 
-                    </div>
-                    <!--Campo name-->
-                </div>
 
+                <!--Campo name-->
+            </div>
+        </div>
 
 
         <div class="row">
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=showpupil&id_lesion=<?php echo $injury->getCodInjury()?>">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
@@ -103,8 +73,8 @@ $injuryMapper = new InjuryMapper();
                         <?php echo $strings['clean'] ?></i></button>
 
                     <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                        <i class="fa fa-plus"></i>
-                        <?php echo $strings['ADD'] ?></i></button>
+                        <i class="fa fa-edit"></i>
+                        <?php echo $strings['EDIT'] ?></i></button>
                     <?php
 
                     ?>
@@ -115,6 +85,13 @@ $injuryMapper = new InjuryMapper();
     </form>
     <!--fin formulario-->
 </div>
+
+<script>
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
+</script>
 
 <script>
     $( function() {
@@ -129,4 +106,5 @@ $injuryMapper = new InjuryMapper();
         $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
     } );
 </script>
+
 
