@@ -51,12 +51,9 @@ $payment = $paymentMapper->view($id_pago);
                 </div>
 
                 <div class="pull-right">
-                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                        <?php echo $strings['clean'] ?></i></button>
-
                     <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                        <i class="fa fa-edit"></i>
-                        <?php echo $strings['EDIT'] ?></i></button>
+                        <i class="fa fa-usd"></i>
+                        <?php echo $strings['pay'] ?></i></button>
                     <?php
 
                     ?>

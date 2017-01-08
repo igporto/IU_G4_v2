@@ -18,20 +18,99 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             </div>
             <div class="panel-body">
 
-                <!-- avisos + nome -->
                 <div class="row">
+
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['client_type'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                            <select class=" form-control icon-menu" name="tipo_cliente" id="tipo_cliente"
+                                    onchange="tipoCliente()">
+                                <option value="student"><?php echo $strings['student'] ?></option>
+                                <option value="external"><?php echo $strings['external_client'] ?></option>
+                            </select>
+                            <div id="error"></div>
+                        </div>
+                        <!--Campo tipo de cliente-->
+                    </div>
+
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf" id="label1" style="display: block"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
+                        <label for="selectperf" id="label2" style="display: none"><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                            <select class=" form-control icon-menu" name="dni" id="dni" style="display: block">
+                                <?php
+                                //Engadimos unha opcion por categoria a escoller
+                                $alumnMapper = new AlumnMapper();
+
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $alumnMapper->show();
+
+                                foreach ($alumns as $alumn) {
+                                    echo "<option value='" . $alumn->getDni() . "'>" . $alumn->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
+                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external" style="display: none">
+                            <div id="error"></div>
+                        </div>
+                        <!--Campo dni de cliente-->
+                    </div>
+
+                </div>
+
+                <script>
+                    function tipoCliente() {
+                        var tipo = document.getElementById("tipo_cliente").selectedIndex;
+
+                        if (tipo == 0) {
+                            document.getElementById("dni").style = "display: block";
+                            document.getElementById("label1").style = "display: block";
+                            document.getElementById("label2").style = "display: none";
+                            document.getElementById("dni_external").style = "display: none";
+                        } else {
+                            document.getElementById("dni").style = "display: none";
+                            document.getElementById("label1").style = "display: none";
+                            document.getElementById("label2").style = "display: block";
+                            document.getElementById("dni_external").style = "display: block";
+                        }
+                    }
+                </script>
+
+                <div class="row">
+
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['quantity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input type="number" min="0.01" step="0.01" max="2500000" autofocus
                                    class="form-control" id="cantidad" name="cantidad"
-                                   placeholder= <?php echo $strings['quantity'] ?>
-                            >
+                                   placeholder= <?php echo $strings['quantity'] ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo cantidad-->
                     </div>
+
+                </div>
+
+                <div class="row">
+
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['pagado'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
+                            <select class=" form-control icon-menu" name="pagado" id="pagado" onchange="pagar()">
+                                <option value="1"><?php echo $strings['si'] ?></option>
+                                <option value="0"><?php echo $strings['no'] ?></option>
+                            </select>
+                            <div id="error"></div>
+                        </div>
+                        <!--Pagado-->
+                    </div>
+
+                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="display: block">
+                        <label for="selectperf"><?php echo $strings['payment_method'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="metodo_pago" id="metodo_pago">
@@ -42,31 +121,19 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>
                         <!--Campo metodo de pago-->
                     </div>
+                    <script>
+                        function pagar() {
+                            var pagado = document.getElementById("pagado").selectedIndex;
+
+                            if (pagado == 0) {
+                                document.getElementById("div_metodo").style = "display: block";
+                            } else {
+                                document.getElementById("div_metodo").style = "display: none";
+                            }
+                        }
+                    </script>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col col-md-5">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
-                            <select class=" form-control icon-menu" name="tipo_cliente" name="tipo_cliente">
-                                <option value="student" selected><?php echo $strings['student'] ?></option>
-                                <option value="external"><?php echo $strings['external_client'] ?></option>
-                            </select>
-                            <div id="error"></div>
-                        </div>
-                        <!--Campo tipo de cliente-->
-                    </div>
-                    <div class="col-xs-12 col col-md-5">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-chevron-right fa-fw"></i></span>
-                            <input type="text" autofocus
-                                   class="form-control" id="dni" name="dni"
-                                   placeholder= <?php echo $strings['dni'] ?>
-                            >
-                            <div id="error"></div>
-                        </div>
-                        <!--Campo cantidad-->
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="row">
