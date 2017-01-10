@@ -93,4 +93,34 @@ class PhysioMapper
         }
         return $physios;
     }
+    public function getCodPhysio($codPhysio)
+    {
+        $stmt = $this->db->prepare("SELECT id_consulta FROM consulta_fisio WHERE  id_consulta= ?");
+        $stmt->execute(array($codPhysio));
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id_consulta'];
+    }
+        public function getCodReserve($codReserve)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM reserva WHERE  id_reserva= ?");
+        $stmt->execute();
+
+        $r = $stmt->fetch();
+        $id_sp = $r['id_reserva'];
+
+        return $id_sp;
+
+    }
+    public function selectReserveId(){
+        $stmt = $this->db->prepare("SELECT * FROM reserva");
+        $stmt->execute();
+
+        $id = array();
+        $resul = $stmt->fetchAll();
+        foreach($resul as $r){
+            array_push($id,$r['id_reserva']);
+        }
+
+        return $id;
+    }
 }
