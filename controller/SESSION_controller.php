@@ -62,6 +62,13 @@ class SessionController extends BaseController
 
     //comproba se o rango de horas dado pode insertarse na data pasada
     //e nese espacio determinado
+    /*
+    *@return:
+    *   -"null": non hai xornada establecida para esa data
+    *   -"outrange": a hora está fora da xornada
+    *   -"overlap": a sesión písase con outra
+    *   -true: o rango de horas da sesión é correcto a esa hora nese espazo
+    */
     public function isValidRange( $date, $hourstart, $hourend, $space){
         $time = strtotime($date);
         $dayoweek = date('N',$time);
@@ -79,20 +86,22 @@ class SessionController extends BaseController
             }
         }
 
-        if($workday == NULL)  return "workdaynull";
+        if($workday == NULL)  return "null";
 
+
+ 
         // 1. comprobar que rango de horas estea dentro do da xornada
-        if  (
-                (($hourstart > $workday->getHourStart()) &&
-                 ($hourstart < $workday->getHourEnd())) 
-                    ||
-                (($hourend < $workday->getHourEnd()) &&
-                 ($hourend > $workday->getHourStart()))
+        if  (!(
+                (($hourstart > substr($workday->getHourStart(),0,5)) &&
+                 ($hourstart < substr($workday->getHourEnd(),0,5))) 
+                    &&
+                (($hourend < substr($workday->getHourEnd(), 0,5)) &&
+                 ($hourend > substr($workday->getHourStart(), 0,5)))
             )
-            {
+            ){
+            return "outrange";
+        }
 
-                return "range out of workday";
-            }
 
         //obtemos todas as sesións que compartan ese espazo ese día 
         $sessiontocompare = array();
@@ -115,7 +124,7 @@ class SessionController extends BaseController
                  ($hourend > $session->getHourStart()))
             )
             {
-                return "session overlaps on that space";
+                return "overlap";
             }
 
         }
@@ -143,10 +152,8 @@ class SessionController extends BaseController
 
             $session->setEmployee($this->employeeMapper->view($_POST["selemployee"]));
 
-            $aux = $this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]));
-
-            echo $aux;exit; 
             
+
             if ($this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]))) {
                 $session->setSpace($this->spaceMapper->view($_POST["selspace"]));
                 $session->setDate($_POST["date"]);

@@ -19,9 +19,14 @@
 		$('#calendario').fullCalendar({
 			defaultView: 'agendaWeek',
     		firstDay: 1,
-    		allDay: false,
+    		allDaySlot: false,
 			defaultDate: '<?= date('Y/m/d') ?>',
 			editable: false,
+			header:{
+			    left:   'title',
+			    center: 'agendaWeek, month',
+			    right:  'today prev,next'
+			},
 			events: [
 				//xornadas de traballo
 				<?php foreach ($schedules as $sc): ?>

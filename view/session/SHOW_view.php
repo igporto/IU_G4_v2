@@ -62,11 +62,15 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                         </div>
                         <div class="panel-body">
-                            <table id="dataTable" class="table-responsive   table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">
+                            <table id="dataTable" class="table-responsive   table-hover" style="width:80%; ; margin-left: 10%">
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                                    <th class="text-center"><?php echo $strings['name']?></th>
+                                    <th class="text-center"><?php echo $strings['ACTIVITY']?></th>
+                                    <th class="text-center"><?= $strings['date'] ?></th>
+                                    <th class="text-center"><?= $strings['hourstart'] ?></th>
+                                    <th class="text-center"><?= $strings['hourend'] ?></th>
+                                    <th class="text-center"><?= $strings['SPACE'] ?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
                                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -88,7 +92,11 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 foreach ($session as $c) {
                                     echo "<tr class='row text-center' ><td> ";
 
-                                    echo $c->getIdSession()."</td><td class='text-center'>";
+                                    echo $c->getActivity()->getActivityname()."</td><td class='text-center'>";
+                                    echo $c->getDate()."</td><td class='text-center'>";
+                                    echo $c->getHourStart()."</td><td class='text-center'>";
+                                    echo $c->getHourEnd()."</td><td class='text-center'>";
+                                    echo $c->getSpace()->getSpacename()."</td><td class='text-center'>";
                                     //Botón que direcciona a vista do usuario
                                     if($v){
                                         echo '<button type="button" class="btn btn-primary btn-xs';
