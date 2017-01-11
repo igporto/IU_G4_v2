@@ -5,7 +5,6 @@ require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 require_once(__DIR__ . "/../../model/CONTROLLER_model.php");
-require_once(__DIR__ . "/../../model/PUPIL_HAS_INJURY.php");
 
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
@@ -19,30 +18,39 @@ include(__DIR__."/../../view/layouts/datatable_lang_select.php");
 include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
 //obtemos o contido a mostrar
-$pupils = $view->getVariable("pupilstoshow");
-$pls = new InjuryMapper();
+$injurys = $view->getVariable("injurystoshow");
 
 ?>
 
 <div class="col-xs-12 col-md-8 ">
 
-    <h1 class="page-header"><?php echo $strings['list_of_student'] ?></h1>
+    <h1 class="page-header"><?php echo $strings['list_of_injurys'] ?></h1>
 
     <div class="row">
 
 
         <!--BOTÃƒâ€œN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline"  href="index.php?controller=injury&action=showpupil&id_lesion=<?php echo $_GET['id_lesion']?>">
+        <a class="btn btn-warning btn-outline"  href="index.php?controller=alumn&action=show">
             <i class="fa fa-search-minus"></i>
             <?php echo $strings['clean'];?>
         </a>
+
+        <a href="index.php?controller=alumn&action=addinjury&codalumn=<?php echo $_GET['codalumn']?>">
+            <button type="button" class="btn btn-success">
+                <i class="fa fa-fw fa-plus"></i>
+                <?php echo $strings['create_injury'] ?>
+            </button>
+        </a>
+
     </div>
+
+
 
     <!--PANEL TABOA DE LISTADO-->
     <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $strings['list_of'].' '.$strings['students']; ?>
+                <?php echo $strings['list_of_injurys']; ?>
 
             </div>
             <div class="panel-body">
@@ -50,7 +58,9 @@ $pls = new InjuryMapper();
                     <thead>
                     <tr class="row" >
                         <!--CADA UN DE ESTES E UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['students']?></th>
+                        <th class="text-center"><?php echo $strings['injury_name']?></th>
+                        <th class="text-center"><?php echo $strings['date_injury']?></th>
+                        <th class="text-center"><?php echo $strings['date_recovery']?></th>
                         <?php
                         if(!$edit && !$delete){ ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -69,28 +79,33 @@ $pls = new InjuryMapper();
                     <?php
 
 
-                    //Para cada evento, imprimimos o seu nome e as acciÃ³nns que se poden realizar nel (view,edit e delete)
-                    foreach ($pupils as $s) {
+                    foreach ($injurys as $i) {
 
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $pls->getNamePupil($s->getCodPupil()) . "</td><td class='text-center'>";
 
-                        //Boton que direcciona a vista de eliminar
-                        if ($delete) {
-                            echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $s->getCodPupil() . '';
-                            echo '" style="margin:2px">';
-                            echo '<i class="fa fa-trash-o fa-fw"></i>
-                                        </button>';
+                        echo $i->getInjury()->getNameInjury() . "</td><td> ";
+
+                        echo $i->getDate() . "</td><td> ";
+                        if($i->getDateRecovery() != NULL){
+                            echo $i->getDateRecovery() ;
+                        }else{
+                            echo $strings['not_recovered_yet'];
                         }
+                        echo "</td><td class='text-center'>";
 
-                        //MODAL DE CONFIRMACION DE BORRADO PARA CADA ACCION
-                        include(__DIR__ . '/DELETE_PUPIL_view.php');
-
-
+                        if($i->getDateRecovery() == NULL){
+                            echo "<a href=index.php?controller=alumn&action=editinjury&codinjurypupil=".$i->getCod().">";
+                            echo "<button class='btn btn-success btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-check fa-fw'></i></button></a>";
+                        }else{
+                            echo "<a href=index.php?controller=alumn&action=editinjury&codinjurypupil=".$i->getCod().">";
+                            echo "<button class='btn btn-success btn-xs ";
+                            echo "' disabled style='margin:2px'>";
+                            echo "<i class='fa fa-check fa-fw'></i></button></a>";
+                        }
                         echo "</td></tr>";
-                        //  }
                     }
                     ?>
 
@@ -102,7 +117,7 @@ $pls = new InjuryMapper();
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

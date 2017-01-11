@@ -103,15 +103,14 @@ class BillMapper
 
     public function search(Bill $bill)
     {
-        $stmt = $this->db->prepare("SELECT * FROM factura WHERE id_factura like ? ");
-        $stmt->execute(array(" % " . $bill->getIdFactura() . " % "));
+        $stmt = $this->db->prepare("SELECT * FROM factura WHERE nombre like ? AND numero like ?");
+        $stmt->execute(array("%" . $bill->getNombre() . "%", "%" . $bill->getNumero() . "%"));
         $bills_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $bills = array();
-        foreach ($bills_db as $p) {
-            array_push($bills, new Bill(
-                    $p['id_factura'])
-            );
+        foreach ($bills_db as $bill) {
+            array_push($bills, new Bill($bill["id_factura"], $bill["nombre"], $bill["numero"],
+                    $bill["fecha"]));
         }
         return $bills;
     }

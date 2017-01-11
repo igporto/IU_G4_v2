@@ -11,7 +11,7 @@ class Injury {
     public $time;
     public $name;
 
-    public function __construct($codinjury = NULL,$name=NULL, $description = NULL, $treatment = NULL, $time = NULL)
+    public function __construct($codinjury = NULL, $name=NULL, $description = NULL, $treatment = NULL, $time = NULL)
     {
         $this->codinjury = $codinjury;
         $this->name = $name;

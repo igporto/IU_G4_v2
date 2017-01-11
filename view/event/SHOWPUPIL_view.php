@@ -21,12 +21,13 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 //obtemos o contido a mostrar
 $pupils = $view->getVariable("pupilstoshow");
 $eventMapper = new EventMapper();
+$event = $eventMapper->view($_GET['codevent']);
 
 ?>
 
 <div class="col-xs-12 col-md-8 ">
 
-    <h1 class="page-header"><?php echo $strings['list_of_student'] ?></h1>
+    <h1 class="page-header"><?php echo $strings['event_attendance'].': '.$event->getName()?></h1>
 
     <div class="row">
 
@@ -37,13 +38,16 @@ $eventMapper = new EventMapper();
             <?php echo $strings['clean'];?>
         </a>
 
+        <?php
+        if($eventMapper->isearly($event->getDate())){
+        ?>
         <a href="index.php?controller=event&action=addpupil&codevent=<?php echo $_GET['codevent']?>">
             <button type="button" class="btn btn-success">
             <i class="fa fa-fw fa-plus"></i>
                  <?php echo $strings['add_student'] ?>
             </button>
         </a>
-
+        <?php }?>
     </div>
 
 
@@ -52,8 +56,7 @@ $eventMapper = new EventMapper();
     <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $strings['list_of'].' '.$strings['students']; ?>
-
+                <?php echo $strings['list_of_student'] ?>
             </div>
             <div class="panel-body">
                 <table id="dataTable" class="table-responsive   table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">

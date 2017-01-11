@@ -60,19 +60,7 @@ class SessionMapper
         $sessions = array();
 
         foreach ($session_db as $session) {
-
-            array_push($sessions,
-                new Session(
-                    $session['id_sesion'],
-                    $session['fecha'],
-                    $session['hora_inicio'],
-                    $session['hora_fin'],
-                    $this->spaceMapper->view($session['id_espacio']),
-                    $this->eventMapper->view($session['id_evento']),
-                    $this->activityMapper->view($session['id_actividad']),
-                    $this->employeeMapper->view($session['id_empleado'])
-                )
-            );
+            array_push($sessions, $this->view($session['id_sesion']));
         }
 
         return $sessions;

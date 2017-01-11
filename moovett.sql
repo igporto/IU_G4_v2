@@ -120,9 +120,12 @@ CREATE TABLE `alumno` (
 -- Estructura de tabla para la tabla `alumno_tiene_lesion`
 --
 
-CREATE TABLE `alumno_tiene_lesion` (
+CREATE TABLE `alumno_tiene_lesion`(
+  `id_alumno_tiene_lesion` int(4) NOT NULL,
   `id_alumno` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
 ) ;
 
 
@@ -257,24 +260,9 @@ CREATE TABLE `lesion` (
   `nombre` varchar(25) NOT NULL,
   `descripcion` varchar(250) NULL,
   `tratamiento` text NULL,
-  `fecha_lesion` date DEFAULT NULL,
-  `tiempo_recuperacion` int(4) NULL,
-  `fecha_recuperacion` date DEFAULT NULL
+  `tiempo_recuperacion` int(4) NULL
   ) ;
 -- --------------------------------------------------------
-
---
--- table structure for table `lesion_empleado`
---
-
-CREATE TABLE `empleado_tiene_lesion` (
-  `id_empleado` int(4) NOT NULL,
-  `id_lesion` int(4) NOT NULL
-) ;
-
-
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `evento`
 --
@@ -678,9 +666,7 @@ ALTER TABLE `alumno`
 -- Indices de la tabla `alumno_tiene_lesion`
 --
 ALTER TABLE `alumno_tiene_lesion`
-  ADD PRIMARY KEY (`id_lesion`,`id_alumno`),
-  ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `id_alumno` (`id_alumno`);
+  ADD PRIMARY KEY (`id_alumno_tiene_lesion`);
 
 
 --
@@ -739,14 +725,6 @@ ALTER TABLE `empleado`
   ADD PRIMARY KEY (`id_empleado`),
   ADD KEY `cod_usuario` (`cod_usuario`);
 
-
---
--- Indices de la tabla `empleado_tiene_lesion`
---
-ALTER TABLE `empleado_tiene_lesion`
-  ADD PRIMARY KEY (`id_lesion`,`id_empleado`),
-  ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `id_empleado` (`id_empleado`);
 
 --
 -- Indices de la tabla `evento`
@@ -951,7 +929,11 @@ ALTER TABLE `alumno`
 ALTER TABLE `actividad`
   MODIFY `id_actividad` int(4) NOT NULL AUTO_INCREMENT;
   --
-
+--
+-- AUTO_INCREMENT de la tabla `alumno_tiene_lesion`
+--
+ALTER TABLE `alumno_tiene_lesion`
+  MODIFY `id_alumno_tiene_lesion` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
@@ -977,7 +959,7 @@ ALTER TABLE `consulta_fisio`
 --
 ALTER TABLE `descuento`
   MODIFY `id_descuento` int(4) NOT NULL AUTO_INCREMENT;
-  --
+--
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -1140,18 +1122,10 @@ ALTER TABLE `documento`
 
 
 --
--- Filtros para la tabla `empleado_tiene_lesion`
+-- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
   ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`cod_usuario`) REFERENCES `usuario` (`cod_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
---
--- Filtros para la tabla `empleado_tiene_lesion`
---
-ALTER TABLE `empleado_tiene_lesion`
-  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `evento`
@@ -1290,27 +1264,28 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
 -- Volcado de datos para la tabla `controlador`
 --
 
-INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
-(1, 'ACTION'),
-(2, 'CONTROLLER'),
-(3, 'PROFILE'),
-(4, 'USER'),
-(5, 'PERMISSION'),
-(6, 'PAYMENT'),
-(7, 'BILL'),
-(8, 'DOMICILIATION'),
-(9, 'CLIENT'),
-(10, 'SERVICE'),
-(11, 'CATEGORY'),
-(12, 'ACTIVITY'),
-(13, 'ATTENDANCE'),
-(14, 'EMPLOYEE'),
-(15, 'SPACE'),
-(16, 'DISCOUNT'),
-(17, 'EVENT'),
-(18, 'ALUMN'),
-(19, 'INJURY'),
-(20, 'DOCUMENT');
+  INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
+  (1, 'ACTION'),
+  (2, 'CONTROLLER'),
+  (3, 'PROFILE'),
+  (4, 'USER'),
+  (5, 'PERMISSION'),
+  (6, 'PAYMENT'),
+  (7, 'BILL'),
+  (8, 'DOMICILIATION'),
+  (9, 'CLIENT'),
+  (10, 'SERVICE'),
+  (11, 'CATEGORY'),
+  (12, 'ACTIVITY'),
+  (13, 'ATTENDANCE'),
+  (14, 'EMPLOYEE'),
+  (15, 'SPACE'),
+  (16, 'DISCOUNT'),
+  (17, 'EVENT'),
+  (18, 'ALUMN'),
+  (19, 'INJURY'),
+  (20, 'DOCUMENT'),
+  (21, 'SCHEDULE');
 
 
 --
@@ -1329,107 +1304,112 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
 -- Volcado de datos para la tabla `permiso`
 --
 
-INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
-(1 ,1),
-(1 ,2),
-(1 ,3),
-(1 ,4),
-(1 ,5),
-(2 ,1),
-(2 ,2),
-(2 ,3),
-(2 ,4),
-(2 ,5),
-(3 ,1),
-(3 ,2),
-(3 ,3),
-(3 ,4),
-(3 ,5),
-(4 ,1),
-(4 ,2),
-(4 ,3),
-(4 ,4),
-(4 ,5),
-(5 ,1),
-(5 ,2),
-(5 ,3),
-(5 ,4),
-(5 ,5),
-(6 ,1),
-(6 ,2),
-(6 ,3),
-(6 ,4),
-(6 ,5),
-(7 ,1),
-(7 ,2),
-(7 ,3),
-(7 ,4),
-(7 ,5),
-(8 ,1),
-(8 ,2),
-(8 ,3),
-(8 ,4),
-(8 ,5),
-(9 ,1),
-(9 ,2),
-(9 ,3),
-(9 ,4),
-(9 ,5),
-(10 ,1),
-(10 ,2),
-(10 ,3),
-(10 ,4),
-(10 ,5),
-(11 ,1),
-(11 ,2),
-(11 ,3),
-(11 ,4),
-(11 ,5),
-(12 ,1),
-(12 ,2),
-(12 ,3),
-(12 ,4),
-(12 ,5),
-(13 ,1),
-(13 ,2),
-(13 ,3),
-(13 ,4),
-(13 ,5),
-(14 ,1),
-(14 ,2),
-(14 ,3),
-(14 ,4),
-(14 ,5),
-(15 ,1),
-(15 ,2),
-(15 ,3),
-(15 ,4),
-(15 ,5),
-(16 ,1),
-(16 ,2),
-(16 ,3),
-(16 ,4),
-(16 ,5),
-(17 ,1),
-(17 ,2),
-(17 ,3),
-(17 ,4),
-(17 ,5),
-(18 ,1),
-(18 ,2),
-(18 ,3),
-(18 ,4),
-(18 ,5),
-(19 ,1),
-(19 ,2),
-(19 ,3),
-(19 ,4),
-(19 ,5),
-(20 ,1),
-(20 ,2),
-(20 ,3),
-(20 ,4),
-(20 ,5);
+  INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
+  (1 ,1),
+  (1 ,2),
+  (1 ,3),
+  (1 ,4),
+  (1 ,5),
+  (2 ,1),
+  (2 ,2),
+  (2 ,3),
+  (2 ,4),
+  (2 ,5),
+  (3 ,1),
+  (3 ,2),
+  (3 ,3),
+  (3 ,4),
+  (3 ,5),
+  (4 ,1),
+  (4 ,2),
+  (4 ,3),
+  (4 ,4),
+  (4 ,5),
+  (5 ,1),
+  (5 ,2),
+  (5 ,3),
+  (5 ,4),
+  (5 ,5),
+  (6 ,1),
+  (6 ,2),
+  (6 ,3),
+  (6 ,4),
+  (6 ,5),
+  (7 ,1),
+  (7 ,2),
+  (7 ,3),
+  (7 ,4),
+  (7 ,5),
+  (8 ,1),
+  (8 ,2),
+  (8 ,3),
+  (8 ,4),
+  (8 ,5),
+  (9 ,1),
+  (9 ,2),
+  (9 ,3),
+  (9 ,4),
+  (9 ,5),
+  (10 ,1),
+  (10 ,2),
+  (10 ,3),
+  (10 ,4),
+  (10 ,5),
+  (11 ,1),
+  (11 ,2),
+  (11 ,3),
+  (11 ,4),
+  (11 ,5),
+  (12 ,1),
+  (12 ,2),
+  (12 ,3),
+  (12 ,4),
+  (12 ,5),
+  (13 ,1),
+  (13 ,2),
+  (13 ,3),
+  (13 ,4),
+  (13 ,5),
+  (14 ,1),
+  (14 ,2),
+  (14 ,3),
+  (14 ,4),
+  (14 ,5),
+  (15 ,1),
+  (15 ,2),
+  (15 ,3),
+  (15 ,4),
+  (15 ,5),
+  (16 ,1),
+  (16 ,2),
+  (16 ,3),
+  (16 ,4),
+  (16 ,5),
+  (17 ,1),
+  (17 ,2),
+  (17 ,3),
+  (17 ,4),
+  (17 ,5),
+  (18 ,1),
+  (18 ,2),
+  (18 ,3),
+  (18 ,4),
+  (18 ,5),
+  (19 ,1),
+  (19 ,2),
+  (19 ,3),
+  (19 ,4),
+  (19 ,5),
+  (20 ,1),
+  (20 ,2),
+  (20 ,3),
+  (20 ,4),
+  (20 ,5),
+  (21 ,1),
+  (21 ,2),
+  (21 ,3),
+  (21 ,4),
+  (21 ,5);
 
 
 
@@ -1458,107 +1438,112 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
 -- Volcado de datos para la tabla `usuario_tiene_permiso`
 --
 
-INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-(1, 7),
-(1, 8),
-(1, 9),
-(1, 10),
-(1, 11),
-(1, 12),
-(1, 13),
-(1, 14),
-(1, 15),
-(1, 16),
-(1, 17),
-(1, 18),
-(1, 19),
-(1, 20),
-(1, 21),
-(1, 22),
-(1, 23),
-(1, 24),
-(1, 25),
-(1, 26),
-(1, 27),
-(1, 28),
-(1, 29),
-(1, 30),
-(1, 31),
-(1, 32),
-(1, 33),
-(1, 34),
-(1, 35),
-(1, 36),
-(1, 37),
-(1, 38),
-(1, 39),
-(1, 40),
-(1, 41),
-(1, 42),
-(1, 43),
-(1, 44),
-(1, 45),
-(1, 46),
-(1, 47),
-(1, 48),
-(1, 49),
-(1, 50),
-(1, 51),
-(1, 52),
-(1, 53),
-(1, 54),
-(1, 55),
-(1, 56),
-(1, 57),
-(1, 58),
-(1, 59),
-(1, 60),
-(1, 61),
-(1, 62),
-(1, 63),
-(1, 64),
-(1, 65),
-(1, 66),
-(1, 67),
-(1, 68),
-(1, 69),
-(1, 70),
-(1, 71),
-(1, 72),
-(1, 73),
-(1, 74),
-(1, 75),
-(1, 76),
-(1, 77),
-(1, 78),
-(1, 79),
-(1, 80),
-(1, 81),
-(1, 82),
-(1, 83),
-(1, 84),
-(1, 85),
-(1, 86),
-(1, 87),
-(1, 88),
-(1, 89),
-(1, 90),
-(1, 91),
-(1, 92),
-(1, 93),
-(1, 94),
-(1, 95),
-(1, 96),
-(1, 97),
-(1, 98),
-(1, 99),
-(1, 100);
+  INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
+  (1, 1),
+  (1, 2),
+  (1, 3),
+  (1, 4),
+  (1, 5),
+  (1, 6),
+  (1, 7),
+  (1, 8),
+  (1, 9),
+  (1, 10),
+  (1, 11),
+  (1, 12),
+  (1, 13),
+  (1, 14),
+  (1, 15),
+  (1, 16),
+  (1, 17),
+  (1, 18),
+  (1, 19),
+  (1, 20),
+  (1, 21),
+  (1, 22),
+  (1, 23),
+  (1, 24),
+  (1, 25),
+  (1, 26),
+  (1, 27),
+  (1, 28),
+  (1, 29),
+  (1, 30),
+  (1, 31),
+  (1, 32),
+  (1, 33),
+  (1, 34),
+  (1, 35),
+  (1, 36),
+  (1, 37),
+  (1, 38),
+  (1, 39),
+  (1, 40),
+  (1, 41),
+  (1, 42),
+  (1, 43),
+  (1, 44),
+  (1, 45),
+  (1, 46),
+  (1, 47),
+  (1, 48),
+  (1, 49),
+  (1, 50),
+  (1, 51),
+  (1, 52),
+  (1, 53),
+  (1, 54),
+  (1, 55),
+  (1, 56),
+  (1, 57),
+  (1, 58),
+  (1, 59),
+  (1, 60),
+  (1, 61),
+  (1, 62),
+  (1, 63),
+  (1, 64),
+  (1, 65),
+  (1, 66),
+  (1, 67),
+  (1, 68),
+  (1, 69),
+  (1, 70),
+  (1, 71),
+  (1, 72),
+  (1, 73),
+  (1, 74),
+  (1, 75),
+  (1, 76),
+  (1, 77),
+  (1, 78),
+  (1, 79),
+  (1, 80),
+  (1, 81),
+  (1, 82),
+  (1, 83),
+  (1, 84),
+  (1, 85),
+  (1, 86),
+  (1, 87),
+  (1, 88),
+  (1, 89),
+  (1, 90),
+  (1, 91),
+  (1, 92),
+  (1, 93),
+  (1, 94),
+  (1, 95),
+  (1, 96),
+  (1, 97),
+  (1, 98),
+  (1, 99),
+  (1, 100),
+  (1, 101),
+  (1, 102),
+  (1, 103),
+  (1, 104),
+  (1, 105);
 
 
 
@@ -1690,11 +1675,15 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 92),
               (1, 93),
               (1, 94),
-              (1, 95);
-;
-
-;
+              (1, 95),
               /*ENGADIDO POR BRUNO*/
+              /*ENGADIDO POR ADRI*/
+              (1, 101),
+              (1, 102),
+              (1, 103),
+              (1, 104),
+              (1, 105);
+              /*ENGADIDO POR ADRI*/
 /*ENGADIDO POR IVAN */
 --
 -- Volcado de datos para la tabla `categoria`
@@ -1769,9 +1758,9 @@ INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_na
 --
 
 
-INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`, `plazas_libres`) VALUES
-  ('Danza', '10:00:00', '12:00:00', '2017-20-12', 300, 1, 1, 300),
-  ('Zumba', '12:05:00', '13:30:00', '2017-23-12', 150, 1, 1, 150);
+  INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`, `plazas_libres`) VALUES
+    ('Danza', '10:00:00', '12:00:00', '2017-01-01', 300, 1, 1, 300),
+    ('Zumba', '12:05:00', '13:30:00', '2017-01-01', 150, 1, 1, 150);
 
 --
 -- Volcado de datos para la tabla `alumno_se_apunta_evento`

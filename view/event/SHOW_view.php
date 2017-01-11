@@ -69,6 +69,9 @@ $events = $view->getVariable("eventstoshow");
                     <tr class="row" >
                         <!--CADA UN DE ESTES E UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['EVENTS_NAME']?></th>
+                        <th class="text-center"><?php echo $strings['date']?></th>
+                        <th class="text-center"><?php echo $strings['free_places']?></th>
+                        <th class="text-center"><?php echo $strings['one_space']?></th>
                         <?php
                         if(!$edit && !$delete){ ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
@@ -92,7 +95,12 @@ $events = $view->getVariable("eventstoshow");
 
                         echo "<tr class='row text-center' ><td> ";
 
-                        echo $e->getName() . "</td><td class='text-center'>";
+                        echo $e->getName() . "</td><td>";
+                        echo $e->getDate() . "</td><td>";
+                        echo $e->getFreeplaces() . "</td><td>";
+                        echo $e->getSpace()->getCodspace() . "</td>";
+
+                        echo " <td class='text-center'>";
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
                             echo '" data-toggle="modal" data-target="#view' . $e->getCodevent() . '';

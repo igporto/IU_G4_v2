@@ -161,7 +161,7 @@ class SessionController extends BaseController
             }
         }
 
-        
+
         $this->view->setVariable("activity", $this->activityMapper->show());
         $this->view->setVariable("employee", $this->employeeMapper->show());
         $this->view->setVariable("space", $this->spaceMapper->show());

@@ -91,7 +91,7 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
 
                         echo $p->getIdCliente() . "</td><td class='text-center'>";
                         echo $p->getPeriodo() . "</td><td class='text-center'>";
-                        echo $p->getTotal() . "</td><td class='text-center'>";
+                        echo $p->getTotal() . " €</td><td class='text-center'>";
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';

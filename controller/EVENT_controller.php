@@ -23,6 +23,7 @@ class EventController extends BaseController {
     private $employeeMapper;
     private $eventMapper;
     private $alumnMapper;
+    private $sessioncontroller;
 
 
     public function __construct() {
@@ -32,6 +33,7 @@ class EventController extends BaseController {
         $this->employeeMapper = new EmployeeMapper();
         $this->spaceMapper = new SpaceMapper();
         $this->alumnMapper = new AlumnMapper();
+        //$this->sessioncontroller = new SessionController();
 
         $this->view->setLayout("navbar");
 
@@ -56,13 +58,17 @@ class EventController extends BaseController {
                 if(!$this->eventMapper->EventNameExists($event->getName())){
                     if($event->getCapacity()>0){
                         if($event->getCapacity()<= $event->getSpace()->getCapacity()){
-                            //if(isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour())) {
-                                $this->eventMapper->add($event);
-                                $this->view->setFlash('succ_event_add');
-                                $this->view->redirect("event", "show");
-                            /*}else{
-                                $this->view->setFlash("fail_hour_incorrect");
-                            }*/
+                            if($this->eventMapper->isearly($event->getDate())){
+                                //if($this->sessioncontroller->isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour(), $event->getSpace())) {
+                                    $this->eventMapper->add($event);
+                                    $this->view->setFlash('succ_event_add');
+                                    $this->view->redirect("event", "show");
+                                // }else{
+                                //    $this->view->setFlash("fail_hour_incorrect");
+                                // }
+                            }else{
+                                $this->view->setFlash("fail_date_incorrect");
+                            }
                         }else{
                             $this->view->setFlash("fail_aforo_fail_event");
                         }

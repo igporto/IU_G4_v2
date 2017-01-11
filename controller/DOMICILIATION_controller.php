@@ -147,9 +147,20 @@ class DomiciliationController extends BaseController
     {
         if (isset($_POST["submit"])) {
             $domiciliation = new Domiciliation();
-            if (isset($_POST['id_domiciliacion'])) {
-                $domiciliation->setIdDomiciliacion((htmlentities(addslashes($_POST["id_domiciliacion"]))));
+
+            if (isset($_POST['periodo'])) {
+                $domiciliation->setPeriodo(htmlentities(addslashes($_POST["periodo"])));
             }
+            if (isset($_POST['total'])) {
+                $domiciliation->setTotal(htmlentities(addslashes($_POST["total"])));
+            }
+            if (isset($_POST['id_cliente'])) {
+                $domiciliation->setIdCliente(htmlentities(addslashes($_POST["id_cliente"])));
+            }
+            if (isset($_POST['iban'])) {
+                $domiciliation->setIban(htmlentities(addslashes($_POST["iban"])));
+            }
+
             try {
                 $this->view->setVariable("domiciliationstoshow", $this->domiciliationMapper->search($domiciliation));
             } catch (Exception $e) {
