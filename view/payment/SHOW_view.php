@@ -22,14 +22,14 @@ $permissions = $view->getVariable("paymentstoshow");
 
 <div class="col-xs-12 col-md-8 ">
 
-    <?php if ($_REQUEST["action"] == "show") {
+    <?php if ($_REQUEST["action"] == "show" || $_REQUEST["action"] == "search") {
         echo "<h1 class='page-header'>" . $strings['management_payments'] . "</h1>";
     } else {
         echo "<h1 class='page-header'>" . $strings['pending_payments'] . "</h1>";
     } ?>
     <div class="row">
 
-        <?php if ($_REQUEST["action"] == "show") {
+        <?php if ($_REQUEST["action"] == "show" || $_REQUEST["action"] == "search") {
             echo '
         <a class="btn btn-warning btn-outline" href="index.php?controller=payment&action=show">
             <i class="fa fa-search-minus"></i>
@@ -76,7 +76,7 @@ $permissions = $view->getVariable("paymentstoshow");
                 $strings['have_pending_payments'] .
                 '<a href="index.php?controller=payment&action=pending" id="pendiente" style="display: none;">
             <button type="button" class="btn btn-danger" >
-                <i class="fa fa-fw-alert fa"></i>'. $strings['pending_payments'] . '</button>
+                <i class="fa fa-fw-alert fa"></i>' . $strings['pending_payments'] . '</button>
         </a></div>';
         } else {
             echo ' <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
@@ -186,7 +186,7 @@ $permissions = $view->getVariable("paymentstoshow");
 
                         echo "</td></tr>";
                     }
-                ?><a style=""></a>
+                    ?><a style=""></a>
 
                     <script>
                         disp = document.getElementById("pendiente").style.display;

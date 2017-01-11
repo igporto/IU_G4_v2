@@ -557,6 +557,9 @@ $strings = array(
 
     'physio'=>'physio',
         'registration'=>'registration',
-    'REGISTRATION'=>'Registration'
+    'REGISTRATION'=>'Registration',
+    'search_bill'=>'Bill search',
+    'anyone'=>'Anyone',
+    'search_domiciliation'=>'Domiciliation search'
 )
 ?>

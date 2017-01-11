@@ -127,13 +127,15 @@ class BillController extends BaseController
     public function search()
     {
         if (isset($_POST["submit"])) {
+
             $bill = new Bill();
-            if (isset($_POST['billname'])) {
-                $bill->setBillname((htmlentities(addslashes($_POST["billname"]))));
+            if (isset($_POST['name'])) {
+                $bill->setNombre((htmlentities(addslashes($_POST["name"]))));
             }
-            if (isset($_POST["id_pago"])) {
-                $bill->setCodbill(htmlentities(addslashes($_POST["id_pago"])));
+            if (isset($_POST["number"])) {
+                $bill->setNumero(htmlentities(addslashes($_POST["number"])));
             }
+
             try {
 
                 $this->view->setVariable("billstoshow", $this->billMapper->search($bill));

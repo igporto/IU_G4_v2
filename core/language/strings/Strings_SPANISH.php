@@ -554,7 +554,9 @@ $strings = array(
 
     'startTime'=>'Hora inicio',    
         'registration'=>'inscripción',
-    'REGISTRATION'=>'Inscripción'
-
+    'REGISTRATION'=>'Inscripción',
+'search_bill'=>'Buscar factura',
+	'anyone'=>'Cualquiera',
+	'search_domiciliation'=>'Buscar domiciliacion'
 )
 ?>

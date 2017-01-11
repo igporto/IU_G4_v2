@@ -121,16 +121,33 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
 
     public function search(Payment $payment)
     {
-            $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND metodo_pago like ? AND tipo_cliente = ? 
+        $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND metodo_pago like ? AND tipo_cliente like ? 
                                         AND pagado like ? AND dni_alum like ? AND dni_cliente_externo like ?");
-
+        if ($payment->getDniAlum() != "" && $payment->getDniClienteExterno() == NULL) {
+            echo "Primero - ";
+            $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND metodo_pago like ? AND tipo_cliente like ? 
+                                        AND pagado like ? AND dni_alum like ?");
             $stmt->execute(array("%" . $payment->getCantidad() . "%",
                 "%" . $payment->getMetodoPago() . "%", "%" . $payment->getTipoCliente() . "%",
-                "%" . $payment->getPagado() . "%", "%" . $payment->getDniAlum() . "%", "%" . $payment->getDniClienteExterno() . "%"));
-            $payments_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                "%" . $payment->getPagado() . "%", "%" . $payment->getDniAlum() . "%"));
+        } else if ($payment->getDniAlum() == NULL && $payment->getDniClienteExterno() != "") {
+            echo "Segundo - ";
+            $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND metodo_pago like ? AND tipo_cliente like ? 
+                                        AND pagado like ? AND dni_cliente_externo like ?");
+            $stmt->execute(array("%" . $payment->getCantidad() . "%",
+                "%" . $payment->getMetodoPago() . "%", "%" . $payment->getTipoCliente() . "%",
+                "%" . $payment->getPagado() . "%", "%" . $payment->getDniClienteExterno() . "%"));
+        } else {
+            echo "Tercero - ";
+            $stmt = $this->db->prepare("SELECT * FROM pago WHERE cantidad like ? AND metodo_pago like ? AND tipo_cliente like ? 
+                                        AND pagado like ?");
+            $stmt->execute(array("%" . $payment->getCantidad() . "%",
+                "%" . $payment->getMetodoPago() . "%", "%" . $payment->getTipoCliente() . "%",
+                "%" . $payment->getPagado() . "%"));
+        }
 
-        var_dump($payments_db);
-        exit;
+
+        $payments_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $payments = array();
         foreach ($payments_db as $p) {

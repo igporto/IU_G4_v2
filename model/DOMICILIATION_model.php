@@ -11,6 +11,7 @@ require_once(__DIR__ . "/../model/DOMICILIATION.php");
 //inclues de outros obxetos que se precisen
 require_once(__DIR__ . "/../model/ALUMN_model.php");
 require_once(__DIR__ . "/../model/ALUMN.php");
+
 class DomiciliationMapper
 {
 
@@ -102,16 +103,17 @@ class DomiciliationMapper
         }
     }
 
-    public function search(Domiciliation $domiciliation){
-        $stmt = $this->db->prepare("SELECT * FROM domiciliacion WHERE id_domiciliacion like ?");
-        $stmt->execute(array("%".$domiciliation->getIdDomiciliacion()."%"));
+    public function search(Domiciliation $domiciliation)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM domiciliacion WHERE periodo like ? and total like ? and id_cliente like ? and iban like ?");
+        $stmt->execute(array("%" . $domiciliation->getPeriodo() . "%", "%" . $domiciliation->getTotal() . "%", "%" . $domiciliation->getIdCliente() . "%",
+            "%" . $domiciliation->getIban() . "%"));
         $domiciliations_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $domiciliations = array();
-        foreach ($domiciliations_db as $p){
-            array_push($domiciliations, new Domiciliation(
-                    $p['id_domiciliacion'])
-            );
+        foreach ($domiciliations_db as $domiciliation) {
+            array_push($domiciliations, new Domiciliation($domiciliation["id_domiciliacion"], $domiciliation["periodo"], $domiciliation["total"],
+                $domiciliation["id_cliente"], $domiciliation["iban"]));
         }
         return $domiciliations;
     }

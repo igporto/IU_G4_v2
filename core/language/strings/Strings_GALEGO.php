@@ -555,6 +555,9 @@ $strings = array(
     'codReserve'=>'Código Reserva',
     'startTime'=>'Hora comezo',
     'registration'=>'inscrición',
-    'REGISTRATION'=>'Inscrición'
+    'REGISTRATION'=>'Inscrición',
+    'search_bill'=>'Buscar factura',
+    'anyone'=>'Calquera',
+    'search_domiciliation'=>'Buscar domiciliacion'
 )
 ?>

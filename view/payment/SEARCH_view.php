@@ -8,7 +8,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['find']." ".$strings["PAYMENT"] ?></h1>
+    <h1 class="page-header"><?php echo $strings['find'] . " " . $strings["PAYMENT"] ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=payment&action=search"
           enctype="multipart/form-data">
@@ -26,6 +26,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="tipo_cliente" id="tipo_cliente"
                                     onchange="tipoCliente()">
+                                <option value="" selected><?php echo $strings["anyone"] ?></option>
                                 <option value="student"><?php echo $strings['student'] ?></option>
                                 <option value="external"><?php echo $strings['external_client'] ?></option>
                             </select>
@@ -34,12 +35,15 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <!--Campo tipo de cliente-->
                     </div>
 
-                    <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf" id="label1" style="display: block"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
-                        <label for="selectperf" id="label2" style="display: none"><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
+                    <div class="col-xs-12 col col-md-5" id="anyone" style="display: none">
+                        <label for="selectperf" id="label1"
+                               style="display: block"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
+                        <label for="selectperf" id="label2"
+                               style="display: none"><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="dni" id="dni" style="display: block">
+                                <option value="" selected><?php echo $strings["anyone"] ?></option>
                                 <?php
                                 //Engadimos unha opcion por categoria a escoller
                                 $alumnMapper = new AlumnMapper();
@@ -52,7 +56,8 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 }
                                 ?>
                             </select>
-                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external" style="display: none">
+                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external"
+                                   style="display: none">
                             <div id="error"></div>
                         </div>
                         <!--Campo dni de cliente-->
@@ -63,13 +68,16 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 <script>
                     function tipoCliente() {
                         var tipo = document.getElementById("tipo_cliente").selectedIndex;
-
                         if (tipo == 0) {
+                            document.getElementById("anyone").style = "display: none";
+                        } else if (tipo == 1) {
+                            document.getElementById("anyone").style = "display: block";
                             document.getElementById("dni").style = "display: block";
                             document.getElementById("label1").style = "display: block";
                             document.getElementById("label2").style = "display: none";
                             document.getElementById("dni_external").style = "display: none";
-                        } else {
+                        } else if (tipo == 2) {
+                            document.getElementById("anyone").style = "display: block";
                             document.getElementById("dni").style = "display: none";
                             document.getElementById("label1").style = "display: none";
                             document.getElementById("label2").style = "display: block";
@@ -101,6 +109,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="pagado" id="pagado" onchange="pagar()">
+                                <option value="" selected><?php echo $strings['anyone'] ?></option>
                                 <option value="1"><?php echo $strings['si'] ?></option>
                                 <option value="0"><?php echo $strings['no'] ?></option>
                             </select>
@@ -109,12 +118,13 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <!--Pagado-->
                     </div>
 
-                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="display: block">
+                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="display: none">
                         <label for="selectperf"><?php echo $strings['payment_method'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="metodo_pago" id="metodo_pago">
-                                <option value="cash" selected><?php echo $strings['cash'] ?></option>
+                                <option value="" selected><?php echo $strings['anyone'] ?></option>
+                                <option value="cash"><?php echo $strings['cash'] ?></option>
                                 <option value="creditCard"><?php echo $strings['creditCard'] ?></option>
                             </select>
                             <div id="error"></div>
@@ -125,7 +135,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         function pagar() {
                             var pagado = document.getElementById("pagado").selectedIndex;
 
-                            if (pagado == 0) {
+                            if (pagado == 1) {
                                 document.getElementById("div_metodo").style = "display: block";
                             } else {
                                 document.getElementById("div_metodo").style = "display: none";
@@ -152,9 +162,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
                         <i class="fa fa-search"></i>
                         <?php echo $strings['find'] ?></i></button>
-                    <?php
-
-                    ?>
                 </div>
             </div>
 
