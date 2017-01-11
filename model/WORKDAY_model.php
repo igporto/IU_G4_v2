@@ -20,6 +20,23 @@ class WorkdayMapper
         $this->db = PDOConnection::getInstance();
     }
 
+    public function getScheduleWorkday($scheduleId, $day){
+        $stmt = $this->db->prepare("SELECT * FROM jornada where id_horario = ? and dia_semana = ?");
+        $stmt->execute(array(
+                        $scheduleId, $day
+                            )
+                    );
+        $workday = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return new Workday(
+                    $workday['id_jornada'],
+                    $workday['dia_semana'],
+                    $workday['hora_inicio'],
+                    $workday['hora_fin'],
+                    $workday['id_horario']
+                );
+    }
+
     public function add(Workday $workday){
         $stmt = $this->db->prepare("INSERT INTO jornada(id_horario, dia_semana, hora_inicio, hora_fin) values (?,?,?,?)");
         $stmt->execute(array(
@@ -35,7 +52,7 @@ class WorkdayMapper
     {
         $stmt = $this->db->query("SELECT * FROM jornada");
         $workday_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $uworkday = array();
+        $workdays = array();
 
         foreach ($workday_db as $workday) {
 

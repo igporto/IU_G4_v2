@@ -76,7 +76,7 @@ class UserController extends BaseController {
 		}
 		else {
 			$this->view->setVariable('currentperms', $this->getCurrentUserPerms());
-			$this->view->render("calendar", "placeholder");
+			$this->view->redirect("calendar", "home");
 		}
 		
 	}

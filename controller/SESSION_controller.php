@@ -66,6 +66,8 @@ class SessionController extends BaseController
         $time = strtotime($date);
         $dayoweek = date('N',$time);
 
+        $dayoweek = $dayoweek - 1;
+
         $schedule = $this->scheduleMapper->getDateSchedule($date);
         $workday = NULL;
 

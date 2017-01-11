@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
+require_once(__DIR__."/SESSION.php");
 require_once(__DIR__."/SPACE_model.php");
 require_once(__DIR__."/EVENT_model.php");
 require_once(__DIR__."/EMPLOYEE_model.php");
@@ -30,11 +31,20 @@ class SessionMapper
 
 
     public function add(Session $session){
+        $codevent = NULL;
+        $codactivity = NULL;
+
+        if ($session->getEvent() != NULL) {
+            $codevent = $session->getEvent()->getCodevent();
+        }else{
+            $codactivity = $session->getActivity()->getCodactivity();
+        }
+
         $stmt = $this->db->prepare("INSERT INTO sesion(id_espacio, id_evento, id_actividad, id_empleado, hora_inicio, hora_fin, fecha) values (?,?,?,?,?,?,?)");
         $stmt->execute(array(
                 $session->getSpace()->getCodspace(),
-                $session->getEvent()->getCodevent(),
-                $session->getActivity()->getCodactivity(),
+                $codevent,
+                $codactivity,
                 $session->getEmployee()->getCodemployee(),
                 $session->getHourStart(),
                 $session->getHourEnd(),
