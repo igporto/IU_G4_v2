@@ -30,12 +30,12 @@ $injurys = $view->getVariable("injurystoshow");
 
 
         <!--BOTÃƒâ€œN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline"  href="index.php?controller=alumn&action=show">
+        <a class="btn btn-warning btn-outline"  href="index.php?controller=employee&action=show">
             <i class="fa fa-search-minus"></i>
             <?php echo $strings['clean'];?>
         </a>
 
-        <a href="index.php?controller=alumn&action=addinjury&codalumn=<?php echo $_GET['codalumn']?>">
+        <a href="index.php?controller=employee&action=addinjury&codemployee=<?php echo $_GET['codemployee']?>">
             <button type="button" class="btn btn-success">
                 <i class="fa fa-fw fa-plus"></i>
                 <?php echo $strings['create_injury'] ?>
@@ -77,8 +77,6 @@ $injurys = $view->getVariable("injurystoshow");
                     <!--CADA UN DE ESTES E UNHA FILA-->
 
                     <?php
-
-
                     foreach ($injurys as $i) {
 
                         echo "<tr class='row text-center' ><td> ";
@@ -86,7 +84,7 @@ $injurys = $view->getVariable("injurystoshow");
 
                         echo $i->getInjury()->getNameInjury() . "</td><td> ";
 
-                        echo $i->getDate() . "</td><td> ";
+                        echo $i->getDateInjury() . "</td><td> ";
                         if($i->getDateRecovery() != NULL){
                             echo $i->getDateRecovery() ;
                         }else{
@@ -104,7 +102,7 @@ $injurys = $view->getVariable("injurystoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=alumn&action=editinjury&codinjuryalumn=".$i->getCod().">";
+                            echo "<a href=index.php?controller=employee&action=editinjury&codinjuryemployee=".$i->getCod().">";
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -137,7 +135,7 @@ $injurys = $view->getVariable("injurystoshow");
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=employee&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

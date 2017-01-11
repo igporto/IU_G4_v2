@@ -263,6 +263,22 @@ CREATE TABLE `lesion` (
   `tiempo_recuperacion` int(4) NULL
   ) ;
 -- --------------------------------------------------------
+
+--
+-- table structure for table `lesion_empleado`
+--
+
+CREATE TABLE `empleado_tiene_lesion` (
+  `id_empleado_tiene_lesion` int(4) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
+  `id_lesion` int(4) NOT NULL,
+  `fecha_lesion` date DEFAULT NULL,
+  `fecha_recuperacion` date DEFAULT NULL
+) ;
+
+
+-- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `evento`
 --
@@ -668,6 +684,11 @@ ALTER TABLE `alumno`
 ALTER TABLE `alumno_tiene_lesion`
   ADD PRIMARY KEY (`id_alumno_tiene_lesion`);
 
+--
+-- Indices de la tabla `empleado_tiene_lesion`
+--
+ALTER TABLE `empleado_tiene_lesion`
+  ADD PRIMARY KEY (`id_empleado_tiene_lesion`);
 
 --
 -- Indices de la tabla `espacio`
@@ -934,6 +955,12 @@ ALTER TABLE `actividad`
 --
 ALTER TABLE `alumno_tiene_lesion`
   MODIFY `id_alumno_tiene_lesion` int(4) NOT NULL AUTO_INCREMENT;
+  --
+-- AUTO_INCREMENT de la tabla `empleado_tiene_lesion`
+--
+ALTER TABLE `empleado_tiene_lesion`
+  MODIFY `id_empleado_tiene_lesion` int(4) NOT NULL AUTO_INCREMENT;
+  --
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
@@ -1122,10 +1149,18 @@ ALTER TABLE `documento`
 
 
 --
--- Filtros para la tabla `empleado`
+-- Filtros para la tabla `empleado_tiene_lesion`
 --
 ALTER TABLE `empleado`
   ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`cod_usuario`) REFERENCES `usuario` (`cod_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Filtros para la tabla `empleado_tiene_lesion`
+--
+ALTER TABLE `empleado_tiene_lesion`
+  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_1` FOREIGN KEY (`id_lesion`) REFERENCES `lesion` (`id_lesion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `empleado_tiene_lesion_ibfk_2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `evento`

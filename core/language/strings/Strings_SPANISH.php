@@ -280,6 +280,10 @@ $strings = array(
     'succ_payment_delete'=>'Pago borrado correctamente',
     'succ_payment_edit'=>'Pago editado correctamente',
 
+    'succ_injury_add'=>'Lesión creada correctamente',
+    'succ_injury_delete'=>'Lesión borrada correctamente',
+    'succ_injury_edit'=>'Lesión editada correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -303,6 +307,7 @@ $strings = array(
     	'fail_birthdate_incorrect' => 'La fecha de nacimiento no es válida',
     	'fail_price_incorrect'=>'El Precio no es válido',
     	'fail_date_incorrect'=>'La fecha no es válida',
+    	'fail_date_injuries'=>'La fecha de Recuperacion no puede ser anterior a la de Lesión',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -472,6 +477,7 @@ $strings = array(
     'list_of_employer' =>'Lista de empleados',
     'list_of_injurys'=>'Lista de Lesiones',
     'not_recovered_yet'=>'No Recuperado Aún',
+    'injury'=>'Lesión',
 
 
     /*Alumno*/

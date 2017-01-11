@@ -5,7 +5,7 @@ require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../model/INJURY.php");
 require_once(__DIR__."/../model/INJURY_model.php");
 require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
-require_once(__DIR__ . "/../model/EMPLOYER_HAS_INJURY.php");
+require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 
@@ -142,12 +142,6 @@ class InjuryController extends BaseController {
             }
             if(!empty($_POST['name'])){
                 $injury->setNameInjury(htmlentities(addslashes($_POST["name"])));
-            }
-            if(!empty($_POST["description"])){
-                $injury->setDescription(htmlentities(addslashes($_POST["description"])));
-            }
-            if(!empty($_POST["treatment"])){
-                $injury->setTreatment(htmlentities(addslashes($_POST["treatment"])));
             }
             if(!empty($_POST["time"])){
                 $injury->setTime(htmlentities(addslashes($_POST["time"])));

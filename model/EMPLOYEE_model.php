@@ -4,6 +4,7 @@ require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/EMPLOYEE.php");
 require_once(__DIR__ . "/../model/USER.php");
 require_once(__DIR__ . "/../model/USER_model.php");
+require_once(__DIR__ . "/../model/INJURY_model.php");
 
 
 class EmployeeMapper
@@ -15,11 +16,13 @@ class EmployeeMapper
      */
     private $db;
     private $userMapper;
+    private $injuryMapper;
 
     public function __construct()
     {
         $this->db = PDOConnection::getInstance();
         $this->userMapper = new UserMapper();
+        $this->injuryMapper = new InjuryMapper();
     }
 
     public function employeedniExists($codemployee)
@@ -168,5 +171,71 @@ class EmployeeMapper
         }
 
 
+    }
+
+    public function addinjury(Employeehasinjury $phi){
+        $stmt = $this->db->prepare("INSERT INTO empleado_tiene_lesion (id_empleado, id_lesion, fecha_lesion) 
+                                    VALUES (?, ?, ?)");
+        $stmt->execute(array($phi->getEmployee()->getCodemployee(), $phi->getInjury()->getCodInjury(), $phi->getDateInjury()));
+
+        return $this->db->lastInsertId();
+    }
+
+    public function showinjury(Employee $employee){
+        $stmt = $this->db->prepare("SELECT * FROM empleado_tiene_lesion  WHERE id_empleado = ?");
+        $stmt->execute(array($employee->getCodemployee()));
+        $injury_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $injurys = array();
+
+        foreach ($injury_db as $injury) {
+            array_push($injurys, $this->viewInjury($injury['id_empleado_tiene_lesion']));
+        }
+        return $injurys;
+    }
+
+    public function deleteinjury($codinjuryemployee){
+        $stmt = $this->db->prepare("DELETE from empleado_tiene_lesion WHERE id_empleado_tiene_lesion = ?");
+        $stmt->execute(array( $codinjuryemployee ));
+    }
+
+    public function editinjury(Employeehasinjury $phi)
+    {
+        $stmt = $this->db->prepare("UPDATE empleado_tiene_lesion SET fecha_recuperacion = ? WHERE id_empleado_tiene_lesion = ?");
+        $stmt->execute(array($phi->getDateRecovery(), $phi->getCod()));
+    }
+
+    public function viewInjury($codinjuryemployee){
+        $stmt = $this->db->prepare("SELECT * FROM empleado_tiene_lesion WHERE id_empleado_tiene_lesion =?");
+        $stmt->execute(array($codinjuryemployee));
+        $phi = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($phi != null) {
+            return new Employeehasinjury(
+                $phi['id_empleado_tiene_lesion'],
+                $this->view($phi['id_empleado']),
+                $this->injuryMapper->view($phi['id_lesion']),
+                $phi['fecha_lesion'],
+                $phi['fecha_recuperacion']
+            );
+        } else {
+            return new Employeehasinjury();
+        }
+    }
+    public function validInjurydate($date)
+    {
+
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($db != NULL) {
+            $actual = $db[0];
+
+            if ($date <= $actual['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

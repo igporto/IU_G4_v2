@@ -3,7 +3,7 @@
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/INJURY.php");
 require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
-require_once(__DIR__ . "/../model/EMPLOYER_HAS_INJURY.php");
+require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
 
 class InjuryMapper
 {
@@ -97,8 +97,8 @@ class InjuryMapper
     }
 
     public function search(Injury $injury){
-        $stmt = $this->db->prepare("SELECT * FROM lesion WHERE id_lesion like ? AND nombre like ? AND `descripcion` like ? AND tratamiento like ? AND tiempo_recuperacion like ?");
-        $stmt->execute(array("%".$injury->getCodInjury()."%", "%".$injury->getNameInjury()."%", "%".$injury->getDescription()."%", "%".$injury->getTreatment()."%", "%".$injury->getTime()."%"));
+        $stmt = $this->db->prepare("SELECT * FROM lesion WHERE id_lesion like ? AND nombre like ? AND tiempo_recuperacion like ?");
+        $stmt->execute(array("%".$injury->getCodInjury()."%", "%".$injury->getNameInjury()."%", "%".$injury->getTime()."%"));
         $sp_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $in = array();

@@ -297,6 +297,19 @@ class AlumnController extends BaseController
         $this->view->render("alumn", "editinjury", "codinjurypupil=" . $_GET['codinjurypupil']);
     }
 
+    public function deleteinjury(){
+        try {
+            if (isset($_GET['codinjuryalumn'])) {
+                $ehi = $this->alumnMapper->viewInjury($_GET['codinjuryalumn']);
+                $this->alumnMapper->deleteinjury(htmlentities(addslashes($_GET['codinjuryalumn'])));
+                $this->view->setFlash('succ_injury_delete');
+                $this->view->redirect("alumn", "showinjury", "codalumn=".$ehi->getPupil()->getCodalumn() );
+            }
+        } catch (Exception $e) {
+            $this->view->setFlash('erro_general');
+        }
+        $this->view->render("alumn", "show");
+    }
 
     public function validar_dni($dni)
     {

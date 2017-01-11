@@ -196,6 +196,12 @@ class AlumnMapper {
             return new Pupilhasinjury();
         }
     }
+
+    public function deleteinjury($codinjurypupil){
+        $stmt = $this->db->prepare("DELETE from alumno_tiene_lesion WHERE id_alumno_tiene_lesion = ?");
+        $stmt->execute(array($codinjurypupil));
+    }
+
     public function validInjurydate($date)
     {
 

@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../model/EMPLOYEE.php");
 require_once(__DIR__ . "/../model/EMPLOYEE_model.php");
 require_once(__DIR__ . "/../model/USER.php");
 require_once(__DIR__ . "/../model/USER_model.php");
+require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
+require_once(__DIR__ . "/../model/INJURY_model.php");
 
 require_once(__DIR__ . "/../controller/BaseController.php");
 
@@ -15,6 +17,7 @@ class EmployeeController extends BaseController
 
     private $employeeMapper;
     private $userMapper;
+    private $injuryMapper;
 
     public function __construct()
     {
@@ -22,6 +25,7 @@ class EmployeeController extends BaseController
 
         $this->employeeMapper = new EmployeeMapper();
         $this->userMapper = new UserMapper();
+        $this->injuryMapper = new InjuryMapper();
 
         // Actions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
@@ -290,6 +294,69 @@ class EmployeeController extends BaseController
 
     }
 
+    public function addinjury()
+    {
+        if (isset($_POST["submit"])) {
+            $ehi = new Employeehasinjury();
+
+            $ehi->setEmployee($this->employeeMapper->view(htmlentities(addslashes($_REQUEST['codemployee']))));
+            $ehi->setInjury($this->injuryMapper->view(htmlentities(addslashes($_POST['codinjury']))));
+            $ehi->setDateInjury(htmlentities(addslashes($_POST['date'])));
+
+
+            try {
+                if ($this->employeeMapper->validInjurydate($ehi->getDateInjury())) {
+                    $this->employeeMapper->addInjury($ehi);
+                    $this->view->setFlash("succ_injury_add");
+                    $this->view->redirect("employee", "showinjury", "codemployee=" . $ehi->getEmployee()->getCodemployee());
+                } else {
+                    $this->view->setFlash('fail_date_incorrect');
+                }
+            } catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        $this->view->render("employee", "addinjury");
+    }
+
+    public function showinjury()
+    {
+        $injurys = $this->employeeMapper->showinjury($this->employeeMapper->view(htmlentities(addslashes($_GET['codemployee']))));
+        $this->view->setVariable("injurystoshow", $injurys);
+        $this->view->render("employee", "showinjury", "codemployee=" . $_GET['codemployee']);
+    }
+
+    public function editinjury()
+    {
+        if (isset($_POST['submit'])) {
+            $phi = $this->employeeMapper->viewInjury(htmlentities(addslashes($_GET['codinjuryemployee'])));
+            if(isset($_POST['dateI'])){
+               $phi->setDateInjury(htmlentities(addslashes($_POST['dateI'])));
+            }
+            if(isset($_POST['dateR'])){
+                $phi->setDateRecovery(htmlentities(addslashes($_POST['dateR'])));
+            }
+            try {
+                if ($this->employeeMapper->validInjurydate($_POST['dateI']) && $this->employeeMapper->validInjurydate($_POST['dateR'])) {
+                    if($_POST['dateR'] > $_POST['dateI']){
+                        $this->employeeMapper->editinjury($phi);
+                        $this->view->setFlash('succ_injury_edit');
+                        $this->view->redirect("employee", "showinjury", "codemployee=" . $phi->getEmployee()->getCodemployee());
+                    }else{
+                        $this->view->setFlash('fail_date_injuries');
+                    }
+                } else {
+                    $this->view->setFlash('fail_date_incorrect');
+                }
+            } catch (Exception $e) {
+                $this->view->setFlash('erro_general');
+            }
+        }
+        $this->view->render("employee", "editinjury", "codinjuryemployee=" . $_GET['codinjuryemployee']);
+    }
+
     public function validar_dni($dni){
         $letra = substr($dni, -1);
         $numeros = substr($dni, 0, -1);
@@ -298,6 +365,20 @@ class EmployeeController extends BaseController
         }else{
             return false;
         }
+    }
+
+    public function deleteinjury(){
+        try {
+            if (isset($_GET['codinjuryemployee'])) {
+                $ehi = $this->employeeMapper->viewInjury($_GET['codinjuryemployee']);
+                $this->employeeMapper->deleteinjury(htmlentities(addslashes($_GET['codinjuryemployee'])));
+                $this->view->setFlash('succ_injury_delete');
+                $this->view->redirect("employee", "showinjury", "codemployee=".$ehi->getEmployee()->getCodemployee());
+            }
+        } catch (Exception $e) {
+            $this->view->setFlash('erro_general');
+        }
+        $this->view->render("employee", "show");
     }
 
     public function validar_email($direccion){

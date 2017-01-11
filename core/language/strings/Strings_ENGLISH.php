@@ -278,6 +278,10 @@ $strings = array(
     'succ_payment_delete'=>'Payment properly deleted',
     'succ_payment_edit'=>'Payment properly edited',
 
+    'succ_injury_add'=>'Injury properly created',
+    'succ_injury_delete'=>'Injury properly deleted',
+    'succ_injury_edit'=>'Injury properly edited',
+
 
 		/*FAIL*/
 		'fail_title'=>'Fail',
@@ -302,6 +306,7 @@ $strings = array(
     	'fail_birthdate_incorrect' => 'Birth Date is not valid',
     	'fail_price_incorrect'=>'Price is not valid',
     	'fail_date_incorrect'=>'Date is not valid',
+    	'fail_date_injuries'=>'Recovery Date can´t be lower than Injury Date ',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -470,6 +475,7 @@ $strings = array(
     'list_of_employer' =>'List of employer',
     'list_of_injurys'=>'List of Injurys',
     'not_recovered_yet'=>'Not Recovered Yet',
+    'injury'=>'Injury',
 
 
     'DOMICILIATION' => 'Domiciliations',

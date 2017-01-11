@@ -128,6 +128,11 @@ $employees = $view->getVariable("employeestoshow");
                         echo "' style='margin:2px'>";
                         echo "<i class='fa fa-file-text-o fa-fw'></i></button></a>";
 
+                        echo "<a href=index.php?controller=employee&action=showinjury&codemployee=" . $c->getCodemployee() . '>';
+                        echo "<button class='btn btn-danger btn-xs ";
+                        echo "' style='margin:2px'>";
+                        echo "<i class='fa fa-plus fa-fw'></i></button></a>";
+
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA CATEGORIA
                         include(__DIR__ . '/DELETE_view.php');
 

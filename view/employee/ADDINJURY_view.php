@@ -3,11 +3,10 @@
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
+require_once(__DIR__ . "/../../model/INJURY_model.php");
 
-$alumnMapper = new AlumnMapper();
+$employeeMapper = new EmployeeMapper();
 $injuryMapper = new InjuryMapper();
-$phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
-
 ?>
 
 <!-- refresca o perfil do select -->
@@ -20,7 +19,7 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['create_injury']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=alumn&action=editinjury&codinjurypupil=<?php echo $phi->getCod()?>"
+          action="index.php?controller=employee&action=addinjury&codemployee=<?php echo $_GET['codemployee']?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -40,20 +39,34 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
 
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['injury_name']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <?php
+                            $injurys = $injuryMapper->show();
+                            if($injurys == NULL){
+                            ?>
+                            <select name="codinjury" class='form-control icon-menu' disabled>
+
+                                <?php
+                                }else{
+                                ?>
+                                <select name="codinjury" class='form-control icon-menu'>
+                                    <?php
+                                        foreach ($injurys as $injury){
+                                            echo '<option value='.$injury->getCodInjury().'>'.$injury->getNameInjury().'</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                        </div>
+                        <!--Campo id evento-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
                         <label for="divdatestart"><?= $strings['date_injury']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" value="<?php echo $phi->getDateInjury(); ?>" type="date" name="dateI">
-                        </div>
-                        <!--Campo aforo-->
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="date" name="dateR">
+                            <input required class="form-control" type="date" name="date">
                         </div>
                         <!--Campo aforo-->
                     </div>
@@ -65,7 +78,7 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=showinjury&codalumn<?php echo $phi->getPupil()->getCodalumn()?>">
+                    <a class="btn btn-default btn-md" href="index.php?controller=employee&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

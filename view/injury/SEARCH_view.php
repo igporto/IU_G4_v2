@@ -20,72 +20,44 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
                 <!-- avisos + nome -->
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 text-info pull-right" style="margin-left: 10px">
+                    <div class="col-xs-12 col-md-6 text-info " style="margin-left: 10px">
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
 
                     </div>
-                    <div class="col-xs-12  col-md-5 pull-left">
+                </div>
 
+                <div class="row">
+                    <div class="col-xs-12  col-md-5 ">
+                        <label for="divdatestart"><?= $strings['name']  ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
+                            <input autofocus class="form-control" type="text" name="name" placeholder="<?php echo $strings['name'];?>" >
+                        </div>
+                    </div>
+                    <!--Campo name-->
+
+
+                    <div class="col-xs-12  col-md-5 ">
+                        <label for="divdatestart"><?= $strings['time_recovery']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
+                            <input  class="form-control" type="number" min="1" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
+                            <div id="error"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class ="row">
+                    <div class="col-xs-12  col-md-5 pull-left">
+                        <label for="divdatestart"><?= $strings['code']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
                             <input autofocus class="form-control" type="number" name="id_lesion" placeholder="<?php echo $strings['injury_id'];?>" >
                         </div>
                     </div>
-                    <!--Campo name-->
                 </div>
-
-                <div class="row">
-
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="text" name="name" placeholder="<?php echo $strings['name'];?>" >
-                        </div>
-                    </div>
-                    <!--Campo name-->
-                </div>
-                <div class="row">
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>" >
-                        </div>
-                    </div>
-                    <!--Campo description-->
-                </div>
-                <div class="row">
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="text" name="treatment" placeholder="<?php echo $strings['treatment'];?>" >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="number" name="time" placeholder="<?php echo $strings['time_recovery'];?>" >
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-
-
-                </div>
-
-
-
-
+                <!--Campo name-->
             </div>
         </div>
         <div class="row">
