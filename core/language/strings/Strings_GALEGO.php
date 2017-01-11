@@ -221,6 +221,7 @@ $strings = array(
         'succ_title'=>'Correcto',
         'succ_login'=>'Estás correctamente identificado!',
         'succ_user_add'=>'Usuario creado correctamente',
+        'succ_user_edit'=>'Usuario editado correctamente',
         'succ_user_delete'=>'Usuario borrado correctamente',
         'succ_perm_add'=>'Permiso creado correctamente',
         'succ_perm_delete'=>'Permiso borrado correctamente',

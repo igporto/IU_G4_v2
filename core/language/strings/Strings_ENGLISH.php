@@ -222,6 +222,7 @@ $strings = array(
 		'succ_title'=>'Correct',
 		'succ_login'=>'You are logged in!',
 		'succ_user_add'=>'User properly created',
+    	'succ_user_edit'=>'User properly edited',
 		'succ_user_delete'=>'User properly deleted',
 
 		'succ_perm_add'=>'Permission properly created',

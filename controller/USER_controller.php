@@ -261,7 +261,7 @@ class UserController extends BaseController {
 			try {
 				$this->userMapper->edit($user);
 				//ENVIAR AVISO DE USUARIO EDITADO!!!!!!!!!!
-				$this->view->setFlash("Usuario modificado correctamente!");
+				$this->view->setFlash("succ_user_edit");
 				//REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos usuarios)
 				$this->view->redirect("user", "show");
 			}catch(ValidationException $ex) {
