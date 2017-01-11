@@ -2,8 +2,9 @@
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../model/INJURY.php");
-require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
 require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
+require_once(__DIR__ . "/../model/PUPILHASINJURY.php");
+
 
 class InjuryMapper
 {

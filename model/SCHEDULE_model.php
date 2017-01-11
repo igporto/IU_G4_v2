@@ -31,8 +31,7 @@ class ScheduleMapper
         $stmt = $this->db->prepare("SELECT * FROM horario WHERE  fecha_inicio <= ? AND fecha_fin >= ?");
         $stmt->execute(array($date,$date));
 
-        $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        $schedule = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return new Schedule(
                     $schedule['id_horario'],
