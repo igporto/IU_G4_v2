@@ -62,7 +62,6 @@ class SessionMapper
         foreach ($session_db as $session) {
             array_push($sessions, $this->view($session['id_sesion']));
         }
-
         return $sessions;
     }
 
@@ -73,13 +72,11 @@ class SessionMapper
                         $sessionId
                             )
                     );
-        $session_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $sessions = array();
+        $session = $stmt->fetch(PDO::FETCH_ASSOC);
+        
 
-       foreach ($session_db as $session) {
 
-            array_push($sessions,
-                new Session(
+        return new Session(
                     $session['id_sesion'],
                     $session['fecha'],
                     $session['hora_inicio'],
@@ -88,12 +85,7 @@ class SessionMapper
                     $this->eventMapper->view($session['id_evento']),
                     $this->activityMapper->view($session['id_actividad']),
                     $this->employeeMapper->view($session['id_empleado'])
-                )
-            );
-        }
-
-
-        return $sessions;
+                );
     }
 
 

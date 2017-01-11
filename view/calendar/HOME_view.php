@@ -5,6 +5,7 @@
 	$wdMapper = new WorkdayMapper();
 	$schedules = $view->getVariable("schedules");
 	$data = $view->getVariable("scheduledata");
+
 ?>
 
 <script>
@@ -23,6 +24,7 @@
 					<?php 
 						$begin = new DateTime( $sc->getDateStart() );
 						$end = new DateTime( $sc->getDateEnd() );
+						 $end = $end->modify( '+1 day' );
 
 						$interval = DateInterval::createFromDateString('1 day');
 						$period = new DatePeriod($begin, $interval, $end);
@@ -45,10 +47,13 @@
 
 				<?php foreach ($data as $session): ?>
 					{
-						title: '<?=$session->getActivity()->getActivityname() ?>',
-						start: '<?= $session->getHourStart() ?>',
-						end: '<?=$session->getHourEnd()  ?>',
-						color: '<?=$session->getActivity()->getColor() ?>'
+						title: '<?= $session->getActivity()->getActivityname() ?>',
+						start: '<?= $session->getDate() ?>T<?= $session->getHourStart() ?>',
+						end: '<?= $session->getDate()  ?>T<?= $session->getHourEnd()  ?>',
+						color: '<?= $session->getActivity()->getColor() ?>',
+						<?php if ($session->getDate() ): ?>
+							
+						<?php endif ?>
 					},
 				<?php endforeach ?>
 
