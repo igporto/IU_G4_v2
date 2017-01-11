@@ -143,8 +143,54 @@ class AlumnMapper {
                 return false;
             }
         }
-
-
     }
 
+    public function addinjury(Pupilhasinjury $phi){
+        $stmt = $this->db->prepare("INSERT INTO alumno_tiene_lesion (id_alumno, id_lesion, fecha_lesion) 
+                                    VALUES (?, ?, ?)");
+        $stmt->execute(array($phi->getPupil()->getCodalumn(), $phi->getInjury()->getCodInjury(), $phi->getDate()));
+
+        return $this->db->lastInsertId();
+    }
+
+    public function showinjury(Alumn $alumn){
+        $stmt = $this->db->prepare("SELECT * FROM alumno_tiene_lesion  WHERE id_alumno = ?");
+        $stmt->execute(array($alumn->getCodalumn()));
+        $injury_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $injurys = array();
+
+        foreach ($injury_db as $injury) {
+            array_push($injurys, new Pupilhasinjury( $this->view($injury['id_alumno']),
+                $this->injuryMapper->view($injury['id_lesion'])),
+                $injury['fecha_lesion'],
+                $injury['fecha_recuperacion']);
+        }
+
+        return $injurys;
+    }
+
+    public function editinjury(Pupilhasinjury $phi)
+    {
+        $stmt = $this->db->prepare("UPDATE alumno_tiene_lesion SET fecha_recuperacion = ? WHERE id_alumno = ?");
+        $stmt->execute(array($phi->getDateRecovery(), $phi->getPupil()->getCodalumn()));
+    }
+
+
+    public function validInjurydate($date)
+    {
+
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($db != NULL) {
+            $actual = $db[0];
+
+            if ($date < $actual['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }

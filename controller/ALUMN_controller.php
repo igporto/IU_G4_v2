@@ -242,6 +242,54 @@ class AlumnController extends BaseController
 
     }
 
+    public function addinjury(){
+        if (isset($_POST["submit"])) {
+            $injury = new Pupilhasinjury();
+
+            $injury->setPupil($this->alumnMapper->view(htmlentities(addslashes($_REQUEST['codalumn']))));
+            $injury->setInjury($this->injuryMapper->view(htmlentities(addslashes($_POST['codinjury']))));
+            $injury->setDate(htmlentities(addslashes($_POST['date'])));
+
+            try {
+                if($this->alumnMapper->validInjurydate($injury->getDate())){
+                    $this->alumnMapper->addInjury($injury);
+                    $this->view->setFlash("succ_injury_add");
+                    $this->view->redirect("injury", "showinjury" , "codalumn=".$injury->getPupil()->getCodalumn());
+                }else{
+                    $this->view->setFlash('fail_date_incorrect');
+                }
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        //Se non se enviou nada
+        $this->view->render("alumn", "addinjury");
+    }
+
+    public function showinjury(){
+        $injurys = $this->alumnMapper->showinjurys($_GET['codalumn']);
+        $this->view->setVariable("injurystoshow", $injurys);
+        $this->view->render("alumn", "showinjury", "codalumn=".$_GET['codalumn']);
+    }
+
+    public function deleteinjury()
+    {
+        try{
+            if (isset($_GET['codalumn']) && isset($_GET['codinjury'])) {
+                $alumn = $this->alumnMapper->view($_GET['codalumn']);
+                $injury = $this->injuryMapper->view($_GET['codinjury']);
+                $this->alumnMapper->editinjury(new Pupilhasinjury($alumn, $injury));
+                $this->view->setFlash('succ_injury_edit');
+                $this->view->redirect("alumn", "showinjury" , "codalumn=".$alumn->getCodalumn());
+            }
+        }catch (Exception $e) {
+            $this->view->setFlash('erro_general');
+        }
+
+        $this->view->render("alumn", "showinjury" , "codalumn=".$alumn->getCodalumn());
+    }
+
     public function validar_dni($dni){
         $letra = substr($dni, -1);
         $numeros = substr($dni, 0, -1);

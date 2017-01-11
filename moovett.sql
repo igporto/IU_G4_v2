@@ -1312,7 +1312,8 @@ INSERT INTO `controlador`(`id_controlador`,`nombre`) VALUES
 (17, 'EVENT'),
 (18, 'ALUMN'),
 (19, 'INJURY'),
-(20, 'DOCUMENT');
+(20, 'DOCUMENT'),
+(21, 'SCHEDULE');
 
 
 --
@@ -1431,7 +1432,12 @@ INSERT INTO `permiso` (`id_controlador`, `id_accion`) VALUES
 (20 ,2),
 (20 ,3),
 (20 ,4),
-(20 ,5);
+(20 ,5),
+(21 ,1),
+(21 ,2),
+(21 ,3),
+(21 ,4),
+(21 ,5);
 
 
 
@@ -1560,7 +1566,12 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
 (1, 97),
 (1, 98),
 (1, 99),
-(1, 100);
+(1, 100),
+(1, 101),
+(1, 102),
+(1, 103),
+(1, 104),
+(1, 105);
 
 
 
@@ -1692,11 +1703,15 @@ INSERT INTO `usuario_tiene_permiso` (`cod_usuario`, `id_permiso`) VALUES
               (1, 92),
               (1, 93),
               (1, 94),
-              (1, 95);
-;
-
-;
+              (1, 95),
               /*ENGADIDO POR BRUNO*/
+              /*ENGADIDO POR ADRI*/
+              (1, 101),
+              (1, 102),
+              (1, 103),
+              (1, 104),
+              (1, 105);
+              /*ENGADIDO POR ADRI*/
 /*ENGADIDO POR IVAN */
 --
 -- Volcado de datos para la tabla `categoria`
@@ -1772,8 +1787,8 @@ INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_na
 
 
 INSERT INTO `evento` (`nombre`, `hora_inicio`, `hora_fin`, `fecha_evento`, `aforo`, `id_espacio`, `id_empleado`, `plazas_libres`) VALUES
-  ('Danza', '10:00:00', '12:00:00', '2017-20-12', 300, 1, 1, 300),
-  ('Zumba', '12:05:00', '13:30:00', '2017-23-12', 150, 1, 1, 150);
+  ('Danza', '10:00:00', '12:00:00', '2017-01-01', 300, 1, 1, 300),
+  ('Zumba', '12:05:00', '13:30:00', '2017-01-01', 150, 1, 1, 150);
 
 --
 -- Volcado de datos para la tabla `alumno_se_apunta_evento`

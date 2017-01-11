@@ -301,6 +301,7 @@ $strings = array(
 		'fail_email_incorrect'=>'email is not valid',
     	'fail_birthdate_incorrect' => 'Birth Date is not valid',
     	'fail_price_incorrect'=>'Price is not valid',
+    	'fail_date_incorrect'=>'Date is not valid',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -447,6 +448,8 @@ $strings = array(
     'injury_name' => 'Injury name',
     'date_recovery' => 'Recovery date',
     'date_injury' => 'Injury date',
+    'free_places'=>'Free Places',
+    'event_attendance'=>'Event´s Attendance',
 
 
 

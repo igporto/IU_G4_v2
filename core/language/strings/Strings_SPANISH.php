@@ -302,6 +302,7 @@ $strings = array(
 		'fail_email_incorrect'=>'El email no es válido',
     	'fail_birthdate_incorrect' => 'La fecha de nacimiento no es válida',
     	'fail_price_incorrect'=>'El Precio no es válido',
+    	'fail_date_incorrect'=>'La fecha no es válida',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -448,6 +449,8 @@ $strings = array(
     'student_data' => 'Datos del alumno',
 	'succ_pupil_add' => 'Alumno añadido con éxito',
 	'event_name' => 'Nombre del evento',
+    'free_places'=>'Plazas Libres',
+    'event_attendance'=>'Asistencia al Evento',
 
     /*LESIONS*/
     'management_injury' => 'Gestión de Lesiones',

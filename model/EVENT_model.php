@@ -164,4 +164,21 @@ class EventMapper
         );
         return $this->db->lastInsertId();
     }
+    public function isearly($date){
+
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if($db != NULL){
+            $actual = $db[0];
+
+            if ($date > $actual['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    }
 }
