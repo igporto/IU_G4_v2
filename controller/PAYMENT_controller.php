@@ -144,8 +144,8 @@ class PaymentController extends BaseController
                     $payment->setDniAlum($aux);
                 }
             } else {
-                if (isset($_POST["dni"]) && ($_POST['dni']) != "") {
-                    $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni"])));
+                if (isset($_POST["dni_external"]) && ($_POST['dni_external']) != "") {
+                    $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni_external"])));
                 } else {
                     $aux = $payment->getDniClienteExterno();
                     $payment->setDniClienteExterno($aux);
@@ -178,8 +178,42 @@ class PaymentController extends BaseController
     {
         if (isset($_POST["submit"])) {
             $payment = new Payment();
-            if (isset($_POST['id_pago'])) {
-                $payment->setIdPago((htmlentities(addslashes($_POST["id_pago"]))));
+
+            if (isset($_POST["cantidad"]) && ($_POST['cantidad']) != "") {
+                $payment->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
+            } else {
+                $payment->setCantidad("");
+            }
+            if (isset($_POST["metodo_pago"]) && ($_POST['metodo_pago']) != "") {
+                $payment->setMetodoPago(htmlentities(addslashes($_POST["metodo_pago"])));
+            } else {
+                $payment->setMetodoPago("");
+            }
+            if (isset($_POST["tipo_cliente"]) && ($_POST['tipo_cliente']) != "") {
+                $payment->setTipoCliente(htmlentities(addslashes($_POST["tipo_cliente"])));
+            } else {
+                $payment->setTipoCliente("");
+            }
+            if ($_POST["tipo_cliente"] == "student") {
+                if (isset($_POST["dni"]) && ($_POST['dni']) != "") {
+                    $payment->setDniAlum(htmlentities(addslashes($_POST["dni"])));
+                } else {
+                    $payment->setDniAlum("");
+                    $payment->setDniClienteExterno("");
+                }
+            } else {
+                if (isset($_POST["dni_external"]) && ($_POST['dni_external']) != "") {
+                    $payment->setDniClienteExterno(htmlentities(addslashes($_POST["dni_external"])));
+                } else {
+                    $payment->setDniAlum("");
+                    $payment->setDniClienteExterno("");
+                }
+            }
+
+            if (isset($_POST["pagado"]) && ($_POST['pagado']) != "") {
+                $payment->setPagado(htmlentities(addslashes($_POST["pagado"])));
+            } else {
+                $payment->setPagado("");
             }
 
             try {
