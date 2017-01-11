@@ -2,6 +2,8 @@
 
 require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/ALUMN.php");
+require_once(__DIR__."/../model/PUPILHASINJURY.php");
+require_once(__DIR__."/../model/INJURY_model.php");
 
 
 class AlumnMapper {
@@ -11,9 +13,10 @@ class AlumnMapper {
      * @var PDO
      */
     private $db;
-
+    private $injuryMapper;
     public function __construct() {
         $this->db = PDOConnection::getInstance();
+        $this->injuryMapper = new InjuryMapper();
     }
 
     //return: o id da action co nome $actionname
@@ -44,7 +47,6 @@ class AlumnMapper {
         return $this->db->lastInsertId();
     }
 
-
     //Funcion de listar: devolve un array de todos obxetos Alumn correspondentes á tabla Alumno
     public function show() {
 
@@ -58,7 +60,6 @@ class AlumnMapper {
 
         return $alumns;
     }
-
 
     //devolve o obxecto Alumn no que o $codalumn coincida co da tupla.
     public function view($codalumn){
@@ -92,7 +93,6 @@ class AlumnMapper {
         $stmt->execute(array($alumn->getDni(), $alumn->getAlumnname(), $alumn->getAlumnsurname(), $alumn->getBirthdate(), $alumn->getJob(), $alumn->getAddress(),
                             $alumn->getEmail(), $alumn->getComment(), $alumn->getPendingclasses(), $alumn->getCodalumn() ));
     }
-
 
     //borra sobre a taboa alumno a tupla con id igual a cod pasado
     public function delete($codalumn) {
@@ -145,6 +145,7 @@ class AlumnMapper {
         }
     }
 
+
     public function addinjury(Pupilhasinjury $phi){
         $stmt = $this->db->prepare("INSERT INTO alumno_tiene_lesion (id_alumno, id_lesion, fecha_lesion) 
                                     VALUES (?, ?, ?)");
@@ -161,22 +162,40 @@ class AlumnMapper {
         $injurys = array();
 
         foreach ($injury_db as $injury) {
-            array_push($injurys, new Pupilhasinjury( $this->view($injury['id_alumno']),
-                $this->injuryMapper->view($injury['id_lesion'])),
+            array_push($injurys, new Pupilhasinjury(
+                $injury['id_alumno_tiene_lesion'],
+                $this->view($injury['id_alumno']),
+                $this->injuryMapper->view($injury['id_lesion']),
                 $injury['fecha_lesion'],
-                $injury['fecha_recuperacion']);
+                $injury['fecha_recuperacion'])
+            );
         }
-
         return $injurys;
     }
 
     public function editinjury(Pupilhasinjury $phi)
     {
-        $stmt = $this->db->prepare("UPDATE alumno_tiene_lesion SET fecha_recuperacion = ? WHERE id_alumno = ?");
-        $stmt->execute(array($phi->getDateRecovery(), $phi->getPupil()->getCodalumn()));
+        $stmt = $this->db->prepare("UPDATE alumno_tiene_lesion SET fecha_recuperacion = ? WHERE id_alumno_tiene_lesion = ?");
+        $stmt->execute(array($phi->getDateRecovery(), $phi->getCod()));
     }
 
+    public function viewInjury($codinjurypupil){
+        $stmt = $this->db->prepare("SELECT * FROM alumno_tiene_lesion WHERE id_alumno_tiene_lesion =?");
+        $stmt->execute(array($codinjurypupil));
+        $phi = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if($phi != null) {
+            return new Pupilhasinjury(
+                $phi['id_alumno_tiene_lesion'],
+                $this->view($phi['id_alumno']),
+                $this->injuryMapper->view($phi['id_lesion']),
+                $phi['fecha_lesion'],
+                $phi['fecha_recuperacion']
+            );
+        } else {
+            return new Pupilhasinjury();
+        }
+    }
     public function validInjurydate($date)
     {
 
@@ -186,7 +205,7 @@ class AlumnMapper {
         if ($db != NULL) {
             $actual = $db[0];
 
-            if ($date < $actual['CURDATE()']) {
+            if ($date <= $actual['CURDATE()']) {
                 return true;
             } else {
                 return false;

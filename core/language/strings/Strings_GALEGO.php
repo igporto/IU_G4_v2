@@ -446,7 +446,7 @@ $strings = array(
     'management_injury' => 'Xestión de Lesións',
     'INJURY' => 'Lesións',
     'treatment' => 'Tratamento',
-    'time_recovery' => 'Tempo de recuperación aproximado',
+    'time_recovery' => 'Tempo de recuperación',
     'injury_id' => 'ID da lesión',
     'injury_data' => 'Datos da lesión',
     'succ_injury_delete' => 'Lesión borrada correctamente',
@@ -459,9 +459,10 @@ $strings = array(
     'injury_name' => 'Nome da lesión',
     'date_recovery' => 'Data de recuperación',
     'date_injury' => 'Data da lesión',
-    /////////////////////////////////////////
     'add_employer'  => 'Engadir empregado',
     'list_of_employer' =>'Lista de empregados',
+    'list_of_injurys'=>'Lista de Lesións',
+    'not_recovered_yet'=>'Non Recuperado Aínda',
 
 
 
@@ -478,7 +479,7 @@ $strings = array(
     'payment_modify'=>'Modificar Pago',
     'period'=>'Meses',
     'total_quantity'=>'Cantidade total',
-    'months'=>'Meses',
+    'days'=>'Días',
     'domiciliation_data'=>'Datos da Domiciliacion',
     'domiciliation_modify'=>'Modificar Domiciliacion',
 

@@ -5,6 +5,7 @@ $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $alumnMapper = new AlumnMapper();
+$injuryMapper = new InjuryMapper();
 ?>
 
 <!-- refresca o perfil do select -->
@@ -17,7 +18,7 @@ $alumnMapper = new AlumnMapper();
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['create_injury']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=event&action=add"
+          action="index.php?controller=alumn&action=addinjury&codalumn=<?php echo $_GET['codalumn']?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -41,8 +42,8 @@ $alumnMapper = new AlumnMapper();
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <?php
-                            $injurys = $alumnMapper->showinjury($_GET['codalumn']);
-                            if($injurys != NULL){
+                            $injurys = $injuryMapper->show();
+                            if($injurys == NULL){
                             ?>
                                 <select name="codinjury" class='form-control icon-menu' disabled>
 
@@ -53,7 +54,7 @@ $alumnMapper = new AlumnMapper();
                             <?php
 
                                 foreach ($injurys as $injury){
-                                    echo '<option value='.$injury->getCodinjury().'>'.$injury->getNameInjury().'</option>';
+                                    echo '<option value='.$injury->getCodInjury().'>'.$injury->getNameInjury().'</option>';
                                 }
                             }
                             ?>
@@ -62,10 +63,10 @@ $alumnMapper = new AlumnMapper();
                         <!--Campo id evento-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['Data da lesión']  ?></label>
+                        <label for="divdatestart"><?= $strings['date_injury']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="date" name="date" placeholder="<?php echo $strings['aforo'];?>">
+                            <input required class="form-control" type="date" name="date">
                         </div>
                         <!--Campo aforo-->
                     </div>

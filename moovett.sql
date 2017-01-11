@@ -120,7 +120,8 @@ CREATE TABLE `alumno` (
 -- Estructura de tabla para la tabla `alumno_tiene_lesion`
 --
 
-CREATE TABLE `alumno_tiene_lesion` (
+CREATE TABLE `alumno_tiene_lesion`(
+  `id_alumno_tiene_lesion` int(4) NOT NULL,
   `id_alumno` int(4) NOT NULL,
   `id_lesion` int(4) NOT NULL,
   `fecha_lesion` date DEFAULT NULL,
@@ -680,9 +681,7 @@ ALTER TABLE `alumno`
 -- Indices de la tabla `alumno_tiene_lesion`
 --
 ALTER TABLE `alumno_tiene_lesion`
-  ADD PRIMARY KEY (`id_lesion`,`id_alumno`),
-  ADD KEY `id_lesion` (`id_lesion`),
-  ADD KEY `id_alumno` (`id_alumno`);
+  ADD PRIMARY KEY (`id_alumno_tiene_lesion`);
 
 
 --
@@ -953,7 +952,11 @@ ALTER TABLE `alumno`
 ALTER TABLE `actividad`
   MODIFY `id_actividad` int(4) NOT NULL AUTO_INCREMENT;
   --
-
+--
+-- AUTO_INCREMENT de la tabla `alumno_tiene_lesion`
+--
+ALTER TABLE `alumno_tiene_lesion`
+  MODIFY `id_alumno_tiene_lesion` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
@@ -979,7 +982,7 @@ ALTER TABLE `consulta_fisio`
 --
 ALTER TABLE `descuento`
   MODIFY `id_descuento` int(4) NOT NULL AUTO_INCREMENT;
-  --
+--
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`

@@ -68,7 +68,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 <label for="divdatestart"><?= $strings['description']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input required class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>">
+                            <input class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>">
                         </div>
                             </div>
                     </div>

@@ -36,7 +36,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <label for="divdatestart"><?= $strings['name']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus required class="form-control" type="text" name="name" placeholder="<?php echo $strings['name'];?>" >
+                            <input autofocus  class="form-control" type="text" name="name" placeholder="<?php echo $strings['name'];?>" >
                         </div>
                     </div>
                     <!--Campo name-->
@@ -46,7 +46,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <label for="divdatestart"><?= $strings['time_recovery']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input required class="form-control" type="number"  min="1" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
+                            <input class="form-control" type="number"  min="1" name="time_recovery" placeholder="<?php echo $strings['time_recovery'];?>">
                             <div id="error"></div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <label for="divdatestart"><?= $strings['treatment']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input required class="form-control" type="text" name="treatment" placeholder="<?php echo $strings['treatment'];?>">
+                            <input class="form-control" type="text" name="treatment" placeholder="<?php echo $strings['treatment'];?>">
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <label for="divdatestart"><?= $strings['description']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                            <input required class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>">
+                            <input class="form-control" type="text" name="description" placeholder="<?php echo $strings['description'];?>">
                         </div>
                     </div>
                 </div>

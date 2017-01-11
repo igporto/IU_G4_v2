@@ -41,7 +41,9 @@ class InjuryController extends BaseController {
             //Engadimos os datos
             $injury->setTime(htmlentities(addslashes($_POST["time_recovery"])));
             $injury->setTreatment(htmlentities(addslashes($_POST['treatment'])));
-            $injury->setDescription(htmlentities(addslashes($_POST['description'])));
+            if($_POST['description'] && $_POST['description']!=""){
+                $injury->setDescription(htmlentities(addslashes($_POST['description'])));
+            }
             $injury->setNameInjury(htmlentities(addslashes($_POST['name'])));
 
             try {

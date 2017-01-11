@@ -457,7 +457,7 @@ $strings = array(
     'management_injury' => 'Injury Management',
     'INJURY' => 'Injury',
     'treatment' => 'Treatment',
-    'time_recovery' => 'Approximate recovery time',
+    'time_recovery' => 'Recovery time',
     'injury_id' => 'Injury´s ID',
     'injury_data' => 'Injury data',
     'succ_injury_delete' => 'Success injury delete',
@@ -468,6 +468,8 @@ $strings = array(
     'injury_already_exists' => 'Injury already exists',
     'add_employer'  => 'Add employer',
     'list_of_employer' =>'List of employer',
+    'list_of_injurys'=>'List of Injurys',
+    'not_recovered_yet'=>'Not Recovered Yet',
 
 
     'DOMICILIATION' => 'Domiciliations',
@@ -481,7 +483,7 @@ $strings = array(
     'payment_modify'=>'Payment Modify',
     'period'=>'Months',
     'total_quantity'=>'Total quantity',
-    'months'=>'Months',
+    'days'=>'Days',
 	'domiciliation_data'=>'Domiciliation Data',
     'domiciliation_modify'=>'Domiciliation Modify',
 

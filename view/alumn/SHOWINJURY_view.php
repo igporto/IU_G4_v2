@@ -5,7 +5,6 @@ require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 require_once(__DIR__ . "/../../model/CONTROLLER_model.php");
-require_once(__DIR__ . "/../../model/PUPILATTENDSEVENT.php");
 
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
@@ -20,7 +19,6 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
 //obtemos o contido a mostrar
 $injurys = $view->getVariable("injurystoshow");
-$eventMapper = new EventMapper();
 
 ?>
 
@@ -81,32 +79,33 @@ $eventMapper = new EventMapper();
                     <?php
 
 
-                    //Para cada evento, imprimimos o seu nome e as acciÃ³nns que se poden realizar nel (view,edit e delete)
                     foreach ($injurys as $i) {
 
                         echo "<tr class='row text-center' ><td> ";
 
+
                         echo $i->getInjury()->getNameInjury() . "</td><td> ";
 
                         echo $i->getDate() . "</td><td> ";
-                        if($i->getDateRecovery != NULL){
+                        if($i->getDateRecovery() != NULL){
                             echo $i->getDateRecovery() ;
                         }else{
                             echo $strings['not_recovered_yet'];
                         }
                         echo "</td><td class='text-center'>";
 
-                        //Botón que direcciona á vista do editar
-                        if ($edit) {
-
-                            echo "<a href=index.php?controller=alumn&action=editinjury&codalumn=".$i->getPupil()->getCodalumn()."&codinjury=".$i->getInjury()->getCodinjury().">";
-                            echo "<button class='btn btn-warning btn-xs ";
+                        if($i->getDateRecovery() == NULL){
+                            echo "<a href=index.php?controller=alumn&action=editinjury&codinjurypupil=".$i->getCod().">";
+                            echo "<button class='btn btn-success btn-xs ";
                             echo "' style='margin:2px'>";
-                            echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-
+                            echo "<i class='fa fa-check fa-fw'></i></button></a>";
+                        }else{
+                            echo "<a href=index.php?controller=alumn&action=editinjury&codinjurypupil=".$i->getCod().">";
+                            echo "<button class='btn btn-success btn-xs ";
+                            echo "' disabled style='margin:2px'>";
+                            echo "<i class='fa fa-check fa-fw'></i></button></a>";
                         }
                         echo "</td></tr>";
-                        //  }
                     }
                     ?>
 

@@ -4,20 +4,27 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-$inMapper = new InjuryMapper();
-//Recuperamos o id do usuario a editar
-$injury = $inMapper->view($_REQUEST['id_lesion']);
+$alumnMapper = new AlumnMapper();
+$injuryMapper = new InjuryMapper();
+$phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
 
 ?>
 
+<!-- refresca o perfil do select -->
+<script>
+    function enviar() {
+        var ruta = 'index.php?controller=event&action=add';
+    }
+</script>
+
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['injury_edit'].": ".$injury->getNameInjury() ; ?></h1>
+    <h1 class="page-header"><?php echo $strings['create_injury']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=injury&action=editemployer&id_lesion=<?php echo $injury->getCodInjury(); ?>&id_employer=<?php echo $_GET['id_employer']?>"
+          action="index.php?controller=alumn&action=editinjury&codinjurypupil=<?php echo $phi->getCod()?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['management_info'] ?>
+                <?php echo $strings['create_injury'] ?>
             </div>
             <div class="panel-body">
 
@@ -32,38 +39,23 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12  col-md-7">
-                        <label for="divdatestart"><?= $strings['date_injury']  ?></label>
-                        <div id="divdatestart" class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="datestart" name="date_injury"
-                                   required="true" maxlength="10">
-                            <div id="error"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12  col-md-7">
+                    <div class="col-xs-12 col col-md-5">
                         <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
-                        <div id="divdatestart" class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="dateend" name="date_recovery"
-                                   required="true" maxlength="10">
-                            <div id="error"></div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
+                            <input required class="form-control" type="date" name="date" placeholder="<?php echo $strings['aforo'];?>">
                         </div>
+                        <!--Campo aforo-->
                     </div>
                 </div>
 
-
-                <!--Campo name-->
             </div>
         </div>
-
-
         <div class="row">
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=showpupil&id_lesion=<?php echo $injury->getCodInjury()?>">
+                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
@@ -73,8 +65,8 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
                         <?php echo $strings['clean'] ?></i></button>
 
                     <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                        <i class="fa fa-edit"></i>
-                        <?php echo $strings['EDIT'] ?></i></button>
+                        <i class="fa fa-plus"></i>
+                        <?php echo $strings['ADD'] ?></i></button>
                     <?php
 
                     ?>
@@ -85,14 +77,6 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
     </form>
     <!--fin formulario-->
 </div>
-
-<script>
-    //Non deixar que o campo input teña espazos
-    $("input").on("keydown", function (e) {
-        return e.which !== 32;
-    });
-</script>
-
 <script>
     $( function() {
         $( "#datestart" ).datepicker();
@@ -108,3 +92,12 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
 </script>
 
 
+
+
+
+<script>
+    //Non deixar que o campo input teña espazos
+    $("input").on("keydown", function (e) {
+        return e.which !== 32;
+    });
+</script>
