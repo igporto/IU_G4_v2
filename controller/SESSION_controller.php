@@ -79,7 +79,7 @@ class SessionController extends BaseController
             }
         }
 
-        if($workday == NULL) return false;
+        if($workday == NULL)  return "workdaynull";
 
         // 1. comprobar que rango de horas estea dentro do da xornada
         if  (
@@ -90,7 +90,8 @@ class SessionController extends BaseController
                  ($hourend > $workday->getHourStart()))
             )
             {
-                return false;
+
+                return "range out of workday";
             }
 
         //obtemos todas as sesións que compartan ese espazo ese día 
@@ -114,7 +115,7 @@ class SessionController extends BaseController
                  ($hourend > $session->getHourStart()))
             )
             {
-                return false;
+                return "session overlaps on that space";
             }
 
         }
@@ -142,6 +143,10 @@ class SessionController extends BaseController
 
             $session->setEmployee($this->employeeMapper->view($_POST["selemployee"]));
 
+            $aux = $this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]));
+
+            echo $aux;exit; 
+            
             if ($this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]))) {
                 $session->setSpace($this->spaceMapper->view($_POST["selspace"]));
                 $session->setDate($_POST["date"]);

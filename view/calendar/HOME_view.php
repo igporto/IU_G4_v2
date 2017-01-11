@@ -6,8 +6,12 @@
 	$schedules = $view->getVariable("schedules");
 	$data = $view->getVariable("scheduledata");
 
+	$lang = strtolower($_SESSION['idioma']);
+
+
 ?>
 
+<script src='lib/calendar/language/<?= $lang ?>.js'></script>
 <script>
 
 	$(document).ready(function() {
