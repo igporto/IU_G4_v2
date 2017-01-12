@@ -28,7 +28,7 @@ echo '
                                    
                                      <div class="col-xs-12 col-md-12">
                                              <label for="">' . $strings["date_injury"] . ': </label>
-                                             <span class="">' . $i->getDate() . '</span>
+                                             <span class="">' . $i->getDateInjury() . '</span>
                             
                                          <!--Campo id_alumno-->
                                     </div>

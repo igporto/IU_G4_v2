@@ -86,7 +86,7 @@ $injurys = $view->getVariable("injurystoshow");
 
                         echo $i->getInjury()->getNameInjury() . "</td><td> ";
 
-                        echo $i->getDate() . "</td><td> ";
+                        echo $i->getDateInjury() . "</td><td> ";
                         if($i->getDateRecovery() != NULL){
                             echo $i->getDateRecovery() ;
                         }else{

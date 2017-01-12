@@ -149,7 +149,7 @@ class AlumnMapper {
     public function addinjury(Pupilhasinjury $phi){
         $stmt = $this->db->prepare("INSERT INTO alumno_tiene_lesion (id_alumno, id_lesion, fecha_lesion) 
                                     VALUES (?, ?, ?)");
-        $stmt->execute(array($phi->getPupil()->getCodalumn(), $phi->getInjury()->getCodInjury(), $phi->getDate()));
+        $stmt->execute(array($phi->getPupil()->getCodalumn(), $phi->getInjury()->getCodInjury(), $phi->getDateInjury()));
 
         return $this->db->lastInsertId();
     }
@@ -162,13 +162,7 @@ class AlumnMapper {
         $injurys = array();
 
         foreach ($injury_db as $injury) {
-            array_push($injurys, new Pupilhasinjury(
-                $injury['id_alumno_tiene_lesion'],
-                $this->view($injury['id_alumno']),
-                $this->injuryMapper->view($injury['id_lesion']),
-                $injury['fecha_lesion'],
-                $injury['fecha_recuperacion'])
-            );
+            array_push($injurys, $this->viewinjury($injury['id_alumno_tiene_lesion']));
         }
         return $injurys;
     }
@@ -179,8 +173,8 @@ class AlumnMapper {
         $stmt->execute(array($phi->getDateRecovery(), $phi->getCod()));
     }
 
-    public function viewInjury($codinjurypupil){
-        $stmt = $this->db->prepare("SELECT * FROM alumno_tiene_lesion WHERE id_alumno_tiene_lesion =?");
+    public function viewinjury($codinjurypupil){
+        $stmt = $this->db->prepare("SELECT * FROM alumno_tiene_lesion WHERE id_alumno_tiene_lesion = ?");
         $stmt->execute(array($codinjurypupil));
         $phi = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -200,6 +194,20 @@ class AlumnMapper {
     public function deleteinjury($codinjurypupil){
         $stmt = $this->db->prepare("DELETE from alumno_tiene_lesion WHERE id_alumno_tiene_lesion = ?");
         $stmt->execute(array($codinjurypupil));
+    }
+
+
+    public function showlog(){
+        $stmt = $this->db->prepare("SELECT * FROM log_acceso_lesion  WHERE id_empleado != NULL");
+        $stmt->execute();
+        $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $logs = array();
+
+        foreach ($logs_db as $log) {
+            array_push($logs, $this->accesslogMapper->view('id_log'));
+        }
+        return $logs;
     }
 
     public function validInjurydate($date)

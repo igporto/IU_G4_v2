@@ -5,6 +5,10 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../model/ALUMN_model.php");
 require_once(__DIR__ . "/../model/ALUMN.php");
 require_once(__DIR__ . "/../model/INJURY_model.php");
+require_once(__DIR__ . "/../model/ACCESSLOG.php");
+require_once(__DIR__ . "/../model/ACCESSLOG_model.php");
+require_once(__DIR__ . "/../model/USER.php");
+require_once(__DIR__ . "/../model/USER_model.php");
 
 require_once(__DIR__ . "/../controller/BaseController.php");
 
@@ -14,6 +18,8 @@ class AlumnController extends BaseController
 
     private $alumnMapper;
     private $injuryMapper;
+    private $accesslogMapper;
+    private $userMapper;
 
     public function __construct()
     {
@@ -21,6 +27,8 @@ class AlumnController extends BaseController
 
         $this->alumnMapper = new AlumnMapper();
         $this->injuryMapper = new InjuryMapper();
+        $this->accesslogMapper = new AccesslogMapper();
+        $this->userMapper = new UserMapper();
         // Actions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
         // menu is displayed
@@ -251,10 +259,10 @@ class AlumnController extends BaseController
 
             $injury->setPupil($this->alumnMapper->view(htmlentities(addslashes($_REQUEST['codalumn']))));
             $injury->setInjury($this->injuryMapper->view(htmlentities(addslashes($_POST['codinjury']))));
-            $injury->setDate(htmlentities(addslashes($_POST['date'])));
+            $injury->setDateInjury(htmlentities(addslashes($_POST['date'])));
 
             try {
-                if ($this->alumnMapper->validInjurydate($injury->getDate())) {
+                if ($this->alumnMapper->validInjurydate($injury->getDateInjury())) {
                     $this->alumnMapper->addInjury($injury);
                     $this->view->setFlash("succ_injury_add");
                     $this->view->redirect("alumn", "showinjury", "codalumn=" . $injury->getPupil()->getCodalumn());
@@ -280,13 +288,24 @@ class AlumnController extends BaseController
     public function editinjury()
     {
         if (isset($_POST['submit'])) {
+            $phi = $this->alumnMapper->viewInjury(htmlentities(addslashes($_GET['codinjuryalumn'])));
+
+            if (isset($_POST['dateI']) && $_POST['dateI'] != "") {
+                $phi->setDateInjury(htmlentities(addslashes($_POST['dateI'])));
+            }
+            if(isset($_POST['dateR']) && $_POST['dateR'] != "") {
+                $phi->setDateRecovery(htmlentities(addslashes($_POST['dateR'])));
+            }
+
             try {
-                if ($this->alumnMapper->validInjurydate($_POST['date'])) {
-                    $phi = $this->alumnMapper->viewInjury(htmlentities(addslashes($_GET['codinjurypupil'])));
-                    $phi->setDateRecovery(htmlentities(addslashes($_POST['date'])));
-                    $this->alumnMapper->editinjury($phi);
-                    $this->view->setFlash('succ_injury_edit');
-                    $this->view->redirect("alumn", "showinjury", "codalumn=" . $phi->getPupil()->getCodalumn());
+                if($this->alumnMapper->validInjurydate($phi->getDateInjury()) && $this->alumnMapper->validInjurydate($phi->getDateRecovery())) {
+                    if($phi->getDateRecovery() > $phi->getDateInjury()){
+                        $this->alumnMapper->editinjury($phi);
+                        $this->view->setFlash('succ_injury_edit');
+                        $this->view->redirect("alumn", "showinjury", "codalumn=" . $phi->getPupil()->getCodalumn());
+                    }else{
+                        $this->view->setFlash('fail_date_injuries');
+                    }
                 } else {
                     $this->view->setFlash('fail_date_incorrect');
                 }
@@ -294,7 +313,7 @@ class AlumnController extends BaseController
                 $this->view->setFlash('erro_general');
             }
         }
-        $this->view->render("alumn", "editinjury", "codinjurypupil=" . $_GET['codinjurypupil']);
+        $this->view->render("alumn", "editinjury", "codinjurypupil=" . $_GET['codinjuryalumn']);
     }
 
     public function deleteinjury(){
@@ -309,6 +328,29 @@ class AlumnController extends BaseController
             $this->view->setFlash('erro_general');
         }
         $this->view->render("alumn", "show");
+    }
+
+    public function viewinjury(){
+        if(isset($_GET['codinjuryalumn'])){
+            try{
+                $phi = $this->alumnMapper->viewinjury(htmlentities(addslashes($_GET['codinjuryalumn'])));
+                $log = new Accesslog();
+
+                $log->setInjury($phi->getInjury());
+                $log->setAlumn($phi->getPupil());
+                $log->setUser($this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser'])));
+                $this->accesslogMapper->add($log);
+                $this->view->redirect("alumn", "showinjury", "codalumn=".$phi->getPupil()->getCodalumn() );
+            }catch (Exception $e){
+                $this->view->setFlash('erro_general');
+            }
+        }
+    }
+
+    public function showlog(){
+        $logs = $this->alumnMapper->showlog();
+        $this->view->setVariable("logstoshow", $logs);
+        $this->view->render("alumn", "showlog");
     }
 
     public function validar_dni($dni)

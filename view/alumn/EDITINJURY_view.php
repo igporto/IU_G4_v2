@@ -6,7 +6,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $alumnMapper = new AlumnMapper();
 $injuryMapper = new InjuryMapper();
-$phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
+$phi = $alumnMapper->viewInjury($_GET['codinjuryalumn']);
 
 ?>
 
@@ -20,11 +20,11 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
 <div class="col-md-6" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['create_injury']; ?></h1>
     <form name="form" id="form" method="POST"
-          action="index.php?controller=alumn&action=editinjury&codinjurypupil=<?php echo $phi->getCod()?>"
+          action="index.php?controller=alumn&action=editinjury&codinjuryalumn=<?php echo $phi->getCod()?>"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php echo $strings['create_injury'] ?>
+                <?php echo $strings['injury_edit'] ?>
             </div>
             <div class="panel-body">
 
@@ -43,7 +43,7 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
                         <label for="divdatestart"><?= $strings['date_injury']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" value="<?php echo $phi->getDateInjury(); ?>" type="date" name="dateI">
+                            <input class="form-control" value="<?php echo $phi->getDateInjury(); ?>" type="date" name="dateI">
                         </div>
                         <!--Campo aforo-->
                     </div>
@@ -53,7 +53,7 @@ $phi = $alumnMapper->viewInjury($_GET['codinjurypupil']);
                         <label for="divdatestart"><?= $strings['date_recovery']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input required class="form-control" type="date" name="dateR">
+                            <input class="form-control" type="date" name="dateR">
                         </div>
                         <!--Campo aforo-->
                     </div>

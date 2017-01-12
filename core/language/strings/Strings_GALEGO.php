@@ -472,6 +472,7 @@ $strings = array(
     'injury'=>'Lesión',
 
 
+
 //PAGOS, DESCUENTOS y FACTURAS
     'discount_modify' => 'Modificar Desconto',
     'DOMICILIATION' => 'Domiciliacións',

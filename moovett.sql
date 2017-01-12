@@ -549,7 +549,7 @@ CREATE TABLE `log_acceso_lesion` (
   `id_empleado` int(4) NULL,
   `id_alumno` int(4) NULL,
   `cod_usuario` int(4) NOT NULL,
-  `fecha` DATE NULL
+  `fecha` TIMESTAMP NULL
 ) ;
 
 

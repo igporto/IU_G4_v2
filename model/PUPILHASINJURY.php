@@ -11,15 +11,15 @@ class Pupilhasinjury
     public $pupil;
     public $injury;
     public $dateRecovery;
-    public $date;
+    public $dateInjury;
 
 
-    public function __construct($cod = NULL, Alumn $pupil = NULL, Injury $injury = NULL, $date = NULL, $dateRecovery = NULL)
+    public function __construct($cod = NULL, Alumn $pupil = NULL, Injury $injury = NULL, $dateInjury = NULL, $dateRecovery = NULL)
     {
         $this->cod = $cod;
         $this->pupil = $pupil;
         $this->injury = $injury;
-        $this->date = $date;
+        $this->dateInjury = $dateInjury;
         $this->dateRecovery = $dateRecovery;
     }
 
@@ -87,17 +87,17 @@ class Pupilhasinjury
     /**
      * @return null
      */
-    public function getDate()
+    public function getDateInjury()
     {
-        return $this->date;
+        return $this->dateInjury;
     }
 
     /**
      * @param null $date
      */
-    public function setDate($date)
+    public function setDateInjury($dateInjury)
     {
-        $this->date = $date;
+        $this->dateInjury = $dateInjury;
     }
 
 
