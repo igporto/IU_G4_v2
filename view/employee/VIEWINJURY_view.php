@@ -36,13 +36,12 @@ echo '
                             
                                          <!--Campo id_alumno-->
                                     </div>
-                                    
-                                      <div id="collapse' . $i->getCod() . '" class="panel-collapse collapse" aria-expanded="true">
-                                          <div class="panel-body">
-                                         <ul>                                                                                                                             
+                                                                                                                                                                
                 </div><div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                   <a href=index.php?controller=employee&action=viewinjury&codinjuryemployee='. $i->getCod() .' >
+                    <button type="button" class="btn btn-success">
                     <i class="fa fa-tick"></i>'.$strings["okay"].'</button>
+                </div>
                 </div>
             </div>
             <!-- /.modal-content -->

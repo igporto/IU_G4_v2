@@ -479,6 +479,12 @@ $strings = array(
     'list_of_injurys'=>'Lista de Lesiones',
     'not_recovered_yet'=>'No Recuperado Aún',
     'injury'=>'Lesión',
+    'injury_access_log'=>'Log de Acceso a Lesiones',
+
+    /*LOG*/
+    'one_user'=>'Usuario',
+    'alumn'=>'Alumno',
+    'access_date'=>'Fecha y Hora de Acceso',
 
 
     /*Alumno*/

@@ -4,6 +4,7 @@ require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/ALUMN.php");
 require_once(__DIR__."/../model/PUPILHASINJURY.php");
 require_once(__DIR__."/../model/INJURY_model.php");
+require_once(__DIR__."/../model/ACCESSLOG_model.php");
 
 
 class AlumnMapper {
@@ -196,19 +197,6 @@ class AlumnMapper {
         $stmt->execute(array($codinjurypupil));
     }
 
-
-    public function showlog(){
-        $stmt = $this->db->prepare("SELECT * FROM log_acceso_lesion  WHERE id_empleado != NULL");
-        $stmt->execute();
-        $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $logs = array();
-
-        foreach ($logs_db as $log) {
-            array_push($logs, $this->accesslogMapper->view('id_log'));
-        }
-        return $logs;
-    }
 
     public function validInjurydate($date)
     {

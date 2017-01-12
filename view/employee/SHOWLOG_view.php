@@ -27,14 +27,14 @@ $logs = $view->getVariable("logstoshow");
     <div class="row">
 
         <!--BOTÓN BUSCAR-->
-        <a class="btn btn-primary" href="index.php?controller=alumn&action=search">
+        <a class="btn btn-primary" href="index.php?controller=employee&action=search">
             <i class="fa fa-fw fa-search"></i>
             <?php echo $strings['find']; ?>
         </a>
         <!--BOTÓN IMPRIMIR-->
         <?php
-            echo '  
-                <a href="index.php?controller=alumn&action=print">
+        echo '  
+                <a href="index.php?controller=employee&action=print">
                     <button type="button" class="btn btn">
                     <i class="fa fa-fw fa-file-pdf-o "></i>
                     </button>
@@ -58,7 +58,7 @@ $logs = $view->getVariable("logstoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['one_user'] ?></th>
-                        <th class="text-center"><?php echo $strings['alumn'] ?></th>
+                        <th class="text-center"><?php echo $strings['employee'] ?></th>
                         <th class="text-center"><?php echo $strings['access_date'] ?></th>
 
                     </tr>
@@ -75,7 +75,7 @@ $logs = $view->getVariable("logstoshow");
 
                         echo $c->getUser()->getUsername(). "</td><td>";
 
-                        echo $c->getAlumn()->getAlumnname()." ". $c->getAlumn()->getAlumnsurname(). "</td><td>";
+                        echo $c->getEmployee()->getEmployeename()." ". $c->getEmployee()->getEmployeesurname(). "</td><td>";
 
                         echo $c->getDate();
 

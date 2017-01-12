@@ -78,7 +78,7 @@ $injuryMapper = new InjuryMapper();
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=showinjury&codalumn=<?php echo $_GET['codalumn']?>">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

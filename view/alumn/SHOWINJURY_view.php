@@ -29,16 +29,17 @@ $injurys = $view->getVariable("injurystoshow");
     <div class="row">
 
 
-        <!--BOTÃƒâ€œN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline"  href="index.php?controller=alumn&action=show">
-            <i class="fa fa-search-minus"></i>
-            <?php echo $strings['clean'];?>
-        </a>
-
         <a href="index.php?controller=alumn&action=addinjury&codalumn=<?php echo $_GET['codalumn']?>">
             <button type="button" class="btn btn-success">
                 <i class="fa fa-fw fa-plus"></i>
                 <?php echo $strings['create_injury'] ?>
+            </button>
+        </a>
+
+        <a href="index.php?controller=alumn&action=showlog">
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-fw fa-file-text"></i>
+                <?php echo $strings['injury_access_log'] ?>
             </button>
         </a>
 

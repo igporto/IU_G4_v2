@@ -477,6 +477,13 @@ $strings = array(
     'list_of_injurys'=>'List of Injurys',
     'not_recovered_yet'=>'Not Recovered Yet',
     'injury'=>'Injury',
+    'injury_access_log'=>'Injury Access Log',
+
+    /*LOG*/
+    'one_user'=>'User',
+    'alumn'=>'Alumn',
+    'access_date'=>'Access DateTime',
+
 
 
     'DOMICILIATION' => 'Domiciliations',

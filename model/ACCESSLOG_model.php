@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__."/../core/PDOConnection.php");
+
 require_once(__DIR__."/../model/INJURY_model.php");
 require_once(__DIR__."/../model/USER_model.php");
 require_once(__DIR__."/../model/ALUMN_model.php");
@@ -46,9 +47,21 @@ class AccesslogMapper {
         return $this->db->lastInsertId();
     }
 
-    public function show() {
+    public function showA() {
 
-        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion");
+        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion WHERE id_empleado IS NULL");
+        $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $logs = array();
+
+        foreach ($logs_db as $log) {
+            array_push($logs, $this->view($log['id_log']));
+        }
+
+        return $logs;
+    }
+    public function showE() {
+
+        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion WHERE id_alumno IS NULL");
         $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $logs = array();
 
@@ -60,7 +73,7 @@ class AccesslogMapper {
     }
 
     public function view($codlog){
-        $stmt = $this->db->prepare("SELECT * FROM log_acceso_lesion WHERE id_log=?");
+        $stmt = $this->db->prepare("SELECT * FROM log_acceso_lesion WHERE id_log = ?");
         $stmt->execute(array($codlog));
         $log = $stmt->fetch(PDO::FETCH_ASSOC);
 

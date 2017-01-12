@@ -348,9 +348,13 @@ class AlumnController extends BaseController
     }
 
     public function showlog(){
-        $logs = $this->alumnMapper->showlog();
+        $logs = $this->accesslogMapper->showA();
         $this->view->setVariable("logstoshow", $logs);
         $this->view->render("alumn", "showlog");
+    }
+
+    public function printlogs(){
+
     }
 
     public function validar_dni($dni)

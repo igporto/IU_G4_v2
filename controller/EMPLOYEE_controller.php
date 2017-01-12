@@ -8,7 +8,8 @@ require_once(__DIR__ . "/../model/USER.php");
 require_once(__DIR__ . "/../model/USER_model.php");
 require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
 require_once(__DIR__ . "/../model/INJURY_model.php");
-
+require_once(__DIR__ . "/../model/ACCESSLOG_model.php");
+require_once(__DIR__ . "/../model/ACCESSLOG.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
 
 
@@ -18,6 +19,7 @@ class EmployeeController extends BaseController
     private $employeeMapper;
     private $userMapper;
     private $injuryMapper;
+    private $accesslogMapper;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class EmployeeController extends BaseController
         $this->employeeMapper = new EmployeeMapper();
         $this->userMapper = new UserMapper();
         $this->injuryMapper = new InjuryMapper();
+        $this->accesslogMapper = new AccesslogMapper();
 
         // Actions controller operates in a "welcome" layout
         // different to the "default" layout where the internal
@@ -379,6 +382,33 @@ class EmployeeController extends BaseController
             $this->view->setFlash('erro_general');
         }
         $this->view->render("employee", "show");
+    }
+
+    public function viewinjury(){
+        if(isset($_GET['codinjuryemployee'])){
+            try{
+                $phi = $this->employeeMapper->viewinjury(htmlentities(addslashes($_GET['codinjuryemployee'])));
+                $log = new Accesslog();
+
+                $log->setInjury($phi->getInjury());
+                $log->setEmployee($phi->getEmployee());
+                $log->setUser($this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser'])));
+                $this->accesslogMapper->add($log);
+                $this->view->redirect("employee", "showinjury", "codemployee=".$phi->getEmployee()->getCodemployee() );
+            }catch (Exception $e){
+                $this->view->setFlash('erro_general');
+            }
+        }
+    }
+
+    public function showlog(){
+        $logs = $this->accesslogMapper->showE();
+        $this->view->setVariable("logstoshow", $logs);
+        $this->view->render("employee", "showlog");
+    }
+
+    public function printlogs(){
+
     }
 
     public function validar_email($direccion){
