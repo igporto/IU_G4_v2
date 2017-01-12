@@ -30,31 +30,50 @@ class ClientController extends BaseController
             //Creamos un obxecto Client baleiro
             $client = new Client();
 
-            //Engadimos os datos
-            $client->setDni(htmlentities(addslashes($_POST["dni"])));
-            $client->setName(htmlentities(addslashes($_POST["name"])));
-            $client->setSurname(htmlentities(addslashes($_POST["surname"])));
-            $client->setPhone(htmlentities(addslashes($_POST["phone"])));
-            $client->setEmail(htmlentities(addslashes($_POST["email"])));
+            //Engadimos os datos ao obxecto Client
+            if(isset($_POST["dni"])){
+                $client->setDni(htmlentities(addslashes($_POST["dni"])));
+            }
 
+            if(isset($_POST['name'])){
+                $client->setName((htmlentities(addslashes($_POST["name"]))));
+            }
+
+            if(isset($_POST['surname'])){
+                $client->setSurname($_POST["surname"]);
+            }
+
+            if(isset($_POST['phone'])){
+                $client->setPhone($_POST["phone"]);
+            }
+
+            if(isset($_POST['email'])){
+                $client->setEmail($_POST["email"]);
+            }
 
             try {
                 if(!$this->clientMapper->dniExists(htmlentities(addslashes($_POST["dni"])))){
-                    $this->clientMapper->add($client);
-                    //ENVIAR AVISO DE CLIENTE ENGADIDO!!!!!!!!!!
-                    $this->view->setFlash("succ_client_add");
-
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos clientes)
-                    $this->view->redirect("client", "show");
+                    if($this->validar_dni($client->getDni())){
+                        if($this->validar_email($client->getEmail())){
+                            $this->clientMapper->add($client);
+                            //ENVIAR AVISO DE CLIENTE ENGADIDO!!!!!!!!!!
+                            $this->view->setFlash("succ_client_add");
+                            //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos clientes)
+                            $this->view->redirect("client", "show");
+                        }else{
+                            $this->view->setFlash("fail_email_incorrect");
+                        }
+                    } else {
+                        $this->view->setFlash("fail_dni_incorrect");
+                    }
                 } else {
                     $this->view->setFlash("fail_client_exists");
                 }
+
             }catch(ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
+                $this->view->setFlash("erro_general");
             }
         }
-
         //Se non se enviou nada
         $this->view->render("client", "add");
     }
@@ -168,5 +187,23 @@ class ClientController extends BaseController
         //Se non se enviou nada
         $this->view->render("client", "edit");
     }
+
+    public function validar_email($direccion){
+        $Sintaxis='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
+        if(preg_match($Sintaxis,$direccion))
+            return true;
+        else
+            return false;
+    }
+    public function validar_dni($dni){
+        $letra = substr($dni, -1);
+        $numeros = substr($dni, 0, -1);
+        if ( substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros%23, 1) == $letra && strlen($letra) == 1 && strlen ($numeros) == 8 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }
