@@ -49,7 +49,7 @@ $event = $eventMapper->view($codevent);
                         <label for="divdatestart"><?= $strings['aforo']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa-fw"></i></span>
-                            <input  class="form-control" type="number" name="capacity" placeholder="<?php echo $strings['aforo'];?>">
+                            <input  class="form-control" type="number" name="capacity" value="<?php echo $event->getCapacity()?>">
                         </div>
                         <!--Campo aforo-->
                     </div>
@@ -60,15 +60,15 @@ $event = $eventMapper->view($codevent);
                         <label for="divdatestart"><?= $strings['datestart']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="date" name="date"
-                                   ="true" maxlength="10">
+                            <input type="text" class="form-control" id = "datestart" value = "<?php echo $event->getDate()?>" name="date"
+                            ="true" maxlength="10">
                             <div id="error"></div>
                         </div>
                         <!--Campo fecha -->
                     </div>
 
                     <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['space_id']  ?></label>
+                        <label for="divdatestart"><?= $strings['space']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
 
@@ -96,7 +96,7 @@ $event = $eventMapper->view($codevent);
                         <label for="divdatestart"><?= $strings['initial_hour']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input  class="form-control" type="time" name="inihour" placeholder="<?php echo $strings['hora_ini'];?>">
+                            <input  class="form-control" type="time" name="inihour" value="<?php echo $event->getIniHour()?>">
                         </div>
                         <!--Campo hora_ini-->
                     </div>
@@ -104,7 +104,7 @@ $event = $eventMapper->view($codevent);
                         <label for="divdatestart"><?= $strings['final_hour']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input  class="form-control" type="time" name="finhour" placeholder="<?php echo $strings['hora_fin'];?>">
+                            <input  class="form-control" type="time" name="finhour" value="<?php echo $event->getFinHour()?>">
                         </div>
                         <!--Campo hora_fin-->
                     </div>
@@ -119,7 +119,7 @@ $event = $eventMapper->view($codevent);
                                 $s = new EmployeeMapper();
                                 $emps = $s->show();
                                 foreach ($emps as $emp){
-                                    if($emp->getCodemployee == $event->getEmployee()->getCodemployee()){
+                                    if($emp->getCodemployee() == $event->getEmployee()->getCodemployee()){
                                         echo '<option selected value='.$emp->getCodemployee().'>'.$emp->getEmployeename().'</option>';
                                     }else{
                                         echo '<option value='.$emp->getCodemployee().'>'.$emp->getEmployeename().'</option>';
@@ -168,15 +168,12 @@ $event = $eventMapper->view($codevent);
     $( function() {
         $( "#datestart" ).datepicker();
         $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+        $( "#datestart" ).datepicker({
+            defaultDate: new Date("<?= $event->getDate()?>")
+        })
     } );
 </script>
 
-<script>
-    $( function() {
-        $( "#dateend" ).datepicker();
-        $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
-    } );
-</script>
 <script>
     //Non deixar que o campo input teña espazos
     $("input").on("keydown", function (e) {

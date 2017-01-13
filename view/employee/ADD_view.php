@@ -203,6 +203,12 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     </form>
     <!--fin formulario-->
 </div>
+<script>
+    $( function() {
+        $( "#datestart" ).datepicker();
+        $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 
 <script>
     //Non deixar que o campo input teña espazos

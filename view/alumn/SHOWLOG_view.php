@@ -26,11 +26,6 @@ $logs = $view->getVariable("logstoshow");
 
     <div class="row">
 
-        <!--BOTÓN BUSCAR-->
-        <a class="btn btn-primary" href="index.php?controller=alumn&action=search">
-            <i class="fa fa-fw fa-search"></i>
-            <?php echo $strings['find']; ?>
-        </a>
         <!--BOTÓN IMPRIMIR-->
         <?php
             echo '  
@@ -88,7 +83,17 @@ $logs = $view->getVariable("logstoshow");
                 </table><!-- fin table -->
             </div>
         </div><!-- fin panel -->
+        <div class="row">
 
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=showinjury&codalumn=<?php echo $logs[0]->getAlumn()->getCodalumn()?>">
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
+                </div>
+            </div>
+
+        </div>
     </div><!-- fin row -->
 </div><!-- fin contedor -->
 

@@ -31,13 +31,6 @@ $event = $eventMapper->view($_GET['codevent']);
 
     <div class="row">
 
-
-        <!--BOTÃƒâ€œN QUITAR FILTRO-->
-        <a class="btn btn-warning btn-outline"  href="index.php?controller=event&action=showpupil&codevent=<?php echo $_GET['codevent']?>">
-            <i class="fa fa-search-minus"></i>
-            <?php echo $strings['clean'];?>
-        </a>
-
         <?php
         if($eventMapper->isearly($event->getDate())){
         ?>

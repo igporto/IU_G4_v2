@@ -4,7 +4,7 @@ require_once(__DIR__."/../core/ViewManager.php");
 
 require_once(__DIR__."/../model/INJURY.php");
 require_once(__DIR__."/../model/INJURY_model.php");
-require_once(__DIR__ . "/../model/PUPIL_HAS_INJURY.php");
+require_once(__DIR__ . "/../model/PUPILHASINJURY.php");
 require_once(__DIR__ . "/../model/EMPLOYEEHASINJURY.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -156,7 +156,7 @@ class InjuryController extends BaseController {
 
     public function addpupil(){
         if (isset($_POST["submit"])) {
-            $pupil = new Pupil_has_injury();
+            $pupil = new Pupilhasinjury();
 
             $pupil->setCodInjury(htmlentities(addslashes($_POST['id_lesion'])));
             $pupil->setCodPupil(htmlentities(addslashes($_POST['codpupil'])));
@@ -263,7 +263,7 @@ class InjuryController extends BaseController {
     public function editpupil(){
         if (isset($_POST["submit"])) {
 
-            $in = new Pupil_has_injury();
+            $in = new Pupilhasinjury();
 
             if(isset($_POST["date_injury"])&& addslashes($_POST['date_injury'])!=""){
                 $in->setDateInjury(htmlentities(addslashes($_POST["date_injury"])));

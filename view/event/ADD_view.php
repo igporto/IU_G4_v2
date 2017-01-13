@@ -56,18 +56,17 @@ $userMapper = new EventMapper();
 
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                    <label for="divdatestart"><?= $strings['datestart']  ?></label>
-                    <div id="divdatestart" class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                        <input type="text" class="form-control" id="datestart" name="date"
-                               required="true" maxlength="10">
-                        <div id="error"></div>
+                        <label for="divdatestart"><?= $strings['datestart']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id = "datestart" name="date"
+                            ="true" maxlength="10" required ="">
+                            <div id="error"></div>
+                        </div>
+                        <!--Campo fecha -->
                     </div>
-                <!--Campo fecha -->
-                    </div>
-
                     <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['one_space']  ?></label>
+                        <label for="divdatestart"><?= $strings['space']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <select name="space" class='form-control icon-menu''>
@@ -152,13 +151,6 @@ $userMapper = new EventMapper();
     $( function() {
         $( "#datestart" ).datepicker();
         $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
-    } );
-</script>
-
-<script>
-    $( function() {
-        $( "#dateend" ).datepicker();
-        $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
     } );
 </script>
 

@@ -115,7 +115,7 @@ class EventController extends BaseController {
             }
 
             if(isset($_POST['date']) && $_POST['date'] != ""){
-                $event->setDate(htmlentities(addslashes($_POST["capacity"])));
+                $event->setDate(htmlentities(addslashes($_POST["date"])));
             }
 
             if(isset($_POST['inihour']) && $_POST['inihour'] != ""){
