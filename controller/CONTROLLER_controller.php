@@ -41,7 +41,7 @@ class ControllerController extends BaseController {
             $controller = new Controller();
 
 			//Engadimos o usuario e o contrasinal ao usuario
-			$controller->setControllername(htmlentities(addslashes($_POST["controllername"])));
+			$controller->setControllername(strtoupper(htmlentities(addslashes($_POST["controllername"]))));
 
 
 			try {
@@ -103,15 +103,14 @@ class ControllerController extends BaseController {
 			$controller_id = $this->controllerMapper->getIdByName($_GET['controllerName']);
 
 			$controller = $this->controllerMapper->view($controller_id);
+			if($_POST['newname'] && $_POST['newname'] != ""){
+                $controller->setControllername(strtoupper(htmlentities(addslashes($_POST['newname']))));
 
-			 if ($this->controllerMapper->controllernameExists($controller->getControllername())) {
-                $this->view->setFlash("fail_controller_exists");
-                $this->view->redirect("controller", "edit", "controllerName=".$_REQUEST["controllerName"]);
+                if ($this->controllerMapper->controllernameExists($controller->getControllername())) {
+                    $this->view->setFlash("fail_controller_exists");
+                    $this->view->redirect("controller", "edit", "controllerName=".$_REQUEST["controllerName"]);
+                }
             }
-
-			//Engadimos os permisos do usuario (Non entran os do perfil)
-			$controller->setControllername($_POST['newname']);
-
 
 			try {
 				$this->controllerMapper->edit($controller);

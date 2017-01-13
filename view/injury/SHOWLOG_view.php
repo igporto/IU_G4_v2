@@ -3,6 +3,7 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../controller/USER_controller.php");
 require_once(__DIR__ . "/../../model/ACCESSLOG.php");
 
+
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $view = ViewManager::getInstance();
@@ -20,6 +21,12 @@ $showinjury = false;
 $logs = $view->getVariable("logstoshow");
 ?>
 
+
+<script>
+    function imprimir() {
+        window.print();
+    }
+</script>
 <div class="col-xs-12 col-md-8 ">
 
     <h1 class="page-header"><?php echo $strings['injury_access_log'] ?></h1>
@@ -28,15 +35,24 @@ $logs = $view->getVariable("logstoshow");
 
         <!--BOTÓN IMPRIMIR-->
         <?php
-            echo '  
-                <a href="index.php?controller=alumn&action=print">
+        echo '  
+                <a href="index.php?controller=injury&action=print">
                     <button type="button" class="btn btn">
                     <i class="fa fa-fw fa-file-pdf-o "></i>
                     </button>
                 </a>
             ';
+//onclick="imprimir()
+        echo '
+        <a href="index.php?controller=injury&action=printPDF">
+        <button class="btn btn"> 
+            <i class="fa fa-fw fa-file-pdf-o "></i>
+        </button>
+        </a>
 
+        ';
         ?>
+
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
@@ -53,6 +69,7 @@ $logs = $view->getVariable("logstoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['one_user'] ?></th>
+                        <th class="text-center"><?php echo $strings['employee'] ?></th>
                         <th class="text-center"><?php echo $strings['alumn'] ?></th>
                         <th class="text-center"><?php echo $strings['access_date'] ?></th>
 
@@ -67,13 +84,19 @@ $logs = $view->getVariable("logstoshow");
                     //Para cada actividade, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
                     foreach ($logs as $c) {
                         echo "<tr class='row text-center' ><td> ";
-
                         echo $c->getUser()->getUsername(). "</td><td>";
-
-                        echo $c->getAlumn()->getAlumnname()." ". $c->getAlumn()->getAlumnsurname(). "</td><td>";
+                        if($c->getEmployee() != NULL){
+                            echo $c->getEmployee()->getEmployeename()." ". $c->getEmployee()->getEmployeesurname(). "</td><td>";
+                        }else{
+                            echo "" . "</td><td>";
+                        }
+                        if($c->getAlumn() != NULL){
+                            echo $c->getAlumn()->getAlumnname()." ". $c->getAlumn()->getAlumnsurname(). "</td><td>";
+                        }else{
+                            echo "" . "</td><td>";
+                        }
 
                         echo $c->getDate();
-
 
                         echo "</td></tr>";
                     }
@@ -87,7 +110,7 @@ $logs = $view->getVariable("logstoshow");
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=alumn&action=showinjury&codalumn=<?php echo $logs[0]->getAlumn()->getCodalumn()?>">
+                    <a class="btn btn-default btn-md" href="index.php?controller=employee&action=showinjury&codemployee=<?php echo $logs[0]->getEmployee()->getCodemployee()?>">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>

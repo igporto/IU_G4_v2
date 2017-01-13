@@ -197,7 +197,6 @@ class AlumnMapper {
         $stmt->execute(array($codinjurypupil));
     }
 
-
     public function validInjurydate($date)
     {
 

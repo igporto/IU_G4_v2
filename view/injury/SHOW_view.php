@@ -52,6 +52,12 @@ $injury = $view->getVariable("injurystoshow");
                 </a>
             ';
         } ?>
+        <a href="index.php?controller=injury&action=showlog">
+            <button type="button" class="btn btn-primary">
+                <i class="fa fa-fw fa-file-text"></i>
+                <?php echo $strings['injury_access_log'] ?>
+            </button>
+        </a>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->

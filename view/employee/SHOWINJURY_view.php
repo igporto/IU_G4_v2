@@ -36,13 +36,6 @@ $injurys = $view->getVariable("injurystoshow");
             </button>
         </a>
 
-        <a href="index.php?controller=employee&action=showlog">
-            <button type="button" class="btn btn-primary">
-                <i class="fa fa-fw fa-file-text"></i>
-                <?php echo $strings['injury_access_log'] ?>
-            </button>
-        </a>
-
     </div>
 
 

@@ -339,22 +339,15 @@ class AlumnController extends BaseController
                 $log->setInjury($phi->getInjury());
                 $log->setAlumn($phi->getPupil());
                 $log->setUser($this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser'])));
+                $log->setDate($this->accesslogMapper->getToday());
+                $this->writeLog($log);
                 $this->accesslogMapper->add($log);
+
                 $this->view->redirect("alumn", "showinjury", "codalumn=".$phi->getPupil()->getCodalumn() );
             }catch (Exception $e){
                 $this->view->setFlash('erro_general');
             }
         }
-    }
-
-    public function showlog(){
-        $logs = $this->accesslogMapper->showA();
-        $this->view->setVariable("logstoshow", $logs);
-        $this->view->render("alumn", "showlog");
-    }
-
-    public function printlogs(){
-
     }
 
     public function validar_dni($dni)
@@ -366,6 +359,30 @@ class AlumnController extends BaseController
         } else {
             return false;
         }
+    }
+
+    private function writeLog(Accesslog $log){
+        $ruta = __DIR__."/../media/";
+        $file = fopen($ruta."accessLog.txt", "a");
+
+        fwrite($file, "".PHP_EOL);
+        fwrite($file, $log->getDate()." --- ");
+        fwrite($file, $log->getUser()->getUsername()." --- ");
+        if($log->getAlumn() != NULL){
+            fwrite($file, $log->getAlumn()->getDni()."->".$log->getAlumn()->getAlumnname()." ".$log->getAlumn()->getAlumnsurname()." --- ");
+        }else{
+            fwrite($file, " --- ");
+        }
+        if($log->getEmployee() != NULL){
+            fwrite($file, $log->getEmployee()->getEmployeedni()."->".$log->getEmployee()->getEmployeename()." ".$log->getEmployee()->getEmployeesurname()." --- ");
+        }else{
+            fwrite($file, " --- ");
+        }
+
+        fwrite($file, $log->getInjury()->getNameInjury());
+
+        fclose($file);
+
     }
 
     public function validar_email($direccion)

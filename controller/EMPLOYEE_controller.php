@@ -393,7 +393,10 @@ class EmployeeController extends BaseController
                 $log->setInjury($phi->getInjury());
                 $log->setEmployee($phi->getEmployee());
                 $log->setUser($this->userMapper->view($this->userMapper->getIdByName($_SESSION['currentuser'])));
+                $log->setDate($this->accesslogMapper->getToday());
+                $this->writeLog($log);
                 $this->accesslogMapper->add($log);
+
                 $this->view->redirect("employee", "showinjury", "codemployee=".$phi->getEmployee()->getCodemployee() );
             }catch (Exception $e){
                 $this->view->setFlash('erro_general');
@@ -401,16 +404,29 @@ class EmployeeController extends BaseController
         }
     }
 
-    public function showlog(){
-        $logs = $this->accesslogMapper->showE();
-        $this->view->setVariable("logstoshow", $logs);
-        $this->view->render("employee", "showlog");
+    private function writeLog(Accesslog $log){
+        $ruta = __DIR__."/../media/";
+        $file = fopen($ruta."accessLog.txt", "a");
+
+        fwrite($file, "".PHP_EOL);
+        fwrite($file, $log->getDate()." --- ");
+        fwrite($file, $log->getUser()->getUsername()." --- ");
+        if($log->getAlumn() != NULL){
+            fwrite($file, $log->getAlumn()->getDni()."->".$log->getAlumn()->getAlumnname()." ".$log->getAlumn()->getAlumnsurname()." --- ");
+        }else{
+            fwrite($file, "[  ] --- ");
+        }
+        if($log->getEmployee() != NULL){
+            fwrite($file, $log->getEmployee()->getEmployeedni()."->".$log->getEmployee()->getEmployeename()." ".$log->getEmployee()->getEmployeesurname()." --- ");
+        }else{
+            fwrite($file, "[  ] --- ");
+        }
+
+        fwrite($file, $log->getInjury()->getNameInjury());
+
+        fclose($file);
+
     }
-
-    public function printlogs(){
-
-    }
-
     public function validar_email($direccion){
     $Sintaxis='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
        if(preg_match($Sintaxis,$direccion))

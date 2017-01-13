@@ -1744,9 +1744,9 @@ INSERT INTO `espacio`(`id_espacio`, `nombre`, `aforo`, `descripcion`) VALUES
 -- Volcado de datos para la tabla `empleado`
 --
 INSERT INTO `empleado`(`id_empleado`, `dni`, `nombre`, `apellidos`, `fech_nac`, `direccion_postal`, `email`, `comentario_personal`, `hora_entrada`, `hora_salida`, `num_cuenta`, `tipo_contrato`, `cod_usuario`) VALUES
-(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01", "Ourense", "lorena@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111111, "Fixo", 5),
-(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Ourense", "adrian@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111112, "Fixo", 3),
-(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Ourense", "ivan@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111113, "Fixo", 4);
+(1, '44654552J', 'Lorena', 'Dominguez', "1994-01-01", "Ourense", "lorena@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111111, "Fixo", 5),
+(2, '34562321A', 'Adrian', 'Reboredo', "1994-04-01", "Ourense", "adrian@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111112, "Fixo", 3),
+(3, '44432654I', 'Ivan', 'Guardado', "1994-02-01", "Ourense", "ivan@moveett.es", "nada que dicir", "09:00:00", "20:00:00", 111111111111111113, "Fixo", 4);
 
 
 
@@ -1778,9 +1778,9 @@ INSERT INTO `actividad`(`id_actividad`, `nombre`, `aforo`, `id_categoria`, `id_e
 -- Volcado de datos para la tabla `actividad`
 --
 INSERT INTO `alumno`(`id_alumno`, `dni_alumno`, `nombre`, `apellidos`, `fecha_nac`, `profesion`, `direccion_postal`, `email`, `comentarios`, `clases_pendientes`) VALUES
-(1, '44654552J', 'Lorena', 'Domínguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", 0),
-(2, '34562321A', 'Adrián', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", 0),
-(3, '44432654I', 'Iván', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", 0);
+(1, '44654552J', 'Lorena', 'Dominguez', "1994-01-01","Estudante", "Ourense", "lorena@moveett.es", "nada que dicir", 0),
+(2, '34562321A', 'Adrian', 'Reboredo', "1994-04-01", "Administrativo", "Ourense", "adrian@moveett.es", "nada que dicir", 0),
+(3, '44432654I', 'Ivan', 'Guardado', "1994-02-01", "Profesor de ESO", "Ourense", "ivan@moveett.es", "nada que dicir", 0);
 
 
 

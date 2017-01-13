@@ -6,6 +6,7 @@ require_once(__DIR__."/../model/INJURY_model.php");
 require_once(__DIR__."/../model/USER_model.php");
 require_once(__DIR__."/../model/ALUMN_model.php");
 require_once(__DIR__."/../model/EMPLOYEE_model.php");
+require_once(__DIR__."/../model/ACCESSLOG.php");
 
 
 class AccesslogMapper {
@@ -28,11 +29,15 @@ class AccesslogMapper {
         $this->employeeMapper = new EmployeeMapper();
     }
 
-    public function add(Accesslog $accesslog) {
+    public function getToday(){
         $stmt = $this->db->prepare("SELECT CURRENT_TIMESTAMP");
         $stmt->execute();
         $now = $stmt->fetch(PDO::FETCH_ASSOC);
-        $accesslog->setDate($now['CURRENT_TIMESTAMP']);
+        return $now['CURRENT_TIMESTAMP'];
+    }
+    public function add(Accesslog $accesslog) {
+
+
 
         if($accesslog->getEmployee() != NULL){
             $stmt = $this->db->prepare("INSERT INTO log_acceso_lesion(id_lesion,  id_empleado, cod_usuario, fecha) VALUES (?, ?, ?, ? )");
@@ -47,21 +52,9 @@ class AccesslogMapper {
         return $this->db->lastInsertId();
     }
 
-    public function showA() {
+    public function show() {
 
-        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion WHERE id_empleado IS NULL");
-        $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $logs = array();
-
-        foreach ($logs_db as $log) {
-            array_push($logs, $this->view($log['id_log']));
-        }
-
-        return $logs;
-    }
-    public function showE() {
-
-        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion WHERE id_alumno IS NULL");
+        $stmt = $this->db->query("SELECT * FROM log_acceso_lesion");
         $logs_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $logs = array();
 
