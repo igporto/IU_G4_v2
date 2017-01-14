@@ -35,55 +35,7 @@ class RegistrationMapper
         );
         return $this->db->lastInsertId();
     }
-    public function getCodRegistration($codRegistration)
-    {
-        $stmt = $this->db->prepare("SELECT id_inscripcion FROM inscripcion WHERE  id_inscripcion= ?");
-        $stmt->execute(array($codRegistration));
 
-        return $stmt->fetch(PDO::FETCH_ASSOC)['id_inscripcion'];
-    }
-    public function getCodReserve($id){
-        $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_reserva ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_sp = $r['id_reserva'];
-
-        return $id_sp;
-    }
-    public function getIdPago($id){
-        $stmt = $this->db->prepare("SELECT * FROM pago WHERE id_pago ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_sp = $r['id_pago'];
-
-        return $id_sp;
-    }
-    public function selectReserveId(){
-        $stmt = $this->db->prepare("SELECT * FROM reserva");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_reserva']);
-        }
-
-        return $id;
-    }
-    public function selectPaymentId(){
-        $stmt = $this->db->prepare("SELECT * FROM pago");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_pago']);
-        }
-
-        return $id;
-    }
     //Funcion de listar: devolve un array de todos obxetos Registration correspondentes á taboa inscripcion
     public function show()
     {

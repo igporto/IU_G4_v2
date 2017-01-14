@@ -569,7 +569,7 @@ $strings = array(
     'registration_data'=>'Datos de Inscrición',
     'codRegistration'=>'Código de Inscripción',
     'codPhysio'=>'Código de Fisio',
-    'RESERVE'=>'Reserva',
+    'RESERVE'=>'Reservas',
     'reserve'=>'reserva',
     'physio'=>'fisio',
     'one_alumn'=>'un alumno',
@@ -577,13 +577,14 @@ $strings = array(
     'codReserve'=>'Código Reserva',
     'startTime'=>'Hora comezo',
     'registration'=>'inscrición',
-    'REGISTRATION'=>'Inscrición',
+    'REGISTRATION'=>'Inscricións',
     'search_bill'=>'Buscar factura',
     'anyone'=>'Calquera',
     'search_domiciliation'=>'Buscar domiciliacion',
     'without_space'=>'Sen Espazo',
     'without_service'=>'Sen Servizo',
     'without_alumn'=>'Sen Alumno',
+    'without_reserve'=>'Sen Reserva',
 
 )
 ?>

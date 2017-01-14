@@ -569,7 +569,7 @@ $strings = array(
     'registration_data'=>'Registration\'s data',
     'codRegistration'=>'Registration Code',
     'codPhysio'=>'Physio Code',
-    'RESERVE'=>'RESERVE',
+    'RESERVE'=>'Reservations',
         'reserve'=>'reserve',
     'one_alumn'=>'one alumn',
     'endTime'=>'End time',
@@ -578,12 +578,13 @@ $strings = array(
 
     'physio'=>'physio',
         'registration'=>'registration',
-    'REGISTRATION'=>'Registration',
+    'REGISTRATION'=>'Registrations',
     'search_bill'=>'Bill search',
     'anyone'=>'Anyone',
     'search_domiciliation'=>'Domiciliation search',
     'without_space'=>'Without Space',
     'without_service'=>'Without Service',
     'without_alumn'=>'Without Alumn',
+    'without_reserve'=>'Sen Reservation',
 )
 ?>

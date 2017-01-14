@@ -168,6 +168,7 @@
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }                                                
             try {
+
                 if($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL ){
                     if ($reserve->getStartTime() < $reserve->getEndTime()) {
                         if ($this->reserveMapper->validDate($reserve->getDate())) {

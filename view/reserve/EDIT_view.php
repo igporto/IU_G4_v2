@@ -45,9 +45,9 @@ $currentRes = $reserveMapper->view($reserve);
                                 <?php
                                 $sm = new SpaceMapper();
                                 $spaces = $sm->show();
-                                echo '<option value=NULL>'.$strings['without_space'].'</option>';
+                                echo '<option value="NULL">'.$strings['without_space'].'</option>';
                                 foreach ($spaces as $space){
-                                    echo '<option value='.$space->getCodspace;
+                                    echo '<option value='.$space->getCodspace();
                                     if($space->getCodspace() == $currentRes->getSpace()->getCodspace()){
                                         echo " selected ";
                                     }
@@ -103,7 +103,7 @@ $currentRes = $reserveMapper->view($reserve);
                                 <?php
                                 $s = new ServiceMapper();
                                 $services = $s->show();
-                                echo '<option value=NULL>'.$strings['without_service'].'</option>';
+                                echo '<option value="NULL">'.$strings['without_service'].'</option>';
                                 foreach ($services as $service){
                                     echo '<option value='.$service->getId();
                                     if($service->getId() == $currentRes->getService()->getId()){

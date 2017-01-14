@@ -37,12 +37,17 @@ $registrationMapper = new RegistrationMapper();
                             <select id='reserve' name='reserve' class='form-control icon-menu'>
                                 <?php
                                 //Engadimos unha opcion por reserva a escoller
-                                $registrationMapper = new RegistrationMapper();
+                                $rm = new ReserveMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                                $reserves = $registrationMapper->selectReserveId();
-                                echo "<option value='NULL'>".$strings['no_reserve'] . "</option>";
-                                foreach ($reserves as $reserve) {
-                                    echo "<option value='" . $reserve."'>".$registrationMapper->getCodReserve() . "</option>";
+                                $reserves = $rm->show();
+                                echo "<option value='NULL'>".$strings['without_reserve'] . "</option>";
+                                foreach ($reserves as $r) {
+                                    if($r->getSpace()->getCodspace() != NULL){
+                                        echo "<option value='" . $r->getCodReserve()."'>".$r->getSpace()->getSpacename()."-".$r->getDate()."-->".$r->getStartTime()."-".$r->getEndTime() . "</option>";
+                                    }
+                                    elseif ($r->getService()->getId() != NULL){
+                                        echo "<option value='" . $r->getCodReserve()."'>".$r->getService()->getDescipcion()."-".$r->getDate()."-->".$r->getStartTime()."-".$r->getEndTime() . "</option>";
+                                    }
                                 }
                                 ?>
                             </select>
@@ -56,11 +61,11 @@ $registrationMapper = new RegistrationMapper();
                             <select id='payment' name='payment' class='form-control icon-menu'>
                             <?php
                             //Engadimos unha opcion por pago a escoller
-                            $registrationMapper = new RegistrationMapper();
+                            $pm = new PaymentMapper();
                             //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $payments = $registrationMapper->selectPaymentId();
+                            $payments = $pm->show();
                             foreach ($payments as $payment) {
-                                echo "<option value='" . $payment."'>".$registrationMapper->getIdPago() . "</option>";
+                                echo "<option value='" . $payment->getIdPago()."'>".$payment->getIdPago() . "</option>";
                             }
                             ?>
                             </select>
