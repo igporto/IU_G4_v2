@@ -29,7 +29,7 @@ echo '
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["time_recovery"] . ': </label>
-                                                        <span class="">' . $c->getTime() . '</span>
+                                                        <span class="">' . $c->getTime() ." ". $strings['days'] . '</span>
 
                                                 </div>
                                                             
@@ -55,7 +55,7 @@ echo '
 
                                             <div class="modal-footer">
                                                 
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">'.$strings["okay"].'</button>
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">'.$strings["okay"].'</button>
                                                 
                                                 
                                             </div>
