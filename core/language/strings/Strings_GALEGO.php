@@ -495,6 +495,14 @@ $strings = array(
     'management_notifications'=>'Xestión de Notificacións',
     'create_notification'=>'Engadir Notificación',
     'edit_notification'=>'Editar Notificación',
+    'send_email'=>'Enviar Email',
+    'message'=>'Mensaxe',
+    'destiny'=>'Destinatario/os',
+    'subject'=>'Motivo',
+    'free_take'=>'Selección Libre',
+    'all_clients'=>'Todos os Clientes',
+    'activity_clients'=>'Clientes dunha Actividade',
+    'event_clients'=>'Clientes dun Evento',
 
 
 

@@ -48,6 +48,12 @@ $notifications = $view->getVariable("notificationstoshow");
                             </a>
                         ';
         } ?>
+
+        <!--BOTÓN BUSCAR-->
+        <a class="btn btn-primary" href="index.php?controller=notification&action=send">
+            <i class="fa fa-mail-forward fa-search"></i>
+            <?php echo $strings['send_email']; ?>
+        </a>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->

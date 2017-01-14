@@ -502,6 +502,14 @@ $strings = array(
     'management_notifications'=>'Gestión de Notificaciones',
     'create_notification'=>'Añadir Notificación',
     'edit_notification'=>'Editar Notificación',
+    'send_email'=>'Enviar Email',
+    'message'=>'Mensaje',
+    'destiny'=>'Destinatario/os',
+    'subject'=>'Motivo',
+    'free_take'=>'Selección Libre',
+    'all_clients'=>'Todos los Clientes',
+    'activity_clients'=>'Clientes de una Actividad',
+    'event_clients'=>'Clientes de un Evento',
 
 
     /*Alumno*/

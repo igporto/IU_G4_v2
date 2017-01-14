@@ -55,50 +55,42 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
                 </div><!-- cerrar div1 -->
     
-                <label for="well"><?php echo $strings['PERMISSION']?>: </label>
-                <div id="well" class="well">
-                <div class="row" style="padding: 5px"><!-- div2 -->
-                            
-                
-                      
+                    <label for="well"><?php echo $strings['PERMISSION']?>: </label>
+                    <div id="well" class="well">
+                        <div class="row" style="padding: 5px"><!-- div2 -->
+                            <?php
 
-                <?php
-               
-                $am = new ActionMapper();
-                $pm = new PermissionMapper();
-                $actions = $am->show();
-                $permissions = $pm->show();
+                            $am = new ActionMapper();
+                            $pm = new PermissionMapper();
+                            $actions = $am->show();
+                            $permissions = $pm->show();
 
-                if(isset($_REQUEST["controller_id"]) && $_REQUEST["controller_id"] != "NULL") {
-                    
-                    //Creamos un obxctto Controller co id que recibimos po $_GET que é do que temos que mostrar os datos
-                    $c = $cm->view($_REQUEST["controller_id"]);
-                    echo "<div class='form-group'>";
+                            if(isset($_REQUEST["controller_id"]) && $_REQUEST["controller_id"] != "NULL") {
 
-                    foreach ($actions as $a) {
-                        //Creamos un obxecto Permission co controlador e accion actual para poder comprobar que xa hai un permiso con ese par
-                        //CONTROLLER -> ACTION
-                        $permissionaux = new Permission(NULL, $c, $a);
-                        //Se xa existe ese permiso mostramolo pero non o deixamos engadir ese par CONTROLLER -> ACTION
-                        if ($pm->permissionExists($permissionaux)) {
-                            echo "<div class='checkbox'><label><input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</label></div>
-                            ";
-                        } else {
-                            echo "<div class='checkbox'><label><input type='checkbox' name='actions[]' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</label></div>
-                            ";
-                        }
+                                //Creamos un obxctto Controller co id que recibimos po $_GET que é do que temos que mostrar os datos
+                                $c = $cm->view($_REQUEST["controller_id"]);
+                                echo "<div class='form-group'>";
 
-                    }
-
-                    echo  '</div><!-- /form-group -->';
-                }
-                ?>
-
-                
-                </div><!-- /div2 -->
-                </div><!-- well -->
+                                foreach ($actions as $a) {
+                                    //Creamos un obxecto Permission co controlador e accion actual para poder comprobar que xa hai un permiso con ese par
+                                    //CONTROLLER -> ACTION
+                                    $permissionaux = new Permission(NULL, $c, $a);
+                                    //Se xa existe ese permiso mostramolo pero non o deixamos engadir ese par CONTROLLER -> ACTION
+                                    if ($pm->permissionExists($permissionaux)) {
+                                        echo "<div class='checkbox'><label><input type='checkbox' name='' value='' checked disabled >" . $a->getActionname() . "</label></div>
+                                        ";
+                                    } else {
+                                        echo "<div class='checkbox'><label><input type='checkbox' name='actions[]' value='" . $a->getCodAction() . "'>" . $a->getActionname() . "</label></div>
+                                        ";
+                                    }
+                                }
+                                echo  '</div><!-- /form-group -->';
+                            }
+                            ?>
+                        </div><!-- /div2 -->
+                    </div><!-- well -->
                 </div><!-- /panel-body -->
-        </div><!-- /panel -->
+            </div><!-- /panel -->
             <div class="row">
     
                 <div class="col-xs-12">

@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../model/NOTIFICATION.php");
 require_once(__DIR__ . "/../model/NOTIFICATION_model.php");
 require_once(__DIR__ . "/../model/USER.php");
 require_once(__DIR__ . "/../model/USER_model.php");
-
+require_once(__DIR__."/../mail/PHPMailerAutoload.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
 
 
@@ -128,5 +128,76 @@ class NotificationController extends BaseController
             $this->view->render("notification", "search");
         }
 
+    }
+
+    public function send(){
+
+        if(isset($_POST["destiny"])){
+            if (isset($_POST["subject"]) && !empty($_POST["subject"]) && isset($_POST["message"]) && !empty($_POST["message"])){
+
+                $subject=$_POST["subject"];
+                $message=$_POST["message"];
+                $destinies = $_POST['destiny'];
+
+                $mail = new PHPMailer;
+                //Tell PHPMailer to use SMTP
+                $mail->isSMTP();
+                //Enable SMTP debugging
+                // 0 = off (for production use)
+                // 1 = client messages
+                // 2 = client and server messages
+                //$mail->SMTPDebug = 2;
+                //Ask for HTML-friendly debug output
+                $mail->Debugoutput = 'html';
+                //Set the hostname of the mail server
+                //$mail->Host = 'smtp.gmail.com';
+                // use
+                $mail->Host = gethostbyname('smtp.gmail.com');
+                // if your network does not support SMTP over IPv6
+                //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
+                $mail->Port =587;
+                //Set the encryption system to use - ssl (deprecated) or tls
+                $mail->SMTPSecure = 'tls';
+                //Whether to use SMTP authentication
+                $mail->SMTPAuth = true;
+                //Username to use for SMTP authentication - use full email address for gmail
+                $mail->Username = "moovettG4@gmail.com";
+                //Password to use for SMTP authentication
+                $mail->Password = "moovettG4";
+                //Set who the message is to be sent from
+                $mail->setFrom("moovettG4@gmail.com", 'Ximnasio Moovett Ourense');
+                //Set an alternative reply-to address
+                $mail->addReplyTo("moovettG4@gmail.com", 'Ximnasio Moovett Ourense');
+                //Set who the message is to be sent to
+                //$mail->addAddress($email, $email);
+                //Set the subject line
+                $mail->Subject = $subject;
+                //convert HTML into a basic plain-text alternative body
+                $mail->Body = $message;
+                //Replace the plain text body with one created manually
+                $mail->AltBody = $message;
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    ));
+                foreach($destinies as $email){
+                    $mail->addAddress($email, $email);
+                }
+                if (!$mail->Send()) {
+                    $this->view->setFlash("fail_mail_error");
+                    //echo( "Mailer Error: " . $mail->ErrorInfo);
+                } else {
+                    $this->view->setFlash("succ_mail_sent");
+                }
+            }
+            else{
+
+            }
+        }
+        else{
+            $this->view->render("notification", "send");
+        }
     }
 }

@@ -499,7 +499,14 @@ $strings = array(
     'management_notifications'=>'Notifications Management',
     'create_notification'=>'Add Notification',
     'edit_notification'=>'Edit Notification',
-
+    'send_email'=>'Enviar Email',
+    'message'=>'Menssage',
+    'destiny'=>'addressee/s',
+    'subject'=>'Subject',
+    'free_take'=>'Free Select',
+    'all_clients'=>'All Clients',
+    'activity_clients'=>'Activity Clients',
+    'event_clients'=>'Event Clients',
 
 
     'DOMICILIATION' => 'Domiciliations',
