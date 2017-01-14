@@ -43,6 +43,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <span class="input-group-addon"><i class="fa fa-chevron-right fa-fw"></i></span>
                             <input type="number"
                                    class="form-control" id="number" name="number"
+                                   min="1"
                                    placeholder= <?php echo $strings['bill_number'] ?>
                                    required="true">
                             <div id="error"></div>

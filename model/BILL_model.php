@@ -25,6 +25,13 @@ class BillMapper
     //Inserta na base de datos unha tupla cos datos do obxeto $bill
     public function add(Bill $bill)
     {
+
+        $stmt = $this->db->prepare("SELECT * FROM factura WHERE numero = ?");
+        $stmt->execute(array($bill->getNumero()));
+
+        if ($stmt->fetchColumn() > 0) {
+            return false;
+        }
         //cambiar a sentencia acorde á taboa que referencia
         //IMPORTANTE: se a PK da táboa é autoincremental, non se inserta manualmente (non se pon nos 'campo' nin nos '?')
         $stmt = $this->db->prepare("INSERT INTO factura(id_factura, nombre,numero,fecha) values (?,?,?,?)"); //1 ? por campo a insertar

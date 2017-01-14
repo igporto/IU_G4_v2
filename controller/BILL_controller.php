@@ -53,12 +53,15 @@ class BillController extends BaseController
             $bill->setFecha($date);
 
             try {
-                $this->billMapper->add($bill);
-                //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
-                $this->view->setFlash('succ_bill_add');
+                if ($this->billMapper->add($bill) == false) {
+                    $this->view->setFlash('fail_bill_num');
+                } else {
+                    //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
+                    $this->view->setFlash('succ_bill_add');
 
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos bills)
-                $this->view->redirect("bill", "show");
+                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos bills)
+                    $this->view->redirect("bill", "show");
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }

@@ -609,6 +609,7 @@ $strings = array(
     'without_service'=>'Sen Servizo',
     'without_alumn'=>'Sen Alumno',
     'without_reserve'=>'Sen Reserva',
+    'fail_bill_num'=>'Xa existe unha factura con ese numero'
 
 )
 ?>

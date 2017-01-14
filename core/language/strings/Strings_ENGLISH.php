@@ -607,5 +607,6 @@ $strings = array(
     'without_service'=>'Without Service',
     'without_alumn'=>'Without Alumn',
     'without_reserve'=>'Sen Reservation',
-)
+    'fail_bill_num'=>'Bill number already exists'
+	)
 ?>
