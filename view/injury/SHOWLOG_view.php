@@ -35,14 +35,6 @@ $logs = $view->getVariable("logstoshow");
 
         <!--BOTÓN IMPRIMIR-->
         <?php
-        echo '  
-                <a href="index.php?controller=injury&action=print">
-                    <button type="button" class="btn btn">
-                    <i class="fa fa-fw fa-file-pdf-o "></i>
-                    </button>
-                </a>
-            ';
-//onclick="imprimir()
         echo '
         <a href="index.php?controller=injury&action=printPDF">
         <button class="btn btn"> 
