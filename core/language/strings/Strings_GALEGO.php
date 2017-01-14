@@ -307,6 +307,7 @@ $strings = array(
         'fail_date_incorrect'=>'A data non é válida',
         'fail_date_injuries'=>'A data de Recuperacion non pode ser anterior á de Lesión',
         'fail_data_ini_fin_incorrect'=>'A hora de Comezo non pode ser maior á de Fin e viceversa',
+        'fail_not_reserve'=>'Non hai nada que reservar',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -583,5 +584,6 @@ $strings = array(
     'without_space'=>'Sen Espazo',
     'without_service'=>'Sen Servizo',
     'without_alumn'=>'Sen Alumno',
+
 )
 ?>

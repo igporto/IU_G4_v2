@@ -75,18 +75,22 @@
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }
             try {
-                if($reserve->getStartTime() < $reserve->getEndTime()){
-                    if($this->reserveMapper->validDate($reserve->getDate())){
-                        $this->reserveMapper->add($reserve);
-                        $this->view->setFlash('succ_reserve_add');
-                        $this->view->redirect("reserve", "show");
+
+                if($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL ){
+                    if($reserve->getStartTime() < $reserve->getEndTime()){
+                        if($this->reserveMapper->validDate($reserve->getDate())){
+                            $this->reserveMapper->add($reserve);
+                            $this->view->setFlash('succ_reserve_add');
+                            $this->view->redirect("reserve", "show");
+                        }else{
+                            $this->view->setFlash("fail_date_incorrect");
+                        }
                     }else{
-                        $this->view->setFlash("fail_date_incorrect");
+                        $this->view->setFlash("fail_data_ini_fin_incorrect");
                     }
                 }else{
-                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                    $this->view->setFlash("fail_not_reserve");
                 }
-
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -164,16 +168,20 @@
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }                                                
             try {
-                if($reserve->getStartTime() < $reserve->getEndTime()){
-                    if($this->reserveMapper->validDate($reserve->getDate())){
-                        $this->reserveMapper->edit($reserve);
-                        $this->view->setFlash("succ_registration_edit");
-                        $this->view->redirect("reserve", "show");
-                    }else{
-                        $this->view->setFlash("fail_date_incorrect");
+                if($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL ){
+                    if ($reserve->getStartTime() < $reserve->getEndTime()) {
+                        if ($this->reserveMapper->validDate($reserve->getDate())) {
+                            $this->reserveMapper->edit($reserve);
+                            $this->view->setFlash("succ_registration_edit");
+                            $this->view->redirect("reserve", "show");
+                        } else {
+                            $this->view->setFlash("fail_date_incorrect");
+                        }
+                    } else {
+                        $this->view->setFlash("fail_data_ini_fin_incorrect");
                     }
                 }else{
-                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                    $this->view->setFlash("fail_not_reserve");
                 }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
@@ -216,7 +224,6 @@
             }
 
             try {
-
                 $this->view->setVariable("reservestoshow", $this->reserveMapper->search($reserve));
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");

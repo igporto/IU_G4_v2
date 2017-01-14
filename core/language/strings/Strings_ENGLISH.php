@@ -312,6 +312,7 @@ $strings = array(
     	'fail_date_incorrect'=>'Date is not valid',
     	'fail_date_injuries'=>'Recovery Date can´t be lower than Injury Date ',
     	'fail_data_ini_fin_incorrect'=>'Initial Hour can´t be upper than Finaly Hour and vice versa ',
+    	'fail_not_reserve'=>'There is nothing to book ',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
