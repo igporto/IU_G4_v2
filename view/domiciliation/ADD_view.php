@@ -14,7 +14,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             <div class="panel-heading">
                 <?php echo $strings['create_domiciliation'] ?>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="width: 900px;">
 
                 <!-- avisos + nome -->
                 <div class="row">
@@ -30,8 +30,10 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>
                         <!--Campo cantidad-->
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['period'] ?></label>
+                        <label for="selectperf"><?php echo $strings['period'] . " (" . $strings["cada cuanto"] . " )" ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                             <input type="number" min="1" step="1" max="250" autofocus
@@ -65,17 +67,19 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>
                         <!--Campo dni de cliente-->
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf">IBAN</label>
+                        <label for="selectperf">IBAN (<?php echo $strings["no_white_spaces"] ?>)</label>
+
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
-                            <input type="text"
-                                   class="form-control" id="iban" name="iban"
-                                   placeholder="IBAN"
-                                   required="true">
+                            <input type="text" class="form-control" id="iban" name="iban"
+                                   placeholder="IBAN" maxlength="24" required="true">
                             <div id="error"></div>
                         </div>
-                        <!--Campo cantidad-->
+                        <!--Campo iban-->
                     </div>
                 </div>
             </div>

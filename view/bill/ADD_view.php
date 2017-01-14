@@ -84,3 +84,9 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 <!--fin formulario-->
 </div>
+<script>
+    //Non deixar que o campo input teña espazos
+    $('#iban').on("keydown", function (e) {
+        return e.which !== 32;
+    });
+</script>

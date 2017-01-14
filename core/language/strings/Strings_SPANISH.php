@@ -605,6 +605,7 @@ $strings = array(
     'without_service'=>'Sin Servicio',
     'without_alumn'=>'Sin Alumno',
     'without_reserve'=>'Sin Reserva',
-	'fail_bill_num'=>'Ya existe una factura con ese numero'
+	'fail_bill_num'=>'Ya existe una factura con ese numero',
+	'cada cuanto'=> 'Cada cuanto se cobra'
 )
 ?>

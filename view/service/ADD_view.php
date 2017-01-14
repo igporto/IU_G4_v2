@@ -2,11 +2,11 @@
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
 
-include(__DIR__."/../../model/CLIENT_model.php");
+include(__DIR__ . "/../../model/CLIENT_model.php");
 
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
-    $serviceMapper = new ServiceMapper();
+$serviceMapper = new ServiceMapper();
 
 ?>
 
@@ -37,7 +37,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 <span class="input-group-btn">
                                 <button class="btn btn-info" type="button"
                                         data-toggle="modal"
-                                        data-target="#view<?php echo $strings['client'];?>">
+                                        data-target="#view<?php echo $strings['client']; ?>">
                                         <i class="fa fa-eye fa-fw"></i>
                                 </button>
                                 </span>
@@ -51,30 +51,34 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 $clients = $pc->show();
 
                                 foreach ($clients as $cliente) {
-                                    echo "<option value='" . $cliente->getDni()."'>" . $cliente->getDni() . "</option>";
+                                    echo "<option value='" . $cliente->getDni() . "'>" . $cliente->getDni() . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
-                        <div class="form-group input-group">
-                            <span autofocus required class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="date" class="form-control" id="fecha" name="fecha" placeholder=<?php echo $strings['date'] ?>
-                            required="true" maxlength="9">
+                        <label for="divdatestart"><?= $strings['date'] ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="fecha"
+                                   maxlength="10" required="" placeholder=<?= $strings['date'] ?>>
                             <div id="error"></div>
                         </div>
-                        <!--Campo fecha-->
+                        <!--Campo fecha -->
+                        <label for="divdatestart"><?= $strings['cost'] ?></label>
                         <div class="form-group input-group">
                             <span autofocus required class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input type="text" class="form-control" id="coste" name="coste" placeholder=<?php echo $strings['cost'] ?>
-                            required="true" maxlength="">
+                            <input type="text" class="form-control" id="coste" name="coste"
+                                   placeholder=<?php echo $strings['cost'] ?>
+                                   required="true" maxlength="">
                             <div id="error"></div>
                         </div>
                         <!--Campo coste-->
-
+                        <label for="divdatestart"><?= $strings['description'] ?></label>
                         <div class="form-group input-group">
                             <span autofocus required class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder=<?php echo $strings['description'] ?>
-                            required="true" maxlength="25">
+                            <input type="text" class="form-control" id="descripcion" name="descripcion"
+                                   placeholder=<?php echo $strings['description'] ?>
+                                   required="true" maxlength="25">
                             <div id="error"></div>
                         </div>
                         <!--Campo descripcion-->
@@ -83,30 +87,35 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
             </div>
         </div>
         <div class="row">
-                        <div class="col-xs-12">
-                            <div class="pull-left">
-                                <a class="btn btn-default btn-md" href="index.php?controller=service&action=show">
-                                    <i class="fa fa-arrow-left"></i>
-                                    <?php echo $strings['back'] ?></i></a>
-                            </div>
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=service&action=show">
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
+                </div>
 
-                            <div class="pull-right">
-                                <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                                    <?php echo $strings['clean'] ?></i></button>
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                        <?php echo $strings['clean'] ?></i></button>
 
-                                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                                    <i class="fa fa-plus"></i>
-                                    <?php echo $strings['ADD'] ?></i></button>
-                                <?php
+                    <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                        <i class="fa fa-plus"></i>
+                        <?php echo $strings['ADD'] ?></i></button>
+                    <?php
 
-                                ?>
-                            </div>
-                        </div>
-                    </div>
+                    ?>
+                </div>
+            </div>
+        </div>
     </form>
     <!--fin formulario-->
 </div>
-
+<script>
+    $(function () {
+        $("#datestart").datepicker();
+        $("#datestart").datepicker("option", "dateFormat", "yy-mm-d");
+    });
+</script>
 <script>
     //Non deixar que o campo input teña espazos
     $("input").on("keydown", function (e) {
