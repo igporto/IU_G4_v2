@@ -289,6 +289,10 @@ $strings = array(
     'succ_reserve_delete'=>'Reserva borrada correctamente',
     'succ_reserve_edit'=>'Reserva editada correctamente',
 
+    'succ_notification_add'=>'Notificación creada correctamente',
+    'succ_notification_delete'=>'Notificación borrada correctamente',
+    'succ_notification_edit'=>'Notificación editada correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -491,6 +495,13 @@ $strings = array(
     'one_user'=>'Usuario',
     'alumn'=>'Alumno',
     'access_date'=>'Fecha y Hora de Acceso',
+
+    /*NOTIFICACIONS*/
+    'NOTIFICATION'=>'Notificaciones',
+    'notification_data'=>'Datos de la Notificación',
+    'management_notifications'=>'Gestión de Notificaciones',
+    'create_notification'=>'Añadir Notificación',
+    'edit_notification'=>'Editar Notificación',
 
 
     /*Alumno*/

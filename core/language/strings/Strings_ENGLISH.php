@@ -287,6 +287,10 @@ $strings = array(
     'succ_reserve_delete'=>'Reserve properly deleted',
     'succ_reserve_edit'=>'Reserve properly edited',
 
+    'succ_notification_add'=>'Notification properly created',
+    'succ_notification_delete'=>'Notification properly deleted',
+    'succ_notification_edit'=>'Notification properly edited',
+
 		/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",
@@ -488,6 +492,13 @@ $strings = array(
     'one_user'=>'User',
     'alumn'=>'Alumn',
     'access_date'=>'Access DateTime',
+
+    /*NOTIFICACIONS*/
+    'NOTIFICATION'=>'Notifications',
+    'notification_data'=>'Notification Data',
+    'management_notifications'=>'Notifications Management',
+    'create_notification'=>'Add Notification',
+    'edit_notification'=>'Edit Notification',
 
 
 

@@ -1320,9 +1320,10 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
   (18, 'ALUMN'),
   (19, 'INJURY'),
   (20, 'DOCUMENT'),
-  (22, 'SCHEDULE'),
-  (23, 'RESERVE'),
-  (24, 'REGISTRATION');
+  (21, 'SCHEDULE'),
+  (22, 'RESERVE'),
+  (23, 'REGISTRATION'),
+  (24, 'NOTIFICATION');
 
 --
 -- Volcado de datos para la tabla `accion`
@@ -1455,7 +1456,12 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
   (23 ,2),
   (23 ,3),
   (23 ,4),
-  (23 ,5);
+  (23 ,5),
+  (24 ,1),
+  (24 ,2),
+  (24 ,3),
+  (24 ,4),
+  (24 ,5);
 
 
 
@@ -1599,7 +1605,12 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
   (1, 112),
   (1, 113),
   (1, 114),
-  (1, 115);
+  (1, 115),
+  (1, 116),
+  (1, 117),
+  (1, 118),
+  (1, 119),
+  (1, 120);
 
 
 
@@ -1726,11 +1737,17 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
               (1, 109),
               (1, 110),
               /*REGISTRATION*/
-              (1, 110),
               (1, 111),
               (1, 112),
               (1, 113),
               (1, 114),
+              (1, 115),
+              /*NOTIFICATION*/
+              (1, 116),
+              (1, 117),
+              (1, 118),
+              (1, 119),
+              (1, 120),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
