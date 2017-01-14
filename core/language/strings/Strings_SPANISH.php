@@ -320,6 +320,7 @@ $strings = array(
     	'fail_data_ini_fin_incorrect'=>'La hora de Comienzo no puede ser mayor a la de Fin y viceversa',
     	'fail_not_reserve'=>'No hay nada que reservar',
     	'fail_mail_error'=>'Error al enviar email',
+		'fail_not_inscript'=>'No hay nada que Inscribir',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -513,6 +514,10 @@ $strings = array(
     'event_clients'=>'Clientes de un Evento',
     'succ_mail_sent'=>'Email enviado',
 
+    /*REGISTRATION*/
+    'without_event'=>'Sin Evento',
+    'without_activity'=>'Sin Actividad',
+    'without_payment'=>'Sin Pago',
 
 
     /*Alumno*/
@@ -583,13 +588,13 @@ $strings = array(
     'physio_data'=> 'Datos de fisio',
     'physio_modify'=> 'Modificar fisio',
     'reserve_data'=> 'Datos de reserva',
-    'registration_modify'=> 'Inscripción modificada',
+    'registration_modify'=> 'Modificar Inscripción',
     'management_registrations'=> 'Administración de Inscripciones',
     'registration_data'=> 'Datos de Inscripción',
     'codRegistration'=> 'Código de Inscripción',
     'codPhysio'=> 'Código de Fisio',
     'RESERVE'=> 'Reservas',
-        'reserve'=>'reserva',
+        'reserve'=>'Reserva',
     'physio'=>'fisio',
     'one_alumn'=>'un alumno',
     'endTime'=>'Hora Fin',

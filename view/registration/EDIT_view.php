@@ -19,66 +19,102 @@ $registration = $registrationMapper->view($codRegistration);
             </div>
             <div class="panel-body">
                 <div class="row">
+                    <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                        <div class="row">
+                            <?php echo $strings['no_white_spaces'] ?>
+                        </div>
+                        <!--  <div class="row">
+                            <?php echo $strings['max_length'] ?>: 25
+                        </div>-->
+
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['reserve'] ?></label>
+                        <label for="selectperf"><?php echo $strings['activity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
-                            <select id='reserve' name='reserve' class='form-control icon-menu'>
-                            <?php
-                            //Engadimos unha opcion por reserve a escoller
-                            $rm = new ReserveMapper();
-                            //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $reserves = $rm->show();
-                            foreach ($reserves as $reserve) {
-                                echo "<option value='" . $reserve->getCodReserve()."'>".$reserve->getCodReserve() . "</option>";
-                            }
-                            ?>
+                            <select id='reserve' name='activity' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por reserva a escoller
+                                $am = new ActivityMapper();
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $activities = $am->show();
+
+                                echo "<option value='NULL'>".$strings['without_activity'] . "</option>";
+                                foreach ($activities as $a) {
+                                    echo '<option value=' . $a->getCodactivity();
+
+                                    if($a->getCodactivity() == $registration->getActivity()->getCodactivity()){
+                                        echo " selected ";
+                                    }
+                                    echo '>'.$a->getActivityname() . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <!--Campo reserve-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['date'] ?></label>
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                                <input class="form-control" type="date" name="date" maxlength="25"
-                                       placeholder=<?php echo $strings['date']; ?>>
-                            </div>
+                        <label for="selectperf"><?php echo $strings['event'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
+                            <select id='event' name='event' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por reserva a escoller
+                                $em = new EventMapper();
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $events = $em->show();
+
+                                echo '<option value="NULL">'.$strings['without_space'].'</option>';
+                                foreach ($events as $event){
+                                    echo '<option value='.$event->getCodevent();
+                                    if($event->getCodevent() == $registration->getEvent()->getCodevent()){
+                                        echo " selected ";
+                                    }
+                                    echo '>'. $event->getName() .'</option>';
+
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <!--Campo reserve-->
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['one_payment'] ?></label>
+                        <label for="selectperf"><?php echo $strings['alumn'] ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
-                            <select id='payment' name='payment' class='form-control icon-menu'>
-                            <?php
-                            //Engadimos unha opcion por pago a escoller
-                            $pm = new PaymentMapper();
-                            //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $payments = $pm->show();
-                            foreach ($payments as $payment) {
-                                echo "<option value='" . $payment->getIdPago."'>".$payment->getIdPago() . "</option>";
-                            }
-                            ?>
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <select id='payment' name='alumn' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por pago a escoller
+                                $am = new AlumnMapper();
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $am->show();
+                                foreach ($alumns as $a) {
+                                    echo "<option value=" . $a->getCodalumn();
+                                    if($a->getCodalumn() == $registration->getAlumn()->getCodalumn()){
+                                        echo " selected ";
+                                    }
+                                   echo ">".$a->getAlumnname()." ". $a->getAlumnsurname() . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                         <!--Campo payment-->
                     </div>
-
                 </div>
             </div>
         </div>
 
         <div class="row">
-
             <div class="col-xs-12">
                 <div class="pull-left">
                     <a class="btn btn-default btn-md" href="index.php?controller=registration&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
-
                 <div class="pull-right">
                     <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
                         <?php echo $strings['clean'] ?></i></button>
@@ -90,7 +126,6 @@ $registration = $registrationMapper->view($codRegistration);
                     ?>
                 </div>
             </div>
-
         </div>
     </form>
     <!--fin formulario-->

@@ -315,6 +315,7 @@ $strings = array(
         'fail_data_ini_fin_incorrect'=>'A hora de Comezo non pode ser maior á de Fin e viceversa',
         'fail_not_reserve'=>'Non hai nada que reservar',
         'fail_mail_error'=>'Error al enviar email',
+        'fail_not_inscript'=>'Non hai nada que Inscribir',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -508,6 +509,9 @@ $strings = array(
     'succ_mail_sent'=>'Email enviado',
     'fail_mail_error'=>'Erro ao enviar email',
 
+    /*REGISTRATION*/
+    'without_event'=>'Sen Evento',
+    'without_activity'=>'Sen Actividade',
 
 
 //PAGOS, DESCUENTOS y FACTURAS
@@ -535,6 +539,7 @@ $strings = array(
     'client_type'=>'Tipo de cliente',
     'pagado'=>'Pagado',
     'till'=>'Caixa',
+    'without_payment'=>'Sen Pago',
 
 
     'create_spend'=>'Crear gasto de caixa',
@@ -588,13 +593,13 @@ $strings = array(
     'physio_data'=>'Datos de fisio',
     'physio_modify'=>'Modificar fisio',
     'reserve_data'=> 'Datos de reserva',
-    'registration_modify'=>'Inscrición modificada',
+    'registration_modify'=>'Modificar Inscrición',
     'management_registrations'=>'Administrazón de Inscricións',
     'registration_data'=>'Datos de Inscrición',
     'codRegistration'=>'Código de Inscripción',
     'codPhysio'=>'Código de Fisio',
     'RESERVE'=>'Reservas',
-    'reserve'=>'reserva',
+    'reserve'=>'Reserva',
     'physio'=>'fisio',
     'one_alumn'=>'un alumno',
     'endTime'=>'Hora Fin',

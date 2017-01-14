@@ -318,6 +318,7 @@ $strings = array(
     	'fail_data_ini_fin_incorrect'=>'Initial Hour can´t be upper than Finaly Hour and vice versa ',
     	'fail_not_reserve'=>'There is nothing to book ',
     	'fail_mail_error'=>'Error to send email',
+		'fail_not_inscript'=>'There is nothing to enroll',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -510,6 +511,11 @@ $strings = array(
     'event_clients'=>'Event Clients',
     'succ_mail_sent'=>'Email Sent',
 
+    /*REGISTRATION*/
+    'without_event'=>'Without Event',
+    'without_activity'=>'Without Activity',
+    'without_payment'=>'Without Payment',
+
 
 
     'DOMICILIATION' => 'Domiciliations',
@@ -585,13 +591,13 @@ $strings = array(
     'physio_data'=>'Physio\'s data',
     'physio_modify'=>'Physio\'s modify',
     'reserve_data'=>'Reserve\'s data',
-    'registration_modify'=>'Registration edited',
+    'registration_modify'=>'Edit Registration',
     'management_registrations'=>'Management Registrations',
     'registration_data'=>'Registration\'s data',
     'codRegistration'=>'Registration Code',
     'codPhysio'=>'Physio Code',
     'RESERVE'=>'Reservations',
-        'reserve'=>'reserve',
+        'reserve'=>'Reserve',
     'one_alumn'=>'one alumn',
     'endTime'=>'End time',
     'startTime'=>'Start time',

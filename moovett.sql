@@ -373,9 +373,11 @@ CREATE TABLE `horas_posibles` (
 
 CREATE TABLE `inscripcion` (
   `id_inscripcion` int(4) NOT NULL,
-  `id_reserva` int(4) NULL,
+  `id_actividad` int(4) NULL,
+  `id_evento` int(4) NULL,
+  `id_alumno` int(4) NOT NULL,
   `fecha_inscripcion` date NOT NULL DEFAULT '0000-00-00',
-  `id_pago` int(4) NOT NULL
+  `id_pago` int(4) NULL
 ) ;
 
 
@@ -793,9 +795,7 @@ ALTER TABLE `horas_posibles`
 -- Indices de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD PRIMARY KEY (`id_inscripcion`),
-  ADD KEY `id_reserva` (`id_reserva`),
-  ADD KEY `id_pago` (`id_pago`);
+  ADD PRIMARY KEY (`id_inscripcion`);
 
 --
 -- Indices de la tabla `lesion`
@@ -1200,8 +1200,10 @@ ALTER TABLE `horas_posibles`
 -- Filtros para la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_3` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_4` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permiso`

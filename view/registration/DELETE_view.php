@@ -13,9 +13,34 @@ echo '
 echo '
     <div class="row">
         <div class="col-xs-12 col-md-12">
-                <label for="">' . $strings["one_reserve"] . ': </label>
-                <span class="">' . $c->getReserve()->getCodReserve() . '</span>
+                <label for="">' . $strings["code"] . ': </label>
+                <span class="">' . $c->getCodRegistration() . '</span>
+            <!--Campo date-->
+        </div>
+        <div class="col-xs-12 col-md-12">
+                <label for="">' . $strings["activity"] . ': </label>';
+                if($c->getActivity()->getCodactivity() != NULL){
+                    echo '<span class="">' . $c->getActivity()->getCodactivity() . '</span>';
+                }else{
+                    echo '<span class="">' . $strings['without_activity'] . '</span>';
+                }
+                echo '
             <!--Campo reserve-->
+        </div>
+        <div class="col-xs-12 col-md-12">
+                <label for="">' . $strings["event"] . ': </label>';
+                if($c->getEvent()->getCodevent() != NULL){
+                    echo '<span class="">' . $c->getEvent()->getCodevent() . '</span>';
+                }else {
+                    echo '<span class="">' . $strings['without_event'] . '</span>';
+                }
+                echo '
+            <!--Campo reserve-->
+        </div>
+        <div class="col-xs-12 col-md-12">
+                <label for="">' . $strings["alumn"] . ': </label>
+                <span class="">' . $c->getAlumn()->getCodalumn() . '</span>
+            <!--Campo date-->
         </div>
         <div class="col-xs-12 col-md-12">
                 <label for="">' . $strings["date"] . ': </label>
@@ -23,15 +48,20 @@ echo '
             <!--Campo date-->
         </div>
         <div class="col-xs-12 col-md-12">
-                <label for="">' . $strings["one_payment"] . ': </label>
-                <span class="">' . $c->getPayment()->getIdPago() . '</span>
-            <!--Campo payment-->
+                <label for="">' . $strings["payment"] . ': </label>';
+                if($c->getPayment()->getIdPago() != NULL){
+                    echo '<span class="">' . $c->getPayment()->getIdPago() . '</span>';
+                }else {
+                    echo '<span class="">' . $strings['without_payment'] . '</span>';
+                }
+                echo '
+            <!--Campo reserve-->
         </div>
         </div></div><div class="modal-footer">
         
         <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
         
-        <a href="index.php?controller=registration&action=delete&codrRegistration=' . $c->getCodRegistration() . '">
+        <a href="index.php?controller=registration&action=delete&codRegistration=' . $c->getCodRegistration() . '">
         <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
         </a>
     </div>

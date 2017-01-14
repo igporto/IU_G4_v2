@@ -3,55 +3,120 @@ require_once(__DIR__."/../core/ValidationException.php");
 require_once(__DIR__."/../model/PAYMENT.php");
 require_once(__DIR__."/../model/RESERVE.php");
 class Registration {
-    public $codRegistration;
-    public $reserve;
-    public $date;
-    public $payment;
+    private $codRegistration;
+    private $activity;
+    private $event;
+    private $alumn;
+    private $date;
+    private $payment;
 
-    public function __construct($codRegistration = NULL, Reserve $reserve = NULL, $date = NULL, Payment $payment = NULL)
+    public function __construct($codRegistration = NULL, Activity $activity = NULL, Alumn $alumn = NULL, Event $event = NULL, $date = NULL, Payment $payment = NULL)
     {
         $this->codRegistration = $codRegistration;
-        $this->reserve = $reserve;
+        $this->activity = $activity;
+        $this->alumn =$alumn;
+        $this->event = $event;
         $this->date = $date;
         $this->payment = $payment;
     }
 
+    /**
+     * @return null
+     */
     public function getCodRegistration()
     {
         return $this->codRegistration;
     }
+
+    /**
+     * @param null $codRegistration
+     */
     public function setCodRegistration($codRegistration)
     {
         $this->codRegistration = $codRegistration;
     }
-    
-    public function getReserve()
+
+    /**
+     * @return Activity
+     */
+    public function getActivity()
     {
-        return $this->reserve;
+        return $this->activity;
     }
-    
-    public function setReserve(Reserve $reserve)
+
+    /**
+     * @param Activity $activity
+     */
+    public function setActivity(Activity $activity)
     {
-        $this->reserve = $reserve;
+        $this->activity = $activity;
     }
-    
+
+    /**
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function setEvent(Event $event)
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return Alumn
+     */
+    public function getAlumn()
+    {
+        return $this->alumn;
+    }
+
+    /**
+     * @param Alumn $alumn
+     */
+    public function setAlumn(Alumn $alumn)
+    {
+        $this->alumn = $alumn;
+    }
+
+
+
+    /**
+     * @return null
+     */
     public function getDate()
     {
         return $this->date;
     }
-    
+
+    /**
+     * @param null $date
+     */
     public function setDate($date)
     {
         $this->date = $date;
-    } 
-    
+    }
+
+    /**
+     * @return Payment
+     */
     public function getPayment()
     {
         return $this->payment;
     }
-    
-    public function setPayment( Payment $payment)
+
+    /**
+     * @param Payment $payment
+     */
+    public function setPayment(Payment $payment)
     {
         $this->payment = $payment;
-    }    
+    }
+
+
 }

@@ -2,8 +2,12 @@
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../model/REGISTRATION.php");
 require_once(__DIR__ . "/../model/REGISTRATION_model.php");
-require_once(__DIR__ . "/../model/RESERVE.php");
-require_once(__DIR__ . "/../model/RESERVE_model.php");
+require_once(__DIR__ . "/../model/ACTIVITY.php");
+require_once(__DIR__ . "/../model/ACTIVITY_model.php");
+require_once(__DIR__ . "/../model/EVENT.php");
+require_once(__DIR__ . "/../model/EVENT_model.php");
+require_once(__DIR__ . "/../model/ALUMN.php");
+require_once(__DIR__ . "/../model/ALUMN_model.php");
 require_once(__DIR__ . "/../model/PAYMENT.php");
 require_once(__DIR__ . "/../model/PAYMENT_model.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
@@ -15,14 +19,18 @@ require_once(__DIR__ . "/../controller/BaseController.php");
 class RegistrationController extends BaseController
 {
     private $registrationMapper;
-    private $reserveMapper;
+    private $activityMapper;
+    private $eventMapper;
+    private $alumnMapper;
     private $paymentMapper;
 
     public function __construct()
     {
         parent::__construct();
         $this->registrationMapper = new RegistrationMapper();
-        $this->reserveMapper = new ReserveMapper();
+        $this->activityMapper = new ActivityMapper();
+        $this->eventMapper = new EventMapper();
+        $this->alumnMapper = new AlumnMapper();
         $this->paymentMapper = new PaymentMapper();
 
         // Actions controller operates in a "welcome" layout
@@ -36,30 +44,36 @@ class RegistrationController extends BaseController
             //Creamos un obxecto registration baleiro
             $registration = new Registration();
             //Engadimos os datos ao obxecto registration
-            if(isset($_POST['reserve'])){
-                if($_POST['reserve'] !=NULL){
-                    $registration->setReserve($this->reserveMapper->view($_POST["reserve"]));
+
+            $registration->setAlumn($this->alumnMapper->view($_POST["alumn"]));
+
+
+            if(isset($_POST['activity'])){
+                if($_POST['activity'] != "NULL"){
+                    $registration->setActivity($this->activityMapper->view($_POST["activity"]));
                 }else{
-                    $registration->setReserve(new Reserve());
+                    $registration->setActivity(new Activity());
                 }
             }
-            if(isset($_POST['date'])){
-                $registration->setDate($_POST["date"]);
-            }
-            if(isset($_POST['payment'])){
-                if($_POST['payment'] != NULL){
-                $registration->setPayment($this->paymentMapper->view($_POST["payment"]));
+
+            if(isset($_POST['event'])){
+                if($_POST['event'] !=NULL){
+                    $registration->setEvent($this->eventMapper->view($_POST["event"]));
                 }else{
-                    $registration->setPayment(new Payment());
+                    $registration->setEvent(new Event());
                 }
             }
+            $registration->setDate($this->registrationMapper->getToday());
+            $registration->setPayment(new Payment());
+
             try {
-                var_dump($registration);exit;
-                $this->registrationMapper->add($registration);
-                //ENVIAR AVISO DE INSCRIPCION ENGADIDA!!!!!!!!!!
-                $this->view->setFlash('succ_registration_add');
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das inscricións)
-                $this->view->redirect("registration", "show");
+                if($registration->getActivity()->getCodactivity() != NULL || $registration->getEvent()->getCodevent() != NULL){
+                    $this->registrationMapper->add($registration);
+                    $this->view->setFlash('succ_registration_add');
+                    $this->view->redirect("registration", "show");
+                }else{
+                    $this->view->setFlash('fail_not_inscript');
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -96,28 +110,31 @@ class RegistrationController extends BaseController
     {
         if (isset($_POST["submit"])) {
             //creamos un obxecto actividade cos datos da actividade a editar
-            $registration = $this->registrationMapper->view($_GET["codRegistration"]);
-            if(isset($_POST['reserve'])){
-                if($_POST['reserve'] != NULL){
-                    $registration->setReserve($this->reserveMapper->view($_POST["reserve"]));
+            $registration = $this->registrationMapper->view(htmlentities(addslashes($_GET["codRegistration"])));
+
+
+            $registration->setAlumn($this->alumnMapper->view($_POST["alumn"]));
+
+
+            if(isset($_POST['activity'])){
+                if($_POST['activity'] !=NULL){
+                    $registration->setActivity($this->activityMapper->view($_POST["activity"]));
                 }else{
-                    $registration->setReserve(new Reserve());
+                    $registration->setActivity(new Activity());
                 }
             }
-            if(isset($_POST['payment'])){
-                if($_POST['payment'] != NULL){
-                $registration->setPayment($this->paymentMapper->view($_POST["payment"]));
+
+            if(isset($_POST['event'])){
+                if($_POST['event'] !=NULL){
+                    $registration->setEvent($this->eventMapper->view($_POST["event"]));
                 }else{
-                    $registration->setPayment(new Payment());
+                    $registration->setEvent(new Event());
                 }
             }
-            if(isset($_POST['date'])){
-                $registration->setDate($_POST["date"]);
-            }
+
             try {
-                //ENVIAR AVISO DE INSCRIPCION EDITADA!!!!!!!!!!
+                $this->registrationMapper->edit($registration);
                 $this->view->setFlash("succ_registration_edit");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das INSCRIPCIONS)
                 $this->view->redirect("registration", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
@@ -130,29 +147,39 @@ class RegistrationController extends BaseController
         if(isset($_POST["submit"])){
             $registration = new Registration();
             //Comprobamos os datos que nos chegan e engadimolos ao obxecto $registration
-            if(isset($_POST['codRegistration']) && $_POST['codRegistration']!= ""){
-                $registration->setCodRegistration((htmlentities(addslashes($_POST["codRegistration"]))));
+            if(isset($_POST['alumn'])){
+                if($_POST['alumn'] !=NULL){
+                    $registration->setAlumn($this->alumnMapper->view($_POST["alumn"]));
+                }else{
+                    $aux = new Alumn();
+                    $aux->setCodalumn("");
+                    $registration->setAlumn($aux);
+                }
             }
-            if(isset($_POST['useres']) && isset($_POST['reserve'])){
-                $registration->setReserve($this->reserveMapper->view($_POST["reserve"]));
-            }else{
-                $aux = new Reserve();
-                $aux->setCodReserve("");
-                $registration->setReserve($aux);
+
+            if(isset($_POST['activity'])){
+                if($_POST['activity'] !=NULL){
+                    $registration->setActivity($this->activityMapper->view($_POST["activity"]));
+                }else{
+                    $aux = new Activity();
+                    $aux->setCodactivity("");
+                    $registration->setActivity($aux);
+                }
             }
-            if(isset($_POST['date']) && $_POST['date']){
-                $registration->setDate((htmlentities(addslashes($_POST["date"]))));
-            }
-            if(isset($_POST['usepay']) && isset($_POST['payment'])) {
-                $registration->setPayment($this->paymentMapper->view($_POST["payment"]));
-            }else {
-                $aux = new Payment();
-                $aux->setIdPago("");
-                $registration->setPayment($aux);
+
+            if(isset($_POST['event'])){
+                if($_POST['event'] !=NULL){
+                    $registration->setEvent($this->eventMapper->view($_POST["event"]));
+                }else{
+                    $aux = new Event();
+                    $aux->setCodevent("");
+                    $registration->setEvent($aux);
+                }
             }
             try {
                 $this->view->setVariable("registrationstoshow", $this->registrationMapper->search($registration));
             } catch (Exception $e) {
+                var_dump($e->getMessage());exit;
                 $this->view->setFlash("erro_general");
                 $this->view->redirect("registration", "show");
             }

@@ -61,7 +61,9 @@ $registrations = $view->getVariable("registrationstoshow");
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['RESERVE'] ?></th>
+                        <th class="text-center"><?php echo $strings['activity'] ?></th>
+                        <th class="text-center"><?php echo $strings['event'] ?></th>
+                        <th class="text-center"><?php echo $strings['alumn'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -81,8 +83,20 @@ $registrations = $view->getVariable("registrationstoshow");
                     //Para cada registration, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
                     foreach ($registrations as $c) {
                         echo "<tr class='row text-center' ><td> ";
-                        var_dump($c->getReserve());exit;
-                        echo $c->getReserve()->getCodReserve() . "</td><td class='text-center'>";
+                        if($c->getActivity()->getCodactivity() != NULL){
+                            echo $c->getActivity()->getActivityname() . "</td><td>";
+                        }else{
+                            echo $strings['without_activity'] . "</td><td>";
+                        }
+                        if($c->getEvent()->getCodevent() != NULL){
+                            echo $c->getEvent()->getCodevent() . "</td><td>";
+                        }else{
+                            echo $strings['without_event'] . "</td><td>";
+                        }
+
+                        echo $c->getAlumn()->getAlumnname()." " .$c->getAlumn()->getAlumnsurname(). "</td>";
+
+                        echo "<td class='text-center'>";
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
                             echo '" data-toggle="modal" data-target="#view' . $c->getCodRegistration() . '';

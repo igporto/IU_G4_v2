@@ -59,13 +59,17 @@ class EventController extends BaseController {
                     if($event->getCapacity()>0){
                         if($event->getCapacity()<= $event->getSpace()->getCapacity()){
                             if($this->eventMapper->isearly($event->getDate())){
-                                //if($this->sessioncontroller->isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour(), $event->getSpace())) {
+                                if($event->getIniHour() < $event->getFinHour()){
+                                    //if($this->sessioncontroller->isValidRange($event->getDate(),$event->getIniHour(),$event->getFinHour(), $event->getSpace())) {
                                     $this->eventMapper->add($event);
                                     $this->view->setFlash('succ_event_add');
                                     $this->view->redirect("event", "show");
-                                // }else{
-                                //    $this->view->setFlash("fail_hour_incorrect");
-                                // }
+                                    // }else{
+                                    //    $this->view->setFlash("fail_hour_incorrect");
+                                    // }
+                                }else{
+                                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                                }
                             }else{
                                 $this->view->setFlash("fail_date_incorrect");
                             }

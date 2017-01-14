@@ -31,24 +31,19 @@ $registrationMapper = new RegistrationMapper();
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['one_reserve'] ?></label>
+                        <label for="selectperf"><?php echo $strings['activity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
-                            <select id='reserve' name='reserve' class='form-control icon-menu'>
+                            <select id='reserve' name='activity' class='form-control icon-menu'>
                                 <?php
                                 //Engadimos unha opcion por reserva a escoller
-                                $rm = new ReserveMapper();
+                                $am = new ActivityMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                                $reserves = $rm->show();
+                                $activities = $am->show();
 
-                                echo "<option value='NULL'>".$strings['without_reserve'] . "</option>";
-                                foreach ($reserves as $r) {
-                                    if($r->getSpace()->getCodspace() != NULL){
-                                        echo "<option value='" . $r->getCodReserve()."'>".$r->getSpace()->getSpacename()."-".$r->getDate()."-->".$r->getStartTime()."-".$r->getEndTime() . "</option>";
-                                    }
-                                    elseif ($r->getService()->getId() != NULL){
-                                        echo "<option value='" . $r->getCodReserve()."'>".$r->getService()->getDescipcion()."-".$r->getDate()."-->".$r->getStartTime()."-".$r->getEndTime() . "</option>";
-                                    }
+                                echo "<option value='NULL'>".$strings['without_activity'] . "</option>";
+                                foreach ($activities as $a) {
+                                    echo "<option value='" . $a->getCodactivity()."'>".$a->getActivityname() . "</option>";
                                 }
                                 ?>
                             </select>
@@ -56,34 +51,44 @@ $registrationMapper = new RegistrationMapper();
                         <!--Campo reserve-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['one_payment'] ?></label>
+                        <label for="selectperf"><?php echo $strings['event'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
-                            <select id='payment' name='payment' class='form-control icon-menu'>
-                            <?php
-                            //Engadimos unha opcion por pago a escoller
-                            $pm = new PaymentMapper();
-                            //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $payments = $pm->show();
-                            foreach ($payments as $payment) {
-                                echo "<option value='" . $payment->getIdPago()."'>".$payment->getIdPago() . "</option>";
-                            }
-                            ?>
+                            <select id='event' name='event' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por reserva a escoller
+                                $em = new EventMapper();
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $events = $em->show();
+
+                                echo "<option value='NULL'>".$strings['without_event'] . "</option>";
+                                foreach ($events as $e) {
+                                    echo "<option value='" . $e->getCodevent()."'>".$e->getName() . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
-                        <!--Campo payment-->
+                        <!--Campo reserve-->
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf"><?php echo $strings['date'] ?></label>
+                        <label for="selectperf"><?php echo $strings['alumn'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="date" class="form-control" id="date" name="date"
-                                   placeholder= <?php echo $strings['date'] ?>>
-                            <div id="error"></div>
+                            <select id='payment' name='alumn' class='form-control icon-menu'>
+                                <?php
+                                //Engadimos unha opcion por pago a escoller
+                                $am = new AlumnMapper();
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $am->show();
+                                foreach ($alumns as $a) {
+                                    echo "<option value='" . $a->getCodalumn()."'>".$a->getAlumnname()." ". $a->getAlumnsurname() . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <!--Campo date-->
+                        <!--Campo payment-->
                     </div>
                 </div>
             </div>
@@ -113,6 +118,7 @@ $registrationMapper = new RegistrationMapper();
     </form>
     <!--fin formulario-->
 </div>
+
 
 <script>
     //Non deixar que o campo input teña espazos

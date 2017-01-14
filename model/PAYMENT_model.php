@@ -79,7 +79,7 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
                 $payment["metodo_pago"], $payment["pagado"], $payment["tipo_cliente"], $payment["dni_alum"],
                 $payment["dni_cliente_externo"]);
         } else {
-            return NULL;
+            return new Payment();
         }
     }
 
