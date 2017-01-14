@@ -9,7 +9,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 <div class="col-md-6 " style="margin-top: 20px">
     <h1 class="page-header"><?php echo $strings['create_action']; ?></h1>
-    <form name="form" id="form" method="POST" 
+    <form data-parsley-validate name="form" id="form" method="POST" 
           action="index.php?controller=action&action=add"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
@@ -31,11 +31,12 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     <div class="col-xs-12 col col-md-5">
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="text" class="form-control" id="actionname" name="actionname"
+                            <input data-parsley-errors-container="#error" autofocus type="text" class="form-control" id="actionname" name="actionname"
                                    placeholder= <?php echo $strings['name'] ?>
                                    required="true" maxlength="25">
-                            <div id="error"></div>
+                            
                         </div>
+                        <div class="text-danger" id="error"></div>
                         <!--Campo action-->
                     </div>
                 </div>

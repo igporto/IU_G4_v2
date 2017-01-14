@@ -40,7 +40,8 @@ $permis = $uc->getCurrentUserPerms();
     <!--datepicker-->
     <link rel="stylesheet" href="lib/datepicker/css/datepicker.min.css">
 
-    
+    <!-- validations style -->
+    <link rel="stylesheet" href="css/parsley.css">    
 
     <!--FAVICON-->
     <link rel="icon"
@@ -79,6 +80,19 @@ $permis = $uc->getCurrentUserPerms();
     <script src='lib/calendar/moment.min.js'></script>
     <script src='lib/calendar/fullcalendar.min.js'></script>
 
+   
+    <!-- validations library -->
+    <script src="lib/parsley/parsley.min.js"></script>
+     <?php 
+    switch ($_SESSION['idioma']) {
+        case 'GALEGO':
+            echo '<script src="core/language/parsley/gl.js"></script>';
+        break;
+        case 'SPANISH':
+            echo '<script src="core/language/parsley/es.js"></script>';
+        break;
+
+     } ?>
 
 </head>
 
