@@ -75,11 +75,18 @@
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }
             try {
-                    $this->reserveMapper->add($reserve);
-                    //ENVIAR AVISO DE INSCRIPCION ENGADIDA!!!!!!!!!!
-                    $this->view->setFlash('succ_reserve_add');
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das inscricións)
-                    $this->view->redirect("reserve", "show");
+                if($reserve->getStartTime() < $reserve->getEndTime()){
+                    if($this->reserveMapper->validDate($reserve->getDate())){
+                        $this->reserveMapper->add($reserve);
+                        $this->view->setFlash('succ_reserve_add');
+                        $this->view->redirect("reserve", "show");
+                    }else{
+                        $this->view->setFlash("fail_date_incorrect");
+                    }
+                }else{
+                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                }
+
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -114,7 +121,9 @@
     }
     public function edit()
     {
+
         if (isset($_POST["submit"])) {
+
             //creamos un obxecto actividade cos datos da actividade a editar
             $reserve = $this->reserveMapper->view($_GET["codReserve"]);
             if(isset($_POST['space'])){
@@ -137,27 +146,35 @@
                 }else{
                     $reserve->setAlumn(new Alumn());
                 }
-            }            
-            if(isset($_POST['date'])){
-                $reserve->setDate($_POST["date"]);
             }
-            if(isset($_POST['startTime'])){
+            if(isset($_POST['fecha_reserva']) && $_POST['fecha_reserva'] != ""){
+                $reserve->setDate($_POST["fecha_reserva"]);
+            }
+
+            if(isset($_POST['startTime']) && $_POST['startTime'] != ""){
                 $reserve->setStartTime($_POST["startTime"]);
             }
-            if(isset($_POST['endTime'])){
+            if(isset($_POST['endTime']) && $_POST['endTime'] != ""){
                 $reserve->setEndTime($_POST["endTime"]);
             }
-            if(isset($_POST['spacePrice'])){
+            if(isset($_POST['spacePrice']) && $_POST['spacePrice'] != ""){
                 $reserve->setSpacePrice($_POST["spacePrice"]);
             }
-            if(isset($_POST['physioPrice'])){
+            if(isset($_POST['physioPrice']) && $_POST['physioPrice'] != ""){
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }                                                
             try {
-                //ENVIAR AVISO DE INSCRIPCION EDITADA!!!!!!!!!!
-                $this->view->setFlash("succ_registration_edit");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das INSCRIPCIONS)
-                $this->view->redirect("reserve", "show");
+                if($reserve->getStartTime() < $reserve->getEndTime()){
+                    if($this->reserveMapper->validDate($reserve->getDate())){
+                        $this->reserveMapper->edit($reserve);
+                        $this->view->setFlash("succ_registration_edit");
+                        $this->view->redirect("reserve", "show");
+                    }else{
+                        $this->view->setFlash("fail_date_incorrect");
+                    }
+                }else{
+                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -168,58 +185,51 @@
     public function search()
     {
         if(isset($_POST["submit"])){
+
             $reserve = new Reserve();
             //Comprobamos os datos que nos chegan e engadimolos ao obxecto $reserve
             if(isset($_POST['codReserve']) && $_POST['codReserve']!= ""){
                 $reserve->setCodReserve((htmlentities(addslashes($_POST["codReserve"]))));
             }
-            if(isset($_POST['usespa']) && isset($_POST['space'])){
+            if(isset($_POST['space']) && $_POST['space'] != "NULL"){
                 $reserve->setSpace($this->spaceMapper->view($_POST["space"]));
-            }else{
-                $aux = new Space();
-                $aux->setCodspace("");
-                $reserve->setSpace($aux);
             }
-            if(isset($_POST['useser']) && isset($_POST['service'])) {
+
+            if(isset($_POST['service']) && $_POST['service'] != "NULL") {
                 $reserve->setService($this->serviceMapper->view($_POST["service"]));
-            }else {
-                $aux = new Service();
-                $aux->setId("");
-                $reserve->setService($aux);
             }
-            if(isset($_POST['usealu']) && isset($_POST['alumn'])) {
+
+            if(isset($_POST['alumn'])) {
                 $reserve->setAlumn($this->alumnMapper->view($_POST["alumn"]));
-            }else {
-                $aux = new Alumn();
-                $aux->setCodalumn("");
-                $reserve->setAlumn($aux);
             }
-            if(isset($_POST['date']) && $_POST['date']){
-                $reserve->setDate((htmlentities(addslashes($_POST["date"]))));
-            }
-            if(isset($_POST['startTime']) && $_POST['startTime']){
-                $reserve->setStartTime((htmlentities(addslashes($_POST["startTime"]))));
-            }
-            if(isset($_POST['endTime']) && $_POST['endTime']){
-                $reserve->setEndTime((htmlentities(addslashes($_POST["endTime"]))));
-            }
-            if(isset($_POST['spacePrice']) && $_POST['spacePrice']){
+
+            if(isset($_POST['spacePrice']) && $_POST['spacePrice'] != ""){
                 $reserve->setSpacePrice((htmlentities(addslashes($_POST["spacePrice"]))));
+            }else{
+                $reserve->setSpacePrice("");
             }
-            if(isset($_POST['physioPrice']) && $_POST['physioPrice']){
+
+            if(isset($_POST['physioPrice']) && $_POST['physioPrice'] != ""){
                 $reserve->setPhysioPrice((htmlentities(addslashes($_POST["physioPrice"]))));
+            }else{
+                $reserve->setPhysioPrice("");
             }
+
             try {
+
                 $this->view->setVariable("reservestoshow", $this->reserveMapper->search($reserve));
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");
                 $this->view->redirect("reserve", "show");
             }
-            //render dado que non se pode settear a variable antes de un redirect
-            $this->view->render("reserve","show");
+            $this->view->render("reserve", "show");
+
         }else{
             $this->view->render("reserve", "search");
         }
+
+
+
     }
 }
 ?>

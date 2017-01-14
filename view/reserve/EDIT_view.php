@@ -7,7 +7,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 $reserveMapper = new ReserveMapper();
 //Recuperamos o id do evento a editar
 $reserve= $_REQUEST["codReserve"];
-$currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
+$currentRes = $reserveMapper->view($reserve);
 
 
 ?>
@@ -41,12 +41,18 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select name="id_espacio">
+                            <select name="space" class="form-control">
                                 <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectSpaceId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getNameSpace($b).'</option>';
+                                $sm = new SpaceMapper();
+                                $spaces = $sm->show();
+                                echo '<option value=NULL>'.$strings['without_space'].'</option>';
+                                foreach ($spaces as $space){
+                                    echo '<option value='.$space->getCodspace;
+                                    if($space->getCodspace() == $currentRes->getSpace()->getCodspace()){
+                                        echo " selected ";
+                                    }
+                                    echo '>'.$space->getSpacename().'</option>';
+
                                 }
                                 ?>
                             </select>
@@ -58,12 +64,16 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select name="id_alumno">
+                            <select name="alumn" class="form-control">
                                 <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectAlumnId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getAlumnname($b).'</option>';
+                                $s = new AlumnMapper();
+                                $alumns = $s->show();
+                                foreach ($alumns as $alumn){
+                                    echo '<option value='.$alumn->getCodalumn();
+                                    if($alumn->getCodalumn() == $currentRes->getAlumn()->getCodalumn()){
+                                        echo "selected";
+                                    }
+                                    echo '>'.$alumn->getAlumnname()." ".$alumn->getAlumnsurname().'</option>';
                                 }
                                 ?>
                             </select>
@@ -77,8 +87,8 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <label for="divdatestart"><?= $strings['date']  ?></label>
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="date" class="form-control" id="date" name="fecha_reserva"
-                                   required="true" maxlength="10">
+                            <input type="text" class="form-control" id="datestart" name="fecha_reserva"
+                                    maxlength="10" value="<?php echo $currentRes->getDate()?>">
                             <div id="error"></div>
                         </div>
                         <!--Campo fecha -->
@@ -89,12 +99,17 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select name="id_servicio">
+                            <select name="service" class="form-control">
                                 <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectServiceId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getNameService($b).'</option>';
+                                $s = new ServiceMapper();
+                                $services = $s->show();
+                                echo '<option value=NULL>'.$strings['without_service'].'</option>';
+                                foreach ($services as $service){
+                                    echo '<option value='.$service->getId();
+                                    if($service->getId() == $currentRes->getService()->getId()){
+                                        echo "selected";
+                                    }
+                                    echo '>'.$service->getDescripcion().'</option>';
                                 }
                                 ?>
                             </select>
@@ -108,7 +123,7 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <label for="divdatestart"><?= $strings['startTime']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="time" name="hora_inicio" placeholder="<?php echo $strings['hora_ini'];?>">
+                            <input  class="form-control" type="time" name="startTime" value="<?php echo $currentRes->getStartTime()?>">
                         </div>
                         <!--Campo hora_ini-->
                     </div>
@@ -116,7 +131,7 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                         <label for="divdatestart"><?= $strings['endTime']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="time" name="hora_fin" placeholder="<?php echo $strings['hora_fin'];?>">
+                            <input  class="form-control" type="time" name="endTime"  value="<?php echo $currentRes->getEndTime()?>">
                         </div>
                         <!--Campo hora_fin-->
                     </div>
@@ -125,16 +140,16 @@ $currentRes = $reserveMapper->view($reserveMapper->getCodReserve($reserve));
                     <div class="col-xs-12 col col-md-5">
                         <label for="divdatestart"><?= $strings['place_price']  ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="int" name="spaceprice" placeholder="<?php echo $strings['place_price'];?>">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input  class="form-control" type="number" name="spaceprice"  value="<?php echo $currentRes->getSpacePrice()?>">
                         </div>
                         <!--Campo hora_ini-->
                     </div>
                     <div class="col-xs-12 col col-md-5">
                         <label for="divdatestart"><?= $strings['physio_price']  ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="int" name="physioprice" placeholder="<?php echo $strings['physio_price'];?>">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input  class="form-control" type="number" name="physioprice"  value="<?php echo $currentRes->getPhysioPrice()?>">
                         </div>
                         <!--Campo hora_fin-->
                     </div>

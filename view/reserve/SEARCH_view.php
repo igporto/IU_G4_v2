@@ -19,79 +19,89 @@ $reserveMapper = new ReserveMapper();
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
-
-                <!-- avisos + nome -->
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 text-info pull-right" style="margin-left: 10px">
+                    <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
 
                     </div>
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus class="form-control" type="number" name="codReserve" placeholder="<?php echo $strings['codReserve'];?>" >
-                        </div>
-                    </div>
-                    <!--Campo name-->
                 </div>
-
                 <div class="row">
-
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <p><?php echo $strings['initial_hour'];?><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="time" name="hora_inicio" placeholder="<?php echo $strings['initial_hour'];?>" >
-                        </div></p>
-
-                        <p><?php echo $strings['final_hour'];?><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="time" name="hora_fin" placeholder="<?php echo $strings['final_hour'];?>" >
-                        </div></p>
-
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['space_id']  ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus class="form-control" type="number" name="space_id" placeholder="<?php echo $strings['space_id'];?>" >
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <!-- <input class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                            <select id="space" name="space" class="form-control">
+                                <?php
+                                $sm = new SpaceMapper();
+                                $spaces = $sm->show();
+                                echo '<option value=NULL>'.$strings['without_space'].'</option>';
+                                foreach ($spaces as $space){
+                                    echo '<option value='.$space->getCodspace.'>'.$space->getSpacename().'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
-                    <!--Campo name-->
-
-                    <div class="col-xs-12  col-md-5 pull-left">
-
-                        <p><?php echo $strings['date'];?><div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="date" name="date" placeholder="<?php echo $strings['date'];?>" >
-                        </div></p>
-
-
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['service']  ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="number" name="alumn_id" placeholder="<?php echo $strings['alumn_id'];?>" >
-                        </div>
-
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                            <input class="form-control" type="text" name="service_id" placeholder="<?php echo $strings['service_id'];?>" >
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <!-- <input class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                            <select id="service" name="service" class="form-control">
+                                <?php
+                                $s = new ServiceMapper();
+                                $services = $s->show();
+                                echo '<option value=NULL>'.$strings['without_service'].'</option>';
+                                foreach ($services as $service){
+                                    echo '<option value='.$service->getId().'>'.$service->getDescripcion().'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="row">
-
-
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['alumn']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <!-- <input class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                            <select id="alumn" name="alumn" class="form-control">
+                                <?php
+                                $s = new AlumnMapper();
+                                $alumns = $s->show();
+                                foreach ($alumns as $alumn){
+                                    echo '<option value='.$alumn->getCodalumn().'>'.$alumn->getAlumnname()." ".$alumn->getAlumnsurname().'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-
-
-
-
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?php echo $strings['place_price']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input class="form-control" type="number" id="spacePrice" name="spacePrice" placeholder=<?php echo $strings['place_price']?>>
+                        </div>
+                        <!--Campo precio-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?php echo $strings['physio_price']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input class="form-control" type="number" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
+                        </div>
+                        <!--Campo precio-->
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-
             <div class="col-xs-12">
                 <div class="pull-left">
                     <a class="btn btn-default btn-md" href="index.php?controller=reserve&action=show">
@@ -111,7 +121,6 @@ $reserveMapper = new ReserveMapper();
                     ?>
                 </div>
             </div>
-
         </div>
     </form>
     <!--fin formulario-->

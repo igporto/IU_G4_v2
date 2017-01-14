@@ -238,6 +238,7 @@ class AlumnController extends BaseController
             }
 
             try {
+
                 $this->view->setVariable("alumnstoshow", $this->alumnMapper->search($alumn));
             } catch (Exception $e) {
                 $this->view->setFlash("erro_general");

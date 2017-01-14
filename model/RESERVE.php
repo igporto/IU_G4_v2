@@ -14,7 +14,7 @@ class Reserve {
     public $end_time;
     public $spacePrice;
     public $physioPrice;
-	public function __construct($codReserve=NULL, $space=NULL, $service=NULL, $alumn=NULL, $reserveDate=NULL,
+	public function __construct($codReserve=NULL, Space $space = NULL, Service $service=NULL, Alumn $alumn=NULL, $reserveDate=NULL,
                                 $start_time=NULL, $end_time=NULL, $spacePrice=NULL, $physioPrice=NULL) {
 		$this->codReserve = $codReserve;
 		$this->space = $space;
@@ -60,7 +60,7 @@ class Reserve {
      * @param mixed $space the space
      *
      */
-    public function setSpace($space)
+    public function setSpace(Space $space)
     {
         $this->space = $space;
     }
@@ -79,7 +79,7 @@ class Reserve {
      * @param mixed $service the service
      *
      */
-    public function setService($service)
+    public function setService( Service $service)
     {
         $this->service = $service;
     }
@@ -97,7 +97,7 @@ class Reserve {
      *
      * @param mixed $alumn the alumn
      */
-    public function setAlumn($alumn)
+    public function setAlumn(Alumn $alumn)
     {
         $this->alumn = $alumn;
     }

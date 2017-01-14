@@ -13,7 +13,7 @@ require_once(__DIR__ ."/../model/SERVICE_model.php"); //FALTABA UN PUTO Y COMA Y
 require_once(__DIR__ ."/../model/ALUMN.php");
 require_once(__DIR__ ."/../model/ALUMN_model.php"); 
 
-//Por exemplo: 
+
 class ReserveMapper {
     //Obtemos a instancia da conexión
     private $db;
@@ -50,9 +50,7 @@ class ReserveMapper {
         $reserv = array();
 
         foreach ($reserv_db as $ev) {
-            //se o obxeto ten atributos que referencian a outros, aquí deben crearse eses obxetos e introducilos tamén
-            //introduce no array o obxeto Controller creado a partir da query
-            array_push($reserv, new Reserve($ev["id_reserva"],$ev['id_espacio'], $ev["id_servicio"], $ev["id_alumno"], $ev["fecha_reserva"], $ev["hora_inicio"], $ev["hora_fin"], $ev["precio_espacio"], $ev["precio_fisio"]));
+            array_push($reserv, $this->view($ev["id_reserva"]));
         }
 
         //devolve o array
@@ -64,8 +62,9 @@ class ReserveMapper {
         $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_reserva = ?");
         $stmt->execute(array($codReserve));
         $reserv = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($reserv != null) {
-            return new Reserve(
+
+        if ($reserv != NULL) {
+            $reserve = new Reserve(
                 $reserv['id_reserva'],
                 $this->spaceMapper->view($reserv["id_espacio"]),
                 $this->serviceMapper->view($reserv["id_servicio"]),
@@ -76,9 +75,12 @@ class ReserveMapper {
                 $reserv["precio_espacio"],
                 $reserv["precio_fisio"]
             );
+
         } else {
-            return new Reserve();
+            $reserve = new Reserve();
         }
+
+        return $reserve;
     }
     //edita a tupla correspondente co id do obxecto Reserve $reserve
     public function edit(Reserve $reserve)
@@ -88,103 +90,79 @@ class ReserveMapper {
         $stmt->execute(array(
                         $reserve->getSpace()->getCodspace(), $reserve->getService()->getId(), 
                         $reserve->getAlumn()->getCodalumn(), $reserve->getDate(), $reserve->getStartTime(), $reserve->getEndTime(), 
-                        $reserve->getSpacePrice(), $reserve->getPhysioPrice()
+                        $reserve->getSpacePrice(), $reserve->getPhysioPrice(), $reserve->getCodReserve()
                         )
                 );
     }
+
+
     //borra sobre a taboa reservae a tupla con id igual a o do obxeto pasado
     public function delete($codReserve)
     {
         $stmt = $this->db->prepare("DELETE from reserva WHERE id_reserva = '$codReserve'");
         $stmt->execute();
     }
+
+
     public function search(Reserve $reserve){
-        $reserve->getCodReserve();exit;
-        $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_reserva like ? AND id_espacio like ? AND id_servicio like ? AND id_alumno like ? 
-            AND fecha_reserva like ? AND hora_inicio like ? AND hora_fin like ? AND precio_espacio like ? AND precio_fisio like ?");
-        $stmt->execute(array(
-                "%".$reserve->getCodReserve()."%", "%".$reserve->getSpace()->getCodspace()."%", "%".$reserve->getService()->getId()."%",
-                 "%".$reserve->getAlumn()->getCodalumn()."%", "%".$reserve->getDate()."%","%".$reserve->getStartTime()."%",
-                 "%".$reserve->getEndTime()."%","%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+        if($reserve->getSpace() != NULL){
+            if($reserve->getService() != NULL){
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_servicio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt->execute(array("%".$reserve->getSpace()->getCodspace()."%", "%".$reserve->getService()->getId()."%", "%".$reserve->getAlumn()->getCodalumn()."%",
+                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
                 );
+            }else{
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt->execute(array("%".$reserve->getSpace()->getCodspace()."%",  "%".$reserve->getAlumn()->getCodalumn()."%",
+                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                );
+            }
+        }else{
+            if($reserve->getService() != NULL){
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_servicio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt->execute(array( "%".$reserve->getService()->getId()."%", "%".$reserve->getAlumn()->getCodalumn()."%",
+                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                );
+            }else{
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt->execute(array("%".$reserve->getAlumn()->getCodalumn()."%",
+                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                );
+            }
+        }
+
+
         $reserves_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $reserves = array();
-        foreach ($reserves_db as $a){
-            array_push($reserves, $this->view($a["id_reserva"]));
+
+
+        foreach ($reserves_db as $a) {
+            var_dump("dentro");
+            array_push($reserves, $this->view($a['id_reserva']));
+            var_dump($a['id_reserva']);
         }
-        return $reserves;
+
+      return $reserves;
     }
-        
-    public function getCodReserve($codReserve)
+
+    public function validDate($date)
     {
-        $stmt = $this->db->prepare("SELECT id_reserva FROM reserva WHERE  id_reserva= ?");
-        $stmt->execute(array($codReserve));
 
-        return $stmt->fetch(PDO::FETCH_ASSOC)['id_reserva'];
-    }
-    public function getAlumnname($id){
-        $stmt = $this->db->prepare("SELECT * FROM alumno WHERE id_alumno ='$id'");
-        $stmt->execute();
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $r = $stmt->fetch();
-        $id_sp = $r['nombre'];
+        var_dump($date);
 
-        return $id_sp;
-    }
-    public function getNameSpace($id){
-        $stmt = $this->db->prepare("SELECT * FROM espacio WHERE id_espacio ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_sp = $r['nombre'];
-
-        return $id_sp;
-    }
-    public function getNameService($id){
-        $stmt = $this->db->prepare("SELECT * FROM servicio WHERE id_servicio ='$id'");
-        $stmt->execute();
-
-        $r = $stmt->fetch();
-        $id_sp = $r['id_servicio'];
-
-        return $id_sp;
-    }
-    public function selectSpaceId(){
-        $stmt = $this->db->prepare("SELECT * FROM espacio");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_espacio']);
+        if ($db != NULL) {
+            $actual = $db[0];
+            var_dump($actual['CURDATE()']);
+            if ($date > $actual['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
         }
-
-        return $id;
     }
-    public function selectServiceId(){
-        $stmt = $this->db->prepare("SELECT * FROM servicio");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_servicio']);
-        }
-
-        return $id;
-    }
-    public function selectAlumnId(){
-        $stmt = $this->db->prepare("SELECT * FROM alumno");
-        $stmt->execute();
-
-        $id = array();
-        $resul = $stmt->fetchAll();
-        foreach($resul as $r){
-            array_push($id,$r['id_alumno']);
-        }
-
-        return $id;
-    }
-
 }
 ?>

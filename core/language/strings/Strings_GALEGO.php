@@ -278,6 +278,10 @@ $strings = array(
     'succ_injury_delete'=>'Lesión borrada correctamente',
     'succ_injury_edit'=>'Lesión editada correctamente',
 
+    'succ_reserve_add'=>'Reserva creada correctamente',
+    'succ_reserve_delete'=>'Reserva borrada correctamente',
+    'succ_reserve_edit'=>'Reserva editada correctamente',
+
         /*FAIL*/
         'fail_title'=>'Incorrecto',
         'fail_user_exists'=>"O usuario xa existe",
@@ -302,6 +306,7 @@ $strings = array(
         'fail_price_incorrect'=>'O Prezo non é válido',
         'fail_date_incorrect'=>'A data non é válida',
         'fail_date_injuries'=>'A data de Recuperacion non pode ser anterior á de Lesión',
+        'fail_data_ini_fin_incorrect'=>'A hora de Comezo non pode ser maior á de Fin e viceversa',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -506,6 +511,7 @@ $strings = array(
     'pagado'=>'Pagado',
     'till'=>'Caixa',
 
+
     'create_spend'=>'Crear gasto de caixa',
     'create_withdrawal'=>'Crear retirada de caixa',
     'create_close'=>'Cierre de caixa',
@@ -573,6 +579,9 @@ $strings = array(
     'REGISTRATION'=>'Inscrición',
     'search_bill'=>'Buscar factura',
     'anyone'=>'Calquera',
-    'search_domiciliation'=>'Buscar domiciliacion'
+    'search_domiciliation'=>'Buscar domiciliacion',
+    'without_space'=>'Sen Espazo',
+    'without_service'=>'Sen Servizo',
+    'without_alumn'=>'Sen Alumno',
 )
 ?>

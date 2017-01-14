@@ -9,29 +9,22 @@ echo '
                                             </div>
                                             <div class="modal-body">
                                                  <label for="">' . $strings["reserve"] . ': '.$e->getCodReserve().' </label>';
-$mp = new ReserveMapper();
 //DATOS DO EVENTO A AMOSAR
 echo '  
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-12">
-                                                        <label for="">' . $strings["code"] . ': </label>
-                                                        <span class="">' . $e->getCodReserve() . '</span>
-
-                                                </div>
-
-                                                <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["space"] . ': </label>
-                                                        <span class="">' . $mp->getNameSpace($e->getSpace()) . '</span>
+                                                        <span class="">' . $e->getSpace()->getSpacename() . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["service"] . ': </label>
-                                                        <span class="">' . $mp->getNameService($e->getService()) . '</span>
+                                                        <span class="">' . $e->getService()->getId() . '</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["alumn"] . ': </label>
-                                                        <span class="">' . $mp->getAlumnname($e->getAlumn()) . '</span>
+                                                        <span class="">' . $e->getAlumn()->getAlumnname() . '</span>
 
                                                 </div>    
 
@@ -52,12 +45,12 @@ echo '
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                          <label for="">' . $strings["place_price"] . ': </label>
-                                                        <span class="">' . $e->getSpacePrice() . '</span>
+                                                        <span class="">' . $e->getSpacePrice() . '€</span>
 
                                                 </div>
                                                 <div class="col-xs-12 col-md-12">
                                                         <label for="">' . $strings["physio_price"] . ': </label>
-                                                        <span class="">' . $e->getPhysioPrice() . '</span>
+                                                        <span class="">' . $e->getPhysioPrice() . '€</span>
 
                                                 </div>
                                                             

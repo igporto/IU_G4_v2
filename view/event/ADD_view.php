@@ -60,7 +60,7 @@ $userMapper = new EventMapper();
                         <div id="divdatestart" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                             <input type="text" class="form-control" id = "datestart" name="date"
-                            ="true" maxlength="10" required ="">
+                                    maxlength="10" required ="">
                             <div id="error"></div>
                         </div>
                         <!--Campo fecha -->

@@ -18,22 +18,22 @@ echo '
 
                                 <!--Campo id-->
                             </div>
-                            </div>
+                            
                             <div class="col-xs-12 col-md-12">
-                                    <label for="">' . $strings["space_id"] . ': </label>
-                                    <span class="">' . $e->getSpace() . '</span>
+                                    <label for="">' . $strings["space_name"] . ': </label>
+                                    <span class="">' . $e->getSpace()->getSpacename() . '</span>
 
                                 <!--Campo id espacio-->
                             </div>
                             <div class="col-xs-12 col-md-12">
                                     <label for="">' . $strings["service"] . ': </label>
-                                    <span class="">' . $e->getService() . '</span>
+                                    <span class="">' . $e->getService()->getId() . '</span>
 
                                 <!--Campo id espacio-->
                             </div>
                             <div class="col-xs-12 col-md-12">
                                     <label for="">' . $strings["alumn"] . ': </label>
-                                    <span class="">' . $e->getAlumn() . '</span>
+                                    <span class="">' . $e->getAlumn()->getAlumnname()." ". $e->getAlumn()->getAlumnsurname() . '</span>
 
                                 <!--Campo id espacio-->
                             </div>
@@ -58,13 +58,13 @@ echo '
                             
                             <div class="col-xs-12 col-md-12">
                                     <label for="">' . $strings["place_price"] . ': </label>
-                                    <span class="">' . $e->getSpacePrice() . '</span>
+                                    <span class="">' . $e->getSpacePrice() . '€</span>
 
                                 <!--Campo space_price-->
                             </div>
                             <div class="col-xs-12 col-md-12">
                                     <label for="">' . $strings["physio_price"] . ': </label>
-                                    <span class="">' . $e->getPhysioPrice() . '</span>
+                                    <span class="">' . $e->getPhysioPrice() . '€</span>
 
                                 <!--Campo space_price-->
                             </div>

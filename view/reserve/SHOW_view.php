@@ -23,6 +23,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 $reserves = $view->getVariable("reservestoshow");
 
 
+
 ?>
 
 <div class="col-xs-12 col-md-8 ">

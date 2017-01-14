@@ -35,117 +35,114 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                 </div>
 
                 <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['space']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                            <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                            <select autofocus id="space" name="space" class="form-control">
+                                <?php
+                                $sm = new SpaceMapper();
+                                $spaces = $sm->show();
+                                echo '<option value=NULL>'.$strings['without_space'].'</option>';
+                                foreach ($spaces as $space){
+                                    echo '<option value='.$space->getCodspace.'>'.$space->getSpacename().'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    <!--Campo id space-->
+                    </div>
                         <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?= $strings['space_id']  ?></label>
-                                <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-                            <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select id="space" name="space">
-                                <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectSpaceId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getNameSpace($b).'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <!--Campo id space-->
-                        </div>
-                       <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?= $strings['service']  ?></label>
-                                <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
-                            <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select id="service" name="service">
-                                <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectServiceId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getNameService($b).'</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
+                            <label for="divdatestart"><?= $strings['service']  ?></label>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
+                                <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
+                                <select id="service" name="service" class="form-control">
+                                    <?php
+                                    $s = new ServiceMapper();
+                                    $services = $s->show();
+                                    echo '<option value=NULL>'.$strings['without_service'].'</option>';
+                                    foreach ($services as $service){
+                                        echo '<option value='.$service->getId().'>'.$service->getDescripcion().'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         <!--Campo id service-->
                         </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['date']  ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="date"
+                                   placeholder= <?php echo $strings['date'] ?> required="true">
+                            <div id="error"></div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col col-md-5">
-                            <label for="divdatestart"><?= $strings['date']  ?></label>
-                            <div id="divdatestart" class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                <input type="date" class="form-control" id="date" name="date"
-                                       placeholder= <?php echo $strings['date'] ?> required="true">
-                                <div id="error"></div>
-                            </div>
                         <!--Campo fecha -->
-                            </div>
+                    </div>
 
-                            <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?= $strings['alumn']  ?></label>
-                                <div class="form-group input-group">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['alumn']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-tag fa-fw"></i></span>
                             <!-- <input required class="form-control" type="number" name="id_espacio" placeholder="<?php //echo $strings['space_id'];?>">-->
-                            <select id="alumn" name="alumn">
+                            <select required id="alumn" name="alumn" class="form-control">
                                 <?php
-                                $s = new ReserveMapper();
-                                $a = $s->selectAlumnId();
-                                foreach ($a as $b){
-                                    echo '<option value='.$b.'>'.$s->getAlumnname($b).'</option>';
+                                $s = new AlumnMapper();
+                                $alumns = $s->show();
+                                foreach ($alumns as $alumn){
+                                    echo '<option value='.$alumn->getCodalumn().'>'.$alumn->getAlumnname()." ".$alumn->getAlumnsurname().'</option>';
                                 }
                                 ?>
                             </select>
                         </div>
-                        <!--Campo id alumno-->
-                            </div>
-                        </div>
+                    <!--Campo id alumno-->
+                    </div>
+                </div>
 
-                        <div class="row">
-                            <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?= $strings['initial_hour']  ?></label>
-                                <div class="form-group input-group">
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?= $strings['initial_hour']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input autofocus required="true" class="form-control" type="time" id="startTime" name="startTime" placeholder=<?php echo $strings['initial_hour']?>>
+                            <input required="true" class="form-control" type="time" id="startTime" name="startTime" placeholder=<?php echo $strings['initial_hour']?>>
                         </div>
-                        <!--Campo hora_ini-->
-                            </div>
-                            <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?php echo $strings['final_hour']  ?></label>
-                                <div class="form-group input-group">
+                    <!--Campo hora_ini-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?php echo $strings['final_hour']  ?></label>
+                        <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input autofocus class="form-control" type="time" id="endTime" name="endTime" placeholder=<?php echo $strings['final_hour']?> required="true">
-							<div id="error"></div>
+                            <input class="form-control" type="time" id="endTime" name="endTime" placeholder=<?php echo $strings['final_hour']?> required="true">
+                            <div id="error"></div>
                         </div>
                         <!--Campo hora_fin-->
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?php echo $strings['place_price']  ?></label>
-                                <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="int" id="spacePrice" name="spacePrice" placeholder=<?php echo $strings['place_price']?>>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="divdatestart"><?php echo $strings['place_price']  ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                            <input required class="form-control" type="number" id="spacePrice" name="spacePrice" placeholder=<?php echo $strings['place_price']?>>
                         </div>
                         <!--Campo precio-->
-                        </div>
+                    </div>
                         <div class="col-xs-12 col col-md-5">
-                                <label for="divdatestart"><?php echo $strings['physio_price']  ?></label>
-                                <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input required class="form-control" type="int" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
-                        </div>
-                        <!--Campo precio-->
-                        </div>
+                            <label for="divdatestart"><?php echo $strings['physio_price']  ?></label>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
+                                <input required class="form-control" type="number" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
+                            </div>
+                            <!--Campo precio-->
                         </div>
                     </div>
-                    <!--Campo name-->
-
-
-
-
-            </div>
+                </div>
+         </div>
 
 
         <div class="row">
@@ -187,10 +184,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
         $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
     } );
 </script>
-
-
-
-
 
 <script>
     //Non deixar que o campo input teña espazos

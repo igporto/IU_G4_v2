@@ -283,6 +283,9 @@ $strings = array(
     'succ_injury_delete'=>'Injury properly deleted',
     'succ_injury_edit'=>'Injury properly edited',
 
+    'succ_reserve_add'=>'Reserve properly created',
+    'succ_reserve_delete'=>'Reserve properly deleted',
+    'succ_reserve_edit'=>'Reserve properly edited',
 
 		/*FAIL*/
 		'fail_title'=>'Fail',
@@ -308,6 +311,7 @@ $strings = array(
     	'fail_price_incorrect'=>'Price is not valid',
     	'fail_date_incorrect'=>'Date is not valid',
     	'fail_date_injuries'=>'Recovery Date can´t be lower than Injury Date ',
+    	'fail_data_ini_fin_incorrect'=>'Initial Hour can´t be upper than Finaly Hour and vice versa ',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -576,6 +580,9 @@ $strings = array(
     'REGISTRATION'=>'Registration',
     'search_bill'=>'Bill search',
     'anyone'=>'Anyone',
-    'search_domiciliation'=>'Domiciliation search'
+    'search_domiciliation'=>'Domiciliation search',
+    'without_space'=>'Without Space',
+    'without_service'=>'Without Service',
+    'without_alumn'=>'Without Alumn',
 )
 ?>
