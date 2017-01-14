@@ -40,6 +40,7 @@ $registrationMapper = new RegistrationMapper();
                                 $rm = new ReserveMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $reserves = $rm->show();
+
                                 echo "<option value='NULL'>".$strings['without_reserve'] . "</option>";
                                 foreach ($reserves as $r) {
                                     if($r->getSpace()->getCodspace() != NULL){

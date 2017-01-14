@@ -38,7 +38,7 @@ echo '
                             </div>
                             <div class="col-xs-12 col-md-12">
                                      <label for="">' . $strings["time_recovery"] . ': </label>
-                                     <span class="">' . $c->getTime() . '</span>
+                                     <span class="">' . $c->getTime() . " ". $strings['days'] .'</span>
 
                                 <!--Campo name-->
                             </div>

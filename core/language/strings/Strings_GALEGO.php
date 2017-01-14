@@ -485,6 +485,7 @@ $strings = array(
     'injury'=>'Lesión',
     'injury_access_log'=>'Log de Acceso a Lesións',
 
+
     /*LOG*/
     'one_user'=>'Usuario',
     'alumn'=>'Alumno',
