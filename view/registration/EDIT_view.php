@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../../controller/REGISTRATION_controller.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 $registrationMapper = new RegistrationMapper();
 $codRegistration = $_REQUEST["codRegistration"];
-$registration = $registrationMapper->view($registrationMapper->getCodRegistration($codRegistration));
+$registration = $registrationMapper->view($codRegistration);
 ?>
 
 <div class="col-md-6">
@@ -26,22 +26,27 @@ $registration = $registrationMapper->view($registrationMapper->getCodRegistratio
                             <select id='reserve' name='reserve' class='form-control icon-menu'>
                             <?php
                             //Engadimos unha opcion por reserve a escoller
-                            $registrationMapper = new RegistrationMapper();
+                            $rm = new ReserveMapper();
                             //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $reserves = $registrationMapper->selectReserveId();
+                            $reserves = $rm->show();
                             foreach ($reserves as $reserve) {
-                                echo "<option value='" . $reserve."'>".$registrationMapper->getCodReserve() . "</option>";
+                                echo "<option value='" . $reserve->getCodReserve()."'>".$reserve->getCodReserve() . "</option>";
                             }
                             ?>
                             </select>
                         </div>
                         <!--Campo reserve-->
                     </div>
-                    <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input class="form-control" type="date" name="date" maxlength="25"
-                                   placeholder=<?php echo $strings['date']; ?>>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['date'] ?></label>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
+                                <input class="form-control" type="date" name="date" maxlength="25"
+                                       placeholder=<?php echo $strings['date']; ?>>
+                            </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 col col-md-5">
                         <label for="selectperf"><?php echo $strings['one_payment'] ?></label>
                         <div class="form-group input-group">
@@ -49,11 +54,11 @@ $registration = $registrationMapper->view($registrationMapper->getCodRegistratio
                             <select id='payment' name='payment' class='form-control icon-menu'>
                             <?php
                             //Engadimos unha opcion por pago a escoller
-                            $registrationMapper = new RegistrationMapper();
+                            $pm = new PaymentMapper();
                             //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
-                            $payments = $registrationMapper->selectPaymentId();
+                            $payments = $pm->show();
                             foreach ($payments as $payment) {
-                                echo "<option value='" . $payment."'>".$registrationMapper->getIdPago() . "</option>";
+                                echo "<option value='" . $payment->getIdPago."'>".$payment->getIdPago() . "</option>";
                             }
                             ?>
                             </select>

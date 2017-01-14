@@ -46,7 +46,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 $spaces = $sm->show();
                                 echo '<option value=NULL>'.$strings['without_space'].'</option>';
                                 foreach ($spaces as $space){
-                                    echo '<option value='.$space->getCodspace.'>'.$space->getSpacename().'</option>';
+                                    echo '<option value='.$space->getCodspace().'>'.$space->getSpacename().'</option>';
                                 }
                                 ?>
                             </select>

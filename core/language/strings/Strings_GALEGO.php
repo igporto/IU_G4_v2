@@ -314,6 +314,7 @@ $strings = array(
         'fail_date_injuries'=>'A data de Recuperacion non pode ser anterior á de Lesión',
         'fail_data_ini_fin_incorrect'=>'A hora de Comezo non pode ser maior á de Fin e viceversa',
         'fail_not_reserve'=>'Non hai nada que reservar',
+        'fail_mail_error'=>'Error al enviar email',
 
         /*ERROR*/
         'erro_title'=>'Erro',
@@ -503,6 +504,8 @@ $strings = array(
     'all_clients'=>'Todos os Clientes',
     'activity_clients'=>'Clientes dunha Actividade',
     'event_clients'=>'Clientes dun Evento',
+    'succ_mail_sent'=>'Email enviado',
+    'fail_mail_error'=>'Erro ao enviar email',
 
 
 

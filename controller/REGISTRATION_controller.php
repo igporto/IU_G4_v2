@@ -12,7 +12,7 @@ require_once(__DIR__ . "/../controller/BaseController.php");
  *
  * Controller to login, logout and action data managing
  */
-class registrationController extends BaseController
+class RegistrationController extends BaseController
 {
     private $registrationMapper;
     private $reserveMapper;
@@ -54,11 +54,12 @@ class registrationController extends BaseController
                 }
             }
             try {
-                    $this->registrationMapper->add($registration);
-                    //ENVIAR AVISO DE INSCRIPCION ENGADIDA!!!!!!!!!!
-                    $this->view->setFlash('succ_registration_add');
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das inscricións)
-                    $this->view->redirect("registration", "show");
+                var_dump($registration);exit;
+                $this->registrationMapper->add($registration);
+                //ENVIAR AVISO DE INSCRIPCION ENGADIDA!!!!!!!!!!
+                $this->view->setFlash('succ_registration_add');
+                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das inscricións)
+                $this->view->redirect("registration", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -140,7 +141,7 @@ class registrationController extends BaseController
                 $registration->setReserve($aux);
             }
             if(isset($_POST['date']) && $_POST['date']){
-                $activity->setDate((htmlentities(addslashes($_POST["date"]))));
+                $registration->setDate((htmlentities(addslashes($_POST["date"]))));
             }
             if(isset($_POST['usepay']) && isset($_POST['payment'])) {
                 $registration->setPayment($this->paymentMapper->view($_POST["payment"]));

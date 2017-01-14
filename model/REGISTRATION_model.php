@@ -33,6 +33,7 @@ class RegistrationMapper
                 $registration->getPayment()->getIdPago()
             )
         );
+
         return $this->db->lastInsertId();
     }
 

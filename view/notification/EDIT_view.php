@@ -93,9 +93,3 @@ $notification = $nm->view($_GET["codnotification"]);
     <!--fin formulario-->
 </div>
 
-<script>
-    //Non deixar que o campo input teña espazos
-    $("input").on("keydown", function (e) {
-        return e.which !== 32;
-    });
-</script>

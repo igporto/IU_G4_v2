@@ -38,6 +38,7 @@
             //Creamos un obxecto reserve baleiro
             $reserve = new Reserve();
             //Engadimos os datos ao obxecto reserve
+
             if(isset($_POST['space'])){
                 if($_POST['space'] !=NULL){
                     $reserve->setSpace($this->spaceMapper->view($_POST["space"]));
@@ -46,14 +47,14 @@
                 }
             }
             if(isset($_POST['service'])){
-                if($_POST['service'] !=NULL){
+                if($_POST['service'] != NULL){
                     $reserve->setService($this->serviceMapper->view($_POST["service"]));
                 }else{
                     $reserve->setService(new Service());
                 }
             }
             if(isset($_POST['alumn'])){
-                if($_POST['alumn'] !=NULL){
+                if($_POST['alumn'] != NULL){
                     $reserve->setAlumn($this->alumnMapper->view($_POST["alumn"]));
                 }else{
                     $reserve->setAlumn(new Alumn());
@@ -75,7 +76,6 @@
                 $reserve->setPhysioPrice($_POST["physioPrice"]);
             }
             try {
-
                 if($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL ){
                     if($reserve->getStartTime() < $reserve->getEndTime()){
                         if($this->reserveMapper->validDate($reserve->getDate())){

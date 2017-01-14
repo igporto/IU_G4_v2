@@ -14,7 +14,7 @@ echo '
     <div class="row">
         <div class="col-xs-12 col-md-12">
                 <label for="">' . $strings["one_reserve"] . ': </label>
-                <span class="">' . $c->getCodReserve() . '</span>
+                <span class="">' . $c->getReserve()->getCodReserve() . '</span>
             <!--Campo reserve-->
         </div>
         <div class="col-xs-12 col-md-12">
@@ -24,7 +24,7 @@ echo '
         </div>
         <div class="col-xs-12 col-md-12">
                 <label for="">' . $strings["one_payment"] . ': </label>
-                <span class="">' . $c->getIdPago() . '</span>
+                <span class="">' . $c->getPayment()->getIdPago() . '</span>
             <!--Campo payment-->
         </div>
         </div></div><div class="modal-footer">

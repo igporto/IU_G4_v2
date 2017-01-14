@@ -37,7 +37,7 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                         <label for="selectperf"><?php echo $strings['message'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input required="true" class="form-control" type="message" name="message" >
+                            <textarea required="true" class="form-control"  name="message" ></textarea>
                         </div>
                         <!--Campo desconto-->
                     </div>
@@ -45,7 +45,16 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                         <label for="selectperf"><?php echo $strings['subject'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input required="true" class="form-control" type="text" name="subject" >
+                            <select class="form-control" name="subject">
+                            <?php
+                            $nm = new NotificationMapper();
+                            $notifications = $nm->show();
+                            foreach ($notifications as $n) {
+                                ?>
+                                <option value="<?php echo $n->getDescription() ?>"><?php echo $n->getCodnotification() . " " . $n->getDescription() ?></option>
+                                <?php
+                            }?>
+                            </select>
                         </div>
                         <!--Campo desconto-->
                     </div>
@@ -86,13 +95,21 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                                 foreach ($clients as $c) {
                                     if ($mark) {
                                         ?>
-                                        <div class="checkbox"><label><input type="checkbox" name="destiny[]" checked><?php echo $c->getName() . " " . $c->getSurname() ?>
-                                            </label></div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="destiny[]" value="<?php echo $c->getEmail()?>" checked>
+                                                <?php echo $c->getName() . " " . $c->getSurname() ." -> ". $c->getEmail() ?>
+                                            </label>
+                                        </div>
                                         <?php
                                     } else {
                                         ?>
-                                        <div class="checkbox"><label><input name="destiny[]" type="checkbox"><?php echo $c->getName() . " " . $c->getSurname() ?>
-                                            </label></div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="destiny[]" value="<?php echo $c->getEmail()?>" >
+                                                <?php echo $c->getName() . " " . $c->getSurname() ." -> ". $c->getEmail() ?>
+                                            </label>
+                                        </div>
                                         <?php
                                     }
                                 }
@@ -108,7 +125,7 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=notification&notification=show">
+                    <a class="btn btn-default btn-md" href="index.php?controller=notification&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
@@ -130,10 +147,3 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
     </form>
     <!--fin formulario-->
 </div>
-
-<script>
-    //Non deixar que o campo input teña espazos
-    $("input").on("keydown", function (e) {
-        return e.which !== 32;
-    });
-</script>

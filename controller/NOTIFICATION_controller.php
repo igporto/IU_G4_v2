@@ -123,7 +123,7 @@ class NotificationController extends BaseController
                 $this->view->redirect("notification", "show");
             }
 
-            $this->view->render("notification","show");
+            $this->show();
         }else{
             $this->view->render("notification", "search");
         }
@@ -163,7 +163,7 @@ class NotificationController extends BaseController
                 //Username to use for SMTP authentication - use full email address for gmail
                 $mail->Username = "moovettG4@gmail.com";
                 //Password to use for SMTP authentication
-                $mail->Password = "moovettG4";
+                $mail->Password = "moovettG4admin";
                 //Set who the message is to be sent from
                 $mail->setFrom("moovettG4@gmail.com", 'Ximnasio Moovett Ourense');
                 //Set an alternative reply-to address
@@ -182,22 +182,24 @@ class NotificationController extends BaseController
                         'verify_peer_name' => false,
                         'allow_self_signed' => true
                     ));
+
                 foreach($destinies as $email){
                     $mail->addAddress($email, $email);
                 }
                 if (!$mail->Send()) {
                     $this->view->setFlash("fail_mail_error");
-                    //echo( "Mailer Error: " . $mail->ErrorInfo);
+                    $this->view->render("notification", "send");
                 } else {
                     $this->view->setFlash("succ_mail_sent");
                 }
+            }else{
+                $this->view->setFlash("fail_mail_error");
             }
-            else{
-
-            }
+            $this->view->redirect("notification", "show");
         }
         else{
             $this->view->render("notification", "send");
         }
+
     }
 }

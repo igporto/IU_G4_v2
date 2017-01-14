@@ -16,6 +16,7 @@ include(__DIR__ . "/../../view/layouts/datatable_lang_select.php");
 include(__DIR__ . "/../../view/layouts/show_flag_setter.php");
 //obtemos o contido a mostrar
 $registrations = $view->getVariable("registrationstoshow");
+
 ?>
 
 <div class="col-xs-12 col-md-8 ">
@@ -60,7 +61,7 @@ $registrations = $view->getVariable("registrationstoshow");
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['codRegistration'] ?></th>
+                        <th class="text-center"><?php echo $strings['RESERVE'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -78,13 +79,13 @@ $registrations = $view->getVariable("registrationstoshow");
 
                     <?php
                     //Para cada registration, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
-                    foreach ($registrations as $e) {
-                                            echo "<tr class='row text-center' ><td> ";
-
-                        echo $e->getCodRegistration() . "</td><td class='text-center'>";
+                    foreach ($registrations as $c) {
+                        echo "<tr class='row text-center' ><td> ";
+                        var_dump($c->getReserve());exit;
+                        echo $c->getReserve()->getCodReserve() . "</td><td class='text-center'>";
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
-                            echo '" data-toggle="modal" data-target="#view' . $e->getCodRegistration() . '';
+                            echo '" data-toggle="modal" data-target="#view' . $c->getCodRegistration() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-eye fa-fw"></i>
                                         </button>';
@@ -93,7 +94,7 @@ $registrations = $view->getVariable("registrationstoshow");
                         //Boton que direcciona a vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=registration&action=edit&codReserve=" . $e->getCodRegistration() . '>';
+                            echo "<a href=index.php?controller=registration&action=edit&codRegistration=" . $c->getCodRegistration() . '>';
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -103,7 +104,7 @@ $registrations = $view->getVariable("registrationstoshow");
                         //Boton que direcciona a vista de eliminar
                         if ($delete) {
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $e->getCodRegistration() . '';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $c->getCodRegistration() . '';
                             echo '" style="margin:2px">';
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';

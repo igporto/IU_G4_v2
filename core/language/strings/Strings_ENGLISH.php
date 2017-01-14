@@ -317,6 +317,7 @@ $strings = array(
     	'fail_date_injuries'=>'Recovery Date can´t be lower than Injury Date ',
     	'fail_data_ini_fin_incorrect'=>'Initial Hour can´t be upper than Finaly Hour and vice versa ',
     	'fail_not_reserve'=>'There is nothing to book ',
+    	'fail_mail_error'=>'Error to send email',
 
 		/*ERROR*/
 		'erro_title'=>'Error',
@@ -507,6 +508,8 @@ $strings = array(
     'all_clients'=>'All Clients',
     'activity_clients'=>'Activity Clients',
     'event_clients'=>'Event Clients',
+    'succ_mail_sent'=>'Email Sent',
+
 
 
     'DOMICILIATION' => 'Domiciliations',

@@ -110,7 +110,7 @@ $logs = $view->getVariable("logstoshow");
 
             <div class="col-xs-12">
                 <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=employee&action=showinjury&codemployee=<?php echo $logs[0]->getEmployee()->getCodemployee()?>">
+                    <a class="btn btn-default btn-md" href="index.php?controller=injury&action=show">
                         <i class="fa fa-arrow-left"></i>
                         <?php echo $strings['back'] ?></i></a>
                 </div>
