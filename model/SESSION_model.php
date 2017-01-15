@@ -105,9 +105,9 @@ class SessionMapper
         );
     }
 
-    public function delete($is_sesion)
+    public function delete($id_sesion)
     {
-        $stmt = $this->db->prepare("DELETE from sesion WHERE is_sesion= '$is_sesion'");
+        $stmt = $this->db->prepare("DELETE from sesion WHERE id_sesion= '$id_sesion'");
         $stmt->execute();
     }
 }

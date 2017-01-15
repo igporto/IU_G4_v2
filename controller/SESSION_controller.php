@@ -190,7 +190,7 @@ class SessionController extends BaseController
         try {
             if (isset($_GET['sessionid'])) {
                 $session = $this->sessionMapper->view($_REQUEST["sessionid"]);
-                $this->sessionMapper->delete($session);
+                $this->sessionMapper->delete($session->getIdSession());
                 $this->view->setFlash('succ_session_delete');
                 $this->view->redirect("session", "show");
             }
