@@ -145,14 +145,6 @@ $currentRes = $reserveMapper->view($reserve);
                         </div>
                         <!--Campo hora_ini-->
                     </div>
-                    <div class="col-xs-12 col col-md-5">
-                        <label for="divdatestart"><?= $strings['physio_price']  ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
-                            <input  class="form-control" type="number" name="physioprice"  value="<?php echo $currentRes->getPhysioPrice()?>">
-                        </div>
-                        <!--Campo hora_fin-->
-                    </div>
                 </div>
             </div>
 

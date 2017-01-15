@@ -1,4 +1,4 @@
-<?php
+ <?php
 //Modelo de Mapper dun Obxeto
 //Encárgase de realizar todas as accións posibles sobre a db do obxeto
 //Include da conexion
@@ -27,7 +27,7 @@ class ReserveMapper {
     public function add(Reserve $reserve)
     {
         //insertamos na taboa Reserve
-        $stmt = $this->db->prepare("INSERT INTO  reserva (id_espacio, id_servicio, id_alumno, fecha_reserva, hora_inicio, hora_fin, precio_espacio, precio_fisio) VALUES (?,?,?,?,?,?,?,?)");
+        $stmt = $this->db->prepare("INSERT INTO  reserva (id_espacio, id_servicio, id_alumno, fecha_reserva, hora_inicio, hora_fin, precio_espacio) VALUES (?,?,?,?,?,?,?)");
         $stmt->execute(array(
                 $reserve->getSpace()->getCodspace(),
                 $reserve->getService()->getId(),
@@ -35,8 +35,7 @@ class ReserveMapper {
                 $reserve->getDate(),
                 $reserve->getStartTime(),
                 $reserve->getEndTime(),
-                $reserve->getSpacePrice(),
-                $reserve->getPhysioPrice()
+                $reserve->getSpacePrice()
             )
         );
         return $this->db->lastInsertId();
@@ -72,8 +71,7 @@ class ReserveMapper {
                 $reserv["fecha_reserva"],
                 $reserv["hora_inicio"],
                 $reserv["hora_fin"],
-                $reserv["precio_espacio"],
-                $reserv["precio_fisio"]
+                $reserv["precio_espacio"]
             );
 
         } else {
@@ -86,11 +84,11 @@ class ReserveMapper {
     public function edit(Reserve $reserve)
     {
         $stmt = $this->db->prepare("UPDATE reserva SET  id_espacio = ? , id_servicio = ? , id_alumno = ? , 
-            fecha_reserva = ? , hora_inicio = ? , hora_fin = ? , precio_espacio = ? , precio_fisio = ? WHERE id_reserva = ?");
+            fecha_reserva = ? , hora_inicio = ? , hora_fin = ? , precio_espacio = ? WHERE id_reserva = ?");
         $stmt->execute(array(
                         $reserve->getSpace()->getCodspace(), $reserve->getService()->getId(), 
                         $reserve->getAlumn()->getCodalumn(), $reserve->getDate(), $reserve->getStartTime(), $reserve->getEndTime(), 
-                        $reserve->getSpacePrice(), $reserve->getPhysioPrice(), $reserve->getCodReserve()
+                        $reserve->getSpacePrice(), $reserve->getCodReserve()
                         )
                 );
     }
@@ -107,26 +105,26 @@ class ReserveMapper {
     public function search(Reserve $reserve){
         if($reserve->getSpace() != NULL){
             if($reserve->getService() != NULL){
-                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_servicio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_servicio like ? AND id_alumno like ? AND precio_espacio like ? ");
                 $stmt->execute(array("%".$reserve->getSpace()->getCodspace()."%", "%".$reserve->getService()->getId()."%", "%".$reserve->getAlumn()->getCodalumn()."%",
-                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                        "%".$reserve->getSpacePrice()."%")
                 );
             }else{
-                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_espacio like ? AND id_alumno like ? AND precio_espacio like ");
                 $stmt->execute(array("%".$reserve->getSpace()->getCodspace()."%",  "%".$reserve->getAlumn()->getCodalumn()."%",
-                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                        "%".$reserve->getSpacePrice()."%")
                 );
             }
         }else{
             if($reserve->getService() != NULL){
-                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_servicio like ? AND id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_servicio like ? AND id_alumno like ? AND precio_espacio like ? ");
                 $stmt->execute(array( "%".$reserve->getService()->getId()."%", "%".$reserve->getAlumn()->getCodalumn()."%",
-                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                        "%".$reserve->getSpacePrice()."%")
                 );
             }else{
-                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_alumno like ? AND precio_espacio like ? AND precio_fisio like ?");
+                $stmt = $this->db->prepare("SELECT * FROM reserva WHERE id_alumno like ? AND precio_espacio like ?");
                 $stmt->execute(array("%".$reserve->getAlumn()->getCodalumn()."%",
-                        "%".$reserve->getSpacePrice()."%","%".$reserve->getPhysioPrice()."%",)
+                        "%".$reserve->getSpacePrice()."%")
                 );
             }
         }
