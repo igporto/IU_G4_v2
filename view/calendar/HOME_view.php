@@ -56,11 +56,10 @@
 
 				<?php foreach ($data as $session): ?>
 					{
-						title: '<?= $session->getActivity()->getActivityname() ?>',
+						title: '<?= $session->getActivity()->getActivityname()." (" .$session->getSpace()->getSpacename().")" ?>',
 						start: '<?= $session->getDate() ?>T<?= $session->getHourStart() ?>',
 						end: '<?= $session->getDate()  ?>T<?= $session->getHourEnd()  ?>',
-						space: '<?=$session->getSpace()->getSpacename() ?>',
-						color: '<?= $session->getActivity()->getColor() ?>',
+												color: '<?= $session->getActivity()->getColor() ?>',
 						url: 'index.php?controller=session&action=show&id=<?=$session->getIdSession() ?>&doviw=true',
 						<?php if ($session->getDate() ): ?>
 							

@@ -174,6 +174,7 @@ class AttendanceController extends BaseController
                 
             }else{
                 $this->view->setVariable("session", $this->sessionMapper->view($_REQUEST["id"]));
+                $this->view->setVariable("attendants", $this->attendanceMapper->getAttendants($_REQUEST["id"]));
                 $this->view->setVariable("alumns", $alumns);
                 $this->view->render("attendance", "manage");
             }
