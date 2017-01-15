@@ -66,7 +66,6 @@ class PaymentController extends BaseController
 
                 $this->writeRecibo($payment);
                 $this->printPDF();
-                $this->view->redirect("payment", "show");
 
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
