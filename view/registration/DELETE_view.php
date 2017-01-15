@@ -57,6 +57,11 @@ echo '
                 echo '
             <!--Campo reserve-->
         </div>
+        <div class="col-xs-12 col-md-12">
+                <label for="">' . $strings["periodad_de_pago"] . ': </label>
+                <span class="">' . $c->getPeriodicidad() . '</span>
+            <!--Campo date-->
+        </div>
         </div></div><div class="modal-footer">
         
         <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>

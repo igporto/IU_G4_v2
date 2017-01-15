@@ -46,7 +46,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <!--Campo metodo de pago-->
                     </div>
                 </div>
-
             </div>
         </div>
 <div class="row">
