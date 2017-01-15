@@ -334,6 +334,10 @@ $strings = array(
 		/*INFO*/
     'info_title' => 'Información',
 
+	/*ATTENDACE*/
+    'ATTENDANCE'=>'Asistencia',
+	'management_attendances'=>'Gestión de Asistencia',
+
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 
     'PAYMENT' => 'Pagos',

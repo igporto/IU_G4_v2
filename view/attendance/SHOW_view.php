@@ -51,7 +51,7 @@ $attendances = $view->getVariable("attendancestoshow");
     <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <?php echo $strings['list_of'] . ' ' . $strings['CATEGORY']; ?>
+                <?php echo $strings['list_of'] . ' ' . $strings['ATTENDANCE']; ?>
 
             </div>
             <div class="panel-body">
@@ -60,7 +60,9 @@ $attendances = $view->getVariable("attendancestoshow");
                     <thead>
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
-                        <th class="text-center"><?php echo $strings['CATEGORY'] ?></th>
+                        <th class="text-center"><?php echo $strings['code'] ?></th>
+                        <th class="text-center"><?php echo $strings['alumn'] ?></th>
+                        <th class="text-center"><?php echo $strings['activity'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
                             <th class="text-center"><?php echo $strings['no_actions_to_do'] ?></th>
@@ -81,12 +83,14 @@ $attendances = $view->getVariable("attendancestoshow");
                     //Para cada usuario, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
                     foreach ($attendances as $c) {
                         echo "<tr class='row text-center' ><td> ";
-
-                        echo $c->getAttendancename() . "</td><td class='text-center'>";
+                        echo $c->getCod. "</td><td>";
+                        echo $c->getAlumn()->getAlumnname() ." ". $c->getAlumnsurname(). "</td><td>";
+                        echo $c->getSession()->getActivity()->getActivityname(). "</td>";
+                        echo "<td class='text-center'>";
                         //Botón que direcciona a vista do usuario
                         if ($v) {
                             echo '<button type="button" class="btn btn-primary btn-xs';
-                            echo '" data-toggle="modal" data-target="#view' . $c->getCodattendance() . '">';
+                            echo '" data-toggle="modal" data-target="#view' . $c->getCod() . '">';
 
                             echo '<i class="fa fa-eye fa-fw"></i>
                                         </button>';
@@ -94,7 +98,7 @@ $attendances = $view->getVariable("attendancestoshow");
                         //Botón que direcciona á vista do editar
                         if ($edit) {
 
-                            echo "<a href=index.php?controller=attendance&action=edit&codattendance=" . $c->getCodattendance() . '>';
+                            echo "<a href=index.php?controller=attendance&action=edit&codattendance=" . $c->getCod() . '>';
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
@@ -103,7 +107,7 @@ $attendances = $view->getVariable("attendancestoshow");
                         //Botón que direcciona á vista de eliminar
                         if ($delete) {
                             echo '<button type="button" class="btn btn-danger btn-xs';
-                            echo '" data-toggle="modal" data-target="#confirmar' . $c->getCodattendance() . '">';
+                            echo '" data-toggle="modal" data-target="#confirmar' . $c->getCod() . '">';
 
                             echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
