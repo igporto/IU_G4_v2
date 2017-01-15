@@ -120,7 +120,7 @@ class AttendanceController extends BaseController
             $attendance = new Attendance();
 
             if(isset($_POST['alumn'])) {
-                $attendance->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_POST["attendancename"]))));
+                $attendance->setAlumn($this->alumnMapper->view(htmlentities(addslashes($_POST["alumn"]))));
             }else{
                 $aux = new Alumn();
                 $aux->setCodalumn("");

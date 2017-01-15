@@ -1,27 +1,23 @@
 <!-- CONTIDO DA PAXINA -->
-
 <?php
-require_once(__DIR__ . "/../../controller/ACTION_controller.php");
-
+require_once(__DIR__ . "/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-$codattendance = $_REQUEST["codattendance"];
-$attendanceMapper = new AttendanceMapper();
-$attendance = $attendanceMapper->view($codattendance);
 ?>
 
-<div class="col-md-6">
-    <h1 class="page-header"><?php echo $strings['attendance_modify'].': '.$attendance->getCod()?></h1>
-    <form method="POST" name="editform" id="editform"
-          action="index.php?controller=attendance&action=edit&codattendance=<?php echo $codattendance; ?>"
+
+
+<div class="col-md-6 ">
+    <h1 class="page-header"><?php echo $strings['search'].' '.$strings['ATTENDANCE'] ; ?></h1>
+    <form name="form" id="form" method="POST" onsubmit="return hasWhiteSpace()"
+          action="index.php?controller=attendance&action=search"
           enctype="multipart/form-data">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <?php include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php'); ?>
                 <?php echo $strings['management_info'] ?>
             </div>
             <div class="panel-body">
-
                 <div class="row">
                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
                         <div class="row">
@@ -32,19 +28,26 @@ $attendance = $attendanceMapper->view($codattendance);
                         </div>-->
 
                     </div>
-
-                    <div class="col-xs-12 col-md-5">
-                        <label for="selectperf"><?php echo $strings['assist'] ?></label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-5 ">
+                        <label for="selectperf"><?php echo $strings['alumn'] ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <select>
-                                <option value="0"><?php echo $strings['no']?></option>
-                                <option value="1"><?php echo $strings['yes']?></option>
+                            <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
+                            <select class="form-control" name="alumn">
+                                <?php
+                                $am = new AlumnMapper();
+                                $alumns=  $am->show();
+                                foreach ($alumns as $a){
+
+                                ?>
+                                <option value="<?php echo $a->getCodalumn() ?>"><?php echo $a->getAlumnname(). " ". $a->getAlumnsurname()?></option>
+                                <?php
+                                }
+                                ?>
                             </select>
-                            <input autofocus required  class="form-control" type="text" name="asists" maxlength="25"
-                                   placeholder=<?php echo $strings['name']; ?>>
+
                         </div>
-                        <!--Campo nome-->
                     </div>
                 </div>
             </div>
@@ -64,8 +67,8 @@ $attendance = $attendanceMapper->view($codattendance);
                         <?php echo $strings['clean'] ?></i></button>
 
                     <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                        <i class="fa fa-edit"></i>
-                        <?php echo $strings['EDIT'] ?></i></button>
+                        <i class="fa fa-search"></i>
+                        <?php echo $strings['search'] ?></i></button>
                     <?php
 
                     ?>

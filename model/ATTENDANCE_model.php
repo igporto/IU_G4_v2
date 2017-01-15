@@ -80,10 +80,12 @@ class AttendanceMapper {
         if($attendance->getAlumn()->getCodalumn() != NULL){
             $stmt = $this->db->prepare("SELECT * FROM asistencia WHERE id_alumno like ? ");
             $stmt->execute(array($attendance->getAlumn()->getCodalumn()));
-            $attendances_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }else{
 
+        }else{
+            $stmt = $this->db->prepare("SELECT * FROM asistencia");
+            $stmt->execute(array());
         }
+        $attendances_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $attendances = array();
         foreach ($attendances_db as $a){
             array_push($attendances, $this->view($a['id_asistencia']));

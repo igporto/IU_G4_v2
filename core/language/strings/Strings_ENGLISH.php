@@ -337,6 +337,7 @@ $strings = array(
     'attendance_data'=>'Attendance Data',
     'yes'=>'Yes',
     'no'=>'No',
+    'assist'=>'Asists?',
 
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */
