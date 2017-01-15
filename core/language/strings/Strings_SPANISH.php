@@ -612,6 +612,7 @@ $strings = array(
     'without_alumn'=>'Sin Alumno',
     'without_reserve'=>'Sin Reserva',
 	'fail_bill_num'=>'Ya existe una factura con ese numero',
-	'cada cuanto'=> 'Cada cuanto se cobra'
+	'cada cuanto'=> 'Cada cuanto se cobra',
+	'payment_file'=>'Fichero de pago'
 )
 ?>

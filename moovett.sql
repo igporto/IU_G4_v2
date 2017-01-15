@@ -395,7 +395,8 @@ CREATE TABLE `pago` (
   `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
   `dni_alum` VARCHAR (9) NULL,
-  `dni_cliente_externo` VARCHAR (9) NULL
+  `dni_cliente_externo` VARCHAR (9) NULL,
+  `fichero` TEXT
 )  ;
 
 -- --------------------------------------------------------

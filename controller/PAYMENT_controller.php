@@ -49,7 +49,10 @@ class PaymentController extends BaseController
             $payment->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
             $payment->setMetodoPago(htmlentities(addslashes($_POST["metodo_pago"])));
             $payment->setTipoCliente(htmlentities(addslashes($_POST["tipo_cliente"])));
-
+            $payment->setFichero($_POST["file"]);
+var_dump($_POST);
+var_dump($_REQUEST);
+exit;
             if ($_POST["tipo_cliente"] == "student") {
                 $payment->setDniAlum(htmlentities(addslashes($_POST["dni"])));
             } else {

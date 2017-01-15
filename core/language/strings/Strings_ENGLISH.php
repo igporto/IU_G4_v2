@@ -615,6 +615,7 @@ $strings = array(
     'without_alumn'=>'Without Alumn',
     'without_reserve'=>'Sen Reservation',
     'fail_bill_num'=>'Bill number already exists',
-    'cada cuanto'=> 'How often is charged'
+    'cada cuanto'=> 'How often is charged',
+    'payment_file'=>'Payment file'
 	)
 ?>

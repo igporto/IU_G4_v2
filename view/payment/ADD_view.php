@@ -36,8 +36,10 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                     </div>
 
                     <div class="col-xs-12 col col-md-5">
-                        <label for="selectperf" id="label1" style="display: block"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
-                        <label for="selectperf" id="label2" style="display: none"><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
+                        <label for="selectperf" id="label1"
+                               style="display: block"><?php echo $strings['dni'] . " " . $strings["student"] ?></label>
+                        <label for="selectperf" id="label2"
+                               style="display: none"><?php echo $strings['dni'] . " " . $strings["external_client"] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-briefcase fa-fw"></i></span>
                             <select class=" form-control icon-menu" name="dni" id="dni" style="display: block">
@@ -53,7 +55,8 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 }
                                 ?>
                             </select>
-                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external" style="display: none">
+                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external"
+                                   style="display: none">
                             <div id="error"></div>
                         </div>
                         <!--Campo dni de cliente-->
@@ -135,34 +138,45 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         }
                     </script>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="display: block">
+                        <label for="selectperf"><?php echo $strings['payment_file'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
+                            <input ass="form-control" type="file" id="file" name="file">
+                            <div id="error"></div>
+                        </div>
+                        <!--Campo metodo de pago-->
+                    </div>
+                </div>
 
             </div>
         </div>
 
-<div class="row">
+        <div class="row">
 
-    <div class="col-xs-12">
-        <div class="pull-left">
-            <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
-                <i class="fa fa-arrow-left"></i>
-                <?php echo $strings['back'] ?></i></a>
+            <div class="col-xs-12">
+                <div class="pull-left">
+                    <a class="btn btn-default btn-md" href="index.php?controller=payment&action=show">
+                        <i class="fa fa-arrow-left"></i>
+                        <?php echo $strings['back'] ?></i></a>
+                </div>
+
+                <div class="pull-right">
+                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                        <?php echo $strings['clean'] ?></i></button>
+
+                    <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                        <i class="fa fa-plus"></i>
+                        <?php echo $strings['ADD'] ?></i></button>
+                    <?php
+
+                    ?>
+                </div>
+            </div>
+
         </div>
+    </form>
 
-        <div class="pull-right">
-            <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                <?php echo $strings['clean'] ?></i></button>
-
-            <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                <i class="fa fa-plus"></i>
-                <?php echo $strings['ADD'] ?></i></button>
-            <?php
-
-            ?>
-        </div>
-    </div>
-
-</div>
-</form>
-
-<!--fin formulario-->
+    <!--fin formulario-->
 </div>

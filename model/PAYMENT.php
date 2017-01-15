@@ -18,11 +18,12 @@ class Payment
     private $tipo_cliente;
     private $dni_alum;
     private $dni_cliente_externo;
+    private $fichero;
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
     public function __construct($id_pago = NULL, $fecha = NULL, $cantidad = NULL, $metodo_pago = NULL, $pagado = NULL,
-                                $tipo_cliente = NULL, $dni_alum = NULL, $dni_cliente_externo = NULL)
+                                $tipo_cliente = NULL, $dni_alum = NULL, $dni_cliente_externo = NULL, $fichero = NULL)
     {
         $this->id_pago = $id_pago;
         $this->fecha = $fecha;
@@ -32,6 +33,23 @@ class Payment
         $this->tipo_cliente = $tipo_cliente;
         $this->dni_alum = $dni_alum;
         $this->dni_cliente_externo = $dni_cliente_externo;
+        $this->fichero = $fichero;
+    }
+
+    /**
+     * @return null
+     */
+    public function getFichero()
+    {
+        return $this->fichero;
+    }
+
+    /**
+     * @param null $fichero
+     */
+    public function setFichero($fichero)
+    {
+        $this->fichero = $fichero;
     }
 
     /**
