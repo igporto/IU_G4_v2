@@ -70,7 +70,7 @@ class PhysioMapper
     {
         $stmt = $this->db->prepare("UPDATE consulta_fisio SET id_reserva = ? , dia = ? , hora_inicio = ? , hora_fin = ? WHERE id_consulta = ?");
         $stmt->execute(array(
-                        $physio->getReserve()->getCodReserve(), $physio->getDate(), $physio->getStartTime(), $physio->getEndTime()
+                        $physio->getReserve()->getCodReserve(), $physio->getDate(), $physio->getStartTime(), $physio->getEndTime(), $physio->getCodPhysio()
                         )
                 );
     }
@@ -122,5 +122,22 @@ class PhysioMapper
         }
 
         return $id;
+    }
+
+    public function validDate($date)
+    {
+
+        $stmt = $this->db->query("SELECT CURDATE()");
+        $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if ($db != NULL) {
+            $actual = $db[0];
+            if ($date > $actual['CURDATE()']) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

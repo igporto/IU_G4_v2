@@ -49,11 +49,17 @@ class PhysioController extends BaseController
                 $physio->setEndTime($_POST["endTime"]);
             }
             try {
-                    $this->physioMapper->add($physio);
-                    //ENVIAR AVISO DE INSCRIPCION ENGADIDA!!!!!!!!!!
-                    $this->view->setFlash('succ_physio_add');
-                    //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das inscricións)
-                    $this->view->redirect("physio", "show");
+                if($physio->getStartTime() < $physio->getEndTime()){
+                    if($this->physioMapper->validDate($physio->getDate()) ){
+                        $this->physioMapper->add($physio);
+                        $this->view->setFlash('succ_physio_add');
+                        $this->view->redirect('physio', 'show');
+                    }else{
+                        $this->view->setFlash("fail_date_incorrect");
+                    }
+                }else{
+                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -64,8 +70,8 @@ class PhysioController extends BaseController
     public function delete()
     {
         try {
-            if (isset($_GET['codPhysio'])) {
-                $this->physioMapper->delete(htmlentities(addslashes($_GET['codPhysio'])));
+            if (isset($_GET['codphysio'])) {
+                $this->physioMapper->delete(htmlentities(addslashes($_GET['codphysio'])));
                 $this->view->setFlash('succ_physio_delete');
                 $this->view->redirect("physio", "show");
             }
@@ -108,10 +114,17 @@ class PhysioController extends BaseController
                 $physio->setEndTime($_POST["endTime"]);
             }
             try {
-                //ENVIAR AVISO DE INSCRIPCION EDITADA!!!!!!!!!!
-                $this->view->setFlash("succ_physio_edit");
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista das INSCRIPCIONS)
-                $this->view->redirect("physio", "show");
+                if($physio->getStartTime() < $physio->getEndTime()){
+                    if($this->physioMapper->validDate($physio->getDate()) ) {
+                        $this->physioMapper->edit($physio);
+                        $this->view->setFlash("succ_physio_edit");
+                        $this->view->redirect("physio", "show");
+                    }else{
+                        $this->view->setFlash("fail_date_incorrect");
+                    }
+                }else{
+                    $this->view->setFlash("fail_data_ini_fin_incorrect");
+                }
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -134,7 +147,7 @@ class PhysioController extends BaseController
                 $physio->setReserve($aux);
             }
             if(isset($_POST['date']) && $_POST['date']){
-                $activity->setDate((htmlentities(addslashes($_POST["date"]))));
+                $physio->setDate((htmlentities(addslashes($_POST["date"]))));
             }
             if(isset($_POST['startTime']) && $_POST['startTime']){
                 $activity->setStartTime((htmlentities(addslashes($_POST["startTime"]))));

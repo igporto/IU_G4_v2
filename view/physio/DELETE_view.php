@@ -36,7 +36,7 @@ echo '
         
         <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
         
-        <a href="index.php?controller=physio&action=delete&codrRegistration=' . $c->getCodPhysio() . '">
+        <a href="index.php?controller=physio&action=delete&codphysio=' . $c->getCodPhysio() . '">
         <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
         </a>
     </div>

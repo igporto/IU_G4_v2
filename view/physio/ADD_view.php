@@ -54,7 +54,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <label for="selectperf"><?php echo $strings['date'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus type="date" class="form-control" id="date" name="date"
+                            <input autofocus type="text" class="form-control" id="datestart" name="date"
                                    placeholder= <?php echo $strings['date'] ?>>
                             <div id="error"></div>
                         </div>
@@ -109,6 +109,12 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     <!--fin formulario-->
 </div>
 
+<script>
+    $( function() {
+        $( "#datestart" ).datepicker();
+        $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    } );
+</script>
 <script>
     //Non deixar que o campo input teña espazos
     $("input").on("keydown", function (e) {

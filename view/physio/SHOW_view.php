@@ -78,6 +78,7 @@ $physios = $view->getVariable("physiostoshow");
                     foreach ($physios as $c) {
                         echo "<tr class='row text-center' ><td> ";
                         echo $c->getCodPhysio() . "</td><td>";
+                        echo $c->getDate() . "</td><td>";
                         echo $c->getReserve()->getCodReserve() . "</td>
                         <td class='text-center'>";
                         //Botón que direcciona a vista do usuario

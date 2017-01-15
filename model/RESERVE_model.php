@@ -152,7 +152,6 @@ class ReserveMapper {
 
         if ($db != NULL) {
             $actual = $db[0];
-            var_dump($actual['CURDATE()']);
             if ($date > $actual['CURDATE()']) {
                 return true;
             } else {
