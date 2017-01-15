@@ -377,7 +377,7 @@ CREATE TABLE `inscripcion` (
    `id_evento` int(4) NULL,
    `id_alumno` int(4) NOT NULL,
    `fecha_inscripcion` date NOT NULL DEFAULT '0000-00-00',
-   `id_pago` int(4) NOT NULL
+   `id_pago` int(4) NULL
 ) ;
 
 

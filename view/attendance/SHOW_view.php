@@ -82,6 +82,7 @@ $attendances = $view->getVariable("attendancestoshow");
 
                     //Para cada usuario, imprimimos o seu nome e as accións que se poden realizar nel (view,edit e delete)
                     foreach ($attendances as $c) {
+
                         echo "<tr class='row text-center' ><td> ";
                         echo $c->getCod. "</td><td>";
                         echo $c->getAlumn()->getAlumnname() ." ". $c->getAlumnsurname(). "</td><td>";

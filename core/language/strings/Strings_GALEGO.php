@@ -331,6 +331,9 @@ $strings = array(
     /*ATTENDANDE*/
     'ATTENDANCE'=>'Asistencia',
     'management_attendances'=>'Xestión de Asistencia',
+    'attendance_data'=>'Datos da asistencia',
+    'yes'=>'Si',
+    'no'=>'Non',
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 
