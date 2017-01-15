@@ -59,62 +59,87 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                         <!--Campo desconto-->
                     </div>
                 </div>
-                <div class="form-group"><!-- div1 -->
-                    <label><?php echo $strings['destiny'] ?>: </label>
-                    <select id='take_id' name='take_id' class='form-control' onchange='enviar()'>
-                        <option value="0"><?php echo $strings['free_take']?></option>
-                        <option value="1"><?php echo $strings['activity_clients']?></option>
-                        <option value="2"><?php echo $strings['event_clients']?></option>
-                        <option value="3"><?php echo $strings['all_clients']?></option>
-                    </select>
-                </div>
-
                 <div class="row">
-                    <label for="well"><?php echo $strings['clients']?>: </label>
-                    <div id="well" class="well">
-
-                            <?php
-
-                            if(isset($_REQUEST["take_id"]) && $_REQUEST["take_id"] != "NULL") {
-                                $mark = false;
-                                if ($_REQUEST["take_id"] == 0) {
+                    <div class="col-xs-12 col col-md-5">
+                        <label><?php echo $strings['destiny'] ?>: </label>
+                        <select id='take_id' name='take_id' class='form-control' onchange='enviar()'>
+                            <option value="1"><?php echo $strings['free_take']?></option>
+                            <option value="2"><?php echo $strings['activity_clients']?></option>
+                            <option value="3"><?php echo $strings['event_clients']?></option>
+                            <option value="4"><?php echo $strings['all_clients']?></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="well"><?php echo $strings['clients']?>: </label>
+                                <div class="1">
+                                    <?php
                                     $cm = new ClientMapper();
                                     $clients = $cm->show();
-                                } elseif ($_REQUEST["take_id"] == 1) {
-                                    $am = new ActivityMapper();
-                                } elseif ($_REQUEST["take_id"] == 2) {
-
-                                } elseif ($_REQUEST["take_id"] == 3) {
-                                    $cm = new ClientMapper();
-                                    $clients = $cm->show();
-                                    $mark = true;
-                                }
-
-                                echo "<div class='form-group'>";
-
-                                foreach ($clients as $c) {
-                                    if ($mark) {
-                                        ?>
+                                    foreach ($clients as $c) { ?>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="destiny[]" value="<?php echo $c->getEmail()?>" checked>
-                                                <?php echo $c->getName() . " " . $c->getSurname() ." -> ". $c->getEmail() ?>
-                                            </label>
-                                        </div>
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="destiny[]" value="<?php echo $c->getEmail()?>" >
-                                                <?php echo $c->getName() . " " . $c->getSurname() ." -> ". $c->getEmail() ?>
+                                                <input type="checkbox" name="destiny[]"
+                                                       value="<?php echo $c->getEmail() ?>">
+                                                <?php echo $c->getName() . " " . $c->getSurname() . " -> " . $c->getEmail() ?>
                                             </label>
                                         </div>
                                         <?php
                                     }
-                                }
-                            }?>
-                    </div><!-- /div2 -->
+                                    ?>
+                                </div>
+                                <div class="2">
+                                    <?php
+                                    $cm = new ClientMapper();
+                                    $clients = $cm->showforActivity();
+                                    foreach ($clients as $c) { ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="destiny[]"
+                                                       value="<?php echo $c->getEmail() ?>" checked>
+                                                <?php echo $c->getName() . " " . $c->getSurname() . " -> " . $c->getEmail() ?>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                                <div class="3">
+                                    <?php
+                                    $cm = new ClientMapper();
+                                    $clients = $cm->showforEvent();
+                                    foreach ($clients as $c) { ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="destiny[]"
+                                                       value="<?php echo $c->getEmail() ?> " checked>
+                                                <?php echo $c->getName() . " " . $c->getSurname() . " -> " . $c->getEmail() ?>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+
+                                <div class="4">
+                                    <?php
+                                    $cm = new ClientMapper();
+                                    $clients = $cm->show();
+                                    foreach ($clients as $c) { ?>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="destiny[]"
+                                                       value="<?php echo $c->getEmail() ?> " checked>
+                                                <?php echo $c->getName() . " " . $c->getSurname() . " -> " . $c->getEmail() ?>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                 <!-- /form-group -->

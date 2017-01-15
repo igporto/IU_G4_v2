@@ -84,4 +84,34 @@ class ClientMapper {
         return $clients;
     }
 
+
+    public function showforActivity(){
+        $stmt = $this->db->query("SELECT * FROM inscripcion WHERE id_actividad IS NOT NULL");
+        $stmt->execute();
+        $client_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $clients = array();
+
+        foreach ($client_db as $client) {
+            $am = new AlumnMapper();
+            $alumn = $am->view($client['id_alumno']);
+            array_push($clients, $this->view($alumn->getDni()));
+        }
+
+        return $clients;
+    }
+
+    public function showforEvent(){
+        $stmt = $this->db->query("SELECT * FROM inscripcion WHERE id_evento IS NOT NULL");
+        $stmt->execute();
+        $client_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $clients = array();
+
+        foreach ($client_db as $client) {
+            $am = new AlumnMapper();
+            $alumn = $am->view($client['id_alumno']);
+            array_push($clients, $this->view($alumn->getDni()));
+        }
+
+        return $clients;
+    }
 }
