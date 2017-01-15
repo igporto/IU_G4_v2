@@ -136,7 +136,7 @@ $permis = $uc->getCurrentUserPerms();
                    
                     <li>
                         <a href="index.php?controller=user&action=login"><i
-                                class="fa fa-home fa-fw active"></i> <?php echo $strings['home']; ?></a>
+                                class="fa fa-calendar fa-fw active"></i> <?php echo $strings['calendar']; ?></a>
                     </li>
 
                     <li>

@@ -63,6 +63,19 @@ class AttendanceMapper {
         }
     }
 
+    public function getAttendants($idsession){
+        $stmt = $this->db->prepare("SELECT * FROM asistencia   WHERE id_sesion = ?");
+        $stmt->execute(array($idsession));
+        $attendance_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $attendances = array();
+
+        foreach ($attendance_db as $a) {
+            array_push($attendances, $this->view($a['id_asistencia']));
+        }
+
+        return $attendances;
+    }
+
     //edita a tupla correspondente co id do obxecto Attendance $attendance
     public function edit(Attendance $attendance) {
         $stmt = $this->db->prepare("UPDATE asistencia set asiste = ? where id_asistencia = ?");

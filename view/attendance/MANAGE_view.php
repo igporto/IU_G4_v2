@@ -6,6 +6,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 
 $alumns = $view->getVariable("alumns");
+$attendants = $view->getVariable("attendants");
 $session = $view->getVariable("session");
 
 ?>
@@ -29,7 +30,13 @@ $session = $view->getVariable("session");
                 	<div class="row">
                 		 <?php foreach ($alumns as $alumn): ?>
             		<div class="col-md-3">
-            			<label for=""><input id="input" type="checkbox" name="alumns[]" value="<?= $alumn->getCodalumn() ?>"><?= $alumn->getAlumnname() ?> <?= $alumn->getAlumnsurname() ?></label>
+            			<label for=""><input id="input"
+
+                        <?php if (in_array($alumn, $attendants)): ?>
+                            checked disabled
+                        <?php endif ?>
+
+                         type="checkbox" name="alumns[]" value="<?= $alumn->getCodalumn() ?>"><?= $alumn->getAlumnname() ?> <?= $alumn->getAlumnsurname() ?></label>
             		</div>           	
             	<?php endforeach ?> 
                 	</div>
@@ -68,11 +75,3 @@ $session = $view->getVariable("session");
 
 
 
-<script language="JavaScript">
-function toggle(source) {
-  checkboxes = document.getElementsByName('alumns[]');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-    checkboxes[i].checked = source.checked;
-  }
-}
-</script>
