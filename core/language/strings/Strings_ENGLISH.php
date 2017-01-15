@@ -2,6 +2,7 @@
 $strings = array(
 	//General Strings in English (LOGIN_view, USER_EDIT_model, USER_model, connectDB_model)
 	'' => 'Undefined Index',
+	'all'=>'Toggle All',
 	'good_insert' => 'Insert sucessfull',
 	'user_exists' => 'User already exists in DataBase',
 	'database_connection_failure' => 'It is not possible to connect to the database',

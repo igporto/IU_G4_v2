@@ -141,4 +141,31 @@ class AttendanceController extends BaseController
 
     }
 
+
+    public function manage(){
+
+        $alumns = $this->alumnMapper->show();
+        if (isset($_REQUEST["id"])) {
+            if (isset($_POST["submit"])) {
+
+                if (isset($_POST["alumns"])) {
+                    # code...
+                }else{
+                    $this->view->setFlash("fail_nothing_to_add");
+                    $this->view->redirect("session", "show");
+                }
+
+                
+            }else{
+                $this->view->setVariable("session", $this->sessionMapper->view($_REQUEST["id"]));
+                $this->view->setVariable("alumns", $alumns);
+                $this->view->render("attendance", "manage");
+            }
+        }else{
+
+            $this->view->setFlash("err_bad_origin");
+            $this->view->redirect("user", "login");
+        }
+    }
+
 }

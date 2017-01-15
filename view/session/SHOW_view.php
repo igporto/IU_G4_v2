@@ -28,7 +28,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
     </script>
 <?php endif ?>
 
-<div class="col-xs-12 col-md-8 " >
+<div class="col-xs-12 " >
 
 <h1 class="page-header"><?php echo $strings['management_sessions'] ?></h1>
 
@@ -72,7 +72,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
 
                         </div>
                         <div class="panel-body">
-                            <table id="dataTable" class="table-responsive   table-hover" style="width:80%; ; margin-left: 10%">
+                            <table id="dataTable" class="table-responsive   table-hover" style="width:100%">
                                 <thead>
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
@@ -89,6 +89,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     ?>
                                             <th class="text-center"><?php echo $strings['ACTION']?></th>
                                     <?php } ?>
+                                    <th char="text-center"><?= $strings["alumn"] ?></th>
                                     
                                 </tr>
                                 </thead>
@@ -140,7 +141,15 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                     //MODAL DE VISTA PARA CADA ACCIÓN
                                     include(__DIR__.'/VIEW_view.php');
 
-                                    echo "</td></tr>";
+                                    echo "</td>"; 
+
+                                    echo "<td><a href=index.php?controller=attendance&action=manage&id=". $c->getIdSession().'>';
+                                    echo "<button class='btn btn-success btn-xs ";
+                                    echo "' style='margin:2px'>";
+                                    echo "<i class='fa fa-cog fa-fw'></i></button></a></td>";
+
+
+                                    echo "</tr>";
                                 }
                                 ?>
 

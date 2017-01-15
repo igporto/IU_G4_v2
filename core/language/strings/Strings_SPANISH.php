@@ -2,6 +2,7 @@
 $strings = array(
 	//General Strings in Spanish (LOGIN_view, USER_EDIT_model, USER_model, connectDB_model)
 	'' => 'Índice sin Definir',
+	'all'=>'Marcar todos',
 	'good_insert' => 'Inserción realizada con éxito',
 	'user_exists' => 'El usuario ya existe en la base de datos',
 	'database_connection_failure' => 'No se ha podido conectar con la base de datos',

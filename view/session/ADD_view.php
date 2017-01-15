@@ -11,7 +11,7 @@ $schedules = $view->getVariable("schedules");
 ?>
 
 
-<div class="col-md-6 " style="margin-top: 20px; margin-bottom: 20px">
+<div class="col-md-12 " style="margin-top: 20px; margin-bottom: 20px">
     <h1 class="page-header"><?php echo $strings['create_session']; ?></h1>
     <form name="form" id="form" method="POST" 
           action="index.php?controller=session&action=add"
