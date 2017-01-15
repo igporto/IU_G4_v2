@@ -48,7 +48,7 @@ class Attendance {
         $this->session = $session;
     }
 
-    public function isAssist()
+    public function getAssist()
     {
         return $this->assist;
     }
