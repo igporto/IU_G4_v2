@@ -149,7 +149,23 @@ class AttendanceController extends BaseController
             if (isset($_POST["submit"])) {
 
                 if (isset($_POST["alumns"])) {
-                    # code...
+                    
+                    try {
+                        $assist = new Attendance();
+                        $assist->setSession($this->sessionMapper->view($_REQUEST["id"]));
+                        foreach ($_POST["alumns"] as $alumno) {
+                            $assist->setAlumn($this->alumnMapper->view($alumno));
+                            $this->attendanceMapper->add($assist);
+                        }
+                    } catch (Exception $e) {
+                        $this->view->setFlash("erro_add");
+                        $this->view->redirect("session", "show");
+                    }
+
+                    $this->view->setFlash("succ_add");
+                    $this->view->redirect("session", "show");
+
+
                 }else{
                     $this->view->setFlash("fail_nothing_to_add");
                     $this->view->redirect("session", "show");
