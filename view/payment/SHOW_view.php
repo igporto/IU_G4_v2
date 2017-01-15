@@ -86,7 +86,7 @@ $permissions = $view->getVariable("paymentstoshow");
         ?>
     </div>
     <!--PANEL TABOA DE LISTADO-->
-    <div class="row" style="margin-top: 20px; width: 150%">
+    <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?php echo $strings['list_of'] . ' ' . $strings['PAYMENT']; ?>
