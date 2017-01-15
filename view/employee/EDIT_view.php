@@ -11,7 +11,7 @@ $employeeMapper = new EmployeeMapper();
 $employee = $employeeMapper->view($codemployee);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['employee_modify'].': '.$employee->getEmployeename()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=employee&action=edit&codemployee=<?php echo $codemployee; ?>"

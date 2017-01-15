@@ -8,7 +8,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 ?>
 
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['add_line']; ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=bill&action=addline&id_factura=<?php echo $_REQUEST["id_factura"] ?>"

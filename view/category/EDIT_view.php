@@ -10,7 +10,7 @@ $categoryMapper = new CategoryMapper();
 $category = $categoryMapper->view($codcategory);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
 <h1 class="page-header"><?php echo $strings['category_modify'].': '.$category->getCategoryname()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=category&action=edit&codcategory=<?php echo $codcategory; ?>"

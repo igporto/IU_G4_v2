@@ -10,7 +10,7 @@ $nm = new NotificationMapper();
 $notification = $nm->view($_GET["codnotification"]);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['edit_notification'].': '.$notification->getDescription()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=notification&action=edit&codnotification=<?php echo $notification->getCodnotification() ?>"

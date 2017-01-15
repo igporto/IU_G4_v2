@@ -17,7 +17,7 @@ include(__DIR__ . "/../../view/layouts/show_flag_setter.php");
 $employees = $view->getVariable("employeestoshow");
 ?>
 
-<div class="col-xs-12 col-md-8 ">
+<div class="col-xs-12">
 
     <h1 class="page-header"><?php echo $strings['management_employees'] ?></h1>
 

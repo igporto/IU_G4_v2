@@ -11,7 +11,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 ?>
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['profile_modify'].": ".$currentProfile->getProfilename() ; ?></h1>
     <form name="form" id="form" method="POST" 
           action="index.php?controller=profile&action=edit&profile_id=<?php echo $profile_id;?>"

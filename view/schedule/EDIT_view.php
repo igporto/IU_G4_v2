@@ -14,7 +14,7 @@ $schedule = $scheduleMapper->view($scheduleMapper->getIdByName($schedulename));
 ?>
 
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['schedule_modify'] . ': ' . $_GET['scheduleName'] ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=schedule&action=edit&scheduleName=<?php echo $schedulename; ?>"

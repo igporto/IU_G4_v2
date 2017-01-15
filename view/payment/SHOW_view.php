@@ -20,7 +20,7 @@ $permissions = $view->getVariable("paymentstoshow");
 
 ?>
 
-<div class="col-xs-12 col-md-8 ">
+<div class="col-xs-12">
 
     <?php if ($_REQUEST["action"] == "show" || $_REQUEST["action"] == "search") {
         echo "<h1 class='page-header'>" . $strings['management_payments'] . "</h1>";

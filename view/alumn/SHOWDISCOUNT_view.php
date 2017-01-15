@@ -20,7 +20,7 @@ $alumnMapper = new AlumnMapper();
 $alumn = $alumnMapper->view($_GET['codalumn']);
 ?>
 
-<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+<div class="col-xs-12" style="margin-top: 20px">
 
     <h1 class="page-header"><?php echo $strings['management_discounts'].": ".$alumn->getAlumnname()." ".$alumn->getAlumnsurname()?> </h1>
 

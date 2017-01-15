@@ -11,7 +11,7 @@ $alumnMapper = new AlumnMapper();
 $alumn = $alumnMapper->view($codalumn);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['alumn_modify'].': '.$alumn->getAlumnname()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=alumn&action=edit&codalumn=<?php echo $codalumn; ?>"

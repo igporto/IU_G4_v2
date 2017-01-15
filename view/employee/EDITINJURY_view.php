@@ -17,7 +17,7 @@ $phi = $employeeMapper->viewInjury($_GET['codinjuryemployee']);
     }
 </script>
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['create_injury']; ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=employee&action=editinjury&codinjuryemployee=<?php echo $phi->getCod()?>"

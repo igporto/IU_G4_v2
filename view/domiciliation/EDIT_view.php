@@ -10,7 +10,7 @@ $domiciliationMapper = new DomiciliationMapper();
 $domiciliation = $domiciliationMapper->view($id_domiciliacion);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['domiciliation_modify'] . ': ' . $domiciliation->getIdDomiciliacion() ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=domiciliation&action=edit&id_domiciliacion=<?php echo $id_domiciliacion; ?>"

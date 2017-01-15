@@ -22,7 +22,7 @@ $client=$client_mapper->view($client_id);
     }
 </script>
 
-<div class="col-md-6" style="margin-top: 20px">
+<div class="col-md-12" style="margin-top: 20px">
     <h1 class="page-header"><?php echo $strings['client_modify'].': '.$_GET['clientdni']?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=client&action=edit&clientdni=<?php echo $client_id; ?>"

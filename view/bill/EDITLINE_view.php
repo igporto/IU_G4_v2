@@ -10,7 +10,7 @@ $billMapper = new BillMapper();
 $bill = $billMapper->viewline($id_linea);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['line_modify'] . ': ' . $bill->getConcepto() ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=bill&action=editline&id_linea=<?php echo $bill->getIdLinea(); ?>"

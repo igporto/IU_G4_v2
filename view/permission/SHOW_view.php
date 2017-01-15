@@ -21,7 +21,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                   
 ?>
 
-<div class="col-xs-12 col-md-8 ">
+<div class="col-xs-12 ">
 
 <h1 class="page-header"><?php echo $strings['management_permissions'] ?></h1>
 

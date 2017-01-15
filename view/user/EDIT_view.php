@@ -28,7 +28,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
     }
 </script>
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['user_modify'].": ".$currentUser->getUsername() ; ?></h1>
     <form name="form" id="form" method="POST" 
           action="index.php?controller=user&action=edit&user=<?php echo $username; ?>"

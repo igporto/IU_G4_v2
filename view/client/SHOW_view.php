@@ -18,7 +18,7 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
     $clients = $view->getVariable("clientstoshow");
 ?>
 
-<div class="col-xs-12 col-md-8 " style="margin-top: 20px">
+<div class="col-xs-12" style="margin-top: 20px">
 
 <h1 class="page-header"><?php echo $strings['management_clients'] ?></h1>
 

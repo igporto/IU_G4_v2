@@ -10,7 +10,7 @@ $billMapper = new BillMapper();
 $bill = $billMapper->view($id_factura);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['bill_modify'] . ': ' . $bill->getIdFactura() ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=bill&action=edit&id_factura=<?php echo $id_factura; ?>"

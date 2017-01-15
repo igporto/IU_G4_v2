@@ -10,7 +10,7 @@ $injury = $inMapper->view($_REQUEST['id_lesion']);
 
 ?>
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['injury_edit'].": ".$injury->getNameInjury() ; ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=injury&action=edit&id_lesion=<?php echo $injury->getCodInjury(); ?>"

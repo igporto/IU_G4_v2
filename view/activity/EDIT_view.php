@@ -10,7 +10,7 @@ $activityMapper = new ActivityMapper();
 $activity = $activityMapper->view($codactivity);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['activity_modify'].': '.$activity->getActivityname()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=activity&action=edit&codactivity=<?php echo $codactivity; ?>"
@@ -20,7 +20,7 @@ $activity = $activityMapper->view($codactivity);
                 <?php include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php'); ?>
                 <?php echo $strings['management_info'] ?>
             </div>
-            <div class="panel-body">
+            <div class="panel-body container-fluid">
 
                 <div class="row">
                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">

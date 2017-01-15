@@ -25,7 +25,7 @@ $event = $eventMapper->view($_GET['codevent']);
 
 ?>
 
-<div class="col-xs-12 col-md-8 ">
+<div class="col-xs-12  ">
 
     <h1 class="page-header"><?php echo $strings['event_attendance'].': '.$event->getName()?></h1>
 

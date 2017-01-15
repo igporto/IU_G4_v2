@@ -7,7 +7,7 @@ $codRegistration = $_REQUEST["codRegistration"];
 $registration = $registrationMapper->view($codRegistration);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['registration_modify'].': '.$_GET['codRegistration']?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=registration&action=edit&codRegistration=<?php echo $codRegistration; ?>"

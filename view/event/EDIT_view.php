@@ -14,7 +14,7 @@ $event = $eventMapper->view($codevent);
 ?>
 
 
-<div class="col-md-6" style="margin-bottom: 30px">
+<div class="col-md-12" style="margin-bottom: 30px">
     <h1 class="page-header"><?php echo $strings['event_edit'] . ": " . $event->getName(); ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=event&action=edit&codevent=<?php echo $event->getCodevent(); ?>"

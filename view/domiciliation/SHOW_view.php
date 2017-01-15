@@ -19,7 +19,7 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
 
 ?>
 
-<div class="col-xs-12 col-md-8 ">
+<div class="col-xs-12">
 
     <h1 class="page-header"><?php echo $strings['management_domiciliation'] ?></h1>
 

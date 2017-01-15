@@ -10,7 +10,7 @@ $discountMapper = new DiscountMapper();
 $discount = $discountMapper->view($coddiscount);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['discount_modify'].': '.$discount->getType()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=discount&action=edit&coddiscount=<?php echo $coddiscount; ?>"

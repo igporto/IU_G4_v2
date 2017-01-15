@@ -10,7 +10,7 @@ $attendanceMapper = new AttendanceMapper();
 $attendance = $attendanceMapper->view($codattendance);
 ?>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <h1 class="page-header"><?php echo $strings['attendance_modify'].': '.$attendance->getCod()?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=attendance&action=edit&codattendance=<?php echo $codattendance; ?>"

@@ -13,7 +13,7 @@ $service = $sm->view($service_id);
 ?>
 
 
-<div class="col-md-6" style="margin-top: 20px">
+<div class="col-md-12" style="margin-top: 20px">
     <h1 class="page-header"><?php echo $strings['service_modify'] . ': ' . $_GET['service_id'] ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=service&action=edit&service_id=<?php echo $service_id; ?>"

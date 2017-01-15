@@ -21,7 +21,7 @@ $data = $schMapper->getScheduleWorkdays($schMapper->getIdByName($scheduleName));
  
 
 
-<div class="col-md-6 " style="margin-bottom: 20px">
+<div class="col-md-12 " style="margin-bottom: 20px">
     <h1 class="page-header"><?php echo $strings['create_workday'].$schedule->getSchedulename() ?></h1>
     <form name="form" id="form" method="POST" 
           action="index.php?controller=schedule&action=manageWorkday&scheduleName=<?= $scheduleName  ?>"
