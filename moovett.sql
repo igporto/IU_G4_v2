@@ -657,6 +657,14 @@ CREATE TABLE `asistencia`(
 );
 
 
+CREATE TABLE `empleado_imparte_sesion`(
+  `id` int(4) NOT NULL,
+  `id_sesion` int(11),
+  `id_empleado` int(4),
+  `impartida` tinyint(1)
+)
+
+
 
 --
 -- ÃƒÂndices para tablas volcadas
@@ -1117,7 +1125,11 @@ ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesio
 --
 -- Restricciones para tablas volcadas
 --
-
+ALTER TABLE  `empleado_imparte_sesion`
+ADD PRIMARY KEY (`id`),
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+ADD CONSTRAINT `emp_imp_ibfk1` FOREIGN KEY (`id_sesion`) REFERENCES `sesion`(`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `emp_imp_ibfk2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado`(`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- Filtros para la tabla `actividad`
 --
@@ -1320,7 +1332,8 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
   (18, 'ALUMN'),
   (19, 'INJURY'),
   (20, 'DOCUMENT'),
-  (21, 'SCHEDULE');
+  (21, 'SCHEDULE'),
+  (22, 'SESSION');
 
 
 --
@@ -1444,7 +1457,12 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
   (21 ,2),
   (21 ,3),
   (21 ,4),
-  (21 ,5);
+  (21 ,5),
+  (22 ,1),
+  (22 ,2),
+  (22 ,3),
+  (22 ,4),
+  (22 ,5);
 
 
 

@@ -60,6 +60,7 @@
 						start: '<?= $session->getDate() ?>T<?= $session->getHourStart() ?>',
 						end: '<?= $session->getDate()  ?>T<?= $session->getHourEnd()  ?>',
 						color: '<?= $session->getActivity()->getColor() ?>',
+						url: 'index.php?controller=session&action=show&id=<?=$session->getIdSession() ?>&doviw=true',
 						<?php if ($session->getDate() ): ?>
 							
 						<?php endif ?>

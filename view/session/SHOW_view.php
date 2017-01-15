@@ -15,8 +15,18 @@ include(__DIR__."/../../view/layouts/datatable_lang_select.php");
 include(__DIR__."/../../view/layouts/show_flag_setter.php"); 
 
  //obtemos o contido a mostrar
-    $session = $view->getVariable("sessionstoshow");              
+    $session = $view->getVariable("sessionstoshow");
+    $doview = $view->getVariable("doview");
+    $id = $view->getVariable("id");              
 ?>
+
+<?php if ($doview): ?>
+    <script type="text/javascript"><?php  ?>
+        $(window).load(function(){
+            $('#view<?=$id  ?>').modal('show');
+        });
+    </script>
+<?php endif ?>
 
 <div class="col-xs-12 col-md-8 " >
 

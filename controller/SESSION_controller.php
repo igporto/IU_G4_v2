@@ -152,7 +152,10 @@ class SessionController extends BaseController
 
             $session->setEmployee($this->employeeMapper->view($_POST["selemployee"]));
 
-            
+            if ($_POST["hourstart"] > $_POST["hourend"]) {
+                $this->view->setFlash('fail_data_ini_fin_incorrect');
+                $this->view->redirect("session", "add");
+            }
 
             if ($this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]))) {
                 $session->setSpace($this->spaceMapper->view($_POST["selspace"]));
@@ -206,10 +209,11 @@ class SessionController extends BaseController
 
     public function view()
     {
-        $sessionid = $this->sessionMapper->getIdByName($_REQUEST["session"]);
+        $sessionid = $this->sessionMapper->getIdByName($_REQUEST["id"]);
         $session = $this->sessionMapper->view($sessionid);
-        $this->view->setVariable("session", $session);
-        $this->view->render("session", "view");
+        $this->view->setVariable("doview", true);
+        $this->view->setVariable("id", $session);
+        $this->view->render("session", "show");
     }
 
     public function edit()
