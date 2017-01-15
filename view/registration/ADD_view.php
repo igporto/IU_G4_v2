@@ -31,6 +31,18 @@ $registrationMapper = new RegistrationMapper();
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['inscription_type'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
+                            <select id='tipo'  class='form-control icon-menu' onchange="tipoInscripcion()">
+                                <option selected><?php echo $strings["activity"]?></option>
+                                <option><?php echo $strings["event"]?></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col col-md-5" id="actividad" style="display: block">
                         <label for="selectperf"><?php echo $strings['activity'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
@@ -41,16 +53,16 @@ $registrationMapper = new RegistrationMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $activities = $am->show();
 
-                                echo "<option value='NULL'>".$strings['without_activity'] . "</option>";
+                                echo "<option value='NULL'>" . $strings['without_activity'] . "</option>";
                                 foreach ($activities as $a) {
-                                    echo "<option value='" . $a->getCodactivity()."'>".$a->getActivityname() . "</option>";
+                                    echo "<option value='" . $a->getCodactivity() . "'>" . $a->getActivityname() . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <!--Campo reserve-->
                     </div>
-                    <div class="col-xs-12 col col-md-5">
+                    <div class="col-xs-12 col col-md-5" id="evento" style="display: none">
                         <label for="selectperf"><?php echo $strings['event'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
@@ -61,9 +73,9 @@ $registrationMapper = new RegistrationMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $events = $em->show();
 
-                                echo "<option value='NULL'>".$strings['without_event'] . "</option>";
+                                echo "<option value='NULL'>" . $strings['without_event'] . "</option>";
                                 foreach ($events as $e) {
-                                    echo "<option value='" . $e->getCodevent()."'>".$e->getName() . "</option>";
+                                    echo "<option value='" . $e->getCodevent() . "'>" . $e->getName() . "</option>";
                                 }
                                 ?>
                             </select>
@@ -71,6 +83,19 @@ $registrationMapper = new RegistrationMapper();
                         <!--Campo reserve-->
                     </div>
                 </div>
+                <script>
+                    function tipoInscripcion() {
+                        var tipo = document.getElementById("tipo").selectedIndex;
+
+                        if (tipo == 0) {
+                            document.getElementById("actividad").style = "display: block";
+                            document.getElementById("evento").style = "display: none";
+                        } else {
+                            document.getElementById("actividad").style = "display: none";
+                            document.getElementById("evento").style = "display: block";
+                        }
+                    }
+                </script>
                 <div class="row">
                     <div class="col-xs-12 col col-md-5">
                         <label for="selectperf"><?php echo $strings['alumn'] ?></label>
@@ -83,7 +108,7 @@ $registrationMapper = new RegistrationMapper();
                                 //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
                                 $alumns = $am->show();
                                 foreach ($alumns as $a) {
-                                    echo "<option value='" . $a->getCodalumn()."'>".$a->getAlumnname()." ". $a->getAlumnsurname() . "</option>";
+                                    echo "<option value='" . $a->getCodalumn() . "'>" . $a->getAlumnname() . " " . $a->getAlumnsurname() . "</option>";
                                 }
                                 ?>
                             </select>

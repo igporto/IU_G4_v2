@@ -626,6 +626,8 @@ $strings = array(
     'without_reserve'=>'Sen Reservation',
     'fail_bill_num'=>'Bill number already exists',
     'cada cuanto'=> 'How often is charged',
-    'payment_file'=>'Payment file'
-	)
+    'payment_file'=>'Payment file',
+    'inscription_type'=>'Inscription time'
+
+)
 ?>
