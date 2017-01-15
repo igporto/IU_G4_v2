@@ -21,7 +21,7 @@ $controllername = $_REQUEST["controllerName"];
 </script>
 
 <div class="col-md-6">
-<h1 class="page-header"><?php echo $strings['controller_modify'].': '.$_GET['controllerName']?></h1>
+    <h1 class="page-header"><?php echo $strings['controller_modify'] . ': ' . $_GET['controllerName'] ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=controller&action=edit&controllerName=<?php echo $controllername; ?>"
           enctype="multipart/form-data">
@@ -33,61 +33,61 @@ $controllername = $_REQUEST["controllerName"];
             <div class="panel-body">
 
                 <div class="row">
-                     <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
+                    <div class="col-xs-12 col-md-6 text-info float-left" style="margin-left: 10px">
                         <div class="row">
                             <?php echo $strings['no_white_spaces'] ?>
                         </div>
                         <!--  <div class="row">
                             <?php echo $strings['max_length'] ?>: 25
                         </div>-->
-                         
+
                     </div>
 
                     <div class="col-xs-12 col-md-5">
 
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input autofocus required  class="form-control" type="text" name="newname" maxlength="25"
-                                   placeholder=<?php echo $strings['name']; ?>>
+                            <input autofocus required class="form-control" type="text" name="newname" maxlength="25"
+                                   value=<?php echo $controllername ?>>
+                                   </div>
+                            <!--Campo password-->
                         </div>
-                        <!--Campo password-->
+                    </div>
+
+                    <?php
+                    $am = new ControllerMapper();
+                    //Recuperamos o id do usuario a editar
+                    $id_controller = $am->getIdByName($_REQUEST["controllerName"]);
+
+                    $controller = $_REQUEST["controllerName"];
+
+                    ?>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="pull-left">
+                        <a class="btn btn-default btn-md" href="index.php?controller=controller&action=show">
+                            <i class="fa fa-arrow-left"></i>
+                            <?php echo $strings['back'] ?></i></a>
+                    </div>
+
+                    <div class="pull-right">
+                        <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
+                            <?php echo $strings['clean'] ?></i></button>
+
+                        <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
+                            <i class="fa fa-edit"></i>
+                            <?php echo $strings['EDIT'] ?></i></button>
+                        <?php
+
+                        ?>
                     </div>
                 </div>
 
-                <?php
-                $am = new ControllerMapper();
-                //Recuperamos o id do usuario a editar
-                $id_controller = $am->getIdByName($_REQUEST["controllerName"]);
-
-                $controller = $_REQUEST["controllerName"];
-
-                ?>
-                </div>
-                </div>
-
-                <div class="row">
-    
-            <div class="col-xs-12">
-                <div class="pull-left">
-                    <a class="btn btn-default btn-md" href="index.php?controller=controller&action=show">
-                    <i class="fa fa-arrow-left"></i>
-                    <?php echo $strings['back'] ?></i></a>
-                </div>
-
-                <div class="pull-right">
-                    <button class="btn btn-outline btn-warning btn-md" name="reset" type="reset">
-                    <?php echo $strings['clean'] ?></i></button>
-
-                <button class="btn btn-success btn-md" id="submit" name="submit" type="submit">
-                    <i class="fa fa-edit"></i>
-                    <?php echo $strings['EDIT'] ?></i></button>
-                <?php
-                
-                ?>
-                </div>
             </div>
-                
-        </div>
     </form>
     <!--fin formulario-->
 </div>

@@ -5,14 +5,16 @@ require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
-include(__DIR__."/../../model/CLIENT_model.php");
+include(__DIR__ . "/../../model/CLIENT_model.php");
 
 $service_id = $_REQUEST["service_id"];
+$sm = new ServiceMapper();
+$service = $sm->view($service_id);
 ?>
 
 
 <div class="col-md-6" style="margin-top: 20px">
-    <h1 class="page-header"><?php echo $strings['service_modify'].': '.$_GET['service_id']?></h1>
+    <h1 class="page-header"><?php echo $strings['service_modify'] . ': ' . $_GET['service_id'] ?></h1>
     <form method="POST" name="editform" id="editform"
           action="index.php?controller=service&action=edit&service_id=<?php echo $service_id; ?>"
           enctype="multipart/form-data">
@@ -40,7 +42,7 @@ $service_id = $_REQUEST["service_id"];
                                 <span class="input-group-btn">
                                 <button class="btn btn-info" type="button"
                                         data-toggle="modal"
-                                        data-target="#view<?php echo $strings['client'];?>">
+                                        data-target="#view<?php echo $strings['client']; ?>">
                                         <i class="fa fa-eye fa-fw"></i>
                                 </button>
                                 </span>
@@ -54,27 +56,37 @@ $service_id = $_REQUEST["service_id"];
                                 $clients = $pc->show();
 
                                 foreach ($clients as $cliente) {
-                                    echo "<option value='" . $cliente->getDni()."'>" . $cliente->getDni() . "</option>";
+                                    echo "<option value='" . $cliente->getDni() . "'";
+                                    if ($service->getDniClienteExterno() == $cliente->getDni()) {
+                                        echo "selected";
+                                    }
+                                    echo ">" . $cliente->getDni() . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input class="form-control" type="date" name="fecha" maxlength="25"
-                                   placeholder=<?php echo $strings['date']; ?>>
+
+                        <label for="divdatestart"><?= $strings['date'] ?></label>
+                        <div id="divdatestart" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control" id="datestart" name="fecha"
+                                   maxlength="10">
+                            <div id="error"></div>
                         </div>
                         <!--Campo date-->
+
+                        <label for="selectperf"><?php echo $strings['cost']; ?></label>
                         <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-usd fa-fw"></i></span>
                             <input class="form-control" type="text" name="coste" maxlength="25"
-                                   placeholder=<?php echo $strings['cost']; ?>>
+                                   value="<?php echo $service->getCoste() ?>">
                         </div>
                         <!--Campo cost-->
+                        <label for="selectperf"><?php echo $strings['description']; ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
                             <input class="form-control" type="text" name="descripcion" maxlength="9"
-                                   placeholder=<?php echo $strings['description']; ?>>
+                                   value="<?php echo $service->getDescripcion() ?>">
                         </div>
                         <!--Campo description-->
                     </div>
@@ -115,7 +127,13 @@ $service_id = $_REQUEST["service_id"];
     </form>
     <!--fin formulario-->
 </div>
-
+<script>
+    $(function () {
+        $("#datestart").datepicker();
+        $("#datestart").datepicker("option", "dateFormat", "yy-mm-d");
+        $("#datestart").datepicker("setDate", "<?php echo $service->getFecha()?>");
+    });
+</script>
 <script>
     //Non deixar que o campo input teña espazos
     $("input").on("keydown", function (e) {

@@ -38,7 +38,7 @@ $activity = $activityMapper->view($codactivity);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="name" name="name"
-                                   placeholder= <?php echo $strings['name'] ?>>
+                                   value= <?php echo $activity->getActivityname() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo name-->
@@ -48,7 +48,7 @@ $activity = $activityMapper->view($codactivity);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="number" class="form-control" id="capacity" name="capacity"
-                                   placeholder= <?php echo $strings['aforo'] ?>>
+                                   value= <?php echo $activity->getCapacity() ?>
                             <div id="error"></div>
                         </div>
                         <!--Campo aforo-->
@@ -173,7 +173,7 @@ $activity = $activityMapper->view($codactivity);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
                             <input autofocus type="number"  type="number" min="0.01" step="0.01" max="2500000"
-                                   class="form-control" id="price" name="price">
+                                   class="form-control" id="price" name="price" value= <?php echo $activity->getPrice() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo name-->

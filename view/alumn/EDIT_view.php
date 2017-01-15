@@ -39,7 +39,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="name" name="name"
-                                   placeholder= <?php echo $strings['name'] ?> >
+                                   value= <?php echo $alumn->getAlumnname() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo name-->
@@ -49,7 +49,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="surname" name="surname"
-                                   placeholder= <?php echo $strings['surname'] ?> >
+                                   value= <?php echo $alumn->getAlumnsurname() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo surname-->
@@ -61,7 +61,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user-secret fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="dni" name="dni"
-                                   placeholder= <?php echo $strings['dni'] ?> >
+                                   value= <?php echo $alumn->getDni() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo dni-->
@@ -70,8 +70,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <label for="selectperf"><?php echo $strings['birthdate'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input autofocus type="date" class="form-control" id="birthdate" name="birthdate"
-                                   placeholder= <?php echo $strings['birthdate'] ?> >
+                            <input autofocus type="date" class="form-control" id="birthdate" name="birthdate">
                             <div id="error"></div>
                         </div>
                         <!--Campo birthdate-->
@@ -83,7 +82,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="address" name="address"
-                                   placeholder= <?php echo $strings['address'] ?> >
+                                   value= <?php echo $alumn->getAddress() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo address-->
@@ -93,7 +92,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-at fa-fw"></i></span>
                             <input autofocus type="email" class="form-control" id="email" name="email"
-                                   placeholder= <?php echo $strings['email'] ?> >
+                                   value= <?php echo $alumn->getEmail() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo email-->
@@ -105,7 +104,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="job" name="job"
-                                   placeholder= <?php echo $strings['job'] ?> >
+                                   value= <?php echo $alumn->getJob() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo hour_in-->
@@ -115,7 +114,7 @@ $alumn = $alumnMapper->view($codalumn);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-text-width fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="comment" name="comment"
-                                   placeholder= <?php echo $strings['personal_comment'] ?>>
+                                   value= <?php echo $alumn->getComment() ?>>
                             <div id="error"></div>
                         </div>
                         <!--Campo aforo-->
@@ -156,4 +155,11 @@ $alumn = $alumnMapper->view($codalumn);
     $("input").on("keydown", function (e) {
         return e.which !== 32;
     });
+</script>
+<script>
+    $( function() {
+        $( "#birthdate" ).datepicker();
+        $( "#birthdate" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+        $( "#birthdate" ).datepicker("setDate","<?php echo $alumn->getBirthdate()?>");
+    } );
 </script>
