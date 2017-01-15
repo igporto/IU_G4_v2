@@ -643,7 +643,6 @@ CREATE TABLE `sesion`(
   `id_empleado` int(4),
   `id_espacio` int(4) NOT NULL,
   `id_actividad` int(4),
-  `id_evento` int(4),
   `id_sesion` int(11) NOT NULL
 );
 
@@ -1115,7 +1114,6 @@ ADD PRIMARY KEY (`id_sesion`),
 MODIFY `id_sesion` int(11) NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `asistencia`
@@ -1335,7 +1333,10 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
   (19, 'INJURY'),
   (20, 'DOCUMENT'),
   (21, 'SCHEDULE'),
-  (22, 'SESSION');
+  (22, 'SESSION'),
+  (23, 'RESERVE'),
+  (24, 'REGISTRATION'),
+  (25, 'NOTIFICATION');
 
 
 --
@@ -1464,7 +1465,22 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
   (22 ,2),
   (22 ,3),
   (22 ,4),
-  (22 ,5);
+  (22 ,5),
+  (23 ,1),
+  (23 ,2),
+  (23 ,3),
+  (23 ,4),
+  (23 ,5),
+  (24 ,1),
+  (24 ,2),
+  (24 ,3),
+  (24 ,4),
+  (24 ,5),
+  (25 ,1),
+  (25 ,2),
+  (25 ,3),
+  (25 ,4),
+  (25 ,5);
 
 
 
@@ -1598,7 +1614,22 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
   (1, 102),
   (1, 103),
   (1, 104),
-  (1, 105);
+  (1, 105),
+  (1, 106),
+  (1, 107),
+  (1, 108),
+  (1, 109),
+  (1, 110),
+  (1, 111),
+  (1, 112),
+  (1, 113),
+  (1, 114),
+  (1, 115),
+  (1, 116),
+  (1, 117),
+  (1, 118),
+  (1, 119),
+  (1, 120);
 
 
 
@@ -1718,6 +1749,24 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
               (1, 98),
               (1, 99),
               (1, 100),
+              /*RESERVE*/
+              (1, 106),
+              (1, 107),
+              (1, 108),
+              (1, 109),
+              (1, 110),
+              /*REGISTRATION*/
+              (1, 111),
+              (1, 112),
+              (1, 113),
+              (1, 114),
+              (1, 115),
+              /*NOTIFICATION*/
+              (1, 116),
+              (1, 117),
+              (1, 118),
+              (1, 119),
+              (1, 120),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
