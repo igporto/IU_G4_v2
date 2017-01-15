@@ -8,24 +8,43 @@
                                                                     <h4 class="modal-title" id="'.$c->getIdSession().'label">' . $strings["action_data"] . ': </h4>
                                                                 </div>
                                                                 <div class="modal-body">';
-                                                                     
-                                                                //DATOS DO USUARIO A BORRAR
+                                                                //DATOS DO USUARIO
                                                                echo '  
                                                                 <div class="row">
                                                                     <div class="col-xs-12 col-md-12">
                                                                             <label for="">' . $strings["name"] . ': </label>
-                                                                            <span class="">' . $c->getIdSession() . '</span>
-                                                                
-                                                                            
+                                                                            <span class="">' . $c->getActivity()->getActivityname() . '</span>
                                                                         <!--Campo ususario-->
                                                                     </div>
                                                                 </div>
-                                                                
                                                                 <div class="row">
-                                                                    <label for="">' . $strings["code"] . ': </label>
-                                                                                <span class="">' . $c->getIdSession() . '</span>
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["date"] . ': </label>
+                                                                            <span class="">' . $c->getDate() . '</span>
+                                                                        <!--Campo ususario-->
+                                                                    </div>
                                                                 </div>
-
+                                                                 <div class="row">
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["start_time"] . ': </label>
+                                                                            <span class="">' . $c->getHourStart() . '</span>
+                                                                        <!--Campo ususario-->
+                                                                    </div>
+                                                                </div>
+                                                              <div class="row">
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["end_time"] . ': </label>
+                                                                            <span class="">' . $c->getHourEnd() . '</span>
+                                                                        <!--Campo ususario-->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xs-12 col-md-12">
+                                                                            <label for="">' . $strings["space"] . ': </label>
+                                                                            <span class="">' . $c->getSpace()->getSpacename() . '</span>
+                                                                        <!--Campo ususario-->
+                                                                    </div>
+                                                                </div>
                                                                 </div><div class="modal-footer">
                                                                     
                                                                     <button type="button" class="btn btn-success" data-dismiss="modal">
