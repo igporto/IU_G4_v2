@@ -608,7 +608,8 @@ CREATE TABLE `domiciliacion` (
   `periodo` int(4) NOT NULL,
   `total` int(4) NOT NULL,
   `id_cliente` varchar(9) NOT NULL,
-  `iban` varchar (32) NOT NULL
+  `iban` varchar (32) NOT NULL,
+  `documento` varchar(200) NULL
 ) ;
 
 
