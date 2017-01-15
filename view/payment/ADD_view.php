@@ -1,6 +1,7 @@
 <!-- CONTIDO DA PAXINA -->
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
+require_once(__DIR__ . "/../../model/CLIENT_model.php");
 
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
@@ -55,8 +56,20 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                                 }
                                 ?>
                             </select>
-                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external"
-                                   style="display: none">
+
+                            <select  class=" form-control icon-menu" id="dni_external" name="dni_external" style="display: none">
+                                <?php
+                                //Engadimos unha opcion por categoria a escoller
+                                $alumnMapper = new ClientMapper();
+
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $alumnMapper->show();
+
+                                foreach ($alumns as $alumn) {
+                                    echo "<option value='" . $alumn->getDni() . "'>" . $alumn->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
                             <div id="error"></div>
                         </div>
                         <!--Campo dni de cliente-->
