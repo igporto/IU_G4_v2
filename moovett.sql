@@ -651,18 +651,19 @@ CREATE TABLE `sesion`(
 
 
 CREATE TABLE `asistencia`(
-  `id_sesion` int(11),
-  `id_alumno` int(4),
-  `asiste` tinyint(1)
+  `id_asistencia` int(4) NOT NULL,
+  `id_sesion` int(11) NOT NULL,
+  `id_alumno` int(4)NOT NULL ,
+  `asiste` tinyint(1) NOT NULL DEFAULT '0'
 );
 
 
 CREATE TABLE `empleado_imparte_sesion`(
   `id` int(4) NOT NULL,
-  `id_sesion` int(11),
-  `id_empleado` int(4),
-  `impartida` tinyint(1)
-)
+  `id_sesion` int(11) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
+  `impartida` tinyint(1) NOT NULL
+);
 
 
 
@@ -675,9 +676,9 @@ CREATE TABLE `empleado_imparte_sesion`(
 --
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`id_actividad`),
-  ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `id_espacio` (`id_espacio`),
   ADD KEY `descuento` (`descuento`),
+  ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `empleado_imparte` (`empleado_imparte`);
 
 --
@@ -1117,7 +1118,7 @@ ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`i
 ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `asistencia`
-ADD PRIMARY KEY (`id_sesion`, `id_alumno`),
+ADD PRIMARY KEY (`id_asistencia`),
 ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
 

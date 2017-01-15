@@ -4,15 +4,27 @@ require_once(__DIR__."/../core/ValidationException.php");
 
 class Attendance {
 
+    private $cod;
     private $alumn;
     private $session;
     private $assist;
 
-    public function __construct(Alumn $alumn = NULL, Session $session = NULL, $assist = false)
+    public function __construct($cod = NULL,Alumn $alumn = NULL, Session $session = NULL, $assist = false)
     {
+        $this->cod=$cod;
         $this->alumn = $alumn;
         $this->session = $session;
         $this->assist = $assist;
+    }
+
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    public function setCod($cod)
+    {
+        $this->cod = $cod;
     }
 
 
@@ -45,8 +57,5 @@ class Attendance {
     {
         $this->assist = $assist;
     }
-
-
-
 
 }
