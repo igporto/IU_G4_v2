@@ -674,9 +674,11 @@ CREATE TABLE `empleado_imparte_sesion`(
 -- ÃƒÂndices para tablas volcadas
 --
 
+
 --
 -- Indices de la tabla `actividad`
 --
+
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`id_actividad`),
   ADD KEY `id_espacio` (`id_espacio`),
@@ -952,6 +954,8 @@ ALTER TABLE `domiciliacion`
 --
 -- AUTO_INCREMENT de la tabla `alumno`
 --
+
+
 ALTER TABLE `alumno`
   MODIFY `id_alumno` int(4) NOT NULL AUTO_INCREMENT;
 --
@@ -1041,6 +1045,8 @@ ALTER TABLE `linea_factura`
 --
 ALTER TABLE `pago`
   MODIFY `id_pago` int(4) NOT NULL AUTO_INCREMENT;
+
+
 --
 -- AUTO_INCREMENT de la tabla `controlador`
 --
@@ -1117,8 +1123,10 @@ ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado`
 ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+
 ALTER TABLE `asistencia`
 ADD PRIMARY KEY (`id_asistencia`),
+MODIFY `id_asistencia` int(4) NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
 

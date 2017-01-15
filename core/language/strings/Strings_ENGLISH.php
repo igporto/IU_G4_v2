@@ -292,6 +292,10 @@ $strings = array(
     'succ_notification_delete'=>'Notification properly deleted',
     'succ_notification_edit'=>'Notification properly edited',
 
+    'succ_attendance_add'=>'Attendance properly created',
+    'succ_attendance_delete'=>'Attendance properly deleted',
+    'succ_Attendance_edit'=>'Attendance properly edited',
+
     'succ_document_add'=>'Document properly uploaded',
 
 		/*FAIL*/
@@ -340,6 +344,8 @@ $strings = array(
     'no'=>'No',
     'assist'=>'Asists?',
     'periodad_de_pago'=>'Frequency of Payment',
+    'session'=>'Session',
+    'attendance_modify'=>'Attendance Modify',
 
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */

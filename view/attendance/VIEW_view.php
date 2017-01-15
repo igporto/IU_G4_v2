@@ -8,7 +8,7 @@ echo '
                                                                     <h4 class="modal-title" id="'.$c->getCod().'label">' . $strings["attendance_data"] . ': </h4>
                                                                 </div>
                                                                 <div class="modal-body">';
-
+$session = $c->getSession();
 //DATOS DO USUARIO A BORRAR
 echo '  
                                                                  <div class="row">

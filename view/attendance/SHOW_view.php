@@ -73,8 +73,8 @@ $attendances = $view->getVariable("attendancestoshow");
                     foreach ($attendances as $c) {
 
                         echo "<tr class='row text-center' ><td> ";
-                        echo $c->getCod. "</td><td>";
-                        echo $c->getAlumn()->getAlumnname() ." ". $c->getAlumnsurname(). "</td><td>";
+                        echo $c->getCod(). "</td><td>";
+                        echo $c->getAlumn()->getAlumnname() ." ". $c->getAlumn()->getAlumnsurname(). "</td><td>";
                         echo $c->getSession()->getActivity()->getActivityname(). "</td>";
                         echo "<td class='text-center'>";
                         //Botón que direcciona a vista do usuario

@@ -297,6 +297,11 @@ $strings = array(
 
     'succ_document_add'=>'Documento subido correctamente',
 
+
+    'succ_attendance_add'=>'Asistencia creada correctamente',
+    'succ_attendance_delete'=>'Asistencia borrada correctamente',
+    'succ_Attendance_edit'=>'Asistencia editada correctamente',
+
 	/*FAIL*/
 		'fail_title'=>'Incorrecto',
 		'fail_user_exists'=>"El usuario ya existe",
@@ -343,6 +348,8 @@ $strings = array(
     'no'=>'No',
     'assist'=>'¿Asiste?',
     'periodad_de_pago'=>'Periodicidad de Pago',
+    'session'=>'Sesión',
+    'attendance_modify'=>'Modificar Asistencia',
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 
