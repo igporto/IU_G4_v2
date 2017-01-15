@@ -53,7 +53,7 @@ $permissions = $view->getVariable("billstoshow");
     </div>
 
     <!--PANEL TABOA DE LISTADO-->
-    <div class="row" style="margin-top: 20px; width: 130%">
+    <div class="row" style="margin-top: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?php echo $strings['list_of'] . ' ' . $strings['BILL']; ?>
