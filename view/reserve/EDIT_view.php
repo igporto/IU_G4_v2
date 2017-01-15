@@ -6,7 +6,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $reserveMapper = new ReserveMapper();
 //Recuperamos o id do evento a editar
-$reserve = $_REQUEST["codReserve"];
+$reserve= $_REQUEST["codReserve"];
 $currentRes = $reserveMapper->view($reserve);
 
 
@@ -14,7 +14,7 @@ $currentRes = $reserveMapper->view($reserve);
 
 
 <div class="col-md-6" style="margin-bottom: 30px">
-    <h1 class="page-header"><?php echo $strings['reserve_modify'] . ": " . $currentRes->getCodReserve(); ?></h1>
+    <h1 class="page-header"><?php echo $strings['reserve_modify'].": ".$currentRes->getCodReserve() ; ?></h1>
     <form name="form" id="form" method="POST"
           action="index.php?controller=reserve&action=edit&codReserve=<?php echo $reserve; ?>"
           enctype="multipart/form-data">

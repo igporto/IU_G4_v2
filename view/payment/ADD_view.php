@@ -138,17 +138,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         }
                     </script>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col col-md-5" id="div_metodo" style="display: block">
-                        <label for="selectperf"><?php echo $strings['payment_file'] ?></label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
-                            <input ass="form-control" type="file" id="file" name="file">
-                            <div id="error"></div>
-                        </div>
-                        <!--Campo metodo de pago-->
-                    </div>
-                </div>
 
             </div>
         </div>

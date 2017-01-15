@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../model/DOMICILIATION_model.php");
-$dm = new DomiciliationMapper();
+$dm = new PaymentMapper();
 
 $c = $dm->view($_GET['coddomiciliation']);
 //echo '<iframe size="90%" src="'. $c->getRoute() .'"> </iframe>';d

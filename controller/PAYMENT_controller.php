@@ -4,7 +4,7 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 
 require_once(__DIR__ . "/../model/PAYMENT.php");
 require_once(__DIR__ . "/../model/PAYMENT_model.php");
-
+require_once(__DIR__). "/../lib/fpdf/fpdf.php";
 require_once(__DIR__ . "/../controller/BaseController.php");
 
 
@@ -63,8 +63,14 @@ class PaymentController extends BaseController
                 $this->paymentMapper->add($payment);
                 //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_payment_add');
+                if($payment->getMetodoPago()== "cash"){
+                    $this->writeRecibo($payment);
+                    $this->printPDF();
+                }else{
+                    $this->view->redirect("payment", "show");
+                }
 
-                $this->view->redirect("payment", "show");
+
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
             }
@@ -343,6 +349,35 @@ class PaymentController extends BaseController
         $payments = $this->paymentMapper->pending();
         $this->view->setVariable("paymentstoshow", $payments);
         $this->view->render("payment", "show");
+    }
+
+    private function writeRecibo(Payment $payment){
+        $ruta = __DIR__."/../media/";
+        $file = fopen($ruta."pago.txt", "w");
+
+        fwrite($file, "".PHP_EOL);
+
+        fwrite($file, "DNI_CLIENTE  ---  DATA(DIA - HORA) --- CANTIDADE (EUROS)".PHP_EOL);
+        fwrite($file, $payment->getDniAlum()." --- ");
+        fwrite($file, $payment->getFecha()." --- ");
+        fwrite($file, $payment->getCantidad()." EUROS");
+
+        fclose($file);
+
+    }
+
+    public function printPDF()
+    {
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 11);
+        $ruta = __DIR__."/../media/";
+        $file = fopen($ruta."pago.txt", "r");
+        while(!feof($file)) {
+            $pdf->Cell(40, 10, fgets($file),0,1);
+        }
+
+        $pdf->Output();
     }
 
 }
