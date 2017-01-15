@@ -512,6 +512,7 @@ $strings = array(
     /*REGISTRATION*/
     'without_event'=>'Sen Evento',
     'without_activity'=>'Sen Actividade',
+    'PAY'=>'Pagar',
 
 
 //PAGOS, DESCUENTOS y FACTURAS

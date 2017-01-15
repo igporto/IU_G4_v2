@@ -207,4 +207,18 @@ dni_cliente_externo) values (?,?,?,?,?,?,?,?)"); //1 ? por campo a insertar
         //devolve o array
         return $payments;
     }
+
+    public function getByDate(Payment $payment){
+
+        $stmt = $this->db->prepare("SELECT * FROM pago WHERE fecha = ? AND dni_alum = ?");
+        $stmt->execute(array($payment->getFecha(), $payment->getDniAlum()));
+        $payment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($payment != null) {
+            return $this->view($payment['id_pago']);
+        } else {
+            return new Payment();
+        }
+
+    }
 }

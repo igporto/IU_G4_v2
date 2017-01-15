@@ -518,6 +518,7 @@ $strings = array(
     'without_event'=>'Sin Evento',
     'without_activity'=>'Sin Actividad',
     'without_payment'=>'Sin Pago',
+    'PAY'=>'Pagar',
 
 
     /*Alumno*/

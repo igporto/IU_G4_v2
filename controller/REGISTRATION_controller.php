@@ -189,5 +189,28 @@ class RegistrationController extends BaseController
             $this->view->render("registration", "search");
         }
     }
+
+    public function pay(){
+        if(isset($_POST['submit'])){
+            $registration = $this->registrationMapper->view($_GET['codRegistration']);
+            $payment = new Payment();
+            $payment->setDniAlum($registration->getAlumn()->getDni());
+            $date = $this->registrationMapper->getNow();
+            $payment->setFecha($date);
+            $payment->setCantidad($_POST['money']);
+            $payment->setMetodoPago($_POST['metodo_pago']);
+            $payment->setPagado(1);
+            $payment->setTipoCliente("student");
+            $this->paymentMapper->add($payment);
+
+            $registration->setPayment($this->paymentMapper->getByDate($payment));
+            $this->registrationMapper->edit($registration);
+            $this->view->setFlash("succ_payment_add");
+            $this->view->redirect("registration", "show");
+        }else{
+            $this->view->render("registration", "pay", "codRegistration=".$_GET['codRegistration']);
+        }
+
+    }
 }
 ?>

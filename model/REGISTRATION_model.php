@@ -32,10 +32,17 @@ class RegistrationMapper
     }
 
     public function getToday(){
-        $stmt = $this->db->prepare("SELECT CURDATE()");
+        $stmt = $this->db->prepare("SELECT CURENT()");
         $stmt->execute();
         $now = $stmt->fetch(PDO::FETCH_ASSOC);
         return $now['CURDATE()'];
+    }
+
+    public function getNow(){
+        $stmt = $this->db->prepare("SELECT CURRENT_TIMESTAMP");
+        $stmt->execute();
+        $now = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $now['CURRENT_TIMESTAMP'];
     }
 
     //añade unha inscripcion á táboa inscripcion

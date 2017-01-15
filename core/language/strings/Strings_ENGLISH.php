@@ -515,6 +515,7 @@ $strings = array(
     'without_event'=>'Without Event',
     'without_activity'=>'Without Activity',
     'without_payment'=>'Without Payment',
+    'PAY'=>'Pay',
 
 
 

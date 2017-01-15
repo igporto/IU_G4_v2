@@ -138,7 +138,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
             </div>
         </div>
-</div>
 
 <div class="row">
 

@@ -112,7 +112,8 @@ $registrations = $view->getVariable("registrationstoshow");
                             echo "<button class='btn btn-warning btn-xs ";
                             echo "' style='margin:2px'>";
                             echo "<i class='fa fa-edit fa-fw'></i></button></a>";
-
+                            //MODAL DE VISTA PARA CADA ACCION
+                            include(__DIR__ . '/VIEW_view.php');
                         }
 
                         //Boton que direcciona a vista de eliminar
@@ -124,11 +125,18 @@ $registrations = $view->getVariable("registrationstoshow");
                                         </button>';
                         //MODAL DE CONFIRMACION DE BORRADO PARA CADA ACCION
                         include(__DIR__ . '/DELETE_view.php');
-                        //MODAL DE VISTA PARA CADA ACCION
-                        include(__DIR__ . '/VIEW_view.php');
-                        echo "</td></tr>";
+                        }
+
+                        //boton de Pagar
+                        if ($c->getPayment()->getIdPago() == NULL) {
+                            echo "<a href=index.php?controller=registration&action=pay&codRegistration=" . $c->getCodRegistration() . '>';
+                            echo "<button class='btn btn-success btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-dollar fa-fw'> </i></button></a>";
+                            echo "</button>";
                         }
                     }
+                    echo "</td></tr>";
                     ?>
 
                     </tbody>
