@@ -49,13 +49,14 @@ class RegistrationMapper
     public function add(Registration $registration)
     {
         //insertamos na taboa Registration
-        $stmt = $this->db->prepare("INSERT INTO inscripcion( id_actividad, id_evento, id_alumno, fecha_inscripcion, id_pago) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO inscripcion( id_actividad, id_evento, id_alumno, fecha_inscripcion, id_pago, periodicidad) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute(array(
                 $registration->getActivity()->getCodactivity(),
                 $registration->getEvent()->getCodevent(),
                 $registration->getAlumn()->getCodalumn(),
                 $registration->getDate(),
-                $registration->getPayment()->getIdPago()
+                $registration->getPayment()->getIdPago(),
+                $registration->getPeriodicidad()
             )
         );
 
@@ -90,7 +91,8 @@ class RegistrationMapper
                 $this->alumnMapper->view($regist['id_alumno']),
                 $this->eventMapper->view($regist['id_evento']),
                 $regist["fecha_inscripcion"],
-                $this->paymentMapper->view($regist["id_pago"])
+                $this->paymentMapper->view($regist["id_pago"]),
+                $regist['periodicidad']
             );
         } else {
             return new Registration();
@@ -100,10 +102,10 @@ class RegistrationMapper
     //edita a tupla correspondente co id do obxecto Registration $registration
     public function edit(Registration $registration)
     {
-        $stmt = $this->db->prepare("UPDATE inscripcion SET id_actividad = ? , id_evento = ?, id_alumno = ?, fecha_inscripcion = ? , id_pago = ? WHERE id_inscripcion = ?");
+        $stmt = $this->db->prepare("UPDATE inscripcion SET id_actividad = ? , id_evento = ?, id_alumno = ?, fecha_inscripcion = ? , id_pago = ?, periodicidad = ? WHERE id_inscripcion = ?");
         $stmt->execute(array(
-                        $registration->getActivity()->getCodactivity(), $registration->getEvent()->getCodevent(),
-                $registration->getAlumn()->getCodalumn(), $registration->getDate(), $registration->getPayment()->getIdPago(), $registration->getCodRegistration()
+                        $registration->getActivity()->getCodactivity(), $registration->getEvent()->getCodevent(), $registration->getAlumn()->getCodalumn(),
+                $registration->getDate(), $registration->getPayment()->getIdPago(), $registration->getCodRegistration(), $registration->getPeriodicidad()
                         )
                 );
     }

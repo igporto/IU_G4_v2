@@ -336,6 +336,7 @@ $strings = array(
     'yes'=>'Si',
     'no'=>'Non',
     'assist'=>'Asiste?',
+    'periodad_de_pago'=>'Periodicidade de Pago',
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 

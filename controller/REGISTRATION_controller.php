@@ -66,6 +66,11 @@ class RegistrationController extends BaseController
             $registration->setDate($this->registrationMapper->getToday());
             $registration->setPayment(new Payment());
 
+            if(isset($_POST['periodicidad'])){
+                if($_POST['periodicidad'] !=NULL){
+                    $registration->setPeriodicidad($_POST['periodicidad']);
+                }
+            }
             try {
                 if($registration->getActivity()->getCodactivity() != NULL || $registration->getEvent()->getCodevent() != NULL){
                     $this->registrationMapper->add($registration);
@@ -132,6 +137,11 @@ class RegistrationController extends BaseController
                 }
             }
 
+            if(isset($_POST['periodicidad'])){
+                if($_POST['periodicidad'] !=NULL){
+                    $registration->setPeriodicidad($_POST['periodicidad']);
+                }
+            }
             try {
                 $this->registrationMapper->edit($registration);
                 $this->view->setFlash("succ_registration_edit");

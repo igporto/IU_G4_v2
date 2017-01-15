@@ -34,17 +34,6 @@ $attendances = $view->getVariable("attendancestoshow");
             <i class="fa fa-fw fa-search"></i>
             <?php echo $strings['find']; ?>
         </a>
-        <!--BOTÓN ENGADIR-->
-        <?php if ($add) {
-            echo '  
-                <a href="index.php?controller=attendance&action=add">
-                    <button type="button" class="btn btn-success">
-                    <i class="fa fa-fw fa-plus"></i>
-                        ' . $strings['ADD'] . '
-                    </button>
-                </a>
-            ';
-        } ?>
     </div>
 
     <!--PANEL TABOA DE LISTADO-->

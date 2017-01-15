@@ -9,8 +9,9 @@ class Registration {
     private $alumn;
     private $date;
     private $payment;
+    private $periodicidad;
 
-    public function __construct($codRegistration = NULL, Activity $activity = NULL, Alumn $alumn = NULL, Event $event = NULL, $date = NULL, Payment $payment = NULL)
+    public function __construct($codRegistration = NULL, Activity $activity = NULL, Alumn $alumn = NULL, Event $event = NULL, $date = NULL, Payment $payment = NULL, $periodicidad = NULL)
     {
         $this->codRegistration = $codRegistration;
         $this->activity = $activity;
@@ -18,6 +19,7 @@ class Registration {
         $this->event = $event;
         $this->date = $date;
         $this->payment = $payment;
+        $this->periodicidad = $periodicidad;
     }
 
     /**
@@ -117,6 +119,23 @@ class Registration {
     {
         $this->payment = $payment;
     }
+
+    /**
+     * @return null
+     */
+    public function getPeriodicidad()
+    {
+        return $this->periodicidad;
+    }
+
+    /**
+     * @param null $periodicidad
+     */
+    public function setPeriodicidad($periodicidad)
+    {
+        $this->periodicidad = $periodicidad;
+    }
+
 
 
 }

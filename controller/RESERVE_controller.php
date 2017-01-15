@@ -72,9 +72,6 @@
             if(isset($_POST['spacePrice'])){
                 $reserve->setSpacePrice($_POST["spacePrice"]);
             }
-            if(isset($_POST['physioPrice'])){
-                $reserve->setPhysioPrice($_POST["physioPrice"]);
-            }
             try {
                 if($reserve->getPhysioPrice()>0 && $reserve->getSpacePrice() >0){
                     if($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL ){
@@ -168,9 +165,6 @@
             if(isset($_POST['spacePrice']) && $_POST['spacePrice'] != ""){
                 $reserve->setSpacePrice($_POST["spacePrice"]);
             }
-            if(isset($_POST['physioPrice']) && $_POST['physioPrice'] != ""){
-                $reserve->setPhysioPrice($_POST["physioPrice"]);
-            }                                                
             try {
                 if($reserve->getPhysioPrice()>0 && $reserve->getSpacePrice() >0) {
                     if ($reserve->getService()->getId() != NULL || $reserve->getSpace()->getCodspace() != NULL) {

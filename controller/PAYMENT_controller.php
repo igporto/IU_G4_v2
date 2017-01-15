@@ -49,10 +49,7 @@ class PaymentController extends BaseController
             $payment->setCantidad(htmlentities(addslashes($_POST["cantidad"])));
             $payment->setMetodoPago(htmlentities(addslashes($_POST["metodo_pago"])));
             $payment->setTipoCliente(htmlentities(addslashes($_POST["tipo_cliente"])));
-            $payment->setFichero($_POST["file"]);
-var_dump($_POST);
-var_dump($_REQUEST);
-exit;
+
             if ($_POST["tipo_cliente"] == "student") {
                 $payment->setDniAlum(htmlentities(addslashes($_POST["dni"])));
             } else {
@@ -61,13 +58,12 @@ exit;
 
             $payment->setPagado(htmlentities(addslashes($_POST["pagado"])));
 
-            try {
 
+            try {
                 $this->paymentMapper->add($payment);
                 //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_payment_add');
 
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos payments)
                 $this->view->redirect("payment", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");

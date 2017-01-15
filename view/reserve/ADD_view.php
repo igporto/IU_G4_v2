@@ -132,15 +132,6 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         </div>
                         <!--Campo precio-->
                     </div>
-                        <div class="col-xs-12 col col-md-5">
-                            <label for="divdatestart"><?php echo $strings['physio_price']  ?></label>
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
-                                <input required class="form-control" type="number" min="1" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
-                            </div>
-                            <!--Campo precio-->
-                        </div>
-                    </div>
                 </div>
          </div>
 

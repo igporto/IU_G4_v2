@@ -40,8 +40,6 @@ $registrationMapper = new RegistrationMapper();
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col col-md-5" id="actividad" style="display: block">
                         <label for="selectperf"><?php echo $strings['activity'] ?></label>
                         <div class="form-group input-group">
@@ -114,6 +112,13 @@ $registrationMapper = new RegistrationMapper();
                             </select>
                         </div>
                         <!--Campo payment-->
+                    </div>
+                    <div class="col-xs-12 col col-md-5">
+                        <label for="selectperf"><?php echo $strings['periodad_de_pago'] ?></label>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
+                            <input type="number" name="periodicidad" class="form-control" placeholder="<?php echo $strings['period']?>">
+                        </div>
                     </div>
                 </div>
             </div>

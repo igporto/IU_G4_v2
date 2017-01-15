@@ -13,9 +13,9 @@ class Reserve {
     public $start_time;
     public $end_time;
     public $spacePrice;
-    public $physioPrice;
+
 	public function __construct($codReserve=NULL, Space $space = NULL, Service $service=NULL, Alumn $alumn=NULL, $reserveDate=NULL,
-                                $start_time=NULL, $end_time=NULL, $spacePrice=NULL, $physioPrice=NULL) {
+                                $start_time=NULL, $end_time=NULL, $spacePrice=NULL) {
 		$this->codReserve = $codReserve;
 		$this->space = $space;
 		$this->service = $service;
@@ -24,7 +24,6 @@ class Reserve {
         $this->start_time = $start_time;
         $this->end_time = $end_time;
         $this->spacePrice = $spacePrice;
-        $this->physioPrice = $physioPrice;
 	}
     /**
      * Gets the value of codReserve.
@@ -187,20 +186,5 @@ class Reserve {
      *
      * @return mixed
      */
-    public function getPhysioPrice()
-    {
-        return $this->physioPrice;
-    }
-    /**
-     * Sets the value of physioPrice.
-     *
-     * @param mixed $physioPrice the physioPrice
-     * @return mixed    
-     */
-    public function setPhysioPrice($physioPrice)
-    {
-        $this->physioPrice = $physioPrice;
-        return $this;
-    }
 }
 ?>
