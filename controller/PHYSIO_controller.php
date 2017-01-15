@@ -150,10 +150,10 @@ class PhysioController extends BaseController
                 $physio->setDate((htmlentities(addslashes($_POST["date"]))));
             }
             if(isset($_POST['startTime']) && $_POST['startTime']){
-                $activity->setStartTime((htmlentities(addslashes($_POST["startTime"]))));
+                $physio->setStartTime((htmlentities(addslashes($_POST["startTime"]))));
             }
             if(isset($_POST['endTime']) && $_POST['endTime']){
-                $activity->setEndTime((htmlentities(addslashes($_POST["endTime"]))));
+                $physio->setEndTime((htmlentities(addslashes($_POST["endTime"]))));
             }
             try {
                 $this->view->setVariable("physiostoshow", $this->physioMapper->search($physio));
