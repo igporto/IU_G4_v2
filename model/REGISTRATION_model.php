@@ -119,6 +119,7 @@ class RegistrationMapper
 
 
     public function search(Registration $registration){
+
         if($registration->getActivity()->getCodactivity() != NULL){
             if($registration->getEvent()->getCodevent() !=NULL){
                 $stmt = $this->db->prepare("SELECT * FROM inscripcion WHERE id_actividad like ? AND id_event like ? AND id_alumno like ?");

@@ -30,7 +30,7 @@ echo '
                                                                     
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">' . $strings["cancel"] . '</button>
                                                                     
-                                                                    <a href="index.php?controller=category&action=delete&codcategory=' . $c->getCodcategory() . '">
+                                                                    <a href="index.php?controller=category&action=delete&codcategory=' . $c->getCod() . '">
                                                                     <button type="button" class="btn btn-danger">' . $strings["DELETE"] . '</button>
                                                                     </a>
                                                                 </div>

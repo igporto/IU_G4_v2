@@ -37,12 +37,10 @@ $attendance = $attendanceMapper->view($codattendance);
                         <label for="selectperf"><?php echo $strings['assist'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <select>
+                            <select class="form-control" name="asists">
                                 <option value="0"><?php echo $strings['no']?></option>
                                 <option value="1"><?php echo $strings['yes']?></option>
                             </select>
-                            <input autofocus required  class="form-control" type="text" name="asists" maxlength="25"
-                                   placeholder=<?php echo $strings['name']; ?>>
                         </div>
                         <!--Campo nome-->
                     </div>

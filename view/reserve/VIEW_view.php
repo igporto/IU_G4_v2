@@ -9,6 +9,7 @@ echo '
                                             </div>
                                             <div class="modal-body">
                                                  <label for="">' . $strings["reserve"] . ': '.$e->getCodReserve().' </label>';
+
 //DATOS DO EVENTO A AMOSAR
 echo '  
                                             <div class="row">

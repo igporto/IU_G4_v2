@@ -69,73 +69,6 @@ class SessionController extends BaseController
     *   -"overlap": a sesión písase con outra
     *   -true: o rango de horas da sesión é correcto a esa hora nese espazo
     */
-    public function isValidRange( $date, $hourstart, $hourend, $space){
-        $time = strtotime($date);
-        $dayoweek = date('N',$time);
-
-        $dayoweek = $dayoweek - 1;
-
-        $schedule = $this->scheduleMapper->getDateSchedule($date);
-        $workday = NULL;
-
-
-        //escoller a xornada do día correspondente a esa data
-        foreach ($this->workdayMapper->getScheduleWorkdays($schedule->getIdSchedule()) as $wd) {
-            if ($wd->getDay() == $dayoweek) {
-                $workday = $wd;
-            }
-        }
-
-
-        if($workday == NULL)  return false;
-
-
- 
-        // 1. comprobar que rango de horas estea dentro do da xornada
-        if  (!(
-                (($hourstart > substr($workday->getHourStart(),0,5)) &&
-                 ($hourstart < substr($workday->getHourEnd(),0,5))) 
-                    &&
-                (($hourend < substr($workday->getHourEnd(), 0,5)) &&
-                 ($hourend > substr($workday->getHourStart(), 0,5)))
-            )
-            ){
-            return false;
-        }
-
-
-        //obtemos todas as sesións que compartan ese espazo ese día 
-        $sessiontocompare = array();
-        foreach ($this->sessionMapper->show() as $session) {
-            if (($session->getSpace()->getCodspace() == $space->getCodspace())
-                && ($session->getDate() == $date)) {
-                array_push($sessiontocompare,$session);
-            }     
-        }
-
-
-
-        // 2. Comprobamos que a sesión non se pise con outras
-        foreach ($sessiontocompare as $session) {
-            if  (
-                (($hourstart > $session->getHourStart()) &&
-                 ($hourstart < $session->getHourEnd())) 
-                    ||
-                (($hourend < $session->getHourEnd()) &&
-                 ($hourend > $session->getHourStart()))
-            )
-            {
-                return false;
-            }
-
-        }
-
-        return true;
-
-    }
-        
-        
-    
 
     public function add()
     {
@@ -166,12 +99,12 @@ class SessionController extends BaseController
 
                         $interval = DateInterval::createFromDateString('1 day');
                         $period = new DatePeriod($begin, $interval, $end);
-                    
+
                     foreach ($period as $p) {
                             $time = strtotime($p->format('Y/m/d'));
                             $dayoweek = date('N',$time);
                             $dayoweek = $dayoweek - 1;
-                            
+
                             if ($dayoweektoinsert == $dayoweek) {
                                 if ($this->isValidRange($p->format('Y/m/d'),$_POST["hourstart"],$_POST["hourend"], $space)) {
                                         $session->setDate($p->format('Y/m/d'));
@@ -179,7 +112,7 @@ class SessionController extends BaseController
                                          try {
                                                 $this->sessionMapper->add($session);
                                                 $this->view->setFlash('succ_session_add');
-                                                
+
                                         } catch (ValidationException $ex) {
                                             $this->view->setFlash("erro_general");
                                         }
@@ -188,11 +121,11 @@ class SessionController extends BaseController
                                          $this->view->setFlash('fail_some_session_not_valid');
                                     }
 
-                                   
+
                             }
                     }
                     $this->view->redirect("session", "show");
-                          
+
         }
 
         $this->view->setVariable("activity", $this->activityMapper->show());
@@ -200,6 +133,71 @@ class SessionController extends BaseController
         $this->view->setVariable("schedules", $this->scheduleMapper->show());
 
         $this->view->render("session", "add");
+    }
+        
+    public function isValidRange( $date, $hourstart, $hourend, $space){
+        $time = strtotime($date);
+        $dayoweek = date('N',$time);
+
+        $dayoweek = $dayoweek - 1;
+
+        $schedule = $this->scheduleMapper->getDateSchedule($date);
+        $workday = NULL;
+
+
+        //escoller a xornada do día correspondente a esa data
+        foreach ($this->workdayMapper->getScheduleWorkdays($schedule->getIdSchedule()) as $wd) {
+            if ($wd->getDay() == $dayoweek) {
+                $workday = $wd;
+            }
+        }
+
+
+        if($workday == NULL)  return false;
+
+
+
+        // 1. comprobar que rango de horas estea dentro do da xornada
+        if  (!(
+                (($hourstart > substr($workday->getHourStart(),0,5)) &&
+                 ($hourstart < substr($workday->getHourEnd(),0,5)))
+                    &&
+                (($hourend < substr($workday->getHourEnd(), 0,5)) &&
+                 ($hourend > substr($workday->getHourStart(), 0,5)))
+            )
+            ){
+            return false;
+        }
+
+
+        //obtemos todas as sesións que compartan ese espazo ese día
+        $sessiontocompare = array();
+        foreach ($this->sessionMapper->show() as $session) {
+            if (($session->getSpace()->getCodspace() == $space->getCodspace())
+                && ($session->getDate() == $date)) {
+                array_push($sessiontocompare,$session);
+            }
+        }
+
+
+
+        // 2. Comprobamos que a sesión non se pise con outras
+        foreach ($sessiontocompare as $session) {
+            if  (
+                (($hourstart > $session->getHourStart()) &&
+                 ($hourstart < $session->getHourEnd()))
+                    ||
+                (($hourend < $session->getHourEnd()) &&
+                 ($hourend > $session->getHourStart()))
+            )
+            {
+                return false;
+            }
+
+        }
+
+        return true;
+
     }
 
     public function delete()
@@ -262,6 +260,9 @@ class SessionController extends BaseController
         }
         //Se non se enviou nada
         //$this->view->setLayout("navbar");
+        $this->view->setVariable("activity", $this->activityMapper->show());
+        $this->view->setVariable("employee", $this->employeeMapper->show());
+        $this->view->setVariable("schedules", $this->scheduleMapper->show());
         $this->view->render("session", "edit");
     }
 

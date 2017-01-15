@@ -9,6 +9,8 @@ require_once(__DIR__ . "/../model/ACCESSLOG.php");
 require_once(__DIR__ . "/../model/ACCESSLOG_model.php");
 require_once(__DIR__ . "/../model/USER.php");
 require_once(__DIR__ . "/../model/USER_model.php");
+require_once(__DIR__ . "/../model/REGISTRATION_model.php");
+require_once(__DIR__ . "/../model/ACTIVITY_model.php");
 
 require_once(__DIR__ . "/../controller/BaseController.php");
 
@@ -394,4 +396,29 @@ class AlumnController extends BaseController
         else
             return false;
     }
+
+    public function showdiscounts(){
+        $alumn = $_GET['codalumn'];
+        $rm = new RegistrationMapper();
+
+        $registration = new Registration();
+
+        $registration->setAlumn($this->alumnMapper->view($alumn));
+
+        $registration->setEvent(new Event());
+
+        $registration->setActivity(new Activity());
+
+        $rs = $rm->search($registration);
+
+        $activities = array();
+        foreach ($rs as $r){
+            array_push($activities, $r->getActivity());
+        }
+
+        $this->view->setVariable("activitiestoshow", $activities);
+        $this->view->render("alumn", "showdiscount" ,"codalumn=".$alumn);
+
+    }
+
 }
