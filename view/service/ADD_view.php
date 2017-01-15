@@ -67,7 +67,7 @@ $serviceMapper = new ServiceMapper();
                         <label for="divdatestart"><?= $strings['cost'] ?></label>
                         <div class="form-group input-group">
                             <span autofocus required class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
-                            <input type="text" class="form-control" id="coste" name="coste"
+                            <input type="number" class="form-control" id="coste" name="coste" min="0" step="0.5"
                                    placeholder=<?php echo $strings['cost'] ?>
                                    required="true" maxlength="">
                             <div id="error"></div>
