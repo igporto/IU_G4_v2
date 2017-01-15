@@ -21,92 +21,76 @@ class AttendanceMapper {
         $this->sessionMapper = new SessionMapper();
     }
 
-    //return: o id da action co nome $actionname
-    public function getIdByName($actionname)
-    {
-        $stmt = $this->db->prepare("SELECT id_accion FROM accion WHERE  nombre= ?");
-        $stmt->execute(array($actionname));
-
-        return $stmt->fetch(PDO::FETCH_ASSOC)['id_accion'];
-    }
-
-    //devolve true se xa existe unha acción co nome $actionname
-    public function actionnameExists($actionname) {
-        $stmt = $this->db->prepare("SELECT count(*) FROM accion where nombre=?");
-        $stmt->execute(array($actionname));
-
-        if ($stmt->fetchColumn() > 0) {
-            return true;
-        }
-    }
-
     //Inserta na base de datos unha tupla cos datos do obxeto $attendance
     public function add(Attendance $attendance) {
-        $stmt = $this->db->prepare("INSERT INTO asistencia(id_alumno, id_sesion, asiste) values (?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO asistencia(id_alumno, id_sesion) values (?, ?)");
         $stmt->execute(array($attendance->getAlumn()->getCodalumn(), $attendance->getSession()->getIdSession()));
 
         return $this->db->lastInsertId();
     }
 
 
-    //Funcion de listar: devolve un array de todos obxetos Action correspondentes á tabla Accion
+    //Funcion de listar: devolve un array de todos obxetos Attendance correspondentes á tabla Accion
     public function show() {
 
-        $stmt = $this->db->query("SELECT * FROM accion");
-        $action_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $actions = array();
+        $stmt = $this->db->query("SELECT * FROM asistencia");
+        $attendance_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $attendances = array();
 
-        foreach ($action_db as $action) {
-            array_push($actions, new Action($action["id_accion"], $action["nombre"]));
+        foreach ($attendance_db as $a) {
+            array_push($attendances, $this->view($a['id_asistencia']));
         }
 
-        return $actions;
+        return $attendances;
     }
 
 
 
-    //devolve o obxecto Action no que o $action_campo_id coincida co da tupla.
-    public function view($id_accion){
-        $stmt = $this->db->prepare("SELECT * FROM accion WHERE id_accion=?");
-        $stmt->execute(array($id_accion));
-        $action = $stmt->fetch(PDO::FETCH_ASSOC);
+    //devolve o obxecto Attendance no que o $attendance_campo_id coincida co da tupla.
+    public function view($id_asistencia){
+        $stmt = $this->db->prepare("SELECT * FROM asistencia WHERE id_asistencia=?");
+        $stmt->execute(array($id_asistencia));
+        $attendance = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($action != null) {
-            return new Action(
-                $action["id_accion"],
-                $action["nombre"]
+        if($attendance != null) {
+            return new Attendance(
+                $attendance["id_asistencia"],
+                $this->alumnMapper->view($attendance['id_alumno']),
+                $this->sessionMapper->view($attendance['id_sesion'])
             );
         } else {
-            return new Action();
+            return new Attendance();
         }
     }
 
-    //edita a tupla correspondente co id do obxecto Action $action
-    public function edit(Action $action) {
-        $stmt = $this->db->prepare("UPDATE accion set nombre=? where id_accion=?");
-        $stmt->execute(array($action->getActionname(),$action->getCodaction()));
+    //edita a tupla correspondente co id do obxecto Attendance $attendance
+    public function edit(Attendance $attendance) {
+        $stmt = $this->db->prepare("UPDATE asistencia set asiste = ? where id_asistencia = ?");
+        $stmt->execute(array($attendance->getAssist(),$attendance->getCod()));
     }
 
 
-    //borra sobre a taboa accion a tupla con id igual a o do obxeto pasado
-    public function delete(Action $action) {
-        $stmt = $this->db->prepare("DELETE from accion WHERE id_accion=?");
-        $stmt->execute(array($action->getCodaction()));
+    //borra sobre a taboa asistencia a tupla con id igual a o do obxeto pasado
+    public function delete($codattendance) {
+        $stmt = $this->db->prepare("DELETE from asistencia WHERE id_asistencia=?");
+        $stmt->execute(array($codattendance));
     }
 
-    public function search(Action $action){
-        $stmt = $this->db->prepare("SELECT * FROM accion WHERE id_accion like ? AND nombre like ?");
-        $stmt->execute(array("%".$action->getCodaction()."%","%".$action->getActionname()."%"));
-        $actions_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function search(Attendance $attendance){
+        if($attendance->getAlumn()->getCodalumn() != NULL){
+            $stmt = $this->db->prepare("SELECT * FROM asistencia WHERE id_alumno like ? ");
+            $stmt->execute(array($attendance->getAlumn()->getCodalumn()));
 
-        $actions = array();
-        foreach ($actions_db as $a){
-            array_push($actions, new Action(
-                    $a['id_accion'],
-                    $a["nombre"])
-            );
+        }else{
+            $stmt = $this->db->prepare("SELECT * FROM asistencia");
+            $stmt->execute(array());
         }
-        return $actions;
+        $attendances_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $attendances = array();
+        foreach ($attendances_db as $a){
+            array_push($attendances, $this->view($a['id_asistencia']));
+        }
+        return $attendances;
     }
 
 }

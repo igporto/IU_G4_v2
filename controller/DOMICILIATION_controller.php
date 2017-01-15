@@ -38,8 +38,6 @@ class DomiciliationController extends BaseController
 
     public function add()
     {
-
-
         if (isset($_POST["submit"])) {
             //Creamos un obxecto Domiciliation baleiro
             $domiciliation = new Domiciliation();
@@ -51,10 +49,7 @@ class DomiciliationController extends BaseController
 
             try {
                 $this->domiciliationMapper->add($domiciliation);
-                //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_domiciliation_add');
-
-                //REDIRECCION Á PAXINA QUE TOQUE(Neste caso á lista dos domiciliations)
                 $this->view->redirect("domiciliation", "show");
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");

@@ -328,6 +328,14 @@ $strings = array(
         /*INFO*/
     'info_title' => 'Información',
 
+    /*ATTENDANDE*/
+    'ATTENDANCE'=>'Asistencia',
+    'management_attendances'=>'Xestión de Asistencia',
+    'attendance_data'=>'Datos da asistencia',
+    'yes'=>'Si',
+    'no'=>'Non',
+    'assist'=>'Asiste?',
+
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 
     'PAYMENT' => 'Pagos',
@@ -623,7 +631,8 @@ $strings = array(
     'without_reserve'=>'Sen Reserva',
     'fail_bill_num'=>'Xa existe unha factura con ese numero',
     'cada cuanto'=> 'Cada canto se cobra',
-    'payment_file'=>'Ficheiro de pago'
+    'payment_file'=>'Ficheiro de pago',
+    'inscription_type'=>'Tipo de inscripcion'
 
 )
 ?>

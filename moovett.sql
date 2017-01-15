@@ -373,9 +373,11 @@ CREATE TABLE `horas_posibles` (
 
 CREATE TABLE `inscripcion` (
   `id_inscripcion` int(4) NOT NULL,
-  `id_reserva` int(4) NULL,
-  `fecha_inscripcion` date NOT NULL DEFAULT '0000-00-00',
-  `id_pago` int(4) NOT NULL
+   `id_actividad` int(4) NULL,
+   `id_evento` int(4) NULL,
+   `id_alumno` int(4) NOT NULL,
+   `fecha_inscripcion` date NOT NULL DEFAULT '0000-00-00',
+   `id_pago` int(4) NULL
 ) ;
 
 
@@ -608,7 +610,8 @@ CREATE TABLE `domiciliacion` (
   `periodo` int(4) NOT NULL,
   `total` int(4) NOT NULL,
   `id_cliente` varchar(9) NOT NULL,
-  `iban` varchar (32) NOT NULL
+  `iban` varchar (32) NOT NULL,
+  `documento` varchar(200) NULL
 ) ;
 
 
@@ -642,7 +645,6 @@ CREATE TABLE `sesion`(
   `id_empleado` int(4),
   `id_espacio` int(4) NOT NULL,
   `id_actividad` int(4),
-  `id_evento` int(4),
   `id_sesion` int(11) NOT NULL
 );
 
@@ -651,18 +653,19 @@ CREATE TABLE `sesion`(
 
 
 CREATE TABLE `asistencia`(
-  `id_sesion` int(11),
-  `id_alumno` int(4),
-  `asiste` tinyint(1)
+  `id_asistencia` int(4) NOT NULL,
+  `id_sesion` int(11) NOT NULL,
+  `id_alumno` int(4)NOT NULL ,
+  `asiste` tinyint(1) NOT NULL DEFAULT '0'
 );
 
 
 CREATE TABLE `empleado_imparte_sesion`(
   `id` int(4) NOT NULL,
-  `id_sesion` int(11),
-  `id_empleado` int(4),
-  `impartida` tinyint(1)
-)
+  `id_sesion` int(11) NOT NULL,
+  `id_empleado` int(4) NOT NULL,
+  `impartida` tinyint(1) NOT NULL
+);
 
 
 
@@ -675,9 +678,9 @@ CREATE TABLE `empleado_imparte_sesion`(
 --
 ALTER TABLE `actividad`
   ADD PRIMARY KEY (`id_actividad`),
-  ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `id_espacio` (`id_espacio`),
   ADD KEY `descuento` (`descuento`),
+  ADD KEY `id_categoria` (`id_categoria`),
   ADD KEY `empleado_imparte` (`empleado_imparte`);
 
 --
@@ -801,9 +804,7 @@ ALTER TABLE `horas_posibles`
 -- Indices de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD PRIMARY KEY (`id_inscripcion`),
-  ADD KEY `id_reserva` (`id_reserva`),
-  ADD KEY `id_pago` (`id_pago`);
+  ADD PRIMARY KEY (`id_inscripcion`);
 
 --
 -- Indices de la tabla `lesion`
@@ -1113,11 +1114,10 @@ ADD PRIMARY KEY (`id_sesion`),
 MODIFY `id_sesion` int(11) NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT `sesion_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `sesion_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `sesion_ibfk_3` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `sesion_ibfk_4` FOREIGN KEY (`id_espacio`) REFERENCES `espacio` (`id_espacio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `asistencia`
-ADD PRIMARY KEY (`id_sesion`, `id_alumno`),
+ADD PRIMARY KEY (`id_asistencia`),
 ADD CONSTRAINT `alumn_sesion_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `alumn_sesion_ibfk_2` FOREIGN KEY (`id_sesion`) REFERENCES `sesion` (`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -1213,8 +1213,10 @@ ALTER TABLE `horas_posibles`
 -- Filtros para la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `inscripcion_ibfk_3` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+    ADD CONSTRAINT `inscripcion_ibfk_4` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permiso`
@@ -1334,7 +1336,10 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
   (19, 'INJURY'),
   (20, 'DOCUMENT'),
   (21, 'SCHEDULE'),
-  (22, 'SESSION');
+  (22, 'SESSION'),
+  (23, 'RESERVE'),
+  (24, 'REGISTRATION'),
+  (25, 'NOTIFICATION');
 
 
 --
@@ -1463,7 +1468,22 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
   (22 ,2),
   (22 ,3),
   (22 ,4),
-  (22 ,5);
+  (22 ,5),
+  (23 ,1),
+  (23 ,2),
+  (23 ,3),
+  (23 ,4),
+  (23 ,5),
+  (24 ,1),
+  (24 ,2),
+  (24 ,3),
+  (24 ,4),
+  (24 ,5),
+  (25 ,1),
+  (25 ,2),
+  (25 ,3),
+  (25 ,4),
+  (25 ,5);
 
 
 
@@ -1597,7 +1617,22 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
   (1, 102),
   (1, 103),
   (1, 104),
-  (1, 105);
+  (1, 105),
+  (1, 106),
+  (1, 107),
+  (1, 108),
+  (1, 109),
+  (1, 110),
+  (1, 111),
+  (1, 112),
+  (1, 113),
+  (1, 114),
+  (1, 115),
+  (1, 116),
+  (1, 117),
+  (1, 118),
+  (1, 119),
+  (1, 120);
 
 
 
@@ -1717,6 +1752,24 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
               (1, 98),
               (1, 99),
               (1, 100),
+              /*RESERVE*/
+              (1, 106),
+              (1, 107),
+              (1, 108),
+              (1, 109),
+              (1, 110),
+              /*REGISTRATION*/
+              (1, 111),
+              (1, 112),
+              (1, 113),
+              (1, 114),
+              (1, 115),
+              /*NOTIFICATION*/
+              (1, 116),
+              (1, 117),
+              (1, 118),
+              (1, 119),
+              (1, 120),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
