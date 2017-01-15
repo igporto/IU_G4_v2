@@ -365,6 +365,15 @@ $strings = array(
     'create_workday'=>'Xornada semanal de: ',
     'schedule_modify'=>'Modificar Horario',
     'schedule'=>'Horario',
+    'fail_date_interval'=>'O intercalo non é válido',
+    'fail_schedule_overlap'=>'O horario sobrepon a outro',
+    'succ_schedule_add'=>'Horario creado correctamente',
+    'fail_schedule_name_exists'=>'O nome de horario xa existe',
+    'fail_hour_not_valid'=>'Hora non válida',
+    'succ_workday_add'=>'Xornada asignada correctamente',
+    'succ_schedule_delete'=>'Horario borrado correctamente',
+    'succ_schedule_edit'=>'Horario editado correctamente',
+
 
     /* sesión */
     'SESSION'=>'Sesións',

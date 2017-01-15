@@ -371,6 +371,14 @@ $strings = array(
 	'WORKDAY'=>'Work day',
 	'schedule_modify'=>'Modify Schedule',
 	'schedule'=>'Schedule',
+	'fail_date_interval'=>'Date interval is not valid',
+    'fail_schedule_overlap'=>'Schedule overlaps with another',
+    'succ_schedule_add'=>'Succesfully added schedule',
+    'fail_schedule_name_exists'=>'Schedule name exists',
+    'fail_hour_not_valid'=>'Hour not valid',
+    'succ_workday_add'=>'Work day added properly',
+    'succ_schedule_delete'=>'Schedule deleted correctly',
+    'succ_schedule_edit'=>'Schedule edited correctly',
 
 	/* sesión */
     'SESSION'=>'Sessions',

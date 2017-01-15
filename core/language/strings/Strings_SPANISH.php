@@ -373,6 +373,14 @@ $strings = array(
     'WORKDAY'=>'Jornada',
     'schedule_modify'=>'Modificar Horario',
     'schedule'=>'Horario',
+    'fail_date_interval'=>'Intervalo incorrecto',
+    'fail_schedule_overlap'=>'Horario sobrepasa a otro',
+    'succ_schedule_add'=>'Horario añadido correctamente',
+    'fail_schedule_name_exists'=>'Nombre de horario ya existente',
+    'fail_hour_not_valid'=>'Hora inválida',
+    'succ_workday_add'=>'Jornada añadida correctamente',
+    'succ_schedule_delete'=>'Horario borrado correctamente',
+    'succ_schedule_edit'=>'Horario editado correctamente',
 
     /* sesión */
     'SESSION'=>'Sesiones',
