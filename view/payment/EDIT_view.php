@@ -2,6 +2,7 @@
 
 <?php
 require_once(__DIR__ . "/../../model/PAYMENT_model.php");
+require_once(__DIR__ . "/../../model/CLIENT_model.php");
 
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
@@ -87,13 +88,23 @@ $payment = $paymentMapper->view($id_pago);
                                 }
                                 ?>
                             </select>
-                            <input type="text" class=" form-control icon-menu" id="dni_external" name="dni_external"
-                                   style='<?php if ($payment->getTipoCliente() == "external") {
-                                       echo "display: block";
-                                   } else {
-                                       echo "display: none";
-                                   } ?>' value=<?php echo $payment->getDniClienteExterno() ?>>
-                            <div id="error"></div>
+                            <select  class=" form-control icon-menu" id="dni_external" name="dni_external" style="display: none">
+                                <?php
+                                //Engadimos unha opcion por categoria a escoller
+                                $alumnMapper = new ClientMapper();
+
+                                //Recuperamos todos os posibles perfiles que se poden escoller para o usuario
+                                $alumns = $alumnMapper->show();
+
+                                foreach ($alumns as $alumn) {
+                                    echo "<option value='" . $alumn->getDni() . "'";
+                                    if ($payment->getDniAlum() == $alumn->getDni()) {
+                                        echo "selected";
+                                    }
+                                    echo ">" . $alumn->getDni() . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <!--Campo dni-->
                     </div>
