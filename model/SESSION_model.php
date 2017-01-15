@@ -3,7 +3,6 @@
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__."/SESSION.php");
 require_once(__DIR__."/SPACE_model.php");
-require_once(__DIR__."/EVENT_model.php");
 require_once(__DIR__."/EMPLOYEE_model.php");
 require_once(__DIR__."/ACTIVITY_model.php");
 
@@ -16,7 +15,6 @@ class SessionMapper
      */
     private $db;
     private $spaceMapper;
-    private $eventMapper;
     private $employeeMapper;
     private $activityMapper;
 
@@ -24,26 +22,19 @@ class SessionMapper
     {
         $this->db = PDOConnection::getInstance();
         $this->spaceMapper = new SpaceMapper();
-        $this->eventMapper = new EventMapper();
         $this->employeeMapper = new EmployeeMapper();
         $this->activityMapper = new ActivityMapper();
     }
 
 
     public function add(Session $session){
-        $codevent = NULL;
         $codactivity = NULL;
+        $codactivity = $session->getActivity()->getCodactivity();
 
-        if ($session->getEvent() != NULL) {
-            $codevent = $session->getEvent()->getCodevent();
-        }else{
-            $codactivity = $session->getActivity()->getCodactivity();
-        }
 
-        $stmt = $this->db->prepare("INSERT INTO sesion(id_espacio, id_evento, id_actividad, id_empleado, hora_inicio, hora_fin, fecha) values (?,?,?,?,?,?,?)");
+        $stmt = $this->db->prepare("INSERT INTO sesion(id_espacio, id_actividad, id_empleado, hora_inicio, hora_fin, fecha) values (?,?,?,?,?,?)");
         $stmt->execute(array(
                 $session->getSpace()->getCodspace(),
-                $codevent,
                 $codactivity,
                 $session->getEmployee()->getCodemployee(),
                 $session->getHourStart(),
@@ -82,7 +73,6 @@ class SessionMapper
                     $session['hora_inicio'],
                     $session['hora_fin'],
                     $this->spaceMapper->view($session['id_espacio']),
-                    $this->eventMapper->view($session['id_evento']),
                     $this->activityMapper->view($session['id_actividad']),
                     $this->employeeMapper->view($session['id_empleado'])
                 );
@@ -91,10 +81,9 @@ class SessionMapper
 
     public function edit(Session $session)
     {
-        $stmt = $this->db->prepare("UPDATE sesion  set id_espacio = ?, id_evento = ?, id_actividad = ?, id_empleado = ?, hora_inicio = ?, hora_fin = ?, fecha WHERE id_sesion = ?");
+        $stmt = $this->db->prepare("UPDATE sesion  set id_espacio = ?, id_actividad = ?, id_empleado = ?, hora_inicio = ?, hora_fin = ?, fecha WHERE id_sesion = ?");
         $stmt->execute(array(
                 $session->getSpace()->getCodspace(),
-                $session->getEvent()->getCodevent(),
                 $session->getActivity()->getCodactivity(),
                 $session->getEmployee()->getCodemployee(),
                 $session->getHourStart(),

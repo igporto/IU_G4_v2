@@ -86,7 +86,8 @@ class SessionController extends BaseController
             }
         }
 
-        if($workday == NULL)  return "null";
+
+        if($workday == NULL)  return false;
 
 
  
@@ -99,7 +100,7 @@ class SessionController extends BaseController
                  ($hourend > substr($workday->getHourStart(), 0,5)))
             )
             ){
-            return "outrange";
+            return false;
         }
 
 
@@ -124,7 +125,7 @@ class SessionController extends BaseController
                  ($hourend > $session->getHourStart()))
             )
             {
-                return "overlap";
+                return false;
             }
 
         }
@@ -139,17 +140,9 @@ class SessionController extends BaseController
     public function add()
     {
 
-
         if (isset($_POST["submit"])) {
-            //Creamos un obxecto Session baleiro
             $session = new Session();
-
-            if ($_POST["selector"] == "ac") {
-                $session->setActivity($this->activityMapper->view($_POST["selactivity"]));
-            }else{
-                 $session->setEvent($this->eventMapper->view($_POST["selevent"]));
-            }
-
+            $session->setActivity($this->activityMapper->view($_POST["selactivity"]));
             $session->setEmployee($this->employeeMapper->view($_POST["selemployee"]));
 
             if ($_POST["hourstart"] > $_POST["hourend"]) {
@@ -157,30 +150,54 @@ class SessionController extends BaseController
                 $this->view->redirect("session", "add");
             }
 
-            if ($this->isValidRange($_POST["date"],$_POST["hourstart"], $_POST["hourend"],$this->spaceMapper->view($_POST["selspace"]))) {
-                $session->setSpace($this->spaceMapper->view($_POST["selspace"]));
-                $session->setDate($_POST["date"]);
-                $session->setHourStart($_POST["hourstart"]);
-                $session->setHourEnd($_POST["hourend"]);
-            }
-            else{
-                $this->view->setFlash('fail_session_not_valid');
-                    $this->view->redirect("session", "show");
-            }
-            try {
-                    $this->sessionMapper->add($session);
-                    $this->view->setFlash('succ_session_add');
-                    $this->view->redirect("session", "show");
-            } catch (ValidationException $ex) {
-                $this->view->setFlash("erro_general");
-            }
-        }
+            $session->setHourStart($_POST["hourstart"]);
+            $session->setHourEnd($_POST["hourend"]);
 
+            $space = $this->activityMapper->view($_POST["selactivity"])->getSpace();
+            $session->setSpace($space);
+
+            $dayoweektoinsert = $_POST["dayoweek"];
+
+            $schedule = $this->scheduleMapper->view($_POST["schedule"]);
+
+                        $begin = new DateTime( $schedule->getDateStart() );
+                        $end = new DateTime( $schedule->getDateEnd() );
+                        $end = $end->modify( '+1 day' );
+
+                        $interval = DateInterval::createFromDateString('1 day');
+                        $period = new DatePeriod($begin, $interval, $end);
+                    
+                    foreach ($period as $p) {
+                            $time = strtotime($p->format('Y/m/d'));
+                            $dayoweek = date('N',$time);
+                            $dayoweek = $dayoweek - 1;
+                            
+                            if ($dayoweektoinsert == $dayoweek) {
+                                if ($this->isValidRange($p->format('Y/m/d'),$_POST["hourstart"],$_POST["hourend"], $space)) {
+                                        $session->setDate($p->format('Y/m/d'));
+
+                                         try {
+                                                $this->sessionMapper->add($session);
+                                                $this->view->setFlash('succ_session_add');
+                                                
+                                        } catch (ValidationException $ex) {
+                                            $this->view->setFlash("erro_general");
+                                        }
+                                    }
+                                    else{
+                                         $this->view->setFlash('fail_some_session_not_valid');
+                                    }
+
+                                   
+                            }
+                    }
+                    $this->view->redirect("session", "show");
+                          
+        }
 
         $this->view->setVariable("activity", $this->activityMapper->show());
         $this->view->setVariable("employee", $this->employeeMapper->show());
-        $this->view->setVariable("space", $this->spaceMapper->show());
-        $this->view->setVariable("event", $this->eventMapper->show());
+        $this->view->setVariable("schedules", $this->scheduleMapper->show());
 
         $this->view->render("session", "add");
     }

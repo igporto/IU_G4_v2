@@ -59,6 +59,7 @@
 						title: '<?= $session->getActivity()->getActivityname() ?>',
 						start: '<?= $session->getDate() ?>T<?= $session->getHourStart() ?>',
 						end: '<?= $session->getDate()  ?>T<?= $session->getHourEnd()  ?>',
+						space: '<?=$session->getSpace()->getSpacename() ?>',
 						color: '<?= $session->getActivity()->getColor() ?>',
 						url: 'index.php?controller=session&action=show&id=<?=$session->getIdSession() ?>&doviw=true',
 						<?php if ($session->getDate() ): ?>
@@ -73,9 +74,22 @@
 	});
 
 </script>
- 
+
+
 
 
 <div class="col-xs-12" style="margin-top: 20px; margin-bottom: 20px">
 		<div id='calendario' ></div>
 	</div>
+
+<script>
+	eventRender: function(event, element, view) {
+
+        element.find(".fc-event-content")
+            .append("<b><?= $strings["space"] ?></b>:" + event.space);
+    }
+
+
+
+</script>
+ 

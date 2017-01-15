@@ -362,6 +362,7 @@ $strings = array(
     'create_workday'=>'Jornada semanal de: ',
     'WORKDAY'=>'Jornada',
     'schedule_modify'=>'Modificar Horario',
+    'schedule'=>'Horario',
 
     /* sesión */
     'SESSION'=>'Sesiones',
@@ -371,6 +372,8 @@ $strings = array(
     'event'=>'Evento',
     'monitor'=>'Monitor',
     'space'=>'Lugar',
+    'fail_some_session_not_valid'=>'Alguna de las sesiones no era válida. Se han creado las correctas.',
+    'succ_session_add'=>'Sesiones creadas correctamente',
 
 	/* Categorias*/
 

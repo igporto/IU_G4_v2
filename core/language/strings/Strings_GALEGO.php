@@ -354,6 +354,7 @@ $strings = array(
     'hourend'=>'Hora de Fin',
     'create_workday'=>'Xornada semanal de: ',
     'schedule_modify'=>'Modificar Horario',
+    'schedule'=>'Horario',
 
     /* sesión */
     'SESSION'=>'Sesións',
@@ -363,6 +364,9 @@ $strings = array(
     'event'=>'Evento',
     'monitor'=>'Monitor',
     'space'=>'Lugar',
+    'fail_some_session_not_valid'=>'Algunha das sesión non era correcta.  Crearonse as demáis.',
+    'succ_session_add'=>'Sesións creadas correctamente',
+
 
     /* Categorias*/
     'CATEGORY' => 'Categorias',

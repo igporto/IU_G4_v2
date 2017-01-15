@@ -1,14 +1,12 @@
-5<!-- CONTIDO DA PAXINA -->
+<!-- CONTIDO DA PAXINA -->
 <?php
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $activity = $view->getVariable("activity");
-$event = $view->getVariable("event");
-$space = $view->getVariable("space");
 $employee = $view->getVariable("employee");
-
+$schedules = $view->getVariable("schedules");
 
 ?>
 
@@ -35,22 +33,10 @@ $employee = $view->getVariable("employee");
                     </div>
                     
                 </div>
-                <label for="asd"><?= $strings['activity']."/".$strings['event'] ?></label>
-                <div id="asd" class="well">
-                    <div class="row">
-                        <div id="selector" class="row">
+                <label for="asd"><?= $strings['activity']?></label>
+                    <div id="asd" class="row">
+                        
                             <div class="col-xs-12">
-                                 <div class="form-group input-group">
-                                <label class="radio-inline"><input checked value="ac" type="radio" name="selector"><?= $strings["ACTIVITY"] ?></label>
-                                <label class="radio-inline"><input value="ev" type="radio" name="selector"><?= $strings["EVENT"]?></label>
-
-                                </div>
-                            </div>                            
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <label for="2"><?= $strings['activity'] ?></label>
                                 <div id="2" class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
                                     <select  class="form-control" id="selactivity" name="selactivity">
@@ -64,81 +50,70 @@ $employee = $view->getVariable("employee");
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-xs-12 col-md-6">
-                                <label for="2"><?= $strings['event'] ?></label>
-                                <div id="2" class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                                    <select  class="form-control" id="selevent" name="selevent">
-                                            <?php 
-                                            foreach ($event as $ev) {
-                                                echo "<option value='".$ev->getCodevent()."'>".$ev->getName()."</option>";
-                                            }
-
-                                         ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
 
 
 
                 <label for="1"><?= $strings['SCHEDULE'] ?></label>
                 <div id="1" class="well">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                        <label for="2"><?= $strings['date'] ?></label>
-                        <div id="2" class="form-group input-group">
+
+                     <div class="row">
+                        <label for="dia"><?=$strings["schedule"] ?>:</label>
+                          <div id="2" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control" id="date" name="date"
-                                   required="true" maxlength="5">
+                            <select class="form-control" name="schedule" id="asd">
+                                <?php foreach ($schedules as $schedule): ?>
+                                    <option value="<?=$schedule->getIdSchedule() ?>"><?=$schedule->getSchedulename() ?></option>
+                                <?php endforeach ?>
+                            </select>
                             
                         </div>
                     </div>
+                
+                    <div class="row">
+                        <label for="dia"><?=$strings["days"] ?>:</label>
+                          <div id="2" class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar-o fa-fw"></i></span>
+                            <select class="form-control" name="dayoweek" id="asd">
+                                <option value="0"><?= $strings["day0"] ?></option>
+                                <option value="1"><?= $strings["day1"] ?></option>
+                                <option value="2"><?= $strings["day2"] ?></option>
+                                <option value="3"><?= $strings["day3"] ?></option>
+                                <option value="4"><?= $strings["day4"] ?></option>
+                                <option value="5"><?= $strings["day5"] ?></option>
+                                <option value="6"><?= $strings["day6"] ?></option>
+                            </select>
+                            
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        
                     
-                    <div class="col-xs-12 col-md-6">
-                    <label for="3"><?= $strings['hourstart'] ?></label>
-                        <div id="3" class="form-group input-group">
+                     <div class="col-xs-12">
+                             
+                    <label for="4"><?= $strings['hourstart'] ?></label>
+                        <div id="4" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                             <input type="time" class="form-control" id="hourstart" name="hourstart"
                                    placeholder= "HH:MM"
                                    required="true" maxlength="5">
-                            
+                            <div id="error"></div>
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-md-6 col-md-offset-6">
+                    <div class="col-xs-12">
+                    
                     <label for="4"><?= $strings['hourend'] ?></label>
                         <div id="4" class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                             <input type="time" class="form-control" id="hourend" name="hourend"
                                    placeholder= "HH:MM"
-                                   required="true" maxlength="25">
+                                   required="true" maxlength="5">
                             <div id="error"></div>
                         </div>
                     </div>
                     </div>
                 </div>
-
-                <label><?= $strings['space'] ?></label>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group input-group">
-                                        <span class="input-group-addon"><i class="fa fa-code fa-fw"></i></span>
-                                        <select  class="form-control" id="selspace" name="selspace">
-                                                <?php 
-                                                foreach ($space as $sp) {
-                                                    echo "<option value='".$sp->getCodspace()."'>".$sp->getSpacename()."</option>";
-                                                }
-
-                                             ?>
-                                        </select>
-                                    </div>
-                        </div>
-                        
-                    </div>
 
                 <label><?= $strings['monitor'] ?></label>
                     <div class="row">
@@ -191,10 +166,18 @@ $employee = $view->getVariable("employee");
 
 <script>
   $( function() {
-    $( "#date" ).datepicker();
-    $( "#date" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+    $( "#datestart" ).datepicker();
+    $( "#datestart" ).datepicker( "option", "dateFormat", "yy-mm-d" );
   } );
   </script>
+
+  <script>
+  $( function() {
+    $( "#dateend" ).datepicker();
+    $( "#dateend" ).datepicker( "option", "dateFormat", "yy-mm-d" );
+  } );
+  </script>
+
 
 <script>
     //Non deixar que o campo input teña espazos

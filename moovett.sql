@@ -1130,6 +1130,7 @@ ADD PRIMARY KEY (`id`),
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
 ADD CONSTRAINT `emp_imp_ibfk1` FOREIGN KEY (`id_sesion`) REFERENCES `sesion`(`id_sesion`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `emp_imp_ibfk2` FOREIGN KEY (`id_empleado`) REFERENCES `empleado`(`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 --
 -- Filtros para la tabla `actividad`
 --

@@ -8,7 +8,6 @@ class Session
     private $hourstart;
     private $hourend;
     private $space;
-    private $event;
     private $activity;
     private $employee;
 
@@ -20,7 +19,6 @@ class Session
                     $hourstart=NULL,
                     $hourend=NULL,
                     $space=NULL,
-                    $event=NULL,
                     $activity=NULL,
                     $employee=NULL)
     {
@@ -29,7 +27,6 @@ class Session
         $this->hourstart = $hourstart;
         $this->hourend = $hourend;
         $this->space = $space;
-        $this->event = $event;
         $this->activity = $activity;
         $this->employee = $employee;
 
@@ -56,15 +53,7 @@ class Session
         return $this->space;
     }
 
-    /**
-     * Gets the value of event.
-     *
-     * @return mixed
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
+
 
     /**
      * Gets the value of activity.
@@ -117,19 +106,7 @@ class Session
         return $this;
     }
 
-    /**
-     * Sets the value of event.
-     *
-     * @param mixed $event the id event
-     *
-     * @return self
-     */
-    public function setEvent(Event $event)
-    {
-        $this->event = $event;
 
-        return $this;
-    }
 
     /**
      * Sets the value of activity.
