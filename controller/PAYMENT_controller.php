@@ -354,7 +354,15 @@ class PaymentController extends BaseController
         fwrite($file, "".PHP_EOL);
 
         fwrite($file, "DNI_CLIENTE  ---  DATA(DIA - HORA) --- CANTIDADE (EUROS)".PHP_EOL);
-        fwrite($file, $payment->getDniAlum()." --- ");
+        if($payment->getTipoCliente() == "student"){
+
+            fwrite($file, $payment->getDniAlum()." --- ");
+
+        }elseif ($payment->getTipoCliente() == "external"){
+
+            fwrite($file, $payment->getDniClienteExterno()." --- ");
+        }
+
         fwrite($file, $payment->getFecha()." --- ");
         fwrite($file, $payment->getCantidad()." EUROS");
 
