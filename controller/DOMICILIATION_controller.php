@@ -174,4 +174,30 @@ class DomiciliationController extends BaseController
         }
 
     }
+
+    public  function  addDoc(){
+
+        if(isset($_POST['submit'])){
+            $dm =  new DomiciliationMapper();
+            $dom = $dm->view($_GET['coddomiciliation']);
+
+            $ruta = __DIR__."/../media/documents/";
+            $dest = $ruta."DOMICILIACION_".$_FILES['document']['name'];
+            copy($_FILES['document']['tmp_name'],$dest);
+
+            $dom->setDocumento("media/documents/"."DOMICILIACION_".$_FILES['document']['name']);
+
+            $this->domiciliationMapper->edit($dom);
+
+            $this->view->setFlash("succ_document_add");
+            $this->view->redirect("domiciliation", "show");
+        }else{
+            $this->view->render("domiciliation", "adddoc", "coddomiciliation=".$_GET['coddomiciliation']);
+        }
+    }
+
+    public function viewdoc(){
+        $this->view->render("domiciliation", "viewdoc", "coddomiciliation=".$_GET['coddomiciliation']);
+    }
+
 }

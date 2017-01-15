@@ -20,7 +20,7 @@ echo '
                 
                 <div class="col-xs-12 col-md-12">
                         <label for="">' . $strings["period"] . ': </label>
-                        <span class="">' . $p->getPeriodo() . ' ' . $strings["months"] . '</span >
+                        <span class="">' . $p->getPeriodo() . ' ' . $strings["period"] . '</span >
 
                     <!--Campo periodo-->
                 </div >
@@ -40,7 +40,16 @@ echo '
 
                     <!--Campo iban-->
                 </div >
-                
+                <div class="col-xs-12 col-md-12" >
+                        <label for="" >'.$strings['document'].' </label >';
+
+                        echo "<a href=index.php?controller=domiciliation&action=viewdoc&coddomiciliation=" . $p->getIdDomiciliacion() . '>';
+                        echo "<button class='btn btn-primary btn-xs ";
+                        echo "' style='margin:2px'>";
+                        echo "<i class='fa fa-eye fa-fw'></i></button></a>";
+echo '                        
+                    <!--Campo iban-->
+                </div >
                 </div ></div ><div class="modal-footer" >
                 
                 <button type = "button" class="btn btn-success" data-dismiss = "modal" >

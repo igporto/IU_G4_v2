@@ -2,3 +2,4 @@ Data_Acceso --- Username --- Alumno --- Empregado --- Lesion
 
 2017-01-13 15:30:52 --- admin --- 34562321A->Adrian Reboredo ---  --- Esguince
 2017-01-13 15:33:49 --- admin ---  --- 34562321A->Adrian Reboredo --- Esguince
+2017-01-14 17:23:39 --- admin --- [  ] --- 34562321A->Adrian Reboredo --- Esguince

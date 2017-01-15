@@ -15,16 +15,18 @@ class Domiciliation
     private $total;
     private $id_cliente;
     private $iban;
+    private $documento;
 
     //constructor da clase, inicializamos cada un dos campos
     //no caso de ser un campo 'autoincrement' debe inicializarse a null sempre que se queira insertar 
-    public function __construct($id_domiciliacion = NULL, $periodo = NULL, $total = NULL, $id_cliente = NULL, $iban = NULL)
+    public function __construct($id_domiciliacion = NULL, $periodo = NULL, $total = NULL, $id_cliente = NULL, $iban = NULL, $documento = NULL)
     {
         $this->id_domiciliacion = $id_domiciliacion;
         $this->periodo = $periodo;
         $this->total = $total;
         $this->id_cliente = $id_cliente;
         $this->iban = $iban;
+        $this->documento = $documento;
     }
 
     /**
@@ -107,4 +109,16 @@ class Domiciliation
         $this->iban = $iban;
     }
 
+    public function getDocumento()
+    {
+        return $this->documento;
+    }
+
+    /**
+     * @param null $documento
+     */
+    public function setDocumento($documento)
+    {
+        $this->documento = $documento;
+    }
 }

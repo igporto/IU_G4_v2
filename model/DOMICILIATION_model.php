@@ -68,7 +68,7 @@ class DomiciliationMapper
 
         if ($domiciliation != null) {
             return new Domiciliation($domiciliation["id_domiciliacion"], $domiciliation["periodo"], $domiciliation["total"],
-                $domiciliation["id_cliente"], $domiciliation["iban"]);
+                $domiciliation["id_cliente"], $domiciliation["iban"], $domiciliation['documento']);
         } else {
             return NULL;
         }
@@ -78,10 +78,10 @@ class DomiciliationMapper
     //edita a tupla correspondente co id do obxecto Domiciliation $domiciliation
     public function edit(Domiciliation $domiciliation)
     {
-        $stmt = $this->db->prepare("UPDATE domiciliacion set periodo=?, total=?, id_cliente=?, iban=? where id_domiciliacion=?");
+        $stmt = $this->db->prepare("UPDATE domiciliacion set periodo=?, total=?, id_cliente=?, iban=?, documento = ? where id_domiciliacion = ?");
 
         $stmt->execute(array($domiciliation->getPeriodo(), $domiciliation->getTotal(), $domiciliation->getIdCliente(),
-            $domiciliation->getIban()));
+            $domiciliation->getIban(),$domiciliation->getDocumento(), $domiciliation->getIdDomiciliacion()));
     }
 
 

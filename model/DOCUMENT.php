@@ -83,6 +83,9 @@ class Document {
         $this->employee = $employee;
     }
 
+    /**
+     * @return null
+     */
 
 
 

@@ -286,6 +286,8 @@ $strings = array(
     'succ_notification_delete'=>'Notificación borrada correctamente',
     'succ_notification_edit'=>'Notificación editada correctamente',
 
+    'succ_document_add'=>'Documento subido correctamente',
+
 
 
         /*FAIL*/

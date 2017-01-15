@@ -65,7 +65,7 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
                     <tr class="row">
                         <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                         <th class="text-center"><?php echo $strings['dni']." ".$strings["student"] ?></th>
-                        <th class="text-center"><?php echo $strings['months'] ?></th>
+                        <th class="text-center"><?php echo $strings['period'] ?></th>
                         <th class="text-center"><?php echo $strings['quantity'] ?></th>
                         <?php
                         if (!$edit && !$delete && !$v) { ?>
@@ -117,7 +117,14 @@ $domiciliations = $view->getVariable("domiciliationstoshow");
                                 echo '<i class="fa fa-trash-o fa-fw"></i>
                                             </button>';
                         }
+                        if($p->getDocumento() == NULL){
+                            echo "<a href=index.php?controller=domiciliation&action=adddoc&coddomiciliation=" . $p->getIdDomiciliacion() . '>';
+                            echo "<button class='btn btn-success btn-xs ";
+                            echo "' style='margin:2px'>";
+                            echo "<i class='fa fa-file-text-o fa-fw'></i></button></a>";
+                        }else{
 
+                        }
                         //MODAL DE CONFIRMACIÓN DE BORRADO PARA CADA ACCIÓN
                         include(__DIR__ . '/DELETE_view.php');
 

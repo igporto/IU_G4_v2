@@ -291,6 +291,8 @@ $strings = array(
     'succ_notification_delete'=>'Notification properly deleted',
     'succ_notification_edit'=>'Notification properly edited',
 
+    'succ_document_add'=>'Document properly uploaded',
+
 		/*FAIL*/
 		'fail_title'=>'Fail',
 		'fail_user_exists'=>"User already exists",

@@ -373,11 +373,9 @@ CREATE TABLE `horas_posibles` (
 
 CREATE TABLE `inscripcion` (
   `id_inscripcion` int(4) NOT NULL,
-  `id_actividad` int(4) NULL,
-  `id_evento` int(4) NULL,
-  `id_alumno` int(4) NOT NULL,
+  `id_reserva` int(4) NULL,
   `fecha_inscripcion` date NOT NULL DEFAULT '0000-00-00',
-  `id_pago` int(4) NULL
+  `id_pago` int(4) NOT NULL
 ) ;
 
 
@@ -395,8 +393,7 @@ CREATE TABLE `pago` (
   `pagado` BOOLEAN NOT NULL,
   `tipo_cliente` VARCHAR (19) NULL,
   `dni_alum` VARCHAR (9) NULL,
-  `dni_cliente_externo` VARCHAR (9) NULL,
-  `fichero` TEXT
+  `dni_cliente_externo` VARCHAR (9) NULL
 )  ;
 
 -- --------------------------------------------------------
@@ -796,7 +793,9 @@ ALTER TABLE `horas_posibles`
 -- Indices de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD PRIMARY KEY (`id_inscripcion`);
+  ADD PRIMARY KEY (`id_inscripcion`),
+  ADD KEY `id_reserva` (`id_reserva`),
+  ADD KEY `id_pago` (`id_pago`);
 
 --
 -- Indices de la tabla `lesion`
@@ -1201,10 +1200,8 @@ ALTER TABLE `horas_posibles`
 -- Filtros para la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_actividad`) REFERENCES `actividad` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscripcion_ibfk_3` FOREIGN KEY (`id_alumno`) REFERENCES `alumno` (`id_alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscripcion_ibfk_4` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscripcion_ibfk_2` FOREIGN KEY (`id_pago`) REFERENCES `pago` (`id_pago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permiso`
@@ -1323,10 +1320,8 @@ ADD CONSTRAINT `fk_alumnos_recibe_notificacion_notificacion1` FOREIGN KEY (`id_n
   (18, 'ALUMN'),
   (19, 'INJURY'),
   (20, 'DOCUMENT'),
-  (21, 'SCHEDULE'),
-  (22, 'RESERVE'),
-  (23, 'REGISTRATION'),
-  (24, 'NOTIFICATION');
+  (21, 'SCHEDULE');
+
 
 --
 -- Volcado de datos para la tabla `accion`
@@ -1449,22 +1444,7 @@ INSERT INTO `accion`(`id_accion`,`nombre`) VALUES
   (21 ,2),
   (21 ,3),
   (21 ,4),
-  (21 ,5),
-  (22 ,1),
-  (22 ,2),
-  (22 ,3),
-  (22 ,4),
-  (22 ,5),
-  (23 ,1),
-  (23 ,2),
-  (23 ,3),
-  (23 ,4),
-  (23 ,5),
-  (24 ,1),
-  (24 ,2),
-  (24 ,3),
-  (24 ,4),
-  (24 ,5);
+  (21 ,5);
 
 
 
@@ -1598,22 +1578,7 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
   (1, 102),
   (1, 103),
   (1, 104),
-  (1, 105),
-  (1, 106),
-  (1, 107),
-  (1, 108),
-  (1, 109),
-  (1, 110),
-  (1, 111),
-  (1, 112),
-  (1, 113),
-  (1, 114),
-  (1, 115),
-  (1, 116),
-  (1, 117),
-  (1, 118),
-  (1, 119),
-  (1, 120);
+  (1, 105);
 
 
 
@@ -1733,24 +1698,6 @@ INSERT INTO `usuario` (`cod_usuario`, `user`, `password`, `id_perfil`) VALUES
               (1, 98),
               (1, 99),
               (1, 100),
-              /*RESERVE*/
-              (1, 106),
-              (1, 107),
-              (1, 108),
-              (1, 109),
-              (1, 110),
-              /*REGISTRATION*/
-              (1, 111),
-              (1, 112),
-              (1, 113),
-              (1, 114),
-              (1, 115),
-              /*NOTIFICATION*/
-              (1, 116),
-              (1, 117),
-              (1, 118),
-              (1, 119),
-              (1, 120),
               /* ENGADIDO POR IVAN ATA AQUI OS PERMISOS*/
               /*ENGADIDO POR BRUNO*/
               /*EVENT*/
