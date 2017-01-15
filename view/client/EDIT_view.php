@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../../controller/CONTROLLER_controller.php");
 include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
 
 $client_id = $_REQUEST["clientdni"];
+$client_mapper=new ClientMapper();
+$client=$client_mapper->view($client_id);
 ?>
 <script>
     function enviar() {
@@ -48,25 +50,25 @@ $client_id = $_REQUEST["clientdni"];
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input class="form-control" type="text" name="newname" maxlength="25"
-                                   placeholder=<?php echo $strings['newname']; ?>>
+                                   value=<?php echo $client->getName()?>>
                         </div>
                         <!--Campo name-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input class="form-control" type="text" name="newsurname" maxlength="25"
-                                   placeholder=<?php echo $strings['newsurname']; ?>>
+                                   value=<?php echo $client->getSurname()?>>
                         </div>
                         <!--Campo surname-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                             <input class="form-control" type="text" name="newphone" maxlength="9"
-                                   placeholder=<?php echo $strings['newphone']; ?>>
+                                   value=<?php echo $client->getPhone()?>>
                         </div>
                         <!--Campo phone-->
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-cog fa-fw"></i></span>
                             <input class="form-control" type="text" name="newemail" maxlength="25"
-                                   placeholder=<?php echo $strings['newemail']; ?>>
+                                   value=<?php echo $client->getEmail()?>>
                         </div>
                         <!--Campo email-->
                     </div>

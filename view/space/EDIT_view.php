@@ -43,19 +43,19 @@ $space = $spMapper->view($_REQUEST['id_espacio']);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="text" name="name"
-                                   autofocus    placeholder=<?php echo $strings['name'];?> >
+                                   autofocus    value="<?php echo $space->getSpacename()?>" >
                         </div>
 
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="number" name="capacity"
-                                   autofocus    placeholder=<?php echo $strings['aforo'];?> >
+                                   autofocus    value="<?php echo $space->getCapacity()?>" >
                         </div>
 
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                             <input class="form-control" type="text" name="description"
-                                   autofocus    placeholder=<?php echo $strings['description'];?> >
+                                   autofocus    value="<?php echo $space->getDescription()?>" >
                         </div>
                     </div>
                     <!--Campo name-->

@@ -39,7 +39,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="name" name="name"
-                                   placeholder= <?php echo $strings['name'] ?>>
+                                   value='<?php echo $employee->getEmployeename()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo name-->
@@ -49,7 +49,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="surname" name="surname"
-                                   placeholder= <?php echo $strings['surname'] ?>>
+                                   value='<?php echo $employee->getEmployeesurname()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo surname-->
@@ -61,7 +61,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user-secret fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="dni" name="dni"
-                                   placeholder= <?php echo $strings['dni'] ?>>
+                                   value='<?php echo $employee->getEmployeedni()?>'>
                             <div id="error"></div>
                         </div>
                     <!--Campo dni-->
@@ -71,7 +71,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                             <input autofocus type="date" class="form-control" id="birthdate" name="birthdate"
-                                   placeholder= <?php echo $strings['birthdate'] ?>>
+                                   value='<?php echo $employee->getBirthdate()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo birthdate-->
@@ -83,7 +83,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="address" name="address"
-                                   placeholder= <?php echo $strings['address'] ?>>
+                                   value='<?php echo $employee->getAddress()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo address-->
@@ -93,7 +93,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-at fa-fw"></i></span>
                             <input autofocus type="email" class="form-control" id="email" name="email"
-                                   placeholder= <?php echo $strings['email'] ?>>
+                                   value='<?php echo $employee->getEmail()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo email-->
@@ -105,7 +105,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                             <input autofocus type="time" class="form-control" id="hourin" name="hourin"
-                                   placeholder= <?php echo $strings['hour_in'] ?>>
+                                   value='<?php echo $employee->getHourIn()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo hour_in-->
@@ -115,7 +115,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
                             <input autofocus type="time" class="form-control" id="hourout" name="hourout"
-                                   placeholder= <?php echo $strings['hour_out'] ?>>
+                                   value='<?php echo $employee->getHourOut()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo hour_out-->
@@ -128,7 +128,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-bank fa-fw"></i></span>
                             <input autofocus type="number" class="form-control" id="banknum" name="banknum"
-                                   placeholder= <?php echo $strings['bank_account'] ?>>
+                                   value='<?php echo $employee->getBanknum()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo banknum-->
@@ -138,7 +138,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-paperclip fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="contracttype" name="contracttype"
-                                   placeholder= <?php echo $strings['contract_type'] ?>>
+                                   value='<?php echo $employee->getContracttype()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo aforo-->
@@ -177,7 +177,7 @@ $employee = $employeeMapper->view($codemployee);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-text-width fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="comment" name="comment"
-                                   placeholder= <?php echo $strings['personal_comment'] ?>>
+                                   value='<?php echo $employee->getComment()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo aforo-->

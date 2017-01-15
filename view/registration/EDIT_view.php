@@ -108,7 +108,7 @@ $registration = $registrationMapper->view($codRegistration);
                         <label for="selectperf"><?php echo $strings['period'] ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
-                            <input type="number" name="periodicidad" class="form-control" placeholder="<?php echo $strings['period']?>">
+                            <input type="number" name="periodicidad" class="form-control" value="<?php echo $registration->getPeriodicidad()?>">
                         </div>
                     </div>
                 </div>

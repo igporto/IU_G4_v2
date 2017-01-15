@@ -48,7 +48,7 @@ $actionname = $_REQUEST["actionName"];
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus required  class="form-control" type="text" name="newname" maxlength="25"
-                                   placeholder=<?php echo $strings['name']; ?>>
+                                   value=<?php echo $_GET['actionName']; ?>>
                         </div>
                         <!--Campo password-->
                     </div>

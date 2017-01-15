@@ -38,7 +38,7 @@ $category = $categoryMapper->view($codcategory);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input autofocus required  class="form-control" type="text" name="newcategoryname" maxlength="25"
-                                   placeholder=<?php echo $strings['name']; ?>>
+                                   value=<?php echo $category->getCategoryname()?>>
                         </div>
                         <!--Campo nome-->
                     </div>

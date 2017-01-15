@@ -38,7 +38,7 @@ $discount = $discountMapper->view($coddiscount);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="type" name="type"
-                                   placeholder= <?php echo $strings['discount_type'] ?>>
+                                   value='<?php echo $discount->getType()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo category-->
@@ -48,19 +48,19 @@ $discount = $discountMapper->view($coddiscount);
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
                             <input autofocus type="number" class="form-control" id="percent" name="percent"
-                                   placeholder= <?php echo $strings['discount'] ?>>
+                                   value='<?php echo $discount->getPercent()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo category-->
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col col-md-5">
+                    <div class="col-xs-12 col col-md-5" style="width: 400px">
                         <label><?php echo $strings['description'] ?></label>
-                        <div class="form-group input-group">
+                        <div class="form-group input-group" >
                             <span class="input-group-addon"><i class="fa fa-dashcube fa-fw"></i></span>
                             <input autofocus type="text" class="form-control" id="description" name="description"
-                                   placeholder= <?php echo $strings['description'] ?>>
+                                   value='<?php echo $discount->getDescription()?>'>
                             <div id="error"></div>
                         </div>
                         <!--Campo category-->
