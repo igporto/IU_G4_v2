@@ -367,7 +367,9 @@ $strings = array(
 	'create_service' => 'Añadir Servicio',
 	'service_data' => 'Datos del Servicio',
 	'service_modify' => 'Modificar servicio',
-
+    'importe'=>'Importe Descontado',
+    'activity_price'=>'Precio Actividad',
+    'final_importe'=>'Importe Final',
 
 	/* Horario */
 	'management_schedules'=>'Gestión de Horarios',

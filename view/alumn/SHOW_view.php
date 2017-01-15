@@ -70,7 +70,7 @@ $alumns = $view->getVariable("alumnstoshow");
                             ?>
                             <th class="text-center"><?php echo $strings['ACTION'] ?></th>
                         <?php } ?>
-
+                        <th class="text-center"><?php echo $strings['DISCOUNT'] ?></th>
                     </tr>
                     </thead>
 
@@ -130,6 +130,12 @@ $alumns = $view->getVariable("alumnstoshow");
                         //MODAL DE VISTA PARA CADA ACCIÓN
                         include(__DIR__ . '/VIEW_view.php');
 
+
+                        echo "</td><td>";
+                        echo "<a href=index.php?controller=alumn&action=showdiscounts&codalumn=". $c->getCodalumn().'>';
+                        echo "<button class='btn btn-success btn-xs ";
+                        echo "' style='margin:2px'>";
+                        echo "<i class='fa fa-dollar fa-fw'></i></button></a>";
                         echo "</td></tr>";
                     }
                     ?>

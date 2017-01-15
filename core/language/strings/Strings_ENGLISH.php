@@ -364,6 +364,9 @@ $strings = array(
 	'create_service' => 'Create Service',
 	'service_data' => 'Service Data',
 	'service_modify' => 'Modify Service',
+    'importe'=>'Discounted Amount',
+    'activity_price'=>'Activity Price',
+    'final_importe'=>'Final Amount',
 
 
 	/* Horario */

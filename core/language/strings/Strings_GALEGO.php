@@ -341,6 +341,9 @@ $strings = array(
     'periodad_de_pago'=>'Periodicidade de Pago',
     'session'=>'Sesión',
     'attendance_modify'=>'Modificar Asistencia',
+    'importe'=>'Importe Descontado',
+    'activity_price'=>'Prezo Actividade',
+    'final_importe'=>'Importe Final',
 
     /* Gestion de Pagos, Facturas y Domiciliaciones */
 

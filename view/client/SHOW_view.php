@@ -61,16 +61,15 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                 <tr class="row" >
                                     <!--CADA UN DE ESTES É UN CABECERO DA TABOA (TIPO "NOMBRE")-->
                                     <th class="text-center"><?php echo $strings['CLIENT']?></th>
+                                    <th class="text-center"><?php echo $strings['dni']?></th>
                                     <?php 
                                         if(!$edit && !$delete && !$v){ ?>
                                             <th class="text-center"><?php echo $strings['no_actions_to_do']?></th>
                                     <?php
                                         }else{
                                     ?>
-                                            <th class="text-center"><?php echo $strings['dni']?></th>
                                             <th class="text-center"><?php echo $strings['ACTION']?></th>
                                     <?php } ?>
-                                    
                                 </tr>
                                 </thead>
 
@@ -102,6 +101,8 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                         echo "' style='margin:2px'>";
                                         echo "<i class='fa fa-edit fa-fw'></i></button></a>";
 
+                                        //MODAL DE VISTA PARA CADA ACCIÓN
+                                        include(__DIR__.'/VIEW_view.php');
                                     }
                                     //Botón que direcciona á vista de eliminar
                                     if($delete){
@@ -111,11 +112,8 @@ include(__DIR__."/../../view/layouts/show_flag_setter.php");
                                         echo '<i class="fa fa-trash-o fa-fw"></i>
                                         </button>';
 
+                                        include(__DIR__.'/DELETE_view.php');
                                     }
-
-                                    //MODAL DE VISTA PARA CADA ACCIÓN
-                                    include(__DIR__.'/VIEW_view.php');
-                                    include(__DIR__.'/DELETE_view.php');
 
                                     echo "</td></tr>";
                                 }

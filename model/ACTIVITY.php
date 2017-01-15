@@ -108,6 +108,7 @@ class Activity {
     {
         $this->employee = $employee;
     }
+
     public function getPrice()
     {
         return $this->price;
