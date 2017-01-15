@@ -138,11 +138,8 @@ class ReserveMapper {
 
 
         foreach ($reserves_db as $a) {
-            var_dump("dentro");
             array_push($reserves, $this->view($a['id_reserva']));
-            var_dump($a['id_reserva']);
         }
-
       return $reserves;
     }
 
@@ -152,7 +149,6 @@ class ReserveMapper {
         $stmt = $this->db->query("SELECT CURDATE()");
         $db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        var_dump($date);
 
         if ($db != NULL) {
             $actual = $db[0];

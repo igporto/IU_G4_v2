@@ -72,7 +72,7 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                 <div class="row">
                     <label for="well"><?php echo $strings['clients']?>: </label>
                     <div id="well" class="well">
-                        <div class="row" style="padding: 5px">
+
                             <?php
 
                             if(isset($_REQUEST["take_id"]) && $_REQUEST["take_id"] != "NULL") {
@@ -114,7 +114,6 @@ require_once(__DIR__ . "/../../model/CLIENT_model.php");
                                     }
                                 }
                             }?>
-                        </div><!-- /form-group -->
                     </div><!-- /div2 -->
                 </div>
             </div>
