@@ -219,6 +219,12 @@ class SessionController extends BaseController
 
     public function show()
     {
+        if (isset($_REQUEST["id"])) {
+             $this->view->setVariable("doview", true);
+            $this->view->setVariable("id", $_REQUEST["id"]);
+        }
+
+        
         $sessions = $this->sessionMapper->show();
         $this->view->setVariable("sessionstoshow", $sessions);
         $this->view->render("session", "show");
@@ -226,10 +232,7 @@ class SessionController extends BaseController
 
     public function view()
     {
-        $sessionid = $this->sessionMapper->getIdByName($_REQUEST["id"]);
-        $session = $this->sessionMapper->view($sessionid);
-        $this->view->setVariable("doview", true);
-        $this->view->setVariable("id", $session);
+       
         $this->view->render("session", "show");
     }
 

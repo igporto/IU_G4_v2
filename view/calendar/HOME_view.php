@@ -5,6 +5,7 @@
 	$wdMapper = new WorkdayMapper();
 	$schedules = $view->getVariable("schedules");
 	$data = $view->getVariable("scheduledata");
+	$events = $view->getVariable("events");
 
 	$lang = strtolower($_SESSION['idioma']);
 
@@ -60,8 +61,22 @@
 						start: '<?= $session->getDate() ?>T<?= $session->getHourStart() ?>',
 						end: '<?= $session->getDate()  ?>T<?= $session->getHourEnd()  ?>',
 												color: '<?= $session->getActivity()->getColor() ?>',
-						url: 'index.php?controller=session&action=show&id=<?=$session->getIdSession() ?>&doviw=true',
+						url: 'index.php?controller=session&action=show&id=<?=$session->getIdSession() ?>&doview=true',
 						<?php if ($session->getDate() ): ?>
+							
+						<?php endif ?>
+					},
+				<?php endforeach ?>
+
+				<?php foreach ($events as $event): ?>
+					{
+						title: '**** <?= $event->getName()." (" .$event->getSpace()->getSpacename().")" ?> ****',
+						start: '<?= $event->getDate() ?>T<?= $event->getIniHour() ?>',
+						end: '<?= $event->getDate()  ?>T<?= $event->getFinHour()  ?>',
+						color: '#fc1974',
+						borderColor: '#1e000c',
+						url: 'index.php?controller=event&action=show&id=<?=$event->getCodevent() ?>&doview=true',
+						<?php if ($event->getDate() ): ?>
 							
 						<?php endif ?>
 					},

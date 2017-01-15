@@ -8,6 +8,7 @@ require_once(__DIR__."/../model/USER_model.php");
 require_once(__DIR__."/../model/SESSION_model.php");
 require_once(__DIR__."/../model/WORKDAY_model.php");
 require_once(__DIR__."/../model/SCHEDULE_model.php");
+require_once(__DIR__."/../model/EVENT_model.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -23,6 +24,7 @@ class CalendarController extends BaseController {
 	private $userMapper;
 	private $sessionMapper;
 	private $scheduleMapper;
+	private $eventMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -31,6 +33,7 @@ class CalendarController extends BaseController {
 		$this->sessionMapper = new SessionMapper();
 		$this->workdayMapper = new WorkdayMapper();
 		$this->scheduleMapper = new ScheduleMapper();
+		$this->eventMapper = new EventMapper();
 		$this->view->setLayout("navbar");
 	}
 
@@ -41,6 +44,7 @@ class CalendarController extends BaseController {
 	}
 
 	public function home(){
+		$this->view->setVariable("events", $this->eventMapper->show());
 		$this->view->setVariable("schedules", $this->scheduleMapper->show());
 		$this->view->setVariable("scheduledata", $this->sessionMapper->show());
 		$this->view->render("calendar", "home");
