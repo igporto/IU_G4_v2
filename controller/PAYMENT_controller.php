@@ -63,13 +63,10 @@ class PaymentController extends BaseController
                 $this->paymentMapper->add($payment);
                 //ENVIAR AVISO DE ACCION ENGADIDO!!!!!!!!!!
                 $this->view->setFlash('succ_payment_add');
-                if($payment->getMetodoPago()== "cash"){
-                    $this->writeRecibo($payment);
-                    $this->printPDF();
-                }else{
-                    $this->view->redirect("payment", "show");
-                }
 
+                $this->writeRecibo($payment);
+                $this->printPDF();
+                $this->view->redirect("payment", "show");
 
             } catch (ValidationException $ex) {
                 $this->view->setFlash("erro_general");
