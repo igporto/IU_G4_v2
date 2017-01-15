@@ -128,7 +128,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                         <label for="divdatestart"><?php echo $strings['place_price']  ?></label>
                         <div class="form-group input-group">
                             <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
-                            <input required class="form-control" type="number" id="spacePrice" name="spacePrice" placeholder=<?php echo $strings['place_price']?>>
+                            <input required class="form-control" type="number" min="1" id="spacePrice" name="spacePrice" placeholder=<?php echo $strings['place_price']?>>
                         </div>
                         <!--Campo precio-->
                     </div>
@@ -136,7 +136,7 @@ include('core/language/strings/Strings_' . $_SESSION["idioma"] . '.php');
                             <label for="divdatestart"><?php echo $strings['physio_price']  ?></label>
                             <div class="form-group input-group">
                                 <span class="input-group-addon"><i class="fa fa-euro fa-fw"></i></span>
-                                <input required class="form-control" type="number" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
+                                <input required class="form-control" type="number" min="1" id="physioPrice" name="physioPrice" placeholder="<?php echo $strings['physio_price'];?>">
                             </div>
                             <!--Campo precio-->
                         </div>
